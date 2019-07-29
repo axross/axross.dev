@@ -1,6 +1,7 @@
 import IntlMessageFormat from "intl-messageformat";
 import NextHead from "next/head";
 import * as React from "react";
+import { AVAILABLE_LOCALES, DEFAULT_LOCALE } from "../../../constant/locale";
 import useAvailableLocales from "../../hooks/useAvailableLocales";
 import useCurrentLocale from "../../hooks/useCurrentLocale";
 import useMyself from "../../hooks/useMyself";
@@ -54,6 +55,21 @@ function Head({
             hrefLang={locale}
             href={buildUrlWithLocale(canonicalUrl, locale).href}
             key={`alternate:${locale}`}
+          />
+        ))}
+
+        {/* feed */}
+        {AVAILABLE_LOCALES.map(locale => (
+          <link
+            rel="alternate"
+            type="application/atom+xml"
+            title={`Blog post Atom feed (${locale})`}
+            href={
+              url.origin +
+              "/posts/feed.xml" +
+              (locale === DEFAULT_LOCALE ? "" : `?hl=${locale}`)
+            }
+            key={`atomFeed:${locale}`}
           />
         ))}
 
