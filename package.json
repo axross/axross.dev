@@ -16,6 +16,7 @@
     "@emotion/styled": "^10.0.14",
     "contentful": "^7.8.2",
     "date-fns": "^2.0.0-beta.2",
+    "intl-messageformat": "^5.4.3",
     "next": "v9.0.3-canary.2",
     "querystring": "^0.2.0",
     "react": "^16.8.6",

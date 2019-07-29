@@ -1,3 +1,4 @@
+import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import useMyself from "../hooks/useMyself";
 import useSelfUrl from "../hooks/useSelfUrl";
@@ -21,7 +22,7 @@ function BlogPostMeta() {
     "@context": "https://schema.org",
     "@type": "Person",
     url: canonicalUrl,
-    name: translation["person_name"](myself),
+    name: myself.name,
     image: url.origin + "/static/profile.jpg",
     jobTitle: myself.jobTitle,
     sameAs: myself.socialLinks.map(({ url }) => url)
@@ -29,11 +30,15 @@ function BlogPostMeta() {
 
   return (
     <Head
-      person={myself}
       type="profile"
       canonicalUrl={canonicalUrl}
-      title={translation["website.title"](myself)}
-      description={translation["website.description"](myself)}
+      title={new IntlMessageFormat(translation["website.title"]).format({
+        name: myself.name,
+        screenName: myself.screenName
+      })}
+      description={new IntlMessageFormat(
+        translation["website.description"]
+      ).format({ name: myself.name, screenName: myself.screenName })}
       linkingData={linkingData}
     />
   );

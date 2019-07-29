@@ -1,3 +1,4 @@
+import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import BlogPost from "../../entities/BlogPost";
 import useMyself from "../hooks/useMyself";
@@ -12,9 +13,8 @@ interface Props {
 function BlogPostHead({ blogPost }: Props) {
   const url = useSelfUrl();
   const translation = useTranslation();
-  const myself = useMyself();
-
   const canonicalUrl = new URL(url.href);
+  const myself = useMyself();
 
   canonicalUrl.searchParams.forEach((value, key) => {
     if (key !== "hl" || value !== "ja-JP") {
@@ -24,7 +24,7 @@ function BlogPostHead({ blogPost }: Props) {
 
   const contentHolderLinkingData = {
     "@type": "Person",
-    name: translation["person_name"](myself),
+    name: myself.name,
     image: url.origin + "/static/profile.jpg",
     jobTitle: myself.jobTitle,
     sameAs: myself.socialLinks.map(({ url }) => url)
@@ -50,10 +50,15 @@ function BlogPostHead({ blogPost }: Props) {
 
   return (
     <Head
-      person={myself}
       type="article"
       canonicalUrl={canonicalUrl}
-      title={translation["website.title_blog_post"](blogPost, myself)}
+      title={new IntlMessageFormat(
+        translation["website.title_blog_post"]
+      ).format({
+        title: blogPost.title,
+        name: myself.name,
+        screenName: myself.screenName
+      })}
       description={blogPost.summary}
       linkingData={linkingData}
     />

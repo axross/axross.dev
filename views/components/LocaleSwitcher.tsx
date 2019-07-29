@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -43,7 +44,7 @@ function LocaleSwitcher(props: Props) {
             size={TextSize.caption}
             key={locale}
           >
-            {translation[`language.${locale}`]()}
+            {new IntlMessageFormat(translation[`language.${locale}`]).format()}
           </TextItem>
         ) : (
           <Link
@@ -54,7 +55,9 @@ function LocaleSwitcher(props: Props) {
             key={locale}
           >
             <LinkItem size={TextSize.caption}>
-              {translation[`language.${locale}`]()}
+              {new IntlMessageFormat(
+                translation[`language.${locale}`]
+              ).format()}
             </LinkItem>
           </Link>
         );
@@ -67,11 +70,18 @@ const TextItem = styled(Text)`
   margin-inline-start: ${LAPTOP_MINOR_PADDING_SIZE}px;
 
   &:first-child {
-    margin-inline-start: 0;
+    margin-inline-start: -${MOBILE_MINOR_PADDING_SIZE}px;
   }
 
   ${MEDIA_MOBILE} {
-    margin-inline-start: ${MOBILE_MINOR_PADDING_SIZE}px;
+    margin-block-start: -${MOBILE_MINOR_PADDING_SIZE}px;
+    margin-block-end: -${MOBILE_MINOR_PADDING_SIZE}px;
+    margin-inline-start: 0;
+    margin-inline-end: -${MOBILE_MINOR_PADDING_SIZE}px;
+    padding-block-start: ${MOBILE_MINOR_PADDING_SIZE}px;
+    padding-block-end: ${MOBILE_MINOR_PADDING_SIZE}px;
+    padding-inline-start: ${MOBILE_MINOR_PADDING_SIZE}px;
+    padding-inline-end: ${MOBILE_MINOR_PADDING_SIZE}px;
   }
 `;
 

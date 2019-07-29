@@ -9,7 +9,6 @@ import {
   LAPTOP_SECTION_MARGIN_SIZE
 } from "../constant/size";
 import useMyself from "../hooks/useMyself";
-import useTranslation from "../hooks/useTranslation";
 import KeepLocaleLink from "./KeepLocaleLink";
 import LinkText from "./LinkText";
 import Text, { TextColor, TextSize } from "./Text";
@@ -21,20 +20,16 @@ interface Props extends React.Attributes {
 
 function Profile(props: Props) {
   const myself = useMyself();
-  const translation = useTranslation();
 
   return (
     <Root {...props}>
       <KeepLocaleLink href="/" as="/" prefetch passHref>
         <Myself>
-          <Image
-            src="/static/profile.jpg"
-            alt={translation["person_name"](myself)}
-          />
+          <Image src="/static/profile.jpg" alt={myself.name} />
 
           <Name>
             <Text size={TextSize.subtitle2} color={TextColor.black} bold>
-              {translation["person_name"](myself)}
+              {myself.name}
             </Text>
           </Name>
         </Myself>

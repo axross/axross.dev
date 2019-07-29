@@ -10,8 +10,7 @@ export function parseContentfulEntryToPerson(entry: any): Person {
 
   return {
     screenName: _fields.screenName,
-    givenName: _fields.givenName,
-    familyName: _fields.familyName,
+    name: _fields.name,
     description: _fields.description,
     jobTitle: _fields.jobTitle,
     socialLinks: _fields.socialLinks.map((item: any) =>

@@ -1,10 +1,7 @@
 import { useRouter } from "next/router";
 import * as React from "react";
-import { AVAILABLE_LOCALES } from "../../constant/locale";
 import LocaleString from "../../entities/LocaleString";
 import Person from "../../entities/Person";
-import enUsTranslation from "../../translations/en-US";
-import jaJpTranslation from "../../translations/ja-JP";
 import AvailableLocalesContext from "./AvailableLocalesContext";
 import CurrentLocaleContext from "./CurrentLocaleContext";
 import MyselfContext from "./MyselfContext";
@@ -12,22 +9,23 @@ import SelfUrlContext from "./SelfUrlContext";
 import TranslationContext from "./TranslationContext";
 
 export interface Props {
-  myself: Person;
-  locale: LocaleString;
-  availableLocales?: LocaleString[];
   origin: string;
+  locale: LocaleString;
+  availableLocales: LocaleString[];
+  translation: Record<string, string>;
+  myself: Person;
 }
 
 function Page({
-  myself,
   locale,
-  availableLocales = AVAILABLE_LOCALES,
+  availableLocales,
   origin,
+  translation,
+  myself,
   children
 }: Props & { children: React.ReactNode }) {
   const router = useRouter();
   const url = new URL(router.asPath, origin);
-  const translation = locale === "ja-JP" ? jaJpTranslation : enUsTranslation;
 
   return (
     <SelfUrlContext.Provider value={url}>

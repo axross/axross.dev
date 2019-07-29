@@ -1,9 +1,11 @@
 import { NextPageContext } from "next";
 import * as React from "react";
+import { AVAILABLE_LOCALES } from "../constant/locale";
 import { jsonifyBlogPost, parseJsonToBlogPost } from "../parsers/blogPost";
 import { jsonifyPerson, parseJsonToPerson } from "../parsers/person";
-import { getMyself } from "../repositories/personRepository";
 import { getAllBlogPosts } from "../repositories/blogPostRepository";
+import { getMyself } from "../repositories/personRepository";
+import getTranslation from "../repositories/translationRepository";
 import getLocale from "../utility/getLocale";
 import getOriginIsomorphicly from "../utility/getOriginIsomorphicly";
 import IndexPage, { Props as IndexPageProps } from "../views/pages/IndexPage";
@@ -29,16 +31,19 @@ Route.getInitialProps = async ({
 }: NextPageContext): Promise<Props> => {
   const locale = getLocale(query);
   const origin = getOriginIsomorphicly(req);
-  const [blogPosts, myself] = await Promise.all([
+  const [blogPosts, myself, translation] = await Promise.all([
     getAllBlogPosts({ locale: locale }),
-    getMyself({ locale: locale })
+    getMyself({ locale: locale }),
+    getTranslation(locale)
   ]);
 
   return {
-    blogPostsJson: blogPosts.map(blogPost => jsonifyBlogPost(blogPost)),
-    myselfJson: jsonifyPerson(myself),
+    origin,
     locale,
-    origin
+    availableLocales: AVAILABLE_LOCALES,
+    translation,
+    myselfJson: jsonifyPerson(myself),
+    blogPostsJson: blogPosts.map(blogPost => jsonifyBlogPost(blogPost))
   };
 };
 

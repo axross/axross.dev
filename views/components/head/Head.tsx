@@ -1,15 +1,15 @@
+import IntlMessageFormat from "intl-messageformat";
 import NextHead from "next/head";
 import * as React from "react";
-import Person from "../../../entities/Person";
 import useAvailableLocales from "../../hooks/useAvailableLocales";
 import useCurrentLocale from "../../hooks/useCurrentLocale";
+import useMyself from "../../hooks/useMyself";
 import useSelfUrl from "../../hooks/useSelfUrl";
 import useTranslation from "../../hooks/useTranslation";
 import GlobalStyle from "./GlobalStyle";
 import GoogleAnalytics from "./GoogleAnalytics";
 
 interface Props {
-  person: Person;
   type: string;
   canonicalUrl: URL;
   title: string;
@@ -19,7 +19,6 @@ interface Props {
 }
 
 function Head({
-  person,
   type,
   canonicalUrl,
   title,
@@ -31,6 +30,7 @@ function Head({
   const translation = useTranslation();
   const availableLocales = useAvailableLocales();
   const currentLocale = useCurrentLocale();
+  const myself = useMyself();
   const alternativeLocales = availableLocales.filter(
     locale => locale !== currentLocale
   );
@@ -45,6 +45,8 @@ function Head({
 
         <title>{title}</title>
         <meta name="description" content={description} key="description" />
+        <link rel="shortcut icon" href="/static/shortcut-icon.png" />
+        <meta name="theme-color" content="#087da1" />
         <link rel="canonical" href={canonicalUrl.href} key="canonical" />
         {alternativeLocales.map(locale => (
           <link
@@ -73,7 +75,10 @@ function Head({
         ))}
         <meta
           property="og:site_name"
-          content={translation["website.title"](person)}
+          content={new IntlMessageFormat(translation["website.title"]).format({
+            screenName: myself.screenName,
+            name: myself.name
+          })}
           key="og:site_name"
         />
         <meta property="og:title" content={title} key="og:title" />

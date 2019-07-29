@@ -1,0 +1,11 @@
+{
+  "website.title": "{name} / @{screenName}",
+  "website.title_blog_post": "{title} | written by {name}",
+  "website.description": "${name}'s personal website",
+  "whoami": "whoami",
+  "recent_n_blog_posts": "Blog posts",
+  "language.en-US": "English",
+  "language.ja-JP": "Japanese",
+  "blogPost.timestamp": "Written {createdAt}",
+  "blogPost.written_at": "Written {createdAt}"
+}

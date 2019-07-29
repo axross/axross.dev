@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
+import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import BlogPost from "../../../entities/BlogPost";
 import { MEDIA_MOBILE } from "../../constant/mediaquery";
 import { MOBILE_PADDING_SIZE, LAPTOP_PADDING_SIZE } from "../../constant/size";
+import useFormatRelative from "../../hooks/useFormatRelative";
 import useTranslation from "../../hooks/useTranslation";
 import LinkKeepLocale from "../../components/KeepLocaleLink";
 import LinkText from "../../components/LinkText";
@@ -15,6 +17,7 @@ interface Props extends React.Attributes {
 
 function FirstNBlogPosts({ blogPosts, ...props }: Props) {
   const translation = useTranslation();
+  const formatRelative = useFormatRelative();
 
   return (
     <Root {...props}>
@@ -32,7 +35,9 @@ function FirstNBlogPosts({ blogPosts, ...props }: Props) {
           </Title>
 
           <CreateDate color={TextColor.secondary} size={TextSize.caption}>
-            {translation["blogPost.written_at"](blogPost.createdAt)}
+            {new IntlMessageFormat(translation["blogPost.written_at"]).format({
+              createdAt: formatRelative(blogPost.createdAt)
+            })}
           </CreateDate>
         </Item>
       ))}

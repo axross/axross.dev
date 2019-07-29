@@ -1,6 +1,7 @@
 import * as React from "react";
-import Translation from "../../translations/Translation";
 
-const TranslationContext = React.createContext<Translation>(undefined as any);
+const TranslationContext = React.createContext<Record<string, string>>(
+  undefined as any
+);
 
 export default TranslationContext;

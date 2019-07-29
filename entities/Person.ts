@@ -2,8 +2,7 @@ import SocialLink from "./SocialLink";
 
 interface Person {
   screenName: string;
-  givenName: string;
-  familyName: string;
+  name: string;
   description: string;
   jobTitle: string;
   socialLinks: SocialLink[];

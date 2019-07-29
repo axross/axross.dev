@@ -1,8 +1,7 @@
 import * as React from "react";
-import Translation from "../../translations/Translation";
 import TranslationContext from "../components/TranslationContext";
 
-function useTranslation(): Translation {
+function useTranslation(): Record<string, string> {
   return React.useContext(TranslationContext);
 }
 
