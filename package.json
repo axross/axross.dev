@@ -1,0 +1,33 @@
+{
+  "name": "axross.dev",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A personal website",
+  "author": "Kohei Asai <me@axross.io> (https://axross.dev/)",
+  "engines": {
+    "node": "10.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "next build"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.14",
+    "@emotion/styled": "^10.0.14",
+    "contentful": "^7.8.2",
+    "date-fns": "^2.0.0-beta.2",
+    "next": "v9.0.3-canary.2",
+    "querystring": "^0.2.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-markdown": "^4.1.0",
+    "react-syntax-highlighter": "^11.0.2",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.8",
+    "@types/react": "^16.8.23",
+    "@types/react-syntax-highlighter": "^10.2.1",
+    "typescript": "^3.5.3"
+  }
+}
