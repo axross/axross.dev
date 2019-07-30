@@ -76,9 +76,9 @@ const Text = React.forwardRef<HTMLElement, Props>(
       <>
         <Head>
           <link
-            href="https://fonts.googleapis.com/css?family=Noto+Serif+JP:400,700&display=swap&subset=japanese"
+            href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700|Open+Sans:400,700&display=swap&subset=japanese"
             rel="stylesheet"
-            key="notoSerifFont"
+            key="sansFont"
           />
         </Head>
 
@@ -135,8 +135,8 @@ const Root = styled.span<{
   margin-inline-start: 0;
   margin-inline-end: 0;
   color: ${({ _color }) => _color};
-  font-family: "Noto Serif JP";
-  font-weight: ${({ _bold }) => (_bold ? 700 : 400)};
+  font-family: "Open Sans", "Noto Sans JP";
+  font-weight: ${({ _bold }) => (_bold ? "bold" : "normal")};
   text-align: ${({ _alignment }) => _alignment};
   line-height: ${({ _multiline }) => (_multiline ? "normal" : "1")};
   word-break: break-word;

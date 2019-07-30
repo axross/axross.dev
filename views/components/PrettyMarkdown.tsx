@@ -34,12 +34,12 @@ function PrettyMarkdown({ ...props }: Props) {
     <>
       <Head>
         <link
-          href="https://fonts.googleapis.com/css?family=Noto+Serif+JP:400,700&display=swap&subset=japanese"
+          href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700|Open+Sans:400,700&display=swap&subset=japanese"
           rel="stylesheet"
-          key="notoSerifFont"
+          key="sansFont"
         />
         <link
-          href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap"
+          href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500&display=swap"
           rel="stylesheet"
           key="sourceCodeFont"
         />
@@ -80,7 +80,7 @@ const Root = styled(Markdown)`
   --minor-block-padding: ${LAPTOP_MINOR_PADDING_SIZE}px;
 
   color: ${TextColor.normal};
-  font-family: "Noto Serif JP";
+  font-family: "Open Sans", "Noto Sans JP";
   font-size: var(--font-size);
   font-weight: normal;
   text-align: start;
@@ -258,6 +258,7 @@ const Root = styled(Markdown)`
   code {
     background-color: ${TextColor.normal}08;
     font-family: "Source Code Pro";
+    font-weight: 500;
     margin-inline-start: -8px;
     margin-inline-end: -8px;
     padding-block-start: 4px;
@@ -269,7 +270,7 @@ const Root = styled(Markdown)`
 
   pre {
     background-color: ${TextColor.normal}08;
-    line-height: 1.5;
+    line-height: 1.333;
     overflow-x: scroll;
 
     code {
@@ -283,6 +284,7 @@ const Root = styled(Markdown)`
       border-radius: 0;
       font-size: calc(var(--font-size) * 0.8);
       font-family: "Source Code Pro";
+      font-weight: 500;
     }
   }
 
