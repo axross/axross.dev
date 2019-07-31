@@ -42,7 +42,7 @@ jobs:
           name: Build dryly
           command: npx --no-install next build
           environment:
-            ORIGIN: $ORIGIN_STAGING
+            ORIGIN: $ORIGIN_PRODUCTION
             CONTENTFUL_SPACE: $CONTENTFUL_SPACE
             CONTENTFUL_ACCESS_TOKEN: $CONTENTFUL_ACCESS_TOKEN
   test:
@@ -61,6 +61,14 @@ jobs:
       - deploy:
           name: Deploy to staging
           command: npx -p now@15 now --token $NOW_TOKEN --name $NOW_NAME_STAGING --target production -b ORIGIN=$ORIGIN_STAGING -b CONTENTFUL_SPACE=$CONTENTFUL_SPACE -b CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN .
+  deploy-produciton:
+    <<: *general_options
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - deploy:
+          name: Deploy to production
+          command: npx -p now@15 now --token $NOW_TOKEN --name $NOW_NAME_PRODUCTION --target production -b ORIGIN=$ORIGIN_PRODUCTION -b CONTENTFUL_SPACE=$CONTENTFUL_SPACE -b CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN .
 workflows:
   version: 2
   default:
@@ -79,6 +87,14 @@ workflows:
           filters:
             branches:
               only: master
+          requires:
+            - dry-compile
+            - dry-build
+            - test
+      - deploy-production:
+          filters:
+            tags:
+              only: /v.*/
           requires:
             - dry-compile
             - dry-build
