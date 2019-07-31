@@ -45,6 +45,14 @@ jobs:
             ORIGIN: $ORIGIN_STAGING
             CONTENTFUL_SPACE: $CONTENTFUL_SPACE
             CONTENTFUL_ACCESS_TOKEN: $CONTENTFUL_ACCESS_TOKEN
+  test:
+    <<: *general_options
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Test
+          command: npm test
   deploy-staging:
     <<: *general_options
     steps:
@@ -64,6 +72,9 @@ workflows:
       - dry-build:
           requires:
             - checkout
+      - test:
+          requires:
+            - checkout
       - deploy-staging:
           filters:
             branches:
@@ -71,3 +82,4 @@ workflows:
           requires:
             - dry-compile
             - dry-build
+            - test
