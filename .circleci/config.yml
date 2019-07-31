@@ -87,17 +87,22 @@ workflows:
           filters:
             branches:
               only: master
-            tags:
-              ignore: /v.*/
+          requires:
+            - dry-compile
+            - dry-build
+            - test
+      - hold-deploy-production:
+          type: approval
+          filters:
+            branches:
+              only: master
           requires:
             - dry-compile
             - dry-build
             - test
       - deploy-production:
           filters:
-            tags:
-              only: /v.*/
+            branches:
+              only: master
           requires:
-            - dry-compile
-            - dry-build
-            - test
+            - hold-deploy-production
