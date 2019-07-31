@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import BlogPost from "../../../entities/BlogPost";
+import LocaleString from "../../../entities/LocaleString";
+import AvailableLocalesContext from "../../components/AvailableLocalesContext";
 import LocaleSwitcher from "../../components/LocaleSwitcher";
 import Head from "../../components/IndexHead";
-import Page, { Props as PageProps } from "../../components/Page";
 import Profile from "../../components/Profile";
 import TwoPaneView, { LeftPane, RightPane } from "../../components/TwoPaneView";
 import { MEDIA_MOBILE } from "../../constant/mediaquery";
@@ -19,13 +20,14 @@ import FirstNBlogPostsHeading from "./FirstNBlogPostsHeading";
 import Whoami from "./Whoami";
 import WhoamiHeading from "./WhoamiHeading";
 
-export interface Props extends PageProps {
+export interface Props {
   blogPosts: BlogPost[];
+  availableLocales: LocaleString[];
 }
 
-function IndexPage({ blogPosts, ...props }: Props) {
+function IndexPage({ blogPosts, availableLocales }: Props) {
   return (
-    <Page {...props}>
+    <AvailableLocalesContext.Provider value={availableLocales}>
       <Head />
 
       <TwoPaneView>
@@ -45,7 +47,7 @@ function IndexPage({ blogPosts, ...props }: Props) {
           <_FirstNBlogPosts blogPosts={blogPosts} />
         </_RightPane>
       </TwoPaneView>
-    </Page>
+    </AvailableLocalesContext.Provider>
   );
 }
 

@@ -4,7 +4,7 @@ import BlogPost from "../../entities/BlogPost";
 import useMyself from "../hooks/useMyself";
 import useSelfUrl from "../hooks/useSelfUrl";
 import useTranslation from "../hooks/useTranslation";
-import Head from "./head/Head";
+import Head from "./Head";
 
 interface Props {
   blogPost: BlogPost;

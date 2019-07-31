@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import BlogPost from "../../../entities/BlogPost";
+import LocaleString from "../../../entities/LocaleString";
+import AvailableLocalesContext from "../../components/AvailableLocalesContext";
 import LocaleSwitcher from "../../components/LocaleSwitcher";
 import PrettyMarkdown from "../../components/PrettyMarkdown";
 import Head from "../../components/BlogPostHead";
 import BlogPostTimestamp from "../../components/BlogPostTimestamp";
-import Page, { Props as PageProps } from "../../components/Page";
 import Profile from "../../components/Profile";
 import Text, { TextSize, TextColor } from "../../components/Text";
 import TwoPaneView, { LeftPane, RightPane } from "../../components/TwoPaneView";
@@ -18,16 +19,17 @@ import {
   LAPTOP_PADDING_SIZE
 } from "../../constant/size";
 
-export interface Props extends PageProps {
+export interface Props {
   blogPost: BlogPost;
+  availableLocales: LocaleString[];
 }
 
-function BlogPostPage({ blogPost, ...props }: Props) {
+function BlogPostPage({ blogPost, availableLocales }: Props) {
   return (
-    <Page {...props}>
+    <AvailableLocalesContext.Provider value={availableLocales}>
       <Head blogPost={blogPost} />
 
-      <TwoPaneView {...props}>
+      <TwoPaneView>
         <LeftPane>
           <Profile />
         </LeftPane>
@@ -54,7 +56,7 @@ function BlogPostPage({ blogPost, ...props }: Props) {
           <Body>{blogPost.body}</Body>
         </_RightPane>
       </TwoPaneView>
-    </Page>
+    </AvailableLocalesContext.Provider>
   );
 }
 
