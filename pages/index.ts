@@ -7,7 +7,6 @@ import { getAllBlogPosts } from "../repositories/blogPostRepository";
 import { getMyself } from "../repositories/personRepository";
 import getTranslation from "../repositories/translationRepository";
 import getLocale from "../utility/getLocale";
-import getOriginIsomorphicly from "../utility/getOriginIsomorphicly";
 import IndexPage, { Props as IndexPageProps } from "../views/pages/IndexPage";
 
 interface Props extends Omit<Omit<IndexPageProps, "blogPosts">, "myself"> {
@@ -25,12 +24,8 @@ function Route(props: Props) {
   });
 }
 
-Route.getInitialProps = async ({
-  req,
-  query
-}: NextPageContext): Promise<Props> => {
+Route.getInitialProps = async ({ query }: NextPageContext): Promise<Props> => {
   const locale = getLocale(query);
-  const origin = getOriginIsomorphicly(req);
   const [blogPosts, myself, translation] = await Promise.all([
     getAllBlogPosts({ locale: locale }),
     getMyself({ locale: locale }),
@@ -38,7 +33,6 @@ Route.getInitialProps = async ({
   ]);
 
   return {
-    origin,
     locale,
     availableLocales: AVAILABLE_LOCALES,
     translation,

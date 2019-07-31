@@ -9,7 +9,6 @@ import SelfUrlContext from "./SelfUrlContext";
 import TranslationContext from "./TranslationContext";
 
 export interface Props {
-  origin: string;
   locale: LocaleString;
   availableLocales: LocaleString[];
   translation: Record<string, string>;
@@ -19,13 +18,12 @@ export interface Props {
 function Page({
   locale,
   availableLocales,
-  origin,
   translation,
   myself,
   children
 }: Props & { children: React.ReactNode }) {
   const router = useRouter();
-  const url = new URL(router.asPath, origin);
+  const url = new URL(router.asPath, process.env.ORIGIN);
 
   return (
     <SelfUrlContext.Provider value={url}>

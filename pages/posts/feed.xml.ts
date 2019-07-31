@@ -4,19 +4,16 @@ import { AVAILABLE_LOCALES, DEFAULT_LOCALE } from "../../constant/locale";
 import { getAllBlogPosts } from "../../repositories/blogPostRepository";
 import { getMyself } from "../../repositories/personRepository";
 import getLocale from "../../utility/getLocale";
-import getOriginIsomorphicly from "../../utility/getOriginIsomorphicly";
 
 function SitemapXml() {
   return null;
 }
 
 SitemapXml.getInitialProps = async ({
-  req,
   res,
   query
 }: NextPageContext): Promise<any> => {
   const locale = getLocale(query);
-  const origin = getOriginIsomorphicly(req);
   const [myself, blogPosts] = await Promise.all([
     getMyself({ locale }),
     getAllBlogPosts({ locale })
