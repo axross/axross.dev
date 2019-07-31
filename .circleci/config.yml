@@ -87,6 +87,8 @@ workflows:
           filters:
             branches:
               only: master
+            tags:
+              ignore: /v.*/
           requires:
             - dry-compile
             - dry-build
