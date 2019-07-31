@@ -12,7 +12,7 @@ function WhoamiHeading(props: Props) {
 
   return (
     <h2 {...props}>
-      <Text color={TextColor.black} size={TextSize.title} bold multiline>
+      <Text color={TextColor.highlight} size={TextSize.title} bold maxLines={0}>
         {new IntlMessageFormat(translation["whoami"]).format()}
       </Text>
     </h2>

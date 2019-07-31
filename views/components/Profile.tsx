@@ -28,7 +28,7 @@ function Profile(props: Props) {
           <Image src="/static/profile.jpg" alt={myself.name} />
 
           <Name>
-            <Text size={TextSize.subtitle2} color={TextColor.black} bold>
+            <Text size={TextSize.subtitle2} color={TextColor.highlight} bold>
               {myself.name}
             </Text>
           </Name>

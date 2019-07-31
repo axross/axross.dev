@@ -41,7 +41,12 @@ function BlogPostPage({ blogPost, ...props }: Props) {
           <_LocaleSwitcher />
 
           <Title>
-            <Text size={TextSize.title} color={TextColor.black} bold multiline>
+            <Text
+              size={TextSize.title}
+              color={TextColor.highlight}
+              bold
+              maxLines={0}
+            >
               {blogPost.title}
             </Text>
           </Title>

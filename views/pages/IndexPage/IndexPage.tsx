@@ -52,7 +52,9 @@ function IndexPage({ blogPosts, ...props }: Props) {
 const _RightPane = styled(RightPane)`
   display: grid;
   grid-template-rows: auto ${LAPTOP_PADDING_SIZE}px auto ${LAPTOP_PADDING_SIZE}px auto ${LAPTOP_SECTION_MARGIN_SIZE}px auto ${LAPTOP_PADDING_SIZE}px auto;
-  grid-template-areas: "localeSwitcher" "." "whoamiHeading" "." "whoami" "." "firstNBlogPostsHeading" "." "firstNBlogPosts";
+  grid-template-areas:
+    "localeSwitcher" "." "whoamiHeading" "." "whoami" "."
+    "firstNBlogPostsHeading" "." "firstNBlogPosts";
 
   ${MEDIA_MOBILE} {
     grid-template-rows: auto ${MOBILE_MINOR_PADDING_SIZE}px auto ${MOBILE_PADDING_SIZE}px auto ${MOBILE_SECTION_MARGIN_SIZE}px auto ${MOBILE_PADDING_SIZE}px auto;
