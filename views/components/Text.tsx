@@ -2,6 +2,14 @@ import styled from "@emotion/styled";
 import Head from "next/head";
 import * as React from "react";
 import TextThemeContext, { TextTheme } from "./TextThemeContext";
+import {
+  PRIMARY_COLOR,
+  PRIMARY_HIGHLIGHT_COLOR,
+  SECONDARY_COLOR,
+  SECONDARY_HIGHLIGHT_COLOR,
+  TEXT_COLOR,
+  TEXT_HIGHLIGHT_COLOR
+} from "../constant/color";
 import { MEDIA_MOBILE } from "../constant/mediaquery";
 import {
   LAPTOP_SUBTITLE_SIZE,
@@ -30,9 +38,9 @@ export interface Props extends React.Attributes {
   size?: TextSize;
   bold?: boolean;
   /**
-   * If this param is true and the string inside is going overflown, it is clamped by an ellipsis.
+   * If this param is more than or equal 1 and the string inside is going overflown, it is clamped by an ellipsis at the end of the specified line.
    */
-  multiline?: boolean;
+  maxLines?: number;
   alignment?: TextAlignment;
   /**
    * You should set it to be `true` if it's used as a label text, such as labels on buttons.
@@ -52,7 +60,7 @@ const Text = React.forwardRef<HTMLElement, Props>(
       color,
       size,
       bold,
-      multiline,
+      maxLines,
       alignment,
       selectable,
       ...props
@@ -64,7 +72,7 @@ const Text = React.forwardRef<HTMLElement, Props>(
     const _color = mergeValues(color, textTheme.color, TextColor.normal);
     const _size = mergeValues(size, textTheme.size, TextSize.body);
     const _bold = mergeValues(bold, textTheme.bold, false);
-    const _multiline = mergeValues(multiline, textTheme.multiline, false);
+    const _maxLines = mergeValues(maxLines, textTheme.maxLines, 1);
     const _alignment = mergeValues(
       alignment,
       textTheme.alignment,
@@ -86,7 +94,7 @@ const Text = React.forwardRef<HTMLElement, Props>(
           _color={_color}
           _size={_size}
           _bold={_bold}
-          _multiline={_multiline}
+          _maxLines={_maxLines}
           _alignment={_alignment}
           _selectable={_selectable}
           ref={ref}
@@ -97,14 +105,14 @@ const Text = React.forwardRef<HTMLElement, Props>(
   }
 );
 
-export enum TextColor {
-  normal = "#0a4c5b",
-  black = "#0a3640",
-  primary = "#087da1",
-  primaryHighlight = "#1c7f99",
-  secondary = "#667985",
-  secondaryHighlight = "#bdd3de"
-}
+export const TextColor = {
+  normal: TEXT_COLOR,
+  highlight: TEXT_HIGHLIGHT_COLOR,
+  primary: PRIMARY_COLOR,
+  primaryHighlight: PRIMARY_HIGHLIGHT_COLOR,
+  secondary: SECONDARY_COLOR,
+  secondaryHighlight: SECONDARY_HIGHLIGHT_COLOR
+};
 
 export enum TextSize {
   body,
@@ -125,7 +133,7 @@ const Root = styled.span<{
   _size: TextSize;
   _color: string;
   _bold: boolean;
-  _multiline: boolean;
+  _maxLines: number;
   _alignment: TextAlignment;
   _selectable: boolean;
 }>`
@@ -138,7 +146,6 @@ const Root = styled.span<{
   font-family: "Open Sans", "Noto Sans JP";
   font-weight: ${({ _bold }) => (_bold ? "bold" : "normal")};
   text-align: ${({ _alignment }) => _alignment};
-  line-height: ${({ _multiline }) => (_multiline ? "normal" : "1")};
   word-break: break-word;
   user-select: ${({ _selectable }) => (_selectable ? "auto" : "none")};
   transition: color 150ms ease-in-out 0ms, font-size 150ms ease-in-out 0ms,
@@ -146,13 +153,19 @@ const Root = styled.span<{
 
   ${({ _size }) => TEXT_SIZES[_size]}
 
-  ${({ _multiline }) =>
-    _multiline
+  ${({ _maxLines }) =>
+    _maxLines === 0
       ? ""
       : `
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+    display: box;
+    display: -webkit-box;
+    display: -moz-box;
+    box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    line-clamp: ${_maxLines};
+    -webkit-line-clamp: ${_maxLines};
+    overflow-y: hidden;
   `}
 `;
 

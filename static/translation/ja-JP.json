@@ -2,10 +2,10 @@
   "website.title": "@{screenName} / {name}",
   "website.title_blog_post": "{title} | written by @{screenName}",
   "website.description": "@${screenName}のウェブサイト",
+  "blogPost.timestamp": "{createdAt}に投稿",
+  "blogPost.written_at": "{createdAt}に投稿",
   "whoami": "whoami",
   "recent_n_blog_posts": "ブログ",
   "language.en-US": "English",
-  "language.ja-JP": "日本語",
-  "blogPost.timestamp": "{createdAt}に投稿",
-  "blogPost.written_at": "{createdAt}に投稿"
+  "language.ja-JP": "日本語"
 }

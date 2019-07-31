@@ -9,6 +9,7 @@
   },
   "scripts": {
     "test": "jest",
+    "dev": "next dev",
     "build": "next build"
   },
   "dependencies": {
@@ -17,14 +18,12 @@
     "contentful": "^7.8.2",
     "date-fns": "^2.0.0-beta.2",
     "intl-messageformat": "^5.4.3",
-    "jest": "^24.8.0",
     "next": "v9.0.3-canary.2",
     "querystring": "^0.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-markdown": "^4.1.0",
     "react-syntax-highlighter": "^11.0.2",
-    "ts-jest": "^24.0.2",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
@@ -32,6 +31,8 @@
     "@types/node": "^12.6.8",
     "@types/react": "^16.8.23",
     "@types/react-syntax-highlighter": "^10.2.1",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
   }
 }

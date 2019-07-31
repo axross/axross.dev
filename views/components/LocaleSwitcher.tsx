@@ -28,7 +28,7 @@ function LocaleSwitcher(props: Props) {
   const translation = useTranslation();
 
   return (
-    <span {...props}>
+    <Root {...props}>
       {availableLocales.map(locale => {
         const localeUrl = new URL(url.href);
 
@@ -62,9 +62,15 @@ function LocaleSwitcher(props: Props) {
           </Link>
         );
       })}
-    </span>
+    </Root>
   );
 }
+
+const Root = styled.span`
+  display: inline-flex;
+  flex-direction: row;
+  align-items: flex-end;
+`;
 
 const TextItem = styled(Text)`
   margin-inline-start: ${LAPTOP_MINOR_PADDING_SIZE}px;

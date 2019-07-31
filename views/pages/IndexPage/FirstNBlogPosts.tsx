@@ -30,7 +30,7 @@ function FirstNBlogPosts({ blogPosts, ...props }: Props) {
               passHref
               prefetch
             >
-              <LinkText multiline>{blogPost.title}</LinkText>
+              <LinkText maxLines={0}>{blogPost.title}</LinkText>
             </LinkKeepLocale>
           </Title>
 

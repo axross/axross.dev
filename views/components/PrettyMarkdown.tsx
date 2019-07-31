@@ -127,7 +127,7 @@ const Root = styled(Markdown)`
   h6 {
     margin-block-start: var(--major-block-padding);
     margin-block-end: var(--block-padding);
-    color: ${TextColor.black};
+    color: ${TextColor.highlight};
   }
 
   p:first-child,

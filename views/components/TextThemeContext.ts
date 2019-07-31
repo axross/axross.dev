@@ -7,7 +7,7 @@ export interface TextTheme {
   color?: string;
   size?: TextSize;
   bold?: boolean;
-  multiline?: boolean;
+  maxLines?: number;
   alignment?: TextAlignment;
   selectable?: boolean;
 }
