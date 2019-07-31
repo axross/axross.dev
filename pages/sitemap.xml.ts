@@ -2,17 +2,13 @@ import { NextPageContext } from "next";
 import * as xmljs from "xml-js";
 import { DEFAULT_LOCALE, AVAILABLE_LOCALES } from "../constant/locale";
 import { getAllBlogPostsInAllLocale } from "../repositories/blogPostRepository";
-import getOriginIsomorphicly from "../utility/getOriginIsomorphicly";
 
 function SitemapXml() {
   return null;
 }
 
-SitemapXml.getInitialProps = async ({
-  req,
-  res
-}: NextPageContext): Promise<any> => {
-  const origin = getOriginIsomorphicly(req);
+SitemapXml.getInitialProps = async ({ res }: NextPageContext): Promise<any> => {
+  const origin = process.env.ORIGIN;
   const blogPostAndLocales = await getAllBlogPostsInAllLocale();
   const xml = xmljs.js2xml(
     {
