@@ -13,6 +13,7 @@ SitemapXml.getInitialProps = async ({
   res,
   query
 }: NextPageContext): Promise<any> => {
+  const origin = process.env.ORIGIN;
   const locale = getLocale(query);
   const [myself, blogPosts] = await Promise.all([
     getMyself({ locale }),
