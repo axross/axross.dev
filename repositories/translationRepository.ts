@@ -13,7 +13,7 @@ async function getTranslation(
   if (typeof window !== "undefined") {
     const response = await fetch(`/static/translation/${locale}.json`);
     const json = await response.json();
-    locale_cache.set(locale, json)
+    localeCache.set(locale, json)
     return json;
   }
 
