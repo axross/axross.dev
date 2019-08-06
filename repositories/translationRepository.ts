@@ -1,6 +1,6 @@
 import LocaleString from "../entities/LocaleString";
 
-const locale_cache = new Map();
+const localeCache = new Map();
 
 async function getTranslation(
   locale: LocaleString
