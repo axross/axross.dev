@@ -6,11 +6,12 @@ async function getTranslation(
   locale: LocaleString
 ): Promise<Record<string, string>> {
     
-  if (typeof window !== "undefined" && locale_cache.has(locale)) {
-    return locale_cache.get(locale)
-  } 
-   
   if (typeof window !== "undefined") {
+    
+    if (localeCache.has(locale)) {
+        return localeCache.get(locale)
+    }
+    
     const response = await fetch(`/static/translation/${locale}.json`);
     const json = await response.json();
     localeCache.set(locale, json)
