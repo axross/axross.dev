@@ -1,7 +1,7 @@
 {
   "website.title": "{name} / @{screenName}",
   "website.title_blog_post": "{title} | written by {name}",
-  "website.description": "${name}'s personal website",
+  "website.description": "{name}'s personal website",
   "blogPost.timestamp": "Written {createdAt}",
   "blogPost.written_at": "Written {createdAt}",
   "whoami": "whoami",
