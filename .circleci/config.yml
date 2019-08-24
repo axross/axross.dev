@@ -97,9 +97,7 @@ workflows:
             branches:
               only: master
           requires:
-            - dry-compile
-            - dry-build
-            - test
+            - deploy-staging
       - deploy-production:
           filters:
             branches:
