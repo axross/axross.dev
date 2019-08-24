@@ -256,13 +256,11 @@ const Root = styled(Markdown)`
   }
 
   h2 {
-    /* font-size: 40px; */
     font-size: var(--subtitle-font-size);
     font-weight: bold;
   }
 
   h3 {
-    /* font-size: 30px; */
     font-size: var(--subtitle2-font-size);
     font-weight: bold;
   }
