@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { MEDIA_MOBILE } from "../constant/mediaquery";
+import { MOBILE } from "../constant/mediaquery";
 import {
   LAPTOP_MAJOR_PADDING_SIZE,
   LAPTOP_SECTION_MARGIN_SIZE,
@@ -34,7 +34,7 @@ export const LeftPane = styled.div<PaneProps>`
   grid-area: left;
   padding-block-start: ${LAPTOP_SECTION_MARGIN_SIZE}px;
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     display: block;
     padding-block-start: ${MOBILE_PADDING_SIZE}px;
     padding-inline-start: 20px;
@@ -48,7 +48,7 @@ export const RightPane = styled.div<PaneProps>`
   padding-block-end: ${LAPTOP_SECTION_MARGIN_SIZE}px;
   padding-inline-end: ${LAPTOP_MAJOR_PADDING_SIZE}px;
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     padding-block-start: ${MOBILE_PADDING_SIZE}px;
     padding-block-end: ${MOBILE_SECTION_MARGIN_SIZE}px;
     padding-inline-start: 20px;
@@ -66,7 +66,7 @@ const Root = styled.div`
   margin-inline-start: auto;
   margin-inline-end: auto;
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     grid-template-columns: 100%;
     grid-template-rows: auto auto;
     grid-template-areas: "left" "right";

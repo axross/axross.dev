@@ -1,11 +1,16 @@
 import { css, Global } from "@emotion/core";
 import * as React from "react";
+import { DARK_MODE } from "../constant/mediaquery";
 
 function GlobalStyle() {
   return <Global styles={GLOBAL_STYLE} />;
 }
 
 const GLOBAL_STYLE = css`
+  html {
+    background-color: #fdfdfd;
+  }
+
   body {
     margin: 0;
   }
@@ -39,6 +44,12 @@ const GLOBAL_STYLE = css`
 
   a {
     text-decoration: none;
+  }
+
+  ${DARK_MODE} {
+    html {
+      background-color: #1a304c;
+    }
   }
 `;
 

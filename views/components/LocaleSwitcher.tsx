@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { DEFAULT_LOCALE } from "../../constant/locale";
-import { MEDIA_MOBILE } from "../constant/mediaquery";
+import { MOBILE } from "../constant/mediaquery";
 import {
   MOBILE_MINOR_PADDING_SIZE,
   LAPTOP_MINOR_PADDING_SIZE
@@ -79,7 +79,7 @@ const TextItem = styled(Text)`
     margin-inline-start: -${MOBILE_MINOR_PADDING_SIZE}px;
   }
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     margin-block-start: -${MOBILE_MINOR_PADDING_SIZE}px;
     margin-block-end: -${MOBILE_MINOR_PADDING_SIZE}px;
     margin-inline-start: 0;

@@ -2,15 +2,8 @@ import styled from "@emotion/styled";
 import Head from "next/head";
 import * as React from "react";
 import TextThemeContext, { TextTheme } from "./TextThemeContext";
-import {
-  PRIMARY_COLOR,
-  PRIMARY_HIGHLIGHT_COLOR,
-  SECONDARY_COLOR,
-  SECONDARY_HIGHLIGHT_COLOR,
-  TEXT_COLOR,
-  TEXT_HIGHLIGHT_COLOR
-} from "../constant/color";
-import { MEDIA_MOBILE } from "../constant/mediaquery";
+import { FOREGROUND_COLORS, ForegroundColor } from "../constant/color";
+import { DARK_MODE, MOBILE } from "../constant/mediaquery";
 import {
   LAPTOP_SUBTITLE_SIZE,
   LAPTOP_SUBTITLE2_SIZE,
@@ -23,6 +16,8 @@ import {
 } from "../constant/size";
 import mergeValues from "../utility/mergeValues";
 
+export { ForegroundColor as TextColor } from "../constant/color";
+
 export interface Props extends React.Attributes {
   /**
    * Default is `span`. No matter if `h1` or `p`, it affects as just a kind of element.
@@ -31,7 +26,7 @@ export interface Props extends React.Attributes {
   /**
    * You can use [[TextColor]] enum instead of a raw string value
    */
-  color?: string;
+  color?: ForegroundColor;
   /**
    * You can use [[TextSize]] enum instead of a raw string value
    */
@@ -69,7 +64,7 @@ const Text = React.forwardRef<HTMLElement, Props>(
   ) => {
     const Component = Root.withComponent(tag);
     const textTheme: TextTheme = React.useContext(TextThemeContext) || {};
-    const _color = mergeValues(color, textTheme.color, TextColor.normal);
+    const _color = mergeValues(color, textTheme.color, ForegroundColor.normal);
     const _size = mergeValues(size, textTheme.size, TextSize.body);
     const _bold = mergeValues(bold, textTheme.bold, false);
     const _maxLines = mergeValues(maxLines, textTheme.maxLines, 1);
@@ -105,15 +100,6 @@ const Text = React.forwardRef<HTMLElement, Props>(
   }
 );
 
-export const TextColor = {
-  normal: TEXT_COLOR,
-  highlight: TEXT_HIGHLIGHT_COLOR,
-  primary: PRIMARY_COLOR,
-  primaryHighlight: PRIMARY_HIGHLIGHT_COLOR,
-  secondary: SECONDARY_COLOR,
-  secondaryHighlight: SECONDARY_HIGHLIGHT_COLOR
-};
-
 export enum TextSize {
   body,
   caption,
@@ -131,7 +117,7 @@ export enum TextAlignment {
 
 const Root = styled.span<{
   _size: TextSize;
-  _color: string;
+  _color: ForegroundColor;
   _bold: boolean;
   _maxLines: number;
   _alignment: TextAlignment;
@@ -142,7 +128,7 @@ const Root = styled.span<{
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
-  color: ${({ _color }) => _color};
+  color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.light};
   font-family: "Open Sans", "Noto Sans JP";
   font-weight: ${({ _bold }) => (_bold ? "bold" : "normal")};
   text-align: ${({ _alignment }) => _alignment};
@@ -167,41 +153,45 @@ const Root = styled.span<{
     -webkit-line-clamp: ${_maxLines};
     overflow-y: hidden;
   `}
+
+  ${DARK_MODE} {
+    color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.dark};
+  }
 `;
 
 const TEXT_SIZES = {
   [TextSize.body]: `
     font-size: ${LAPTOP_TEXT_SIZE}px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_TEXT_SIZE}px;
     }
   `,
   [TextSize.caption]: `
     font-size: 17px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: 14px;
     }
   `,
   [TextSize.title]: `
     font-size: ${LAPTOP_TITLE_SIZE}px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_TITLE_SIZE}px;
     }
   `,
   [TextSize.subtitle]: `
     font-size: ${LAPTOP_SUBTITLE_SIZE}px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_SUBTITLE_SIZE}px;
     }
   `,
   [TextSize.subtitle2]: `
     font-size: ${LAPTOP_SUBTITLE2_SIZE}px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_SUBTITLE2_SIZE}px;
     }
   `

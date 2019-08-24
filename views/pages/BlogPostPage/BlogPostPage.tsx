@@ -10,7 +10,7 @@ import BlogPostTimestamp from "../../components/BlogPostTimestamp";
 import Profile from "../../components/Profile";
 import Text, { TextSize, TextColor } from "../../components/Text";
 import TwoPaneView, { LeftPane, RightPane } from "../../components/TwoPaneView";
-import { MEDIA_MOBILE } from "../../constant/mediaquery";
+import { MOBILE } from "../../constant/mediaquery";
 import {
   MOBILE_MAJOR_PADDING_SIZE,
   MOBILE_MINOR_PADDING_SIZE,
@@ -68,7 +68,7 @@ const _RightPane = styled(RightPane)`
   column-gap: ${LAPTOP_PADDING_SIZE}px;
   align-content: flex-start;
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     grid-template-columns: 100%;
     grid-template-rows: auto ${MOBILE_MINOR_PADDING_SIZE}px auto ${MOBILE_MAJOR_PADDING_SIZE}px auto ${MOBILE_SECTION_MARGIN_SIZE}px auto;
     grid-template-areas: "localeSwitcher" "." "title" "." "body" "." "timestamp";

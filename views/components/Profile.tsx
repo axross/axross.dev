@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { MEDIA_MOBILE } from "../constant/mediaquery";
+import { MOBILE } from "../constant/mediaquery";
 import {
   MOBILE_MINOR_PADDING_SIZE,
   MOBILE_PADDING_SIZE,
@@ -12,7 +12,7 @@ import useMyself from "../hooks/useMyself";
 import KeepLocaleLink from "./KeepLocaleLink";
 import LinkText from "./LinkText";
 import Text, { TextColor, TextSize } from "./Text";
-import { Facebook, GitHub, IconProps, Instagram, LinkedIn } from "./icons";
+import Icon, { IconColor, IconName } from "./Icon";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -36,30 +36,27 @@ function Profile(props: Props) {
       </KeepLocaleLink>
 
       <LinkList>
-        {myself.socialLinks.map(item => {
-          const IconComponent = LinkIcon.withComponent(
-            ICON_COMPONENTS[item.name]
-          );
+        {myself.socialLinks.map(item => (
+          <LinkListItem key={item.name}>
+            <LinkIcon
+              name={ICON_NAMES.get(item.name)!}
+              fill={IconColor.secondary}
+            />
 
-          return (
-            <LinkListItem key={item.name}>
-              <IconComponent fill={TextColor.secondary} />
-
-              <LinkText href={item.url}>{item.username}</LinkText>
-            </LinkListItem>
-          );
-        })}
+            <LinkText href={item.url}>{item.username}</LinkText>
+          </LinkListItem>
+        ))}
       </LinkList>
     </Root>
   );
 }
 
-const ICON_COMPONENTS: Record<string, React.ComponentType<IconProps>> = {
-  GitHub: GitHub,
-  LinkedIn: LinkedIn,
-  Facebook: Facebook,
-  Instagram: Instagram
-};
+const ICON_NAMES = new Map<string, IconName>([
+  ["GitHub", IconName.github],
+  ["LinkedIn", IconName.linkedIn],
+  ["Facebook", IconName.facebook],
+  ["Instagram", IconName.instagram]
+]);
 
 const Root = styled.div`
   display: grid;
@@ -81,7 +78,7 @@ const Myself = styled.a`
   padding-inline-start: ${LAPTOP_MINOR_PADDING_SIZE}px;
   padding-inline-end: ${LAPTOP_MINOR_PADDING_SIZE}px;
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     grid-template-columns: 64px 1fr;
     grid-template-areas: "image name";
     column-gap: ${MOBILE_MINOR_PADDING_SIZE}px;
@@ -105,7 +102,7 @@ const Image = styled.img`
   height: 128px;
   transition: width 150ms ease-in-out 0ms, height 150ms ease-in-out 0ms;
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     width: 48px;
     height: 48px;
   }
@@ -120,7 +117,7 @@ const LinkList = styled.ul`
   flex-direction: column;
   margin-block-start: ${LAPTOP_SECTION_MARGIN_SIZE}px;
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     display: none;
   }
 `;
@@ -137,7 +134,7 @@ const LinkListItem = styled.li`
   }
 `;
 
-const LinkIcon = styled.svg`
+const LinkIcon = styled(Icon)`
   width: 24px;
   height: 24px;
 `;

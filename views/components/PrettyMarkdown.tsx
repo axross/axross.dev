@@ -3,7 +3,8 @@ import Head from "next/head";
 import * as React from "react";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { MEDIA_MOBILE } from "../constant/mediaquery";
+import { FOREGROUND_COLORS } from "../constant/color";
+import { DARK_MODE, MOBILE } from "../constant/mediaquery";
 import {
   MOBILE_MAJOR_PADDING_SIZE,
   MOBILE_MINOR_PADDING_SIZE,
@@ -71,21 +72,28 @@ function PrettyMarkdown({ ...props }: Props) {
 
 const Root = styled(Markdown)`
   --font-size: ${LAPTOP_TEXT_SIZE}px;
-  --title-font-size: ${LAPTOP_TITLE_SIZE}px;
-  --subtitle-font-size: ${LAPTOP_SUBTITLE_SIZE}px;
-  --subtitle2-font-size: ${LAPTOP_SUBTITLE2_SIZE}px;
-  --subtitl3-font-size: ${LAPTOP_SUBTITLE3_SIZE}px;
   --block-padding: ${LAPTOP_PADDING_SIZE}px;
   --major-block-padding: ${LAPTOP_MAJOR_PADDING_SIZE}px;
   --minor-block-padding: ${LAPTOP_MINOR_PADDING_SIZE}px;
 
-  color: ${TextColor.normal};
+  ${MOBILE} {
+    --font-size: ${MOBILE_TEXT_SIZE}px;
+    --block-padding: ${MOBILE_PADDING_SIZE}px;
+    --major-block-padding: ${MOBILE_MAJOR_PADDING_SIZE}px;
+    --minor-block-padding: ${MOBILE_MINOR_PADDING_SIZE}px;
+  }
+
+  color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light};
   font-family: "Open Sans", "Noto Sans JP";
   font-size: var(--font-size);
   font-weight: normal;
   text-align: start;
   line-height: 1.75;
   word-break: break-word;
+
+  ${DARK_MODE} {
+    color: ${FOREGROUND_COLORS.get(TextColor.normal)!.dark};
+  }
 
   * {
     box-sizing: border-box;
@@ -127,7 +135,11 @@ const Root = styled(Markdown)`
   h6 {
     margin-block-start: var(--major-block-padding);
     margin-block-end: var(--block-padding);
-    color: ${TextColor.highlight};
+    color: ${FOREGROUND_COLORS.get(TextColor.highlight)!.light};
+
+    ${DARK_MODE} {
+      color: ${FOREGROUND_COLORS.get(TextColor.highlight)!.dark};
+    }
   }
 
   p:first-child,
@@ -187,6 +199,16 @@ const Root = styled(Markdown)`
     padding-inline-start: var(--block-padding);
     padding-inline-end: var(--block-padding);
     border-radius: 8px;
+
+    ${MOBILE} {
+      max-width: calc(100% + 20px * 2);
+      width: calc(100% + 20px * 2);
+      margin-inline-start: -20px;
+      margin-inline-end: -20px;
+      padding-inline-start: 20px;
+      padding-inline-end: 20px;
+      border-radius: 0;
+    }
   }
 
   ul,
@@ -221,29 +243,43 @@ const Root = styled(Markdown)`
   }
 
   h1 {
-    font-size: var(--title-font-size);
+    font-size: ${LAPTOP_TITLE_SIZE}px;
     font-weight: bold;
+
+    ${MOBILE} {
+      font-size: ${MOBILE_TITLE_SIZE}px;
+    }
   }
 
   h2 {
-    /* font-size: 40px; */
-    font-size: var(--subtitle-font-size);
+    font-size: ${LAPTOP_SUBTITLE_SIZE}px;
     font-weight: bold;
+
+    ${MOBILE} {
+      font-size: ${MOBILE_SUBTITLE_SIZE}px;
+    }
   }
 
   h3 {
-    /* font-size: 30px; */
-    font-size: var(--subtitle2-font-size);
+    font-size: ${LAPTOP_SUBTITLE2_SIZE}px;
     font-weight: bold;
+
+    ${MOBILE} {
+      font-size: ${MOBILE_SUBTITLE2_SIZE}px;
+    }
+  }
+
+  h4,
+  h5 {
+    font-size: ${LAPTOP_SUBTITLE3_SIZE}px;
+
+    ${MOBILE} {
+      font-size: ${MOBILE_SUBTITLE3_SIZE}px;
+    }
   }
 
   h4 {
-    font-size: var(--subtitle3-font-size);
     font-weight: bold;
-  }
-
-  h5 {
-    font-size: var(--subtitle3-font-size);
   }
 
   h6 {
@@ -251,12 +287,16 @@ const Root = styled(Markdown)`
   }
 
   blockquote {
-    background-color: ${TextColor.normal}20;
+    background-color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light}10;
     font-style: italic;
+
+    ${DARK_MODE} {
+      background-color: #00000040;
+    }
   }
 
   code {
-    background-color: ${TextColor.normal}08;
+    background-color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light}10;
     font-family: "Source Code Pro";
     font-weight: 500;
     margin-inline-start: -8px;
@@ -266,12 +306,20 @@ const Root = styled(Markdown)`
     padding-inline-start: 8px;
     padding-inline-end: 8px;
     border-radius: 4px;
+
+    ${DARK_MODE} {
+      background-color: #00000040;
+    }
   }
 
   pre {
-    background-color: ${TextColor.normal}08;
+    background-color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light}10;
     line-height: 1.333;
     overflow-x: scroll;
+
+    ${DARK_MODE} {
+      background-color: #00000040;
+    }
 
     code {
       background-color: transparent;
@@ -291,8 +339,15 @@ const Root = styled(Markdown)`
   table {
     border-collapse: inherit;
     border-spacing: inherit;
-    border: 1px ${TextColor.secondaryHighlight} solid;
+    border-width: 1px;
+    border-color: ${FOREGROUND_COLORS.get(TextColor.secondaryHighlight)!.light};
+    border-style: solid;
     border-radius: 8px;
+
+    ${DARK_MODE} {
+      border-color: ${FOREGROUND_COLORS.get(TextColor.secondaryHighlight)!
+        .dark};
+    }
 
     tr {
       th,
@@ -300,7 +355,17 @@ const Root = styled(Markdown)`
         padding-block-start: var(--minor-block-padding);
         padding-block-end: var(--minor-block-padding);
         padding-inline-start: var(--block-padding);
-        border-bottom: 1px ${TextColor.secondaryHighlight} solid;
+        border-bottom-width: 1px;
+        border-bottom-color: ${FOREGROUND_COLORS.get(
+          TextColor.secondaryHighlight
+        )!.light};
+        border-bottom-style: solid;
+
+        ${DARK_MODE} {
+          border-bottom-color: ${FOREGROUND_COLORS.get(
+            TextColor.secondaryHighlight
+          )!.dark};
+        }
 
         &:last-child {
           padding-inline-end: var(--block-padding);
@@ -317,7 +382,13 @@ const Root = styled(Markdown)`
 
   hr {
     border: none;
-    border-top: 1px ${TextColor.secondary}7f solid;
+    border-top-width: 1px;
+    border-top-color: ${FOREGROUND_COLORS.get(TextColor.secondary)!.light}80;
+    border-top-style: solid;
+
+    ${DARK_MODE} {
+      border-top-color: ${FOREGROUND_COLORS.get(TextColor.secondary)!.dark}80;
+    }
   }
 
   img {
@@ -327,47 +398,41 @@ const Root = styled(Markdown)`
   }
 
   a {
-    color: ${TextColor.primary};
+    color: ${FOREGROUND_COLORS.get(TextColor.primary)!.light};
     text-decoration: none;
 
+    ${DARK_MODE} {
+      color: ${FOREGROUND_COLORS.get(TextColor.primary)!.dark};
+    }
+
     &:hover {
-      color: ${TextColor.primaryHighlight};
+      color: ${FOREGROUND_COLORS.get(TextColor.primaryHighlight)!.light};
       text-decoration: underline ${TextColor.primaryHighlight};
+
+      ${DARK_MODE} {
+        color: ${FOREGROUND_COLORS.get(TextColor.primaryHighlight)!.dark};
+      }
     }
   }
 
   strong {
     font-weight: bold;
   }
-
-  ${MEDIA_MOBILE} {
-    --font-size: ${MOBILE_TEXT_SIZE}px;
-    --title-font-size: ${MOBILE_TITLE_SIZE}px;
-    --subtitle-font-size: ${MOBILE_SUBTITLE_SIZE}px;
-    --subtitle2-font-size: ${MOBILE_SUBTITLE2_SIZE}px;
-    --subtitl3-font-size: ${MOBILE_SUBTITLE3_SIZE}px;
-    --block-padding: ${MOBILE_PADDING_SIZE}px;
-    --major-block-padding: ${MOBILE_MAJOR_PADDING_SIZE}px;
-    --minor-block-padding: ${MOBILE_MINOR_PADDING_SIZE}px;
-
-    blockquote,
-    pre {
-      max-width: calc(100% + 20px * 2);
-      width: calc(100% + 20px * 2);
-      margin-inline-start: -20px;
-      margin-inline-end: -20px;
-      padding-inline-start: 20px;
-      padding-inline-end: 20px;
-      border-radius: 0;
-    }
-  }
 `;
 
 const Code = styled(SyntaxHighlighter)`
-  color: #323449;
+  color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light};
+
+  ${DARK_MODE} {
+    color: ${FOREGROUND_COLORS.get(TextColor.normal)!.dark};
+  }
 
   .token.comment {
-    color: ${TextColor.secondary};
+    color: ${FOREGROUND_COLORS.get(TextColor.secondary)!.light}80;
+
+    ${DARK_MODE} {
+      color: ${FOREGROUND_COLORS.get(TextColor.secondary)!.dark}80;
+    }
   }
 
   .token.keyword {
@@ -375,7 +440,11 @@ const Code = styled(SyntaxHighlighter)`
   }
 
   .token.function {
-    color: ${TextColor.primary};
+    color: ${FOREGROUND_COLORS.get(TextColor.primary)!.light};
+
+    ${DARK_MODE} {
+      color: ${FOREGROUND_COLORS.get(TextColor.primary)!.dark};
+    }
   }
 
   .token.string {
