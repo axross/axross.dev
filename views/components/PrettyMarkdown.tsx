@@ -72,20 +72,12 @@ function PrettyMarkdown({ ...props }: Props) {
 
 const Root = styled(Markdown)`
   --font-size: ${LAPTOP_TEXT_SIZE}px;
-  --title-font-size: ${LAPTOP_TITLE_SIZE}px;
-  --subtitle-font-size: ${LAPTOP_SUBTITLE_SIZE}px;
-  --subtitle2-font-size: ${LAPTOP_SUBTITLE2_SIZE}px;
-  --subtitl3-font-size: ${LAPTOP_SUBTITLE3_SIZE}px;
   --block-padding: ${LAPTOP_PADDING_SIZE}px;
   --major-block-padding: ${LAPTOP_MAJOR_PADDING_SIZE}px;
   --minor-block-padding: ${LAPTOP_MINOR_PADDING_SIZE}px;
 
   ${MEDIA_MOBILE} {
     --font-size: ${MOBILE_TEXT_SIZE}px;
-    --title-font-size: ${MOBILE_TITLE_SIZE}px;
-    --subtitle-font-size: ${MOBILE_SUBTITLE_SIZE}px;
-    --subtitle2-font-size: ${MOBILE_SUBTITLE2_SIZE}px;
-    --subtitl3-font-size: ${MOBILE_SUBTITLE3_SIZE}px;
     --block-padding: ${MOBILE_PADDING_SIZE}px;
     --major-block-padding: ${MOBILE_MAJOR_PADDING_SIZE}px;
     --minor-block-padding: ${MOBILE_MINOR_PADDING_SIZE}px;
@@ -251,27 +243,43 @@ const Root = styled(Markdown)`
   }
 
   h1 {
-    font-size: var(--title-font-size);
+    font-size: ${LAPTOP_TITLE_SIZE}px;
     font-weight: bold;
+
+    ${MEDIA_MOBILE} {
+      font-size: ${MOBILE_TITLE_SIZE}px;
+    }
   }
 
   h2 {
-    font-size: var(--subtitle-font-size);
+    font-size: ${LAPTOP_SUBTITLE_SIZE}px;
     font-weight: bold;
+
+    ${MEDIA_MOBILE} {
+      font-size: ${MOBILE_SUBTITLE_SIZE}px;
+    }
   }
 
   h3 {
-    font-size: var(--subtitle2-font-size);
+    font-size: ${LAPTOP_SUBTITLE2_SIZE}px;
     font-weight: bold;
+
+    ${MEDIA_MOBILE} {
+      font-size: ${MOBILE_SUBTITLE2_SIZE}px;
+    }
+  }
+
+  h4,
+  h5 {
+    font-size: ${LAPTOP_SUBTITLE3_SIZE}px;
+
+    ${MEDIA_MOBILE} {
+      font-size: ${MOBILE_SUBTITLE3_SIZE}px;
+    }
   }
 
   h4 {
-    font-size: var(--subtitle3-font-size);
     font-weight: bold;
-  }
-
-  h5 {
-    font-size: var(--subtitle3-font-size);
   }
 
   h6 {
