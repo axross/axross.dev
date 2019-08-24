@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Head from "next/head";
 import * as React from "react";
 import TextThemeContext, { TextTheme } from "./TextThemeContext";
-import { FOREGROUND_COLORS, ForegroundColor } from "../constant/Color";
+import { FOREGROUND_COLORS, ForegroundColor } from "../constant/color";
 import { DARK_MODE, MOBILE } from "../constant/mediaquery";
 import {
   LAPTOP_SUBTITLE_SIZE,
@@ -16,7 +16,7 @@ import {
 } from "../constant/size";
 import mergeValues from "../utility/mergeValues";
 
-export { ForegroundColor as TextColor } from "../constant/Color";
+export { ForegroundColor as TextColor } from "../constant/color";
 
 export interface Props extends React.Attributes {
   /**

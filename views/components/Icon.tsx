@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { ForegroundColor, FOREGROUND_COLORS } from "../constant/Color";
+import { ForegroundColor, FOREGROUND_COLORS } from "../constant/color";
 import { DARK_MODE } from "../constant/mediaquery";
 
-export { ForegroundColor as IconColor } from "../constant/Color";
+export { ForegroundColor as IconColor } from "../constant/color";
 
 interface IconProps extends React.Attributes {
   name: IconName;

@@ -3,7 +3,7 @@ import Head from "next/head";
 import * as React from "react";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { FOREGROUND_COLORS } from "../constant/Color";
+import { FOREGROUND_COLORS } from "../constant/color";
 import { DARK_MODE, MOBILE } from "../constant/mediaquery";
 import {
   MOBILE_MAJOR_PADDING_SIZE,
