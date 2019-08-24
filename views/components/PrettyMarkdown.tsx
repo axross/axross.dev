@@ -4,7 +4,7 @@ import * as React from "react";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { FOREGROUND_COLORS } from "../constant/Color";
-import { DARK_MODE, MEDIA_MOBILE } from "../constant/mediaquery";
+import { DARK_MODE, MOBILE } from "../constant/mediaquery";
 import {
   MOBILE_MAJOR_PADDING_SIZE,
   MOBILE_MINOR_PADDING_SIZE,
@@ -76,7 +76,7 @@ const Root = styled(Markdown)`
   --major-block-padding: ${LAPTOP_MAJOR_PADDING_SIZE}px;
   --minor-block-padding: ${LAPTOP_MINOR_PADDING_SIZE}px;
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     --font-size: ${MOBILE_TEXT_SIZE}px;
     --block-padding: ${MOBILE_PADDING_SIZE}px;
     --major-block-padding: ${MOBILE_MAJOR_PADDING_SIZE}px;
@@ -200,7 +200,7 @@ const Root = styled(Markdown)`
     padding-inline-end: var(--block-padding);
     border-radius: 8px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       max-width: calc(100% + 20px * 2);
       width: calc(100% + 20px * 2);
       margin-inline-start: -20px;
@@ -246,7 +246,7 @@ const Root = styled(Markdown)`
     font-size: ${LAPTOP_TITLE_SIZE}px;
     font-weight: bold;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_TITLE_SIZE}px;
     }
   }
@@ -255,7 +255,7 @@ const Root = styled(Markdown)`
     font-size: ${LAPTOP_SUBTITLE_SIZE}px;
     font-weight: bold;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_SUBTITLE_SIZE}px;
     }
   }
@@ -264,7 +264,7 @@ const Root = styled(Markdown)`
     font-size: ${LAPTOP_SUBTITLE2_SIZE}px;
     font-weight: bold;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_SUBTITLE2_SIZE}px;
     }
   }
@@ -273,7 +273,7 @@ const Root = styled(Markdown)`
   h5 {
     font-size: ${LAPTOP_SUBTITLE3_SIZE}px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_SUBTITLE3_SIZE}px;
     }
   }

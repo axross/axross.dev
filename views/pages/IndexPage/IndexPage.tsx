@@ -7,7 +7,7 @@ import LocaleSwitcher from "../../components/LocaleSwitcher";
 import Head from "../../components/IndexHead";
 import Profile from "../../components/Profile";
 import TwoPaneView, { LeftPane, RightPane } from "../../components/TwoPaneView";
-import { MEDIA_MOBILE } from "../../constant/mediaquery";
+import { MOBILE } from "../../constant/mediaquery";
 import {
   MOBILE_MINOR_PADDING_SIZE,
   MOBILE_PADDING_SIZE,
@@ -58,7 +58,7 @@ const _RightPane = styled(RightPane)`
     "localeSwitcher" "." "whoamiHeading" "." "whoami" "."
     "firstNBlogPostsHeading" "." "firstNBlogPosts";
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     grid-template-rows: auto ${MOBILE_MINOR_PADDING_SIZE}px auto ${MOBILE_PADDING_SIZE}px auto ${MOBILE_SECTION_MARGIN_SIZE}px auto ${MOBILE_PADDING_SIZE}px auto;
     grid-template-areas: "localeSwitcher", ".",
       "whoamiHeading" "." "whoami" "." "firstNBlogPostsHeading" "."

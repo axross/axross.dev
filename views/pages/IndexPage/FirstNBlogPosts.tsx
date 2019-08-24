@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import BlogPost from "../../../entities/BlogPost";
-import { MEDIA_MOBILE } from "../../constant/mediaquery";
+import { MOBILE } from "../../constant/mediaquery";
 import { MOBILE_PADDING_SIZE, LAPTOP_PADDING_SIZE } from "../../constant/size";
 import useFormatRelative from "../../hooks/useFormatRelative";
 import useTranslation from "../../hooks/useTranslation";
@@ -59,7 +59,7 @@ const Item = styled.li`
     margin-block-start: 0;
   }
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     margin-block-start: ${MOBILE_PADDING_SIZE}px;
   }
 `;

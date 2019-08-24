@@ -3,7 +3,7 @@ import Head from "next/head";
 import * as React from "react";
 import TextThemeContext, { TextTheme } from "./TextThemeContext";
 import { FOREGROUND_COLORS, ForegroundColor } from "../constant/Color";
-import { DARK_MODE, MEDIA_MOBILE } from "../constant/mediaquery";
+import { DARK_MODE, MOBILE } from "../constant/mediaquery";
 import {
   LAPTOP_SUBTITLE_SIZE,
   LAPTOP_SUBTITLE2_SIZE,
@@ -163,35 +163,35 @@ const TEXT_SIZES = {
   [TextSize.body]: `
     font-size: ${LAPTOP_TEXT_SIZE}px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_TEXT_SIZE}px;
     }
   `,
   [TextSize.caption]: `
     font-size: 17px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: 14px;
     }
   `,
   [TextSize.title]: `
     font-size: ${LAPTOP_TITLE_SIZE}px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_TITLE_SIZE}px;
     }
   `,
   [TextSize.subtitle]: `
     font-size: ${LAPTOP_SUBTITLE_SIZE}px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_SUBTITLE_SIZE}px;
     }
   `,
   [TextSize.subtitle2]: `
     font-size: ${LAPTOP_SUBTITLE2_SIZE}px;
 
-    ${MEDIA_MOBILE} {
+    ${MOBILE} {
       font-size: ${MOBILE_SUBTITLE2_SIZE}px;
     }
   `

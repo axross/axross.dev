@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { MEDIA_MOBILE } from "../constant/mediaquery";
+import { MOBILE } from "../constant/mediaquery";
 import {
   MOBILE_MINOR_PADDING_SIZE,
   MOBILE_PADDING_SIZE,
@@ -78,7 +78,7 @@ const Myself = styled.a`
   padding-inline-start: ${LAPTOP_MINOR_PADDING_SIZE}px;
   padding-inline-end: ${LAPTOP_MINOR_PADDING_SIZE}px;
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     grid-template-columns: 64px 1fr;
     grid-template-areas: "image name";
     column-gap: ${MOBILE_MINOR_PADDING_SIZE}px;
@@ -102,7 +102,7 @@ const Image = styled.img`
   height: 128px;
   transition: width 150ms ease-in-out 0ms, height 150ms ease-in-out 0ms;
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     width: 48px;
     height: 48px;
   }
@@ -117,7 +117,7 @@ const LinkList = styled.ul`
   flex-direction: column;
   margin-block-start: ${LAPTOP_SECTION_MARGIN_SIZE}px;
 
-  ${MEDIA_MOBILE} {
+  ${MOBILE} {
     display: none;
   }
 `;
