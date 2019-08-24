@@ -1,10 +1,10 @@
 import { createContext } from "react";
-import { TextAlignment, TextSize } from "./Text";
+import { TextAlignment, TextColor, TextSize } from "./Text";
 
 export { TextAlignment, TextColor, TextSize } from "./Text";
 
 export interface TextTheme {
-  color?: string;
+  color?: TextColor;
   size?: TextSize;
   bold?: boolean;
   maxLines?: number;
