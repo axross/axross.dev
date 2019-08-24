@@ -8,6 +8,7 @@ import NextDocument, {
 } from "next/document";
 import LocaleString from "../entities/LocaleString";
 import getLocale from "../utility/getLocale";
+import { FOREGROUND_COLORS, ForegroundColor } from "../views/constant/color";
 import GlobalStyle from "../views/components/GlobalStyle";
 import GoogleAnalytics from "../views/components/GoogleAnalytics";
 
@@ -30,7 +31,11 @@ class Document extends NextDocument<Props> {
             href="/static/shortcut-icon.png"
             key="shortcutIcon"
           />
-          <meta name="theme-color" content="#087da1" key="themeColor" />
+          <meta
+            name="theme-color"
+            content={FOREGROUND_COLORS.get(ForegroundColor.normal)!.light}
+            key="themeColor"
+          />
         </Head>
 
         <body>
