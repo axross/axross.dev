@@ -1,5 +1,6 @@
 import { css, Global } from "@emotion/core";
 import * as React from "react";
+import { BACKGROUND_COLORS, BackgroundColor } from "../constant/color";
 import { DARK_MODE } from "../constant/mediaquery";
 
 function GlobalStyle() {
@@ -8,7 +9,7 @@ function GlobalStyle() {
 
 const GLOBAL_STYLE = css`
   html {
-    background-color: #fdfdfd;
+    background-color: ${BACKGROUND_COLORS.get(BackgroundColor.normal)!.light};
   }
 
   body {
@@ -48,7 +49,7 @@ const GLOBAL_STYLE = css`
 
   ${DARK_MODE} {
     html {
-      background-color: #1a304c;
+      background-color: ${BACKGROUND_COLORS.get(BackgroundColor.normal)!.dark};
     }
   }
 `;

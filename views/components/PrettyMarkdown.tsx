@@ -3,7 +3,13 @@ import Head from "next/head";
 import * as React from "react";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { FOREGROUND_COLORS } from "../constant/color";
+import {
+  BACKGROUND_COLORS,
+  CODE_COLORS,
+  FOREGROUND_COLORS,
+  BackgroundColor,
+  CodeColor
+} from "../constant/color";
 import { DARK_MODE, MOBILE } from "../constant/mediaquery";
 import {
   MOBILE_MAJOR_PADDING_SIZE,
@@ -54,6 +60,7 @@ function PrettyMarkdown({ ...props }: Props) {
           code: ({ language, value }: any) => {
             return (
               <Code
+                codeTagProps={{ className: `language-${language}` }}
                 language={language}
                 children={value}
                 // disable default style
@@ -287,38 +294,40 @@ const Root = styled(Markdown)`
   }
 
   blockquote {
-    background-color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light}10;
+    background-color: ${BACKGROUND_COLORS.get(BackgroundColor.highlight)!
+      .light};
     font-style: italic;
 
     ${DARK_MODE} {
-      background-color: #00000040;
+      background-color: ${BACKGROUND_COLORS.get(BackgroundColor.highlight)!
+        .dark};
     }
   }
 
   code {
-    background-color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light}10;
+    background-color: ${BACKGROUND_COLORS.get(BackgroundColor.code)!.light};
     font-family: "Source Code Pro";
     font-weight: 500;
-    margin-inline-start: -8px;
-    margin-inline-end: -8px;
-    padding-block-start: 4px;
-    padding-block-end: 4px;
-    padding-inline-start: 8px;
-    padding-inline-end: 8px;
+    margin-inline-start: -0.2em;
+    margin-inline-end: -0.2em;
+    padding-block-start: 0.2em;
+    padding-block-end: 0.2em;
+    padding-inline-start: 0.2em;
+    padding-inline-end: 0.2em;
     border-radius: 4px;
 
     ${DARK_MODE} {
-      background-color: #00000040;
+      background-color: ${BACKGROUND_COLORS.get(BackgroundColor.code)!.dark};
     }
   }
 
   pre {
-    background-color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light}10;
+    background-color: ${BACKGROUND_COLORS.get(BackgroundColor.code)!.light};
     line-height: 1.333;
     overflow-x: scroll;
 
     ${DARK_MODE} {
-      background-color: #00000040;
+      background-color: ${BACKGROUND_COLORS.get(BackgroundColor.code)!.dark};
     }
 
     code {
@@ -407,10 +416,13 @@ const Root = styled(Markdown)`
 
     &:hover {
       color: ${FOREGROUND_COLORS.get(TextColor.primaryHighlight)!.light};
-      text-decoration: underline ${TextColor.primaryHighlight};
+      text-decoration: underline
+        ${FOREGROUND_COLORS.get(TextColor.primaryHighlight)!.light};
 
       ${DARK_MODE} {
         color: ${FOREGROUND_COLORS.get(TextColor.primaryHighlight)!.dark};
+        text-decoration: underline
+          ${FOREGROUND_COLORS.get(TextColor.primaryHighlight)!.dark};
       }
     }
   }
@@ -421,39 +433,143 @@ const Root = styled(Markdown)`
 `;
 
 const Code = styled(SyntaxHighlighter)`
-  color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light};
+  color: ${CODE_COLORS.get(CodeColor.normal)!.light};
 
   ${DARK_MODE} {
-    color: ${FOREGROUND_COLORS.get(TextColor.normal)!.dark};
+    color: ${CODE_COLORS.get(CodeColor.normal)!.dark};
   }
 
   .token.comment {
-    color: ${FOREGROUND_COLORS.get(TextColor.secondary)!.light}80;
+    color: ${CODE_COLORS.get(CodeColor.comment)!.light};
 
     ${DARK_MODE} {
-      color: ${FOREGROUND_COLORS.get(TextColor.secondary)!.dark}80;
+      color: ${CODE_COLORS.get(CodeColor.comment)!.dark};
     }
   }
 
   .token.keyword {
-    color: #0bacdb;
-  }
-
-  .token.function {
-    color: ${FOREGROUND_COLORS.get(TextColor.primary)!.light};
+    color: ${CODE_COLORS.get(CodeColor.keyword)!.light};
 
     ${DARK_MODE} {
-      color: ${FOREGROUND_COLORS.get(TextColor.primary)!.dark};
+      color: ${CODE_COLORS.get(CodeColor.keyword)!.dark};
     }
   }
 
-  .token.string {
-    color: #b3ab47;
+  .token.operator {
+    color: ${CODE_COLORS.get(CodeColor.operator)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.operator)!.dark};
+    }
+  }
+
+  .token.punctuation {
+    color: ${CODE_COLORS.get(CodeColor.punctuation)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.punctuation)!.dark};
+    }
+  }
+
+  .token.function {
+    color: ${CODE_COLORS.get(CodeColor.function)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.function)!.dark};
+    }
+  }
+
+  .token.string,
+  .token.attr-value {
+    color: ${CODE_COLORS.get(CodeColor.string)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.string)!.dark};
+    }
   }
 
   .token.number,
-  .token.interpolation {
-    color: #ff6c80;
+  .token.unit,
+  .token.interpolation,
+  .token.pseudo-element {
+    color: ${CODE_COLORS.get(CodeColor.number)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.number)!.dark};
+    }
+  }
+
+  .token.class-name,
+  .token.maybe-class-name {
+    color: ${CODE_COLORS.get(CodeColor.class)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.class)!.dark};
+    }
+  }
+
+  .token.tag {
+    color: ${CODE_COLORS.get(CodeColor.tag)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.tag)!.dark};
+    }
+
+    .token.punctuation {
+      color: ${CODE_COLORS.get(CodeColor.tagPunctuation)!.light};
+
+      ${DARK_MODE} {
+        color: ${CODE_COLORS.get(CodeColor.tagPunctuation)!.dark};
+      }
+    }
+  }
+
+  .token.attr-name {
+    color: ${CODE_COLORS.get(CodeColor.attributeKey)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.attributeKey)!.dark};
+    }
+  }
+
+  .token.constant {
+    color: ${CODE_COLORS.get(CodeColor.constant)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.constant)!.dark};
+    }
+  }
+
+  .token.parameter {
+    color: ${CODE_COLORS.get(CodeColor.parameter)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.parameter)!.dark};
+    }
+  }
+
+  .token.property {
+    color: ${CODE_COLORS.get(CodeColor.property)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.property)!.dark};
+    }
+  }
+
+  .token.selector {
+    color: ${CODE_COLORS.get(CodeColor.selector)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.selector)!.dark};
+    }
+  }
+
+  .token.hexcode {
+    color: ${CODE_COLORS.get(CodeColor.hexcode)!.light};
+
+    ${DARK_MODE} {
+      color: ${CODE_COLORS.get(CodeColor.hexcode)!.dark};
+    }
   }
 `;
 
