@@ -11,7 +11,7 @@ import {
 import useMyself from "../hooks/useMyself";
 import KeepLocaleLink from "./KeepLocaleLink";
 import LinkText from "./LinkText";
-import Text, { TextColor, TextSize } from "./Text";
+import Text, { TextSize } from "./Text";
 import Icon, { IconColor, IconName } from "./Icon";
 
 interface Props extends React.Attributes {
@@ -28,7 +28,7 @@ function Profile(props: Props) {
           <Image src="/static/profile.jpg" alt={myself.name} />
 
           <Name>
-            <Text size={TextSize.subtitle2} color={TextColor.highlight} bold>
+            <Text size={TextSize.subtitle2} bold>
               {myself.name}
             </Text>
           </Name>
