@@ -36,7 +36,7 @@ const Root = styled.svg<{ _color: ForegroundColor }>`
     fill: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.light};
 
     ${DARK_MODE} {
-      color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.dark};
+      fill: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.dark};
     }
   }
 `;
