@@ -404,6 +404,10 @@ const Root = styled(Markdown)`
     max-width: 100%;
     max-height: 800px;
     border-radius: 8px;
+
+    ${DARK_MODE} {
+      filter: grayscale(25%);
+    }
   }
 
   a {
