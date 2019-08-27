@@ -13,7 +13,6 @@ jobs:
         with:
           node-version: "10.x"
       - run: npm install
-      - name:
       - run: npm i --no-save typescript@3
       - run: $(npm bin)/tsc --noEmit
   test:
