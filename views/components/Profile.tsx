@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { MOBILE } from "../constant/mediaquery";
+import { DARK_MODE, MOBILE } from "../constant/mediaquery";
 import {
   MOBILE_MINOR_PADDING_SIZE,
   MOBILE_PADDING_SIZE,
@@ -105,6 +105,10 @@ const Image = styled.img`
   ${MOBILE} {
     width: 48px;
     height: 48px;
+  }
+
+  ${DARK_MODE} {
+    filter: grayscale(25%);
   }
 `;
 
