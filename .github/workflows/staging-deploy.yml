@@ -1,0 +1,61 @@
+name: Deploy to Staging
+on:
+  push:
+    branches:
+      - master
+jobs:
+  dry-compile:
+    name: Dry Compilation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - run: npm install
+      - name:
+      - run: npm i --no-save typescript@3
+      - run: $(npm bin)/tsc --noEmit
+  test:
+    name: Testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - run: npm install
+      - run: npm test
+  dry-build:
+    name: Dry Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - run: npm install
+      - run: npm i --no-save next@9
+      - run: $(npm bin)/next build
+        env:
+          ORIGIN: ${{ secrets.ORIGIN }}
+          CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+  deploy-staging:
+    name: Deploying to Staging Environment
+    needs: [dry-compile, test, dry-build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - run: npm install
+      - run: npm i --no-save now@15
+      - run: $(npm bin)/now --token $NOW_TOKEN --name $NOW_NAME --target production -b ORIGIN=$ORIGIN -b CONTENTFUL_SPACE=$CONTENTFUL_SPACE -b CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN .
+        env:
+          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
+          NOW_NAME: ${{ secrets.STAGING_NOW_NAME }}
+          ORIGIN: ${{ secrets.STAGING_ORIGIN }}
+          CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
