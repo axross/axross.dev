@@ -23,7 +23,7 @@ function Profile(props: Props) {
 
   return (
     <Root {...props}>
-      <KeepLocaleLink href="/" as="/" prefetch passHref>
+      <KeepLocaleLink href="/" as="/" passHref>
         <Myself>
           <Image src="/static/profile.jpg" alt={myself.name} />
 
