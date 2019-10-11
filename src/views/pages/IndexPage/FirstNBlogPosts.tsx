@@ -28,7 +28,6 @@ function FirstNBlogPosts({ blogPosts, ...props }: Props) {
               href="/posts/[blogPostId]"
               as={`/posts/${blogPost.id}`}
               passHref
-              prefetch
             >
               <LinkText maxLines={0}>{blogPost.title}</LinkText>
             </LinkKeepLocale>

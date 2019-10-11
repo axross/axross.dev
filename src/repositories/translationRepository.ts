@@ -19,7 +19,7 @@ async function getTranslation(
   }
 
   if (typeof process !== "undefined") {
-    const json = require(`../static/translation/${locale}.json`);
+    const json = require(`../../public/static/translation/${locale}.json`);
 
     return json;
   }
