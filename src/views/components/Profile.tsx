@@ -10,7 +10,6 @@ import {
 } from "../constant/size";
 import useMyself from "../hooks/useMyself";
 import KeepLocaleLink from "./KeepLocaleLink";
-import LinkText from "./LinkText";
 import Text, { TextSize } from "./Text";
 import Icon, { IconColor, IconName } from "./Icon";
 
@@ -43,7 +42,11 @@ function Profile(props: Props) {
               fill={IconColor.secondary}
             />
 
-            <LinkText href={item.url}>{item.username}</LinkText>
+            <a href={item.url}>
+              <Text link>
+                {item.username}
+              </Text>
+            </a>
           </LinkListItem>
         ))}
       </LinkList>

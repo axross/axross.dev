@@ -9,8 +9,8 @@
     "build": "next build"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.14",
-    "@emotion/styled": "^10.0.14",
+    "@emotion/core": "^10.0.21",
+    "@emotion/styled": "^10.0.17",
     "contentful": "^7.8.2",
     "date-fns": "^2.4.1",
     "intl-messageformat": "^5.4.3",
@@ -18,7 +18,6 @@
     "querystring": "^0.2.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-markdown": "^4.1.0",
     "react-syntax-highlighter": "^11.0.2",
     "xml-js": "^1.6.11"
   },
@@ -26,7 +25,7 @@
     "@types/jest": "^24.0.16",
     "@types/node": "^12.6.8",
     "@types/react": "^16.9.5",
-    "@types/react-syntax-highlighter": "^10.2.1",
+    "@types/@emotion/styledlighter": "^10.2.1",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.6.4"

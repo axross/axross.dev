@@ -7,7 +7,6 @@ import { MOBILE_PADDING_SIZE, LAPTOP_PADDING_SIZE } from "../../constant/size";
 import useFormatRelative from "../../hooks/useFormatRelative";
 import useTranslation from "../../hooks/useTranslation";
 import LinkKeepLocale from "../../components/KeepLocaleLink";
-import LinkText from "../../components/LinkText";
 import Text, { TextColor, TextSize } from "../../components/Text";
 
 interface Props extends React.Attributes {
@@ -29,7 +28,9 @@ function FirstNBlogPosts({ blogPosts, ...props }: Props) {
               as={`/posts/${blogPost.id}`}
               passHref
             >
-              <LinkText maxLines={0}>{blogPost.title}</LinkText>
+              <a>
+                <Text maxLines={0} link>{blogPost.title}</Text>
+              </a>
             </LinkKeepLocale>
           </Title>
 
