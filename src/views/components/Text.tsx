@@ -20,10 +20,6 @@ export { ForegroundColor as TextColor } from "../constant/color";
 
 export interface Props extends React.Attributes {
   /**
-   * Default is `span`. No matter if `h1` or `p`, it affects as just a kind of element.
-   */
-  tag?: keyof JSX.IntrinsicElements;
-  /**
    * You can use [[TextColor]] enum instead of a raw string value
    */
   color?: ForegroundColor;
@@ -32,6 +28,7 @@ export interface Props extends React.Attributes {
    */
   size?: TextSize;
   bold?: boolean;
+  link?: boolean;
   /**
    * If this param is more than or equal 1 and the string inside is going overflown, it is clamped by an ellipsis at the end of the specified line.
    */
@@ -51,10 +48,10 @@ export interface Props extends React.Attributes {
 const Text = React.forwardRef<HTMLElement, Props>(
   (
     {
-      tag = "span",
       color,
       size,
       bold,
+      link = false,
       maxLines,
       alignment,
       selectable,
@@ -62,7 +59,6 @@ const Text = React.forwardRef<HTMLElement, Props>(
     },
     ref
   ) => {
-    const Component = Root.withComponent(tag);
     const textTheme: TextTheme = React.useContext(TextThemeContext) || {};
     const _color = mergeValues(color, textTheme.color, ForegroundColor.normal);
     const _size = mergeValues(size, textTheme.size, TextSize.body);
@@ -85,10 +81,11 @@ const Text = React.forwardRef<HTMLElement, Props>(
           />
         </Head>
 
-        <Component
+        <Root
           _color={_color}
           _size={_size}
           _bold={_bold}
+          _link={link}
           _maxLines={_maxLines}
           _alignment={_alignment}
           _selectable={_selectable}
@@ -119,6 +116,7 @@ const Root = styled.span<{
   _size: TextSize;
   _color: ForegroundColor;
   _bold: boolean;
+  _link: boolean;
   _maxLines: number;
   _alignment: TextAlignment;
   _selectable: boolean;
@@ -128,7 +126,7 @@ const Root = styled.span<{
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
-  color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.light};
+  color: ${({ _color, _link }) => _link ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.light : FOREGROUND_COLORS.get(_color)!.light};
   font-family: "Open Sans", "Noto Sans JP";
   font-weight: ${({ _bold }) => (_bold ? "bold" : "normal")};
   text-align: ${({ _alignment }) => _alignment};
@@ -155,7 +153,21 @@ const Root = styled.span<{
   `}
 
   ${DARK_MODE} {
-    color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.dark};
+    color: ${({ _color, _link }) => _link ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.dark : FOREGROUND_COLORS.get(_color)!.dark};
+  }
+
+  &:hover {
+    ${({ _link }) => _link ? `
+      color: ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.light};
+      text-decoration: underline ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.light};
+    ` : ""}
+
+    ${DARK_MODE} {
+      color: ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.dark};
+      ${({ _link }) => _link ? `
+        text-decoration: underline ${FOREGROUND_COLORS.get(ForegroundColor.primary)!.dark};
+      ` : ""}
+    }
   }
 `;
 

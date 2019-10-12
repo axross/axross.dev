@@ -9,8 +9,8 @@
     "build": "next build"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.14",
-    "@emotion/styled": "^10.0.14",
+    "@emotion/core": "^10.0.21",
+    "@emotion/styled": "^10.0.17",
     "contentful": "^7.8.2",
     "date-fns": "^2.4.1",
     "intl-messageformat": "^5.4.3",

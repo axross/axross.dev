@@ -10,7 +10,6 @@ import {
   LAPTOP_MINOR_PADDING_SIZE
 } from "../constant/size";
 import useTranslation from "../hooks/useTranslation";
-import LinkText from "./LinkText";
 import Text, { TextColor, TextSize } from "./Text";
 import useCurrentLocale from "../hooks/useCurrentLocale";
 import useAvailableLocales from "../hooks/useAvailableLocales";
@@ -39,27 +38,31 @@ function LocaleSwitcher(props: Props) {
         }
 
         return locale === currentLocale ? (
-          <TextItem
-            color={TextColor.secondary}
-            size={TextSize.caption}
-            key={locale}
-          >
-            {new IntlMessageFormat(translation[`language.${locale}`]).format()}
-          </TextItem>
+          <Item key={locale}>
+            <Text
+              color={TextColor.secondary}
+              size={TextSize.caption}
+            >
+              {new IntlMessageFormat(translation[`language.${locale}`]).format()}
+            </Text>
+          </Item>
         ) : (
-          <Link
-            href={router.pathname + localeUrl.search}
-            as={localeUrl}
-            replace
-            passHref
-            key={locale}
-          >
-            <LinkItem size={TextSize.caption}>
-              {new IntlMessageFormat(
-                translation[`language.${locale}`]
-              ).format()}
-            </LinkItem>
-          </Link>
+          <Item key={locale}>
+            <Link
+              href={router.pathname + localeUrl.search}
+              as={localeUrl}
+              replace
+              passHref
+            >
+              <a>
+                <Text size={TextSize.caption} link>
+                  {new IntlMessageFormat(
+                    translation[`language.${locale}`]
+                  ).format()}
+                </Text>
+              </a>
+            </Link>
+          </Item>
         );
       })}
     </Root>
@@ -72,25 +75,23 @@ const Root = styled.span`
   align-items: flex-end;
 `;
 
-const TextItem = styled(Text)`
+const Item = styled.li`
   margin-inline-start: ${LAPTOP_MINOR_PADDING_SIZE}px;
 
-  &:first-child {
-    margin-inline-start: -${MOBILE_MINOR_PADDING_SIZE}px;
-  }
+&:first-child {
+  margin-inline-start: -${MOBILE_MINOR_PADDING_SIZE}px;
+}
 
-  ${MOBILE} {
-    margin-block-start: -${MOBILE_MINOR_PADDING_SIZE}px;
-    margin-block-end: -${MOBILE_MINOR_PADDING_SIZE}px;
-    margin-inline-start: 0;
-    margin-inline-end: -${MOBILE_MINOR_PADDING_SIZE}px;
-    padding-block-start: ${MOBILE_MINOR_PADDING_SIZE}px;
-    padding-block-end: ${MOBILE_MINOR_PADDING_SIZE}px;
-    padding-inline-start: ${MOBILE_MINOR_PADDING_SIZE}px;
-    padding-inline-end: ${MOBILE_MINOR_PADDING_SIZE}px;
-  }
+${MOBILE} {
+  margin-block-start: -${MOBILE_MINOR_PADDING_SIZE}px;
+  margin-block-end: -${MOBILE_MINOR_PADDING_SIZE}px;
+  margin-inline-start: 0;
+  margin-inline-end: -${MOBILE_MINOR_PADDING_SIZE}px;
+  padding-block-start: ${MOBILE_MINOR_PADDING_SIZE}px;
+  padding-block-end: ${MOBILE_MINOR_PADDING_SIZE}px;
+  padding-inline-start: ${MOBILE_MINOR_PADDING_SIZE}px;
+  padding-inline-end: ${MOBILE_MINOR_PADDING_SIZE}px;
+}
 `;
-
-const LinkItem = TextItem.withComponent(LinkText);
 
 export default LocaleSwitcher;
