@@ -1,12 +1,13 @@
 import { NextPageContext } from "next";
+import getOrigin from '../utility/getOrigin';
 
 function RobotsTxt() {
   return null;
 }
 
-RobotsTxt.getInitialProps = async ({ res }: NextPageContext): Promise<any> => {
+RobotsTxt.getInitialProps = async ({ req, res }: NextPageContext): Promise<any> => {
   res!.setHeader("content-type", "text/plain");
-  res!.write(`Sitemap: ${process.env.ORIGIN}/sitemap.xml\n`);
+  res!.write(`Sitemap: ${getOrigin(req)}/sitemap.xml\n`);
   res!.end();
 
   return;
