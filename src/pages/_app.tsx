@@ -1,5 +1,5 @@
 import * as React from "react";
-import NextApp, { AppContext, Container } from "next/app";
+import NextApp, { AppContext } from "next/app";
 import getLocale from "../utility/getLocale";
 import LocaleString from "../entities/LocaleString";
 import getTranslation from "../repositories/translationRepository";
@@ -32,17 +32,15 @@ class App extends NextApp<Props> {
     const url = new URL(router.asPath, process.env.ORIGIN);
 
     return (
-      <Container>
-        <SelfUrlContext.Provider value={url}>
-          <MyselfContext.Provider value={myself}>
-            <CurrentLocaleContext.Provider value={locale}>
-              <TranslationContext.Provider value={translation}>
-                <Component {...pageProps} />
-              </TranslationContext.Provider>
-            </CurrentLocaleContext.Provider>
-          </MyselfContext.Provider>
-        </SelfUrlContext.Provider>
-      </Container>
+      <SelfUrlContext.Provider value={url}>
+        <MyselfContext.Provider value={myself}>
+          <CurrentLocaleContext.Provider value={locale}>
+            <TranslationContext.Provider value={translation}>
+              <Component {...pageProps} />
+            </TranslationContext.Provider>
+          </CurrentLocaleContext.Provider>
+        </MyselfContext.Provider>
+      </SelfUrlContext.Provider>
     );
   }
 
