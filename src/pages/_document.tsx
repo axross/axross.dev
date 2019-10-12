@@ -28,7 +28,8 @@ class Document extends NextDocument<Props> {
           />
           <link
             rel="shortcut icon"
-            href="/static/shortcut-icon.png"
+            type="image/png" 
+            href="/static/favicon.png"
             key="shortcutIcon"
           />
           <meta
