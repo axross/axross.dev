@@ -60,7 +60,7 @@ jobs:
           at: ~/repo
       - deploy:
           name: Deploy to staging
-          command: npx -p now@15 now --token $NOW_TOKEN --name $NOW_NAME_STAGING --target production -b ORIGIN=$ORIGIN_STAGING -b CONTENTFUL_SPACE=$CONTENTFUL_SPACE -b CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN .
+          command: npx -p now@16.3.1 now --token $NOW_TOKEN --name $NOW_NAME_STAGING --target production -b ORIGIN=$ORIGIN_STAGING -b CONTENTFUL_SPACE=$CONTENTFUL_SPACE -b CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN .
   deploy-production:
     <<: *general_options
     steps:
@@ -68,7 +68,7 @@ jobs:
           at: ~/repo
       - deploy:
           name: Deploy to production
-          command: npx -p now@15 now --token $NOW_TOKEN --name $NOW_NAME_PRODUCTION --target production -b ORIGIN=$ORIGIN_PRODUCTION -b CONTENTFUL_SPACE=$CONTENTFUL_SPACE -b CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN .
+          command: npx -p now@16.3.1 now --token $NOW_TOKEN --name $NOW_NAME_PRODUCTION --target production -b ORIGIN=$ORIGIN_PRODUCTION -b CONTENTFUL_SPACE=$CONTENTFUL_SPACE -b CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN .
 workflows:
   version: 2
   default:
