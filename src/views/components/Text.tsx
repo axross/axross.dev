@@ -163,9 +163,9 @@ const Root = styled.span<{
     ` : ""}
 
     ${DARK_MODE} {
-      color: ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.dark};
       ${({ _link }) => _link ? `
-        text-decoration: underline ${FOREGROUND_COLORS.get(ForegroundColor.primary)!.dark};
+        color: ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.dark};
+        text-decoration: underline ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.dark};
       ` : ""}
     }
   }
