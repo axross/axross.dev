@@ -29,6 +29,7 @@ import {
   LAPTOP_TEXT_SIZE,
   LAPTOP_TITLE_SIZE
 } from "../constant/size";
+import ScaledImage from './ScaledImage';
 import { TextColor } from "./Text";
 
 interface Props extends React.Attributes {
@@ -57,6 +58,21 @@ function PrettyMarkdown({ ...props }: Props) {
           text: ({ value, nodeKey, ...props }: any) => (
             <span {...props} key={nodeKey} />
           ),
+          image: (attributes: any) => {
+            if (typeof attributes.alt === 'string') {
+              const { alt, ...restAttributes } = attributes;
+              const matchs = /@(([0-9]+.)?[0-9]+)x$/.exec(alt);
+
+              if (matchs !== null) {
+                const scale = 1 / parseFloat(matchs[1]);
+                const sanitizedAlt = alt.substring(0, alt.length - matchs[0].length);
+
+                return <ScaledImage alt={sanitizedAlt} scale={scale} {...restAttributes} />;
+              }
+            }
+
+            return <ScaledImage {...attributes}></ScaledImage>;
+          },
           code: ({ language, value }: any) => {
             return (
               <Code
@@ -69,7 +85,8 @@ function PrettyMarkdown({ ...props }: Props) {
                 customStyle={{ backgroundColor: undefined }}
               />
             );
-          }
+          },
+          
         }}
         {...props}
       />
