@@ -440,7 +440,6 @@ const Root = styled(Markdown)`
   img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
 
     ${DARK_MODE} {
       filter: grayscale(25%);
