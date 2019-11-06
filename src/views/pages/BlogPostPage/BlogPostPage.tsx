@@ -4,7 +4,7 @@ import BlogPost from "../../../entities/BlogPost";
 import LocaleString from "../../../entities/LocaleString";
 import AvailableLocalesContext from "../../components/AvailableLocalesContext";
 import LocaleSwitcher from "../../components/LocaleSwitcher";
-import PrettyMarkdown from "../../components/PrettyMarkdown";
+import PrettyMarkdown from "../../components/PrettyMarkdown/PrettyMarkdown";
 import Head from "../../components/BlogPostHead";
 import BlogPostTimestamp from "../../components/BlogPostTimestamp";
 import Profile from "../../components/Profile";

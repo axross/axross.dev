@@ -3,6 +3,7 @@ import * as React from "react";
 
 interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
   scale: number;
+  inline: boolean;
 }
 
 interface State {
@@ -10,7 +11,7 @@ interface State {
   scaledHeight: number | null,
 }
 
-class ScaledImage extends React.Component<Props, State> {
+class PrettyMarkdownImage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -37,20 +38,22 @@ class ScaledImage extends React.Component<Props, State> {
   }
 
   render() {
-    const { scale, src, ...props } = this.props;
+    const { scale, inline, src, ...props } = this.props;
 
     return <Root
       _width={this.state.scaledWidth}
       _height={this.state.scaledHeight}
+      _inline={this.props.inline}
       ref={this.ref}
       {...props}
     />;
   }
 }
 
-const Root = styled.img<{_width: number | null, _height: number | null}>`
+const Root = styled.img<{ _width: number | null, _height: number | null, _inline: boolean }>`
   ${({ _width }) => _width !== null ? `width: ${_width}px;` : ""}
   ${({ _height }) => _height !== null ? `height: ${_height}px;` : ""}
+  ${({ _inline }) => _inline ? "display: inline-block;" : ""}
 `
 
-export default ScaledImage;
+export default PrettyMarkdownImage;
