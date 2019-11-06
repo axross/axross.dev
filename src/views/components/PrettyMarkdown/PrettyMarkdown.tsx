@@ -30,6 +30,7 @@ import {
   LAPTOP_TITLE_SIZE
 } from "../../constant/size";
 import PrettyMarkdownImage from './PrettyMarkdownImage';
+import PrettyMarkdownVideo from "./PrettyMarkdownVideo";
 import { TextColor } from "../Text";
 
 interface Props extends React.Attributes {
@@ -89,6 +90,10 @@ function PrettyMarkdown({ ...props }: Props) {
               }
 
               _attributes.alt = attributes.alt.substring(0, attributes.alt.length - modifiers.reduce((length, am) => length + am.length, 0));
+            }
+
+            if (attributes.src.endsWith(".mp4")) {
+              return <PrettyMarkdownVideo scale={scale} inline={isInline} {..._attributes} />;
             }
 
             return <PrettyMarkdownImage scale={scale} inline={isInline} {..._attributes} />;
