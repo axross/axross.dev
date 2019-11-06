@@ -1,6 +1,6 @@
 # axross.dev
 
-[![CircleCI](https://circleci.com/gh/axross/axross.dev.svg?style=svg)](https://circleci.com/gh/axross/axross.dev)
+[![Status](https://github.com/axross/axross.dev/workflows/Deploy%20to%20Staging/badge.svg)](https://github.com/axross/axross.dev/actions?workflow=Deploy+to+Staging)
 
 This is the source code of my personal website. The following is why and how I made:
 
