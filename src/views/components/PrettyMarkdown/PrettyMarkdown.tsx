@@ -9,8 +9,8 @@ import {
   FOREGROUND_COLORS,
   BackgroundColor,
   CodeColor
-} from "../constant/color";
-import { DARK_MODE, MOBILE } from "../constant/mediaquery";
+} from "../../constant/color";
+import { DARK_MODE, MOBILE } from "../../constant/mediaquery";
 import {
   MOBILE_MAJOR_PADDING_SIZE,
   MOBILE_MINOR_PADDING_SIZE,
@@ -28,9 +28,9 @@ import {
   LAPTOP_SUBTITLE3_SIZE,
   LAPTOP_TEXT_SIZE,
   LAPTOP_TITLE_SIZE
-} from "../constant/size";
-import ScaledImage from './ScaledImage';
-import { TextColor } from "./Text";
+} from "../../constant/size";
+import PrettyMarkdownImage from './PrettyMarkdownImage';
+import { TextColor } from "../Text";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -59,19 +59,39 @@ function PrettyMarkdown({ ...props }: Props) {
             <span {...props} key={nodeKey} />
           ),
           image: (attributes: any) => {
+            let _attributes = {...attributes};
+            let scale = 1;
+            let isInline = false;
+
             if (typeof attributes.alt === 'string') {
-              const { alt, ...restAttributes } = attributes;
-              const matchs = /@(([0-9]+.)?[0-9]+)x$/.exec(alt);
+              let alt = attributes.alt;
+              const modifiers: string[] = [];
 
-              if (matchs !== null) {
-                const scale = 1 / parseFloat(matchs[1]);
-                const sanitizedAlt = alt.substring(0, alt.length - matchs[0].length);
+              while (/(@[0-9a-z]+)$/.test(alt)) {
+                const modifier = /(@[0-9a-z]+)$/.exec(alt)![1];
 
-                return <ScaledImage alt={sanitizedAlt} scale={scale} {...restAttributes} />;
+                modifiers.push(modifier);
+                alt = alt.substring(0, alt.length - modifier.length);
               }
+
+              for (const modifier of modifiers) {
+                const matchsAsScale = /^@(([0-9]+\.)?[0-9]+)x$/.exec(modifier);
+
+                if (matchsAsScale !== null) {
+                  scale = 1 / parseFloat(matchsAsScale[1]);
+
+                  continue;
+                }
+
+                if (modifier === '@inline') {
+                  isInline = true;
+                }
+              }
+
+              _attributes.alt = attributes.alt.substring(0, attributes.alt.length - modifiers.reduce((length, am) => length + am.length, 0));
             }
 
-            return <ScaledImage {...attributes}></ScaledImage>;
+            return <PrettyMarkdownImage scale={scale} inline={isInline} {..._attributes} />;
           },
           code: ({ language, value }: any) => {
             return (
@@ -419,7 +439,7 @@ const Root = styled(Markdown)`
 
   img {
     max-width: 100%;
-    max-height: 800px;
+    height: auto;
     border-radius: 8px;
 
     ${DARK_MODE} {
