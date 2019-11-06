@@ -23,8 +23,6 @@ class PrettyMarkdownImage extends React.Component<Props, State> {
   private ref: React.RefObject<HTMLImageElement>;
 
   componentDidMount() {
-    console.log(this.props);
-
     const image = this.ref.current!;
 
     image.onload = () => {
