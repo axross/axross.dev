@@ -2,6 +2,7 @@ import * as React from "react";
 import NextApp, { AppContext } from "next/app";
 import getLocale from "../utility/getLocale";
 import LocaleString from "../entities/LocaleString";
+import Person from "../entities/Person";
 import { parseJsonToPerson, jsonifyPerson } from "../parsers/person";
 import getTranslation from "../repositories/translationRepository";
 import { getMyself } from "../repositories/personRepository";
@@ -53,7 +54,7 @@ class App extends NextApp<Props> {
 
     const componentGetInitialProps =
       Component.getInitialProps || (() => Promise.resolve());
-    const [myself, translation, pageProps] = await Promise.all([
+    const [myself, translation, pageProps] = await Promise.all<Person, Record<string, string>, {}>([
       getMyself({ locale }),
       getTranslation(locale),
       componentGetInitialProps(ctx)
