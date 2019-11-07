@@ -45,6 +45,7 @@ class PrettyMarkdownVideo extends React.Component<Props, State> {
       _height={this.state.scaledHeight}
       _inline={this.props.inline}
       ref={this.ref}
+      playsInline
       autoPlay
       loop
       muted
