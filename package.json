@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "dev": "next dev",
-    "build": "next build"
+    "build": "next build",
+    "storybook": "start-storybook"
   },
   "dependencies": {
     "@emotion/core": "^10.0.21",
@@ -23,12 +24,19 @@
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@storybook/addon-actions": "^5.2.6",
+    "@storybook/addon-knobs": "^5.2.6",
+    "@storybook/addons": "^5.2.6",
+    "@storybook/react": "^5.2.6",
     "@types/jest": "^24.0.16",
     "@types/node": "^12.6.8",
     "@types/react": "^16.9.5",
     "@types/react-syntax-highlighter": "^10.2.1",
+    "babel-loader": "^8.0.6",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
+    "ts-loader": "^6.2.1",
     "typescript": "^3.7.2"
   }
 }
