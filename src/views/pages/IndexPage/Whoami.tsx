@@ -6,10 +6,8 @@ interface Props extends React.Attributes {
   className?: string;
 }
 
-function Whoami(props: Props) {
+export default function Whoami(props: Props) {
   const myself = useMyself();
 
   return <PrettyMarkdown {...props}>{myself.description}</PrettyMarkdown>;
 }
-
-export default Whoami;

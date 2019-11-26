@@ -11,7 +11,7 @@ interface Props extends Omit<BlogPostPageProps, "blogPost"> {
   blogPostJson: any;
 }
 
-function Route(props: any) {
+export default function Route(props: any) {
   return React.createElement(BlogPostPage, {
     ...props,
     blogPost: parseJsonToBlogPost(props.blogPostJson)
@@ -33,5 +33,3 @@ Route.getInitialProps = async ({ query }: NextPageContext): Promise<Props> => {
     blogPostJson: jsonifyBlogPost(blogPost)
   };
 };
-
-export default Route;

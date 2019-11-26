@@ -3,7 +3,7 @@ import * as React from "react";
 import { BACKGROUND_COLORS, BackgroundColor } from "../constant/color";
 import { DARK_MODE } from "../constant/mediaquery";
 
-function GlobalStyle() {
+export default function GlobalStyle() {
   return <Global styles={GLOBAL_STYLE} />;
 }
 
@@ -53,5 +53,3 @@ const GLOBAL_STYLE = css`
     }
   }
 `;
-
-export default GlobalStyle;

@@ -12,6 +12,4 @@ export interface TextTheme {
   selectable?: boolean;
 }
 
-const TextThemeContext = createContext<TextTheme>({});
-
-export default TextThemeContext;
+export default createContext<TextTheme>({});

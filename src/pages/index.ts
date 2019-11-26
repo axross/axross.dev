@@ -10,7 +10,7 @@ interface Props extends Omit<IndexPageProps, "blogPosts"> {
   blogPostsJson: any;
 }
 
-function Route(props: Props) {
+export default function Route(props: Props) {
   return React.createElement(IndexPage, {
     ...props,
     blogPosts: props.blogPostsJson.map((item: any) => parseJsonToBlogPost(item))
@@ -26,5 +26,3 @@ Route.getInitialProps = async ({ query }: NextPageContext): Promise<Props> => {
     availableLocales: AVAILABLE_LOCALES
   };
 };
-
-export default Route;

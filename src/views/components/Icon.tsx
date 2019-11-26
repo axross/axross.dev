@@ -18,7 +18,7 @@ export enum IconName {
   linkedIn
 }
 
-function Icon({ name, fill, ...props }: IconProps) {
+export default function Icon({ name, fill, ...props }: IconProps) {
   return (
     <Root
       viewBox="0 0 24 24"
@@ -71,5 +71,3 @@ const CONTENTS = new Map<IconName, React.ReactElement>([
     />
   ]
 ]);
-
-export default Icon;

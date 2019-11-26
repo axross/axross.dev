@@ -13,7 +13,7 @@ interface Props extends React.Attributes {
   children: [React.ReactElement<PaneProps>, React.ReactElement<PaneProps>];
 }
 
-function TwoPaneView({ children, ...props }: Props) {
+export default function TwoPaneView({ children, ...props }: Props) {
   const [leftPane, rightPane] = React.Children.toArray(children);
 
   return (
@@ -72,5 +72,3 @@ const Root = styled.div`
     grid-template-areas: "left" "right";
   }
 `;
-
-export default TwoPaneView;

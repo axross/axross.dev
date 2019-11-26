@@ -38,7 +38,7 @@ interface Props extends React.Attributes {
   children?: string;
 }
 
-function PrettyMarkdown({ ...props }: Props) {
+export default function PrettyMarkdown({ ...props }: Props) {
   return (
     <>
       <Head>
@@ -617,5 +617,3 @@ const Code = styled(SyntaxHighlighter)`
     }
   }
 `;
-
-export default PrettyMarkdown;

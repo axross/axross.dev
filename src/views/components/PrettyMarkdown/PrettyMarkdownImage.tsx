@@ -11,7 +11,7 @@ interface State {
   scaledHeight: number | null,
 }
 
-class PrettyMarkdownImage extends React.Component<Props, State> {
+export default class PrettyMarkdownImage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
@@ -54,6 +54,4 @@ const Root = styled.img<{ _width: number | null, _height: number | null, _inline
   ${({ _width }) => _width !== null ? `width: ${_width}px;` : ""}
   ${({ _height }) => _height !== null ? `height: ${_height}px;` : ""}
   ${({ _inline }) => _inline ? "display: inline-block;" : ""}
-`
-
-export default PrettyMarkdownImage;
+`;

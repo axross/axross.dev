@@ -20,7 +20,7 @@ interface Props {
   pageProps: any;
 }
 
-class App extends NextApp<Props> {
+export default class App extends NextApp<Props> {
   render() {
     const {
       myselfJson,
@@ -69,5 +69,3 @@ class App extends NextApp<Props> {
     };
   }
 }
-
-export default App;
