@@ -6,7 +6,7 @@ import { getMyself } from "../../repositories/personRepository";
 import getLocale from "../../utility/getLocale";
 import getOrigin from '../../utility/getOrigin';
 
-function SitemapXml() {
+export default function SitemapXml() {
   return null;
 }
 
@@ -111,4 +111,4 @@ SitemapXml.getInitialProps = async ({
   return;
 };
 
-export default SitemapXml;
+

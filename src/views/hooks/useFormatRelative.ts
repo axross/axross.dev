@@ -3,10 +3,8 @@ import useCurrentLocale from "./useCurrentLocale";
 
 type FormatRelative = (date: Date) => string;
 
-function useFormatRelative(): FormatRelative {
+export default function useFormatRelative(): FormatRelative {
   const locale = useCurrentLocale();
 
   return date => formatRelative(date, locale);
 }
-
-export default useFormatRelative;

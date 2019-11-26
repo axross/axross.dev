@@ -19,7 +19,7 @@ interface Props extends React.Attributes {
   className?: string;
 }
 
-function LocaleSwitcher(props: Props) {
+export default function LocaleSwitcher(props: Props) {
   const router = useRouter();
   const url = useSelfUrl();
   const availableLocales = useAvailableLocales();
@@ -93,5 +93,3 @@ ${MOBILE} {
   padding-inline-end: ${MOBILE_MINOR_PADDING_SIZE}px;
 }
 `;
-
-export default LocaleSwitcher;

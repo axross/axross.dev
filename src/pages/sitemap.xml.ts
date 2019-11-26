@@ -4,7 +4,7 @@ import { DEFAULT_LOCALE, AVAILABLE_LOCALES } from "../constant/locale";
 import { getAllBlogPostsInAllLocale } from "../repositories/blogPostRepository";
 import getOrigin from '../utility/getOrigin';
 
-function SitemapXml() {
+export default function SitemapXml() {
   return null;
 }
 
@@ -79,5 +79,3 @@ function escape(string: string): string {
     .replace(">", "&gt")
     .replace("<", "&lt");
 }
-
-export default SitemapXml;

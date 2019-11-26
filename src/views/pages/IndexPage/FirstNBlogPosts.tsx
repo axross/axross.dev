@@ -14,7 +14,7 @@ interface Props extends React.Attributes {
   className?: string;
 }
 
-function FirstNBlogPosts({ blogPosts, ...props }: Props) {
+export default function FirstNBlogPosts({ blogPosts, ...props }: Props) {
   const translation = useTranslation();
   const formatRelative = useFormatRelative();
 
@@ -75,5 +75,3 @@ const CreateDate = styled(Text)`
   grid-area: createDate;
   padding-block-end: 4px;
 `;
-
-export default FirstNBlogPosts;

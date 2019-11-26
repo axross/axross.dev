@@ -1,11 +1,11 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import useMyself from "../hooks/useMyself";
-import useSelfUrl from "../hooks/useSelfUrl";
-import useTranslation from "../hooks/useTranslation";
-import Head from "./Head";
+import useMyself from "../../hooks/useMyself";
+import useSelfUrl from "../../hooks/useSelfUrl";
+import useTranslation from "../../hooks/useTranslation";
+import Head from "../../components/Head";
 
-function BlogPostMeta() {
+export default function BlogPostMeta() {
   const myself = useMyself();
   const url = useSelfUrl();
   const translation = useTranslation();
@@ -43,5 +43,3 @@ function BlogPostMeta() {
     />
   );
 }
-
-export default BlogPostMeta;

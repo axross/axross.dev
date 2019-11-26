@@ -6,7 +6,6 @@
   "scripts": {
     "test": "jest",
     "dev": "next dev",
-    "build": "next build",
     "storybook": "start-storybook"
   },
   "dependencies": {

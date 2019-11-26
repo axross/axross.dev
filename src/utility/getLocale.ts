@@ -5,7 +5,7 @@ import {
 } from "../constant/locale";
 import LocaleString from "../entities/LocaleString";
 
-function getLocale(query: any) {
+export default function getLocale(query: any) {
   return sanitizeLocale(query.hl);
 }
 
@@ -26,4 +26,3 @@ function sanitizeLocale(value?: string): LocaleString {
   return DEFAULT_LOCALE;
 }
 
-export default getLocale;

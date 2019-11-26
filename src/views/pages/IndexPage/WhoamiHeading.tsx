@@ -7,7 +7,7 @@ interface Props extends React.Attributes {
   className?: string;
 }
 
-function WhoamiHeading(props: Props) {
+export default function WhoamiHeading(props: Props) {
   const translation = useTranslation();
 
   return (
@@ -18,5 +18,3 @@ function WhoamiHeading(props: Props) {
     </h2>
   );
 }
-
-export default WhoamiHeading;

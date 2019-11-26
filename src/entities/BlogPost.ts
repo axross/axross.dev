@@ -2,7 +2,7 @@ export type BlogPostId = string;
 
 type MarkdownString = string;
 
-interface BlogPost {
+export default interface BlogPost {
   id: BlogPostId;
   createdAt: Date;
   lastModifiedAt: Date;
@@ -10,5 +10,3 @@ interface BlogPost {
   summary: string;
   body: MarkdownString;
 }
-
-export default BlogPost;
