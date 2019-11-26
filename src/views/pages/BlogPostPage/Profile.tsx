@@ -1,23 +1,23 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { DARK_MODE, MOBILE } from "../constant/mediaquery";
+import { DARK_MODE, MOBILE } from "../../constant/mediaquery";
 import {
   MOBILE_MINOR_PADDING_SIZE,
   MOBILE_PADDING_SIZE,
   LAPTOP_MINOR_PADDING_SIZE,
   LAPTOP_PADDING_SIZE,
   LAPTOP_SECTION_MARGIN_SIZE
-} from "../constant/size";
-import useMyself from "../hooks/useMyself";
-import KeepLocaleLink from "./KeepLocaleLink";
-import Text, { TextSize } from "./Text";
-import Icon, { IconColor, IconName } from "./Icon";
+} from "../../constant/size";
+import useMyself from "../../hooks/useMyself";
+import KeepLocaleLink from "../../components/KeepLocaleLink";
+import Text, { TextSize } from "../../components/Text";
+import Icon, { IconColor, IconName } from "../../components/Icon";
 
 interface Props extends React.Attributes {
   className?: string;
 }
 
-function Profile(props: Props) {
+export default function Profile(props: Props) {
   const myself = useMyself();
 
   return (
@@ -145,5 +145,3 @@ const LinkIcon = styled(Icon)`
   width: 24px;
   height: 24px;
 `;
-
-export default Profile;

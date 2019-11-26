@@ -1,6 +1,6 @@
 import SocialLink from "./SocialLink";
 
-interface Person {
+export default interface Person {
   screenName: string;
   name: string;
   description: string;
@@ -8,4 +8,3 @@ interface Person {
   socialLinks: SocialLink[];
 }
 
-export default Person;

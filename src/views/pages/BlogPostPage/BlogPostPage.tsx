@@ -5,9 +5,7 @@ import LocaleString from "../../../entities/LocaleString";
 import AvailableLocalesContext from "../../components/AvailableLocalesContext";
 import LocaleSwitcher from "../../components/LocaleSwitcher";
 import PrettyMarkdown from "../../components/PrettyMarkdown/PrettyMarkdown";
-import Head from "../../components/BlogPostHead";
-import BlogPostTimestamp from "../../components/BlogPostTimestamp";
-import Profile from "../../components/Profile";
+import BlogPostTimestamp from "./BlogPostTimestamp";
 import Text, { TextSize, TextColor } from "../../components/Text";
 import TwoPaneView, { LeftPane, RightPane } from "../../components/TwoPaneView";
 import { MOBILE } from "../../constant/mediaquery";
@@ -18,13 +16,15 @@ import {
   LAPTOP_MAJOR_PADDING_SIZE,
   LAPTOP_PADDING_SIZE
 } from "../../constant/size";
+import Head from "./Head";
+import Profile from "./Profile";
 
 export interface Props {
   blogPost: BlogPost;
   availableLocales: LocaleString[];
 }
 
-function BlogPostPage({ blogPost, availableLocales }: Props) {
+export default function BlogPostPage({ blogPost, availableLocales }: Props) {
   return (
     <AvailableLocalesContext.Provider value={availableLocales}>
       <Head blogPost={blogPost} />
@@ -94,5 +94,3 @@ const Title = styled.h1`
 const Body = styled(PrettyMarkdown)`
   grid-area: body;
 `;
-
-export default BlogPostPage;

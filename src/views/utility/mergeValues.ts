@@ -1,4 +1,4 @@
-function mergeValues<T>(
+export default function mergeValues<T>(
   primary: T | undefined,
   secondary: T | undefined,
   fallback: T
@@ -13,5 +13,3 @@ function mergeValues<T>(
 
   return fallback;
 }
-
-export default mergeValues;

@@ -9,7 +9,7 @@ interface Props extends Omit<Omit<LinkProps, "href">, "as"> {
   children?: any;
 }
 
-function KeepLocaleLink(props: Props) {
+export default function KeepLocaleLink(props: Props) {
   const router = useRouter();
   const hl = router.query.hl;
 
@@ -28,5 +28,3 @@ function KeepLocaleLink(props: Props) {
 
   return <Link {...{ ...props, href: _href, as: _as }} />;
 }
-
-export default KeepLocaleLink;

@@ -1,8 +1,8 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import useFormatRelative from "../hooks/useFormatRelative";
-import useTranslation from "../hooks/useTranslation";
-import Text, { TextColor, TextSize } from "./Text";
+import useFormatRelative from "../../hooks/useFormatRelative";
+import useTranslation from "../../hooks/useTranslation";
+import Text, { TextColor, TextSize } from "../../components/Text";
 
 interface Props extends React.Attributes {
   createdAt: Date;
@@ -10,7 +10,7 @@ interface Props extends React.Attributes {
   className?: string;
 }
 
-function BlogPostTimestamp({ createdAt, lastModifiedAt, ...props }: Props) {
+export default function BlogPostTimestamp({ createdAt, lastModifiedAt, ...props }: Props) {
   const translation = useTranslation();
   const formatRelative = useFormatRelative();
 
@@ -24,5 +24,3 @@ function BlogPostTimestamp({ createdAt, lastModifiedAt, ...props }: Props) {
     </span>
   );
 }
-
-export default BlogPostTimestamp;

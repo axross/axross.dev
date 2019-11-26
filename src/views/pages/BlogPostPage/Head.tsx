@@ -1,16 +1,16 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import BlogPost from "../../entities/BlogPost";
-import useMyself from "../hooks/useMyself";
-import useSelfUrl from "../hooks/useSelfUrl";
-import useTranslation from "../hooks/useTranslation";
-import Head from "./Head";
+import BlogPost from "../../../entities/BlogPost";
+import useMyself from "../../hooks/useMyself";
+import useSelfUrl from "../../hooks/useSelfUrl";
+import useTranslation from "../../hooks/useTranslation";
+import Head from "../../components/Head";
 
 interface Props {
   blogPost: BlogPost;
 }
 
-function BlogPostHead({ blogPost }: Props) {
+export default function BlogPostHead({ blogPost }: Props) {
   const url = useSelfUrl();
   const translation = useTranslation();
   const canonicalUrl = new URL(url.href);
@@ -64,5 +64,3 @@ function BlogPostHead({ blogPost }: Props) {
     />
   );
 }
-
-export default BlogPostHead;

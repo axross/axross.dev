@@ -17,7 +17,7 @@ interface Props {
   linkingData: Record<string, any>;
 }
 
-function Head({
+export default function Head({
   type,
   canonicalUrl,
   title,
@@ -116,5 +116,3 @@ function buildUrlWithLocale(url: URL, locale: string) {
 
   return _url;
 }
-
-export default Head;

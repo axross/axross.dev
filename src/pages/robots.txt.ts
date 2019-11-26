@@ -1,7 +1,7 @@
 import { NextPageContext } from "next";
 import getOrigin from '../utility/getOrigin';
 
-function RobotsTxt() {
+export default function RobotsTxt() {
   return null;
 }
 
@@ -13,4 +13,4 @@ RobotsTxt.getInitialProps = async ({ req, res }: NextPageContext): Promise<any> 
   return;
 };
 
-export default RobotsTxt;
+

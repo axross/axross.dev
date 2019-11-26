@@ -4,8 +4,8 @@ import BlogPost from "../../../entities/BlogPost";
 import LocaleString from "../../../entities/LocaleString";
 import AvailableLocalesContext from "../../components/AvailableLocalesContext";
 import LocaleSwitcher from "../../components/LocaleSwitcher";
-import Head from "../../components/IndexHead";
-import Profile from "../../components/Profile";
+import Head from "./IndexHead";
+import Profile from "../BlogPostPage/Profile";
 import TwoPaneView, { LeftPane, RightPane } from "../../components/TwoPaneView";
 import { MOBILE } from "../../constant/mediaquery";
 import {
@@ -25,7 +25,7 @@ export interface Props {
   availableLocales: LocaleString[];
 }
 
-function IndexPage({ blogPosts, availableLocales }: Props) {
+export default function IndexPage({ blogPosts, availableLocales }: Props) {
   return (
     <AvailableLocalesContext.Provider value={availableLocales}>
       <Head />
@@ -86,5 +86,3 @@ const _FirstNBlogPostsHeading = styled(FirstNBlogPostsHeading)`
 const _FirstNBlogPosts = styled(FirstNBlogPosts)`
   grid-area: firstNBlogPosts;
 `;
-
-export default IndexPage;

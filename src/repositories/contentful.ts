@@ -1,6 +1,6 @@
 import { createClient } from "contentful";
 
-const contentful = createClient({
+export default createClient({
   space: process.env.CONTENTFUL_SPACE!,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
 });
@@ -12,5 +12,3 @@ export function createContentfulPreview(accessToken: string) {
     accessToken
   });
 }
-
-export default contentful;

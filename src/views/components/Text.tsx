@@ -45,7 +45,7 @@ export interface Props extends React.Attributes {
 /**
  * A fundamental text component. Every text in this repository should be made of this component.
  */
-const Text = React.forwardRef<HTMLElement, Props>(
+export default React.forwardRef<HTMLElement, Props>(
   (
     {
       color,
@@ -208,5 +208,3 @@ const TEXT_SIZES = {
     }
   `
 };
-
-export default Text;

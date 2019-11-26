@@ -10,13 +10,12 @@ import LocaleString from "../entities/LocaleString";
 import getLocale from "../utility/getLocale";
 import { FOREGROUND_COLORS, ForegroundColor } from "../views/constant/color";
 import GlobalStyle from "../views/components/GlobalStyle";
-import GoogleAnalytics from "../views/components/GoogleAnalytics";
 
 interface Props {
   locale: LocaleString;
 }
 
-class Document extends NextDocument<Props> {
+export default class Document extends NextDocument<Props> {
   render() {
     return (
       <Html lang={this.props.locale.split("-")[0]}>
@@ -37,14 +36,30 @@ class Document extends NextDocument<Props> {
             content={FOREGROUND_COLORS.get(ForegroundColor.normal)!.light}
             key="themeColor"
           />
+          <script
+            defer
+            src="https://www.googletagmanager.com/gtag/js?id=UA-79252294-3"
+            key="googleAnalyticsTag1"
+          />
+          <script
+            defer
+            key="googleAnalyticsTag2"
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-79252294-3');
+            `
+            }}
+          />
         </Head>
 
         <body>
           <Main />
 
           <NextScript />
-
-          <GoogleAnalytics />
 
           <GlobalStyle />
         </body>
@@ -59,5 +74,3 @@ class Document extends NextDocument<Props> {
     return { ...initialProps, locale };
   }
 }
-
-export default Document;

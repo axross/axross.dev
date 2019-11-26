@@ -2,7 +2,7 @@ import LocaleString from "../entities/LocaleString";
 
 const localeCache = new Map();
 
-async function getTranslation(
+export default async function getTranslation(
   locale: LocaleString
 ): Promise<Record<string, string>> {
     
@@ -26,5 +26,3 @@ async function getTranslation(
 
   throw new Error("it's unsupported running context.");
 }
-
-export default getTranslation;

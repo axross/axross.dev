@@ -7,7 +7,7 @@ interface Props extends React.Attributes {
   className?: string;
 }
 
-function FirstNBlogPostsHeading(props: Props) {
+export default function FirstNBlogPostsHeading(props: Props) {
   const translation = useTranslation();
 
   return (
@@ -18,5 +18,3 @@ function FirstNBlogPostsHeading(props: Props) {
     </h2>
   );
 }
-
-export default FirstNBlogPostsHeading;
