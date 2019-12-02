@@ -6,19 +6,13 @@ import NextDocument, {
   Main,
   NextScript
 } from "next/document";
-import LocaleString from "../entities/LocaleString";
-import getLocale from "../utility/getLocale";
-import { FOREGROUND_COLORS, ForegroundColor } from "../views/constant/color";
 import GlobalStyle from "../views/components/GlobalStyle";
+import { FOREGROUND_COLORS, ForegroundColor } from "../views/constant/color";
 
-interface Props {
-  locale: LocaleString;
-}
-
-export default class Document extends NextDocument<Props> {
+export default class Document extends NextDocument {
   render() {
     return (
-      <Html lang={this.props.locale.split("-")[0]}>
+      <Html>
         <Head>
           <meta
             name="viewport"
@@ -27,7 +21,7 @@ export default class Document extends NextDocument<Props> {
           />
           <link
             rel="shortcut icon"
-            type="image/png" 
+            type="image/png"
             href="/static/favicon.png"
             key="shortcutIcon"
           />
@@ -69,8 +63,7 @@ export default class Document extends NextDocument<Props> {
 
   static async getInitialProps(context: DocumentContext) {
     const initialProps = await NextDocument.getInitialProps(context);
-    const locale = getLocale(context.query);
 
-    return { ...initialProps, locale };
+    return { ...initialProps };
   }
 }

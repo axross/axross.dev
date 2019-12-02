@@ -1,7 +1,6 @@
 import Link, { LinkProps } from "next/link";
-import { useRouter } from "next/router";
-import * as querystring from "querystring";
 import * as React from "react";
+import LocaleContext from "../contexts/LocaleContext";
 
 interface Props extends Omit<Omit<LinkProps, "href">, "as"> {
   href: string;
@@ -10,21 +9,20 @@ interface Props extends Omit<Omit<LinkProps, "href">, "as"> {
 }
 
 export default function KeepLocaleLink(props: Props) {
-  const router = useRouter();
-  const hl = router.query.hl;
+  const { currentLocale } = React.useContext(LocaleContext);
+  const hrefURL = new URL(props.href, "https://example.com");
+  const asURL = new URL(props.as, "https://example.com");
 
-  if (!hl) {
-    return <Link {...props} />;
-  }
+  hrefURL.searchParams.set("hl", currentLocale);
+  asURL.searchParams.set("hl", currentLocale);
 
-  const [hrefPath, hrefQuery] = props.href.split("?");
-  const _href =
-    hrefPath +
-    "?" +
-    querystring.stringify({ ...querystring.parse(hrefQuery), hl });
-  const [asPath, asQuery] = props.as.split("?");
-  const _as =
-    asPath + "?" + querystring.stringify({ ...querystring.parse(asQuery), hl });
-
-  return <Link {...{ ...props, href: _href, as: _as }} />;
+  return (
+    <Link
+      {...{
+        ...props,
+        href: hrefURL.pathname + hrefURL.search,
+        as: asURL.pathname + asURL.search
+      }}
+    />
+  );
 }

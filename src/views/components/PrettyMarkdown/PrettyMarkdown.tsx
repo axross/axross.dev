@@ -29,7 +29,7 @@ import {
   LAPTOP_TEXT_SIZE,
   LAPTOP_TITLE_SIZE
 } from "../../constant/size";
-import PrettyMarkdownImage from './PrettyMarkdownImage';
+import PrettyMarkdownImage from "./PrettyMarkdownImage";
 import PrettyMarkdownVideo from "./PrettyMarkdownVideo";
 import { TextColor } from "../Text";
 
@@ -60,11 +60,11 @@ export default function PrettyMarkdown({ ...props }: Props) {
             <span {...props} key={nodeKey} />
           ),
           image: (attributes: any) => {
-            let _attributes = {...attributes};
+            let _attributes = { ...attributes };
             let scale = 1;
             let isInline = false;
 
-            if (typeof attributes.alt === 'string') {
+            if (typeof attributes.alt === "string") {
               let alt = attributes.alt;
               const modifiers: string[] = [];
 
@@ -84,19 +84,35 @@ export default function PrettyMarkdown({ ...props }: Props) {
                   continue;
                 }
 
-                if (modifier === '@inline') {
+                if (modifier === "@inline") {
                   isInline = true;
                 }
               }
 
-              _attributes.alt = attributes.alt.substring(0, attributes.alt.length - modifiers.reduce((length, am) => length + am.length, 0));
+              _attributes.alt = attributes.alt.substring(
+                0,
+                attributes.alt.length -
+                  modifiers.reduce((length, am) => length + am.length, 0)
+              );
             }
 
             if (attributes.src.endsWith(".mp4")) {
-              return <PrettyMarkdownVideo scale={scale} inline={isInline} {..._attributes} />;
+              return (
+                <PrettyMarkdownVideo
+                  scale={scale}
+                  inline={isInline}
+                  {..._attributes}
+                />
+              );
             }
 
-            return <PrettyMarkdownImage scale={scale} inline={isInline} {..._attributes} />;
+            return (
+              <PrettyMarkdownImage
+                scale={scale}
+                inline={isInline}
+                {..._attributes}
+              />
+            );
           },
           code: ({ language, value }: any) => {
             return (
@@ -110,8 +126,7 @@ export default function PrettyMarkdown({ ...props }: Props) {
                 customStyle={{ backgroundColor: undefined }}
               />
             );
-          },
-          
+          }
         }}
         {...props}
       />

@@ -1,8 +1,8 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import useFormatRelative from "../../hooks/useFormatRelative";
-import useTranslation from "../../hooks/useTranslation";
 import Text, { TextColor, TextSize } from "../../components/Text";
+import LocaleContext from "../../contexts/LocaleContext";
+import TranslationContext from "../../contexts/TranslationContext";
 
 interface Props extends React.Attributes {
   createdAt: Date;
@@ -10,15 +10,19 @@ interface Props extends React.Attributes {
   className?: string;
 }
 
-export default function BlogPostTimestamp({ createdAt, lastModifiedAt, ...props }: Props) {
-  const translation = useTranslation();
-  const formatRelative = useFormatRelative();
+export default function BlogPostTimestamp({
+  createdAt,
+  lastModifiedAt,
+  ...props
+}: Props) {
+  const { currentLocale } = React.useContext(LocaleContext);
+  const translation = React.useContext(TranslationContext);
 
   return (
     <span {...props}>
       <Text color={TextColor.secondary} size={TextSize.caption}>
         {new IntlMessageFormat(translation["blogPost.timestamp"]).format({
-          createdAt: formatRelative(createdAt)
+          createdAt: new Intl.DateTimeFormat(currentLocale).format(createdAt)
         })}
       </Text>
     </span>

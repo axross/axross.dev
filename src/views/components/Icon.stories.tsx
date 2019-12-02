@@ -1,6 +1,6 @@
 import * as React from "react";
-import Icon, { IconName } from "./Icon";
 import { ForegroundColor } from "../constant/color";
+import Icon, { IconName } from "./Icon";
 
 export default { title: "Icon" };
 
@@ -11,8 +11,6 @@ export const catalog = () => (
       <col width="120px"></col>
     </colgroup>
     {Array.from(icons.entries()).map(([nameString, name]) => {
-      console.log(nameString, name);
-
       return (
         <tr>
           <td>

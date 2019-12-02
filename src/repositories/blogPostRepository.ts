@@ -1,79 +1,113 @@
+import { Entry } from "contentful";
 import BlogPost, { BlogPostId } from "../entities/BlogPost";
 import LocaleString from "../entities/LocaleString";
-import { parseMultiLocaleContentfulEntryToBlogPost } from "../parsers/blogPost";
 import contentful, { createContentfulPreview } from "./contentful";
+import { getDefaultLocale } from "./localeRepository";
 
-export async function getAllBlogPosts({
-  locale
-}: {
-  locale: LocaleString;
-}): Promise<BlogPost[]> {
-  const entries = await contentful.getEntries<any>({
-    content_type: "blogPost",
-    order: "-sys.createdAt",
-    locale: "*"
-  });
-
-  const blogPosts = entries.items
-    .filter(item => item.fields.title[locale])
-    .map(item => parseMultiLocaleContentfulEntryToBlogPost(item, locale));
-
-  return blogPosts;
-}
-
-export async function getAllBlogPostsInAllLocale(): Promise<
-  [BlogPost, LocaleString][]
+export async function getAllBlogPosts(): Promise<
+  Map<LocaleString, BlogPost[]>
 > {
-  const entries = await contentful.getEntries<any>({
-    content_type: "blogPost",
-    order: "-sys.createdAt",
-    locale: "*"
-  });
+  const [entries, defaultLocale] = await Promise.all([
+    await contentful.getEntries<any>({
+      content_type: "blogPost",
+      locale: "*"
+    }),
+    getDefaultLocale({ contentful })
+  ]);
 
-  const blogPosts: [BlogPost, LocaleString][] = [];
+  const blogPosts = new Map<LocaleString, BlogPost[]>();
 
-  for (const item of entries.items) {
-    const availableLocales = Object.keys(item.fields.title).filter(
-      locale => item.fields.title[locale].length >= 1
+  for (const entryItem of entries.items) {
+    const locales = Object.keys(entryItem.fields.isAvailable).filter(
+      locale => entryItem.fields.isAvailable[locale]
     );
 
-    for (const locale of availableLocales) {
-      blogPosts.push([
-        parseMultiLocaleContentfulEntryToBlogPost(item, locale),
-        locale
-      ]);
+    for (const locale of locales) {
+      if (!blogPosts.has(locale)) {
+        blogPosts.set(locale, []);
+      }
+
+      blogPosts
+        .get(locale)!
+        .push(parseEntryItemIntoBlogPost(entryItem, locale, defaultLocale));
     }
   }
 
   return blogPosts;
 }
 
-export async function getBlogPostById(
-  blogPostId: BlogPostId,
-  {
-    locale,
-    previewAccessToken
-  }: { locale: LocaleString; previewAccessToken?: string }
-): Promise<[BlogPost | null, LocaleString[]]> {
+export async function getAllBlogPostsByLocale(
+  locale: LocaleString,
+  { previewAccessToken }: { previewAccessToken?: string } = {}
+): Promise<BlogPost[]> {
   const _contentful = previewAccessToken
     ? createContentfulPreview(previewAccessToken)
     : contentful;
+  const [entries, defaultLocale] = await Promise.all([
+    _contentful.getEntries<any>({
+      content_type: "blogPost",
+      order: "-sys.createdAt",
+      locale: "*"
+    }),
+    getDefaultLocale({ contentful })
+  ]);
 
-  const entries = await _contentful.getEntries<any>({
-    content_type: "blogPost",
-    locale: "*",
-    limit: 1,
-    "fields.slug": blogPostId
-  });
+  return entries.items
+    .filter(entryItem => entryItem.fields.isAvailable[locale])
+    .map(entryItem =>
+      parseEntryItemIntoBlogPost(entryItem, locale, defaultLocale)
+    );
+}
+
+export async function getBlogPostsById(
+  blogPostId: BlogPostId,
+  { previewAccessToken }: { previewAccessToken?: string } = {}
+): Promise<Map<LocaleString, BlogPost>> {
+  const _contentful = previewAccessToken
+    ? createContentfulPreview(previewAccessToken)
+    : contentful;
+  const [entries, defaultLocale] = await Promise.all([
+    _contentful.getEntries<any>({
+      content_type: "blogPost",
+      locale: "*",
+      limit: 1,
+      "fields.slug": blogPostId
+    }),
+    getDefaultLocale({ contentful })
+  ]);
 
   if (entries.items.length !== 1) {
-    return [null, []];
+    throw new Error();
   }
 
-  const blogPost = entries.items[0].fields.title[locale]
-    ? parseMultiLocaleContentfulEntryToBlogPost(entries.items[0], locale)
-    : null;
-  const availableLocales = Object.keys(entries.items[0].fields.title);
+  const entryItem = entries.items[0];
+  const locales = Object.keys(entryItem.fields.isAvailable);
+  const availableLocales = locales.filter(
+    locale => entryItem.fields.isAvailable[locale]
+  );
+  const blogPosts = new Map<LocaleString, BlogPost>();
 
-  return [blogPost, availableLocales];
+  for (const locale of availableLocales) {
+    blogPosts.set(
+      locale,
+      parseEntryItemIntoBlogPost(entryItem, locale, defaultLocale)
+    );
+  }
+
+  return blogPosts;
+}
+
+function parseEntryItemIntoBlogPost(
+  entryItem: Entry<any>,
+  locale: LocaleString,
+  defaultLocale: LocaleString
+) {
+  return BlogPost.fromJSON({
+    id: entryItem.fields.slug[defaultLocale],
+    createdAt: entryItem.sys.createdAt,
+    lastModifiedAt: entryItem.sys.updatedAt,
+    title: entryItem.fields.title[locale],
+    summary: entryItem.fields.summary[locale],
+    body: entryItem.fields.body[locale]
+  });
 }

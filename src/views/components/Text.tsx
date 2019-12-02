@@ -126,7 +126,10 @@ const Root = styled.span<{
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
-  color: ${({ _color, _link }) => _link ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.light : FOREGROUND_COLORS.get(_color)!.light};
+  color: ${({ _color, _link }) =>
+    _link
+      ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.light
+      : FOREGROUND_COLORS.get(_color)!.light};
   font-family: "Open Sans", "Noto Sans JP";
   font-weight: ${({ _bold }) => (_bold ? "bold" : "normal")};
   text-align: ${({ _alignment }) => _alignment};
@@ -153,20 +156,33 @@ const Root = styled.span<{
   `}
 
   ${DARK_MODE} {
-    color: ${({ _color, _link }) => _link ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.dark : FOREGROUND_COLORS.get(_color)!.dark};
+    color: ${({ _color, _link }) =>
+      _link
+        ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.dark
+        : FOREGROUND_COLORS.get(_color)!.dark};
   }
 
   &:hover {
-    ${({ _link }) => _link ? `
+    ${({ _link }) =>
+      _link
+        ? `
       color: ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.light};
-      text-decoration: underline ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.light};
-    ` : ""}
+      text-decoration: underline ${
+        FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.light
+      };
+    `
+        : ""}
 
     ${DARK_MODE} {
-      ${({ _link }) => _link ? `
+      ${({ _link }) =>
+        _link
+          ? `
         color: ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.dark};
-        text-decoration: underline ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.dark};
-      ` : ""}
+        text-decoration: underline ${
+          FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.dark
+        };
+      `
+          : ""}
     }
   }
 `;

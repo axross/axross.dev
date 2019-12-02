@@ -1,14 +1,14 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import Text, { TextColor, TextSize } from "../../components/Text";
-import useTranslation from "../../hooks/useTranslation";
+import TranslationContext from "../../contexts/TranslationContext";
 
 interface Props extends React.Attributes {
   className?: string;
 }
 
 export default function WhoamiHeading(props: Props) {
-  const translation = useTranslation();
+  const translation = React.useContext(TranslationContext);
 
   return (
     <h2 {...props}>

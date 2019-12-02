@@ -1,16 +1,14 @@
-import { withKnobs, text } from  "@storybook/addon-knobs";
+import { withKnobs, text } from "@storybook/addon-knobs";
 import * as React from "react";
 import PrettyMarkdown from "./PrettyMarkdown/PrettyMarkdown";
 
 export default {
   title: "PrettyMarkdown",
-  decorators: [withKnobs],
+  decorators: [withKnobs]
 };
 
 export const playground = () => (
-  <PrettyMarkdown
-    children={text("children", initialText)}
-  />
+  <PrettyMarkdown children={text("children", initialText)} />
 );
 
 const initialText = `[Flutter](https://flutter.dev/)で作ったiOS/Androidアプリを初めてストアに出しました。テキサスホールデムというポーカーの計算機で、複数人のハンドやハンドレンジからそれぞれ誰がどれくらいの勝率があるかを計算できるものです。
