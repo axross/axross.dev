@@ -7,8 +7,8 @@ interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 interface State {
-  scaledWidth: number | null,
-  scaledHeight: number | null,
+  scaledWidth: number | null;
+  scaledHeight: number | null;
 }
 
 export default class PrettyMarkdownImage extends React.Component<Props, State> {
@@ -18,7 +18,7 @@ export default class PrettyMarkdownImage extends React.Component<Props, State> {
     this.ref = React.createRef();
   }
 
-  state: State = { scaledWidth: null, scaledHeight: null, };
+  state: State = { scaledWidth: null, scaledHeight: null };
 
   private ref: React.RefObject<HTMLImageElement>;
 
@@ -28,9 +28,9 @@ export default class PrettyMarkdownImage extends React.Component<Props, State> {
     image.onload = () => {
       this.setState({
         scaledWidth: image.naturalWidth * this.props.scale,
-        scaledHeight: image.naturalHeight * this.props.scale,
+        scaledHeight: image.naturalHeight * this.props.scale
       });
-    }
+    };
 
     if (this.props.src) {
       image.src = this.props.src;
@@ -40,18 +40,24 @@ export default class PrettyMarkdownImage extends React.Component<Props, State> {
   render() {
     const { scale, inline, src, ...props } = this.props;
 
-    return <Root
-      _width={this.state.scaledWidth}
-      _height={this.state.scaledHeight}
-      _inline={this.props.inline}
-      ref={this.ref}
-      {...props}
-    />;
+    return (
+      <Root
+        _width={this.state.scaledWidth}
+        _height={this.state.scaledHeight}
+        _inline={this.props.inline}
+        ref={this.ref}
+        {...props}
+      />
+    );
   }
 }
 
-const Root = styled.img<{ _width: number | null, _height: number | null, _inline: boolean }>`
-  ${({ _width }) => _width !== null ? `width: ${_width}px;` : ""}
-  ${({ _height }) => _height !== null ? `height: ${_height}px;` : ""}
-  ${({ _inline }) => _inline ? "display: inline-block;" : ""}
+const Root = styled.img<{
+  _width: number | null;
+  _height: number | null;
+  _inline: boolean;
+}>`
+  ${({ _width }) => (_width !== null ? `width: ${_width}px;` : "")}
+  ${({ _height }) => (_height !== null ? `height: ${_height}px;` : "")}
+  ${({ _inline }) => (_inline ? "display: inline-block;" : "")}
 `;

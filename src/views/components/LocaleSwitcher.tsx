@@ -1,56 +1,48 @@
 import styled from "@emotion/styled";
 import IntlMessageFormat from "intl-messageformat";
-import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { DEFAULT_LOCALE } from "../../constant/locale";
+import * as React from "react";
 import { MOBILE } from "../constant/mediaquery";
 import {
   MOBILE_MINOR_PADDING_SIZE,
   LAPTOP_MINOR_PADDING_SIZE
 } from "../constant/size";
-import useTranslation from "../hooks/useTranslation";
+import LocaleContext from "../contexts/LocaleContext";
+import SelfUrlContext from "../contexts/SelfUrlContext";
+import TranslationContext from "../contexts/TranslationContext";
 import Text, { TextColor, TextSize } from "./Text";
-import useCurrentLocale from "../hooks/useCurrentLocale";
-import useAvailableLocales from "../hooks/useAvailableLocales";
-import useSelfUrl from "../hooks/useSelfUrl";
 
 interface Props extends React.Attributes {
   className?: string;
 }
 
 export default function LocaleSwitcher(props: Props) {
+  const url = React.useContext(SelfUrlContext);
+  const { currentLocale, availableLocales } = React.useContext(LocaleContext);
+  const translation = React.useContext(TranslationContext);
   const router = useRouter();
-  const url = useSelfUrl();
-  const availableLocales = useAvailableLocales();
-  const currentLocale = useCurrentLocale();
-  const translation = useTranslation();
 
   return (
     <Root {...props}>
       {availableLocales.map(locale => {
-        const localeUrl = new URL(url.href);
+        const itemURL = new URL(url.href);
 
-        if (locale === DEFAULT_LOCALE) {
-          localeUrl.searchParams.delete("hl");
-        } else {
-          localeUrl.searchParams.set("hl", locale);
-        }
+        itemURL.searchParams.set("hl", locale);
 
         return locale === currentLocale ? (
           <Item key={locale}>
-            <Text
-              color={TextColor.secondary}
-              size={TextSize.caption}
-            >
-              {new IntlMessageFormat(translation[`language.${locale}`]).format()}
+            <Text color={TextColor.secondary} size={TextSize.caption}>
+              {new IntlMessageFormat(
+                translation[`language.${locale}`]
+              ).format()}
             </Text>
           </Item>
         ) : (
           <Item key={locale}>
             <Link
-              href={router.pathname + localeUrl.search}
-              as={localeUrl}
+              href={router.pathname + itemURL.search}
+              as={itemURL.pathname + itemURL.search}
               replace
               passHref
             >
@@ -78,18 +70,18 @@ const Root = styled.span`
 const Item = styled.li`
   margin-inline-start: ${LAPTOP_MINOR_PADDING_SIZE}px;
 
-&:first-child {
-  margin-inline-start: -${MOBILE_MINOR_PADDING_SIZE}px;
-}
+  &:first-child {
+    margin-inline-start: -${MOBILE_MINOR_PADDING_SIZE}px;
+  }
 
-${MOBILE} {
-  margin-block-start: -${MOBILE_MINOR_PADDING_SIZE}px;
-  margin-block-end: -${MOBILE_MINOR_PADDING_SIZE}px;
-  margin-inline-start: 0;
-  margin-inline-end: -${MOBILE_MINOR_PADDING_SIZE}px;
-  padding-block-start: ${MOBILE_MINOR_PADDING_SIZE}px;
-  padding-block-end: ${MOBILE_MINOR_PADDING_SIZE}px;
-  padding-inline-start: ${MOBILE_MINOR_PADDING_SIZE}px;
-  padding-inline-end: ${MOBILE_MINOR_PADDING_SIZE}px;
-}
+  ${MOBILE} {
+    margin-block-start: -${MOBILE_MINOR_PADDING_SIZE}px;
+    margin-block-end: -${MOBILE_MINOR_PADDING_SIZE}px;
+    margin-inline-start: 0;
+    margin-inline-end: -${MOBILE_MINOR_PADDING_SIZE}px;
+    padding-block-start: ${MOBILE_MINOR_PADDING_SIZE}px;
+    padding-block-end: ${MOBILE_MINOR_PADDING_SIZE}px;
+    padding-inline-start: ${MOBILE_MINOR_PADDING_SIZE}px;
+    padding-inline-end: ${MOBILE_MINOR_PADDING_SIZE}px;
+  }
 `;

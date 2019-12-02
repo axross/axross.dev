@@ -1,10 +1,8 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import BlogPost from "../../../entities/BlogPost";
-import LocaleString from "../../../entities/LocaleString";
-import AvailableLocalesContext from "../../components/AvailableLocalesContext";
+import Person from "../../../entities/Person";
 import LocaleSwitcher from "../../components/LocaleSwitcher";
-import Head from "./IndexHead";
 import Profile from "../BlogPostPage/Profile";
 import TwoPaneView, { LeftPane, RightPane } from "../../components/TwoPaneView";
 import { MOBILE } from "../../constant/mediaquery";
@@ -21,33 +19,29 @@ import Whoami from "./Whoami";
 import WhoamiHeading from "./WhoamiHeading";
 
 export interface Props {
+  myself: Person;
   blogPosts: BlogPost[];
-  availableLocales: LocaleString[];
 }
 
-export default function IndexPage({ blogPosts, availableLocales }: Props) {
+export default function IndexPage({ myself, blogPosts }: Props) {
   return (
-    <AvailableLocalesContext.Provider value={availableLocales}>
-      <Head />
+    <TwoPaneView>
+      <LeftPane>
+        <Profile person={myself} />
+      </LeftPane>
 
-      <TwoPaneView>
-        <LeftPane>
-          <Profile />
-        </LeftPane>
+      <_RightPane>
+        <_LocaleSwitcher />
 
-        <_RightPane>
-          <_LocaleSwitcher />
+        <_WhoamiHeading />
 
-          <_WhoamiHeading />
+        <_Whoami person={myself} />
 
-          <_Whoami />
+        <_FirstNBlogPostsHeading />
 
-          <_FirstNBlogPostsHeading />
-
-          <_FirstNBlogPosts blogPosts={blogPosts} />
-        </_RightPane>
-      </TwoPaneView>
-    </AvailableLocalesContext.Provider>
+        <_FirstNBlogPosts blogPosts={blogPosts} />
+      </_RightPane>
+    </TwoPaneView>
   );
 }
 

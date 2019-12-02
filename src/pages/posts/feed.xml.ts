@@ -1,114 +1,132 @@
 import { NextPageContext } from "next";
+import * as React from "react";
 import * as xmljs from "xml-js";
-import { AVAILABLE_LOCALES, DEFAULT_LOCALE } from "../../constant/locale";
-import { getAllBlogPosts } from "../../repositories/blogPostRepository";
-import { getMyself } from "../../repositories/personRepository";
-import getLocale from "../../utility/getLocale";
-import getOrigin from '../../utility/getOrigin';
+import { getAllBlogPostsByLocale } from "../../repositories/blogPostRepository";
+import { getMyselfbyLocale } from "../../repositories/personRepository";
+import getURL from "../../utility/getURL";
+import { GlobalPageProps } from "../_app";
 
-export default function SitemapXml() {
-  return null;
-}
+export default class extends React.Component<{}, null> {
+  render() {
+    return null;
+  }
 
-SitemapXml.getInitialProps = async ({
-  req,
-  res,
-  query
-}: NextPageContext): Promise<any> => {
-  const origin = getOrigin(req);
-  const locale = getLocale(query);
-  const [myself, blogPosts] = await Promise.all([
-    getMyself({ locale }),
-    getAllBlogPosts({ locale })
-  ]);
-
-  const xml = xmljs.js2xml(
-    {
-      _declaration: {
-        _attributes: {
-          version: "1.0",
-          encoding: "utf-8"
-        }
-      },
-      feed: {
-        _attributes: {
-          xmlns: "http://www.w3.org/2005/Atom"
-        },
-        id: {
-          _text: origin + "/"
-        },
-        title: {
-          _text: `Blog posts in axross.dev`
-        },
-        updated: {
-          _text: blogPosts[0].lastModifiedAt.toISOString()
-        },
-        author: {
-          name: {
-            _text: myself.name
-          },
-          uri: {
-            _text: origin + "/"
+  static async getInitialProps(
+    context: NextPageContext,
+    { availableLocales, currentLocale, url }: GlobalPageProps
+  ): Promise<any> {
+    const [myself, blogPosts] = await Promise.all([
+      getMyselfbyLocale(currentLocale),
+      getAllBlogPostsByLocale(currentLocale)
+    ]);
+    const xml = xmljs.js2xml(
+      {
+        _declaration: {
+          _attributes: {
+            version: "1.0",
+            encoding: "utf-8"
           }
         },
-        link: AVAILABLE_LOCALES.map(l =>
-          l === locale
-            ? {
-                _attributes: {
-                  rel: "self",
-                  href:
-                    origin +
-                    "/posts/feed.xml" +
-                    (l === DEFAULT_LOCALE ? "" : `?hl=${l}`)
-                }
-              }
-            : {
-                _attributes: {
-                  rel: "alternate",
-                  hreflang: l,
-                  href:
-                    origin +
-                    "/posts/feed.xml" +
-                    (l === DEFAULT_LOCALE ? "" : `?hl=${l}`)
-                }
-              }
-        ),
-        entry: blogPosts.map(blogPost => ({
+        feed: {
+          _attributes: {
+            xmlns: "http://www.w3.org/2005/Atom"
+          },
           id: {
-            _text:
-              origin +
-              "/posts/" +
-              blogPost.id +
-              (locale === DEFAULT_LOCALE ? "" : `?hl=${locale}`)
+            _text: (() => {
+              const homeURL = new URL(url.href);
+
+              homeURL.pathname = "/";
+
+              return homeURL.href;
+            })()
           },
           title: {
-            _text: blogPost.title
+            _text: `Blog posts in axross.dev`
           },
           updated: {
-            _text: blogPost.lastModifiedAt.toISOString()
+            _text: blogPosts[0].lastModifiedAt.toISOString()
           },
           author: {
             name: {
               _text: myself.name
             },
             uri: {
-              _text: origin + "/"
+              _text: (() => {
+                const homeURL = new URL(url.href);
+
+                homeURL.pathname = "/";
+
+                return homeURL.href;
+              })()
             }
           },
-          summary: {
-            _text: blogPost.summary
-          }
-        }))
-      }
-    },
-    { compact: true }
-  );
+          link: [
+            {
+              _attributes: {
+                rel: "self",
+                href: getURL(context).href
+              }
+            },
+            ...availableLocales
+              .filter(locale => locale !== currentLocale)
+              .map(locale => {
+                const alternativeURL = new URL(url.href);
 
-  res!.setHeader("content-type", "application/xml");
-  res!.write(xml);
-  res!.end();
+                alternativeURL.searchParams.set("hl", locale);
 
-  return;
-};
+                return {
+                  _attributes: {
+                    rel: "alternate",
+                    hreflang: locale,
+                    href: alternativeURL.href
+                  }
+                };
+              })
+          ],
+          entry: blogPosts.map(blogPost => ({
+            id: {
+              _text: (() => {
+                const url = getURL(context);
 
+                url.pathname = `/posts/${blogPost.id}`;
+                url.searchParams.set("hl", currentLocale);
 
+                return url.href;
+              })()
+            },
+            title: {
+              _text: blogPost.title
+            },
+            updated: {
+              _text: blogPost.lastModifiedAt.toISOString()
+            },
+            author: {
+              name: {
+                _text: myself.name
+              },
+              uri: {
+                _text: (() => {
+                  const url = getURL(context);
+
+                  url.pathname = "/";
+
+                  return url;
+                })()
+              }
+            },
+            summary: {
+              _text: blogPost.summary
+            }
+          }))
+        }
+      },
+      { compact: true }
+    );
+
+    context.res?.setHeader("content-type", "application/xml");
+    context.res?.write(xml);
+    context.res?.end();
+
+    return;
+  }
+}

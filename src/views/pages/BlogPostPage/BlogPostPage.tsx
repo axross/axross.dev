@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import BlogPost from "../../../entities/BlogPost";
-import LocaleString from "../../../entities/LocaleString";
-import AvailableLocalesContext from "../../components/AvailableLocalesContext";
+import Person from "../../../entities/Person";
 import LocaleSwitcher from "../../components/LocaleSwitcher";
 import PrettyMarkdown from "../../components/PrettyMarkdown/PrettyMarkdown";
 import BlogPostTimestamp from "./BlogPostTimestamp";
@@ -16,47 +15,42 @@ import {
   LAPTOP_MAJOR_PADDING_SIZE,
   LAPTOP_PADDING_SIZE
 } from "../../constant/size";
-import Head from "./Head";
 import Profile from "./Profile";
 
 export interface Props {
+  myself: Person;
   blogPost: BlogPost;
-  availableLocales: LocaleString[];
 }
 
-export default function BlogPostPage({ blogPost, availableLocales }: Props) {
+export default function BlogPostPage({ myself, blogPost }: Props) {
   return (
-    <AvailableLocalesContext.Provider value={availableLocales}>
-      <Head blogPost={blogPost} />
+    <TwoPaneView>
+      <LeftPane>
+        <Profile person={myself} />
+      </LeftPane>
 
-      <TwoPaneView>
-        <LeftPane>
-          <Profile />
-        </LeftPane>
+      <_RightPane>
+        <_BlogPostTimestamp
+          createdAt={blogPost.createdAt}
+          lastModifiedAt={blogPost.lastModifiedAt}
+        />
 
-        <_RightPane>
-          <_BlogPostTimestamp
-            createdAt={blogPost.createdAt}
-            lastModifiedAt={blogPost.lastModifiedAt}
-          />
+        <_LocaleSwitcher />
 
-          <_LocaleSwitcher />
+        <Title>
+          <Text
+            size={TextSize.title}
+            color={TextColor.highlight}
+            bold
+            maxLines={0}
+          >
+            {blogPost.title}
+          </Text>
+        </Title>
 
-          <Title>
-            <Text
-              size={TextSize.title}
-              color={TextColor.highlight}
-              bold
-              maxLines={0}
-            >
-              {blogPost.title}
-            </Text>
-          </Title>
-
-          <Body>{blogPost.body}</Body>
-        </_RightPane>
-      </TwoPaneView>
-    </AvailableLocalesContext.Provider>
+        <Body>{blogPost.body}</Body>
+      </_RightPane>
+    </TwoPaneView>
   );
 }
 

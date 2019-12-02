@@ -4,8 +4,8 @@ import * as React from "react";
 import BlogPost from "../../../entities/BlogPost";
 import { MOBILE } from "../../constant/mediaquery";
 import { MOBILE_PADDING_SIZE, LAPTOP_PADDING_SIZE } from "../../constant/size";
-import useFormatRelative from "../../hooks/useFormatRelative";
-import useTranslation from "../../hooks/useTranslation";
+import LocaleContext from "../../contexts/LocaleContext";
+import TranslationContext from "../../contexts/TranslationContext";
 import LinkKeepLocale from "../../components/KeepLocaleLink";
 import Text, { TextColor, TextSize } from "../../components/Text";
 
@@ -15,8 +15,8 @@ interface Props extends React.Attributes {
 }
 
 export default function FirstNBlogPosts({ blogPosts, ...props }: Props) {
-  const translation = useTranslation();
-  const formatRelative = useFormatRelative();
+  const { currentLocale } = React.useContext(LocaleContext);
+  const translation = React.useContext(TranslationContext);
 
   return (
     <Root {...props}>
@@ -29,14 +29,18 @@ export default function FirstNBlogPosts({ blogPosts, ...props }: Props) {
               passHref
             >
               <a>
-                <Text maxLines={0} link>{blogPost.title}</Text>
+                <Text maxLines={0} link>
+                  {blogPost.title}
+                </Text>
               </a>
             </LinkKeepLocale>
           </Title>
 
           <CreateDate color={TextColor.secondary} size={TextSize.caption}>
             {new IntlMessageFormat(translation["blogPost.written_at"]).format({
-              createdAt: formatRelative(blogPost.createdAt)
+              createdAt: new Intl.DateTimeFormat(currentLocale).format(
+                blogPost.createdAt
+              )
             })}
           </CreateDate>
         </Item>

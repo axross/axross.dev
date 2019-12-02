@@ -1,5 +1,10 @@
 import styled from "@emotion/styled";
+import Link from "next/link";
 import * as React from "react";
+import Person from "../../../entities/Person";
+import KeepLocaleLink from "../../components/KeepLocaleLink";
+import Text, { TextSize } from "../../components/Text";
+import Icon, { IconColor, IconName } from "../../components/Icon";
 import { DARK_MODE, MOBILE } from "../../constant/mediaquery";
 import {
   MOBILE_MINOR_PADDING_SIZE,
@@ -8,45 +13,40 @@ import {
   LAPTOP_PADDING_SIZE,
   LAPTOP_SECTION_MARGIN_SIZE
 } from "../../constant/size";
-import useMyself from "../../hooks/useMyself";
-import KeepLocaleLink from "../../components/KeepLocaleLink";
-import Text, { TextSize } from "../../components/Text";
-import Icon, { IconColor, IconName } from "../../components/Icon";
 
 interface Props extends React.Attributes {
+  person: Person;
   className?: string;
 }
 
-export default function Profile(props: Props) {
-  const myself = useMyself();
-
+export default function Profile({ person, ...props }: Props) {
   return (
     <Root {...props}>
       <KeepLocaleLink href="/" as="/" passHref>
         <Myself>
-          <Image src="/static/profile.jpg" alt={myself.name} />
+          <Image src="/static/profile.jpg" alt={person.name} />
 
           <Name>
             <Text size={TextSize.subtitle2} bold>
-              {myself.name}
+              {person.name}
             </Text>
           </Name>
         </Myself>
       </KeepLocaleLink>
 
       <LinkList>
-        {myself.socialLinks.map(item => (
+        {person.socialLinks.map(item => (
           <LinkListItem key={item.name}>
             <LinkIcon
               name={ICON_NAMES.get(item.name)!}
               fill={IconColor.secondary}
             />
 
-            <a href={item.url}>
-              <Text link>
-                {item.username}
-              </Text>
-            </a>
+            <Link href={item.url.href}>
+              <a>
+                <Text link>{item.username}</Text>
+              </a>
+            </Link>
           </LinkListItem>
         ))}
       </LinkList>

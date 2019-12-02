@@ -1,16 +1,21 @@
 import { NextPageContext } from "next";
-import getOrigin from '../utility/getOrigin';
+import * as React from "react";
+import getURL from "../utility/getURL";
 
-export default function RobotsTxt() {
-  return null;
+export default class extends React.Component {
+  render() {
+    return null;
+  }
+
+  static async getInitialProps(context: NextPageContext): Promise<any> {
+    const sitemapUrl = getURL(context);
+
+    sitemapUrl.pathname = "/sitemap.xml";
+
+    context.res?.setHeader("content-type", "text/plain");
+    context.res?.write(`Sitemap: ${sitemapUrl.href}\n`);
+    context.res?.end();
+
+    return;
+  }
 }
-
-RobotsTxt.getInitialProps = async ({ req, res }: NextPageContext): Promise<any> => {
-  res!.setHeader("content-type", "text/plain");
-  res!.write(`Sitemap: ${getOrigin(req)}/sitemap.xml\n`);
-  res!.end();
-
-  return;
-};
-
-
