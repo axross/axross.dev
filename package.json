@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "dev": "next dev",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook",
+    "build": "next build"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
