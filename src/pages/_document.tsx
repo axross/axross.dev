@@ -8,6 +8,7 @@ import NextDocument, {
 } from "next/document";
 import GlobalStyle from "../views/components/GlobalStyle";
 import { FOREGROUND_COLORS, ForegroundColor } from "../views/constant/color";
+import { DNS_PREFETCH_URLS } from "../settings";
 
 export default class Document extends NextDocument {
   render() {
@@ -48,6 +49,10 @@ export default class Document extends NextDocument {
             `
             }}
           />
+
+          {Array.from(DNS_PREFETCH_URLS).map((url) => 
+            <link rel="dns-prefetch" href={url} key={`configured-dns-prefetch:${url}`} />
+          )}
         </Head>
 
         <body>
