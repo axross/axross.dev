@@ -61,7 +61,7 @@ export default function LocaleSwitcher(props: Props) {
   );
 }
 
-const Root = styled.span`
+const Root = styled.ul`
   display: inline-flex;
   flex-direction: row;
   align-items: flex-end;
