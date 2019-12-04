@@ -4,7 +4,7 @@ import Error from "next/error";
 import Head from "next/head";
 import * as React from "react";
 import BlogPost, { BlogPostJSON } from "../../entities/BlogPost";
-import Person from "../../entities/Person";
+import Person, { PersonJSON } from "../../entities/Person";
 import { getBlogPostsById } from "../../repositories/blogPostRepository";
 import { getMyselfbyLocale } from "../../repositories/personRepository";
 import BlogPostPage from "../../views/pages/BlogPostPage";
@@ -12,14 +12,14 @@ import { GlobalPageProps } from "../_app";
 
 interface Props {
   blogPostJSON: BlogPostJSON | null;
-  myself: Person;
+  myselfJSON: PersonJSON;
 }
 
 export default class extends React.Component<Props & GlobalPageProps, null> {
   render() {
     const {
       blogPostJSON,
-      myself,
+      myselfJSON,
       url,
       availableLocales,
       currentLocale,
@@ -31,6 +31,7 @@ export default class extends React.Component<Props & GlobalPageProps, null> {
     }
 
     const blogPost = BlogPost.fromJSON(blogPostJSON);
+    const myself = Person.fromJSON(myselfJSON);
     const title = new IntlMessageFormat(
       translation["website.title_blog_post"]
     ).format({
@@ -181,7 +182,7 @@ export default class extends React.Component<Props & GlobalPageProps, null> {
     return {
       availableLocales: Array.from(blogPosts.keys()),
       blogPostJSON: blogPost?.toJSON() ?? null,
-      myself
+      myselfJSON: myself.toJSON(),
     };
   }
 }

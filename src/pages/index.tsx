@@ -3,7 +3,7 @@ import { NextPageContext } from "next";
 import Head from "next/head";
 import * as React from "react";
 import BlogPost, { BlogPostJSON } from "../entities/BlogPost";
-import Person from "../entities/Person";
+import Person, { PersonJSON } from "../entities/Person";
 import { getAllBlogPostsByLocale } from "../repositories/blogPostRepository";
 import { getMyselfbyLocale } from "../repositories/personRepository";
 import IndexPage from "../views/pages/IndexPage";
@@ -11,20 +11,21 @@ import { GlobalPageProps } from "./_app";
 
 interface Props {
   blogPostsJSON: BlogPostJSON[];
-  myself: Person;
+  myselfJSON: PersonJSON;
 }
 
 export default class extends React.Component<Props & GlobalPageProps, null> {
   render() {
     const {
       blogPostsJSON,
-      myself,
+      myselfJSON,
       url,
       availableLocales,
       currentLocale,
       translation
     } = this.props;
     const blogPosts = blogPostsJSON.map(json => BlogPost.fromJSON(json));
+    const myself = Person.fromJSON(myselfJSON);
     const title = new IntlMessageFormat(translation["website.title"]).format({
       name: myself.name,
       screenName: myself.screenName
@@ -152,7 +153,7 @@ export default class extends React.Component<Props & GlobalPageProps, null> {
 
     return {
       blogPostsJSON: blogPosts.map(blogPost => blogPost.toJSON()),
-      myself
+      myselfJSON: myself.toJSON(),
     };
   }
 }
