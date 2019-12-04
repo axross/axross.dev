@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Link from "next/link";
 import * as React from "react";
 import Person from "../../../entities/Person";
 import KeepLocaleLink from "../../components/KeepLocaleLink";
@@ -24,7 +23,7 @@ export default function Profile({ person, ...props }: Props) {
     <Root {...props}>
       <KeepLocaleLink href="/" as="/" passHref>
         <Myself>
-          <Image src="/static/profile.jpg" alt={person.name} />
+          <Image src="/static/profile.jpg" alt={person.name} {...{ loading: "auto" }} />
 
           <Name>
             <Text size={TextSize.subtitle2} bold>
@@ -42,11 +41,9 @@ export default function Profile({ person, ...props }: Props) {
               fill={IconColor.secondary}
             />
 
-            <Link href={item.url.href}>
-              <a>
-                <Text link>{item.username}</Text>
-              </a>
-            </Link>
+            <a href={item.url.href}>
+              <Text link>{item.username}</Text>
+            </a>
           </LinkListItem>
         ))}
       </LinkList>
