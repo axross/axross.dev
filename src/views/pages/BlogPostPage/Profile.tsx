@@ -23,7 +23,7 @@ export default function Profile({ person, ...props }: Props) {
     <Root {...props}>
       <KeepLocaleLink href="/" as="/" passHref>
         <Myself>
-          <Image src="/static/profile.jpg" alt={person.name} {...{ loading: "auto" }} />
+          <Image src="/static/profile.jpg" alt={person.name} {...{ loading: "lazy" }} />
 
           <Name>
             <Text size={TextSize.subtitle2} bold>
