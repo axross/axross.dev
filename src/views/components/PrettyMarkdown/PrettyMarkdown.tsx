@@ -42,11 +42,6 @@ export default function PrettyMarkdown({ ...props }: Props) {
     <>
       <Head>
         <link
-          href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700|Open+Sans:400,700&display=swap&subset=japanese"
-          rel="stylesheet"
-          key="sansFont"
-        />
-        <link
           href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500&display=swap"
           rel="stylesheet"
           key="sourceCodeFont"
@@ -93,7 +88,7 @@ const Root = styled(Markdown)`
   }
 
   color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light};
-  font-family: "Open Sans", "Noto Sans JP";
+  font-family: sans-serif;
   font-size: var(--font-size);
   font-weight: normal;
   text-align: start;

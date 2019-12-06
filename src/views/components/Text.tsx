@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Head from "next/head";
 import * as React from "react";
 import TextThemeContext, { TextTheme } from "./TextThemeContext";
 import { FOREGROUND_COLORS, ForegroundColor } from "../constant/color";
@@ -72,27 +71,17 @@ export default React.forwardRef<HTMLElement, Props>(
     const _selectable = mergeValues(selectable, textTheme.selectable, true);
 
     return (
-      <>
-        <Head>
-          <link
-            href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700|Open+Sans:400,700&display=swap&subset=japanese"
-            rel="stylesheet"
-            key="sansFont"
-          />
-        </Head>
-
-        <Root
-          _color={_color}
-          _size={_size}
-          _bold={_bold}
-          _link={link}
-          _maxLines={_maxLines}
-          _alignment={_alignment}
-          _selectable={_selectable}
-          ref={ref}
-          {...props}
-        />
-      </>
+      <Root
+        _color={_color}
+        _size={_size}
+        _bold={_bold}
+        _link={link}
+        _maxLines={_maxLines}
+        _alignment={_alignment}
+        _selectable={_selectable}
+        ref={ref}
+        {...props}
+      />
     );
   }
 );
@@ -130,7 +119,7 @@ const Root = styled.span<{
     _link
       ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.light
       : FOREGROUND_COLORS.get(_color)!.light};
-  font-family: "Open Sans", "Noto Sans JP";
+  font-family: "sans-serif";
   font-weight: ${({ _bold }) => (_bold ? "bold" : "normal")};
   text-align: ${({ _alignment }) => _alignment};
   word-break: break-word;
