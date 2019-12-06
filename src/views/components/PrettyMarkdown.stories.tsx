@@ -7,11 +7,10 @@ export default {
   decorators: [withKnobs]
 };
 
-export const playground = () => (
-  <PrettyMarkdown children={text("children", initialText)} />
-);
-
-const initialText = `[Flutter](https://flutter.dev/)で作ったiOS/Androidアプリを初めてストアに出しました。テキサスホールデムというポーカーの計算機で、複数人のハンドやハンドレンジからそれぞれ誰がどれくらいの勝率があるかを計算できるものです。
+export const article = () => (
+  <PrettyMarkdown>
+    {`
+[Flutter](https://flutter.dev/)で作ったiOS/Androidアプリを初めてストアに出しました。テキサスホールデムというポーカーの計算機で、複数人のハンドやハンドレンジからそれぞれ誰がどれくらいの勝率があるかを計算できるものです。
 
 ![Aqua@2x](//videos.ctfassets.net/2mfcuy3p355s/2WCN3uamkggk0Z9Nc9XMwr/80f0514d1063d664fe298a1f1e460496/aqua_video.mp4)
 
@@ -55,4 +54,13 @@ Flutterには[MediaQuery](https://api.flutter.dev/flutter/widgets/MediaQuery-cla
 Flutterはプラットフォームで用意されたUIフレームワークを利用せず、全画面にキャンバスを広げて独自のレンダリングシステムでUIを描画しています。そのためケースによってはネイティブ以上のレンダリングパフォーマンスを叩き出すのですが、通常、広告のSDKはプラットフォームごとのUIフレームワークに依存しているのでFlutterと相性が悪いです。
 
 ### カメラを軸としたアプリ
-これもFlutterが独自のレンダリングシステムを利用しているのが原因です。InstagramやSnapchatのようにカメラにフィルターを当てるようなアプリは作りにくいです。`;
+これもFlutterが独自のレンダリングシステムを利用しているのが原因です。InstagramやSnapchatのようにカメラにフィルターを当てるようなアプリは作りにくいです。
+  `.trim()}
+  </PrettyMarkdown>
+);
+
+export const playground = () => (
+  <PrettyMarkdown>
+    {text("children", "")}
+  </PrettyMarkdown>
+);
