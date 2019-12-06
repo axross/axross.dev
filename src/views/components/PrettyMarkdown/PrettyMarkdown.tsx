@@ -29,8 +29,7 @@ import {
   LAPTOP_TEXT_SIZE,
   LAPTOP_TITLE_SIZE
 } from "../../constant/size";
-import PrettyMarkdownImage from "./PrettyMarkdownImage";
-import PrettyMarkdownVideo from "./PrettyMarkdownVideo";
+import ImageOrVideo from "./ImageOrVideo";
 import { TextColor } from "../Text";
 
 interface Props extends React.Attributes {
@@ -59,61 +58,7 @@ export default function PrettyMarkdown({ ...props }: Props) {
           text: ({ value, nodeKey, ...props }: any) => (
             <span {...props} key={nodeKey} />
           ),
-          image: (attributes: any) => {
-            let _attributes = { ...attributes };
-            let scale = 1;
-            let isInline = false;
-
-            if (typeof attributes.alt === "string") {
-              let alt = attributes.alt;
-              const modifiers: string[] = [];
-
-              while (/(@[0-9a-z]+)$/.test(alt)) {
-                const modifier = /(@[0-9a-z]+)$/.exec(alt)![1];
-
-                modifiers.push(modifier);
-                alt = alt.substring(0, alt.length - modifier.length);
-              }
-
-              for (const modifier of modifiers) {
-                const matchsAsScale = /^@(([0-9]+\.)?[0-9]+)x$/.exec(modifier);
-
-                if (matchsAsScale !== null) {
-                  scale = 1 / parseFloat(matchsAsScale[1]);
-
-                  continue;
-                }
-
-                if (modifier === "@inline") {
-                  isInline = true;
-                }
-              }
-
-              _attributes.alt = attributes.alt.substring(
-                0,
-                attributes.alt.length -
-                  modifiers.reduce((length, am) => length + am.length, 0)
-              );
-            }
-
-            if (attributes.src.endsWith(".mp4")) {
-              return (
-                <PrettyMarkdownVideo
-                  scale={scale}
-                  inline={isInline}
-                  {..._attributes}
-                />
-              );
-            }
-
-            return (
-              <PrettyMarkdownImage
-                scale={scale}
-                inline={isInline}
-                {..._attributes}
-              />
-            );
-          },
+          image: (attributes: any) => <ImageOrVideo {...attributes} />,
           code: ({ language, value }: any) => {
             return (
               <Code
@@ -454,15 +399,6 @@ const Root = styled(Markdown)`
 
     ${DARK_MODE} {
       border-top-color: ${FOREGROUND_COLORS.get(TextColor.secondary)!.dark}80;
-    }
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-
-    ${DARK_MODE} {
-      filter: grayscale(25%);
     }
   }
 
