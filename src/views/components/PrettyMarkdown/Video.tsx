@@ -35,7 +35,7 @@ export default function Video({ src, ...props }: Props) {
       ref={ref}
       {...props}
     >
-      {srcs.map(src => <source src={src} type="video/mp4" />)}
+      {srcs.map(src => <source src={src} type="video/mp4" key={src} />)}
     </Root>
   );
 }
