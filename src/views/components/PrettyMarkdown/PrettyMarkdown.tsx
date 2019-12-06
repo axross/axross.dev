@@ -29,8 +29,9 @@ import {
   LAPTOP_TEXT_SIZE,
   LAPTOP_TITLE_SIZE
 } from "../../constant/size";
-import ImageOrVideo from "./ImageOrVideo";
+import LazyCSS from '../LazyCSS';
 import { TextColor } from "../Text";
+import ImageOrVideo from "./ImageOrVideo";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -41,9 +42,13 @@ export default function PrettyMarkdown({ ...props }: Props) {
   return (
     <>
       <Head>
-        <link
+        <LazyCSS
+          href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese"
+          key="sansSerifFont"
+        />
+
+        <LazyCSS
           href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500&display=swap"
-          rel="stylesheet"
           key="sourceCodeFont"
         />
       </Head>
@@ -88,7 +93,7 @@ const Root = styled(Markdown)`
   }
 
   color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light};
-  font-family: sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
   font-size: var(--font-size);
   font-weight: normal;
   text-align: start;
