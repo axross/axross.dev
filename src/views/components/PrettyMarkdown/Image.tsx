@@ -1,12 +1,35 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 
-interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {}
+interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
+  src: string;
+}
 
-export default function Image(props: Props) {
+export default function Image({ src, ...props }: Props) {
+  const ref = React.useRef<HTMLImageElement>(null);
+  const [_src, setSrc] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (ref.current === null) return;
+    if (typeof window.IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+
+        setSrc(src);
+
+        observer.unobserve(entry.target);
+      }
+    });
+
+    observer.observe(ref.current!);
+  }, [src, ref.current]);
+
   return (
     <Root
-      {...{ loading: "lazy" }}
+      src={_src as any}
+      ref={ref}
       {...props}
     />
   );
