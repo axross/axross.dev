@@ -119,7 +119,7 @@ const Root = styled.span<{
     _link
       ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.light
       : FOREGROUND_COLORS.get(_color)!.light};
-  font-family: "sans-serif";
+  font-family: sans-serif;
   font-weight: ${({ _bold }) => (_bold ? "bold" : "normal")};
   text-align: ${({ _alignment }) => _alignment};
   word-break: break-word;
