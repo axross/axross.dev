@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Head from "next/head";
 import * as React from "react";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -41,17 +40,15 @@ interface Props extends React.Attributes {
 export default function PrettyMarkdown({ ...props }: Props) {
   return (
     <>
-      <Head>
-        <LazyCSS
-          href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese"
-          key="sansSerifFont"
-        />
+      <LazyCSS
+        href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese"
+        key="sansSerifFont"
+      />
 
-        <LazyCSS
-          href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500&display=swap"
-          key="sourceCodeFont"
-        />
-      </Head>
+      <LazyCSS
+        href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500&display=swap"
+        key="sourceCodeFont"
+      />
 
       <Root
         renderers={{
@@ -342,7 +339,7 @@ const Root = styled(Markdown)`
       padding-inline-end: 0;
       border-radius: 0;
       font-size: calc(var(--font-size) * 0.8);
-      font-family: "Source Code Pro";
+      font-family: "Source Code Pro", monospace;
       font-weight: 500;
     }
   }
