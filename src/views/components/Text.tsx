@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Head from "next/head";
 import * as React from "react";
 import TextThemeContext, { TextTheme } from "./TextThemeContext";
 import { FOREGROUND_COLORS, ForegroundColor } from "../constant/color";
@@ -74,12 +73,10 @@ export default React.forwardRef<HTMLElement, Props>(
 
     return (
       <>
-        <Head>
-          <LazyCSS
-            href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese"
-            key="sansSerifFont"
-          />
-        </Head>
+        <LazyCSS
+          href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese"
+          key="sansSerifFont"
+        />
 
         <Root
           _color={_color}

@@ -1,4 +1,5 @@
 import * as React from "react";
+import Head from "next/head";
 
 interface Props extends React.Attributes {
   href: string;
@@ -6,7 +7,7 @@ interface Props extends React.Attributes {
 
 export default function LazyCSS({ href, ...props }: Props) {
   const [_href, setHref] = React.useState<string | null>(null);
-  
+
   React.useEffect(() => {
     setHref(href);
 
@@ -16,10 +17,12 @@ export default function LazyCSS({ href, ...props }: Props) {
   if (_href === null) return null;
 
   return (
-    <link
-      href={href}
-      rel="stylesheet"
-      {...props}
-    />
+    <Head>
+      <link
+        href={_href}
+        rel="stylesheet"
+        {...props}
+      />
+    </Head>
   );
 }
