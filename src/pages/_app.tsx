@@ -13,6 +13,7 @@ import getQueriedlocale from "../utility/getQueriedLocale";
 import getURL from "../utility/getURL";
 import respondNotFound from "../utility/respondNotFound";
 import respondRedirection from "../utility/respondRedirection";
+import setContentSecurityPolicy from '../utility/setContentSecurityPolicy';
 import LocaleSwitchContext from "../views/contexts/LocaleContext";
 import SelfUrlContext from "../views/contexts/SelfUrlContext";
 import TranslationContext from "../views/contexts/TranslationContext";
@@ -119,6 +120,10 @@ export default class App extends NextApp<Props> {
       }
 
       currentLocale = queriedLocale;
+    }
+
+    if (context.res) {
+      setContentSecurityPolicy(context);
     }
 
     const componentGetInitialProps =
