@@ -12,8 +12,7 @@ export const PRECONNECT_URLS = new Set([
 
 export const CONTENT_SECURITY_POLICY = new Map<string, string[]>();
 
-CONTENT_SECURITY_POLICY.set("default-src",
-["'self'"]);
+CONTENT_SECURITY_POLICY.set("default-src",　["'none'"]);
 CONTENT_SECURITY_POLICY.set("img-src", [
   "{SELF_URL}",
   "https://images.ctfassets.net",
