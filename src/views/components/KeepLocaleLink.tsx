@@ -1,6 +1,6 @@
-import Link, { LinkProps } from "next/link";
 import * as React from "react";
 import LocaleContext from "../contexts/LocaleContext";
+import Link, { Props as LinkProps } from "./Link";
 
 interface Props extends Omit<Omit<LinkProps, "href">, "as"> {
   href: string;

@@ -40,7 +40,6 @@ export const playground = () => (
       TextSize.body
     )}
     bold={boolean("bold", false)}
-    link={boolean("link", false)}
     maxLines={number("maxLines", 0, { range: true, min: 0, max: 100 })}
     alignment={select(
       "alignment",

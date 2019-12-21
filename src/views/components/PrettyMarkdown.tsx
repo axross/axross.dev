@@ -1,12 +1,12 @@
 import * as React from "react";
 import Markdown from "react-markdown";
+import ExternalLink from "./ExternalLink";
 import LazyCSS from "./LazyCSS";
 import Blockquote from "./PrettyMarkdown/Blockquote";
 import CodeBlock from "./PrettyMarkdown/CodeBlock";
 import CodeText from "./PrettyMarkdown/CodeText";
 import Emphasis from "./PrettyMarkdown/Emphasis";
 import Heading from "./PrettyMarkdown/Heading";
-import Link from "./PrettyMarkdown/Link";
 import Media from "./PrettyMarkdown/Media";
 import Paragraph from "./PrettyMarkdown/Paragraph";
 import Strong from "./PrettyMarkdown/Strong";
@@ -45,7 +45,7 @@ const renderers = {
   image: Media,
   strong: Strong,
   emphasis: Emphasis,
-  link: Link,
+  link: ExternalLink,
   text: NormalText,
   inlineCode: CodeText
 };

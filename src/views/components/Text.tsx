@@ -33,7 +33,6 @@ export interface Props extends React.Attributes {
   italic?: boolean;
   underline?: boolean;
   strikeThrough?: boolean;
-  link?: boolean;
   /**
    * If this param is more than or equal 1 and the string inside is going overflown, it is clamped by an ellipsis at the end of the specified line.
    */
@@ -59,7 +58,6 @@ export default React.forwardRef<HTMLElement, Props>(
       italic,
       underline,
       strikeThrough,
-      link = false,
       maxLines,
       alignment,
       selectable,
@@ -100,7 +98,6 @@ export default React.forwardRef<HTMLElement, Props>(
           _italic={_italic}
           _underline={_underline}
           _strikeThrough={_strikeThrough}
-          _link={link}
           _maxLines={_maxLines}
           _alignment={_alignment}
           _selectable={_selectable}
@@ -135,7 +132,6 @@ const Root = styled.span<{
   _italic: boolean;
   _underline: boolean;
   _strikeThrough: boolean;
-  _link: boolean;
   _maxLines: number;
   _alignment: TextAlignment;
   _selectable: boolean;
@@ -145,10 +141,7 @@ const Root = styled.span<{
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
-  color: ${({ _color, _link }) =>
-    _link
-      ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.light
-      : FOREGROUND_COLORS.get(_color)!.light};
+  color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.light};
   font-family: "Open Sans", sans-serif;
   font-weight: ${({ _bold }) => (_bold ? "bold" : "normal")};
   font-style: ${({ _italic }) => (_italic ? "italic" : "normal")};
@@ -162,7 +155,7 @@ const Root = styled.span<{
   word-break: break-word;
   user-select: ${({ _selectable }) => (_selectable ? "auto" : "none")};
   transition: color 150ms ease-in-out 0ms, font-size 150ms ease-in-out 0ms,
-    font-weight 150ms ease-in-out 0ms;
+    font-weight 150ms ease-in-out 0ms, text-decoration 150ms ease-in-out 0ms;
 
   ${({ _size }) => TEXT_SIZES[_size]}
 
@@ -182,34 +175,7 @@ const Root = styled.span<{
   `}
 
   ${DARK_MODE} {
-    color: ${({ _color, _link }) =>
-      _link
-        ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.dark
-        : FOREGROUND_COLORS.get(_color)!.dark};
-  }
-
-  &:hover {
-    ${({ _link }) =>
-      _link
-        ? `
-      color: ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.light};
-      text-decoration: underline ${
-        FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.light
-      };
-    `
-        : ""}
-
-    ${DARK_MODE} {
-      ${({ _link }) =>
-        _link
-          ? `
-        color: ${FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.dark};
-        text-decoration: underline ${
-          FOREGROUND_COLORS.get(ForegroundColor.primaryHighlight)!.dark
-        };
-      `
-          : ""}
-    }
+    color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.dark};
   }
 `;
 
