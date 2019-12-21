@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import Person from "../../../entities/Person";
+import ExternalLink from "../../components/ExternalLink";
 import KeepLocaleLink from "../../components/KeepLocaleLink";
 import Text, { TextSize } from "../../components/Text";
 import Icon, { IconColor, IconName } from "../../components/Icon";
@@ -23,7 +24,11 @@ export default function Profile({ person, ...props }: Props) {
     <Root {...props}>
       <KeepLocaleLink href="/" as="/" passHref>
         <Myself>
-          <Image src="/static/profile.jpg" alt={person.name} {...{ loading: "lazy" }} />
+          <Image
+            src="/static/profile.jpg"
+            alt={person.name}
+            {...{ loading: "lazy" }}
+          />
 
           <Name>
             <Text size={TextSize.subtitle2} bold>
@@ -41,9 +46,9 @@ export default function Profile({ person, ...props }: Props) {
               fill={IconColor.secondary}
             />
 
-            <a href={item.url.href}>
-              <Text link>{item.username}</Text>
-            </a>
+            <ExternalLink href={item.url.href}>
+              <Text>{item.username}</Text>
+            </ExternalLink>
           </LinkListItem>
         ))}
       </LinkList>

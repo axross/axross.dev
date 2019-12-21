@@ -1,13 +1,13 @@
 import * as React from "react";
-import TextThemeContext from "../TextThemeContext";
-import { TextColor } from "../Text";
+import { TextColor } from "./Text";
+import TextThemeContext from "./TextThemeContext";
 
-interface Props extends React.Attributes {
-  className?: string;
+export interface Props extends React.Attributes {
+  href: string;
   children?: React.ReactNode;
 }
 
-export default function Link({ children, ...props }: Props) {
+export default function ExternalLink({ children, ...props }: Props) {
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (

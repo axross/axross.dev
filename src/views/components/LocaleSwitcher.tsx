@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import IntlMessageFormat from "intl-messageformat";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import * as React from "react";
 import { MOBILE } from "../constant/mediaquery";
@@ -11,6 +10,7 @@ import {
 import LocaleContext from "../contexts/LocaleContext";
 import SelfUrlContext from "../contexts/SelfUrlContext";
 import TranslationContext from "../contexts/TranslationContext";
+import Link from "./Link";
 import Text, { TextColor, TextSize } from "./Text";
 
 interface Props extends React.Attributes {
@@ -44,15 +44,12 @@ export default function LocaleSwitcher(props: Props) {
               href={router.pathname + itemURL.search}
               as={itemURL.pathname + itemURL.search}
               replace
-              passHref
             >
-              <a>
-                <Text size={TextSize.caption} link>
-                  {new IntlMessageFormat(
-                    translation[`language.${locale}`]
-                  ).format()}
-                </Text>
-              </a>
+              <Text size={TextSize.caption}>
+                {new IntlMessageFormat(
+                  translation[`language.${locale}`]
+                ).format()}
+              </Text>
             </Link>
           </Item>
         );

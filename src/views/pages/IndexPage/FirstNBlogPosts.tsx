@@ -26,13 +26,9 @@ export default function FirstNBlogPosts({ blogPosts, ...props }: Props) {
             <LinkKeepLocale
               href="/posts/[blogPostId]"
               as={`/posts/${blogPost.id}`}
-              passHref
+              prefetch
             >
-              <a>
-                <Text maxLines={0} link>
-                  {blogPost.title}
-                </Text>
-              </a>
+              <Text maxLines={0}>{blogPost.title}</Text>
             </LinkKeepLocale>
           </Title>
 
