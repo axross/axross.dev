@@ -48,7 +48,11 @@ export default function BlogPostPage({ myself, blogPost }: Props) {
           </Text>
         </Title>
 
-        <Body>{blogPost.body}</Body>
+        <Body>
+          <PrettyMarkdown>
+            {blogPost.body}
+          </PrettyMarkdown>
+        </Body>
       </_RightPane>
     </TwoPaneView>
   );
@@ -85,6 +89,7 @@ const Title = styled.h1`
   grid-area: title;
 `;
 
-const Body = styled(PrettyMarkdown)`
+const Body = styled.div`
   grid-area: body;
+  width: 100%;
 `;
