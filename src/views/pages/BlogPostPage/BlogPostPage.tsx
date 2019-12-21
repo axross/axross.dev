@@ -3,7 +3,7 @@ import * as React from "react";
 import BlogPost from "../../../entities/BlogPost";
 import Person from "../../../entities/Person";
 import LocaleSwitcher from "../../components/LocaleSwitcher";
-import PrettyMarkdown from "../../components/PrettyMarkdown/PrettyMarkdown";
+import PrettyMarkdown from "../../components/PrettyMarkdown";
 import BlogPostTimestamp from "./BlogPostTimestamp";
 import Text, { TextSize, TextColor } from "../../components/Text";
 import TwoPaneView, { LeftPane, RightPane } from "../../components/TwoPaneView";
@@ -48,7 +48,9 @@ export default function BlogPostPage({ myself, blogPost }: Props) {
           </Text>
         </Title>
 
-        <Body>{blogPost.body}</Body>
+        <Body>
+          <PrettyMarkdown>{blogPost.body}</PrettyMarkdown>
+        </Body>
       </_RightPane>
     </TwoPaneView>
   );
@@ -85,6 +87,7 @@ const Title = styled.h1`
   grid-area: title;
 `;
 
-const Body = styled(PrettyMarkdown)`
+const Body = styled.div`
   grid-area: body;
+  width: 100%;
 `;

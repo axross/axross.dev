@@ -6,10 +6,12 @@ import { DARK_MODE, MOBILE } from "../constant/mediaquery";
 import {
   LAPTOP_SUBTITLE_SIZE,
   LAPTOP_SUBTITLE2_SIZE,
+  LAPTOP_SUBTITLE3_SIZE,
   LAPTOP_TEXT_SIZE,
   LAPTOP_TITLE_SIZE,
   MOBILE_SUBTITLE_SIZE,
   MOBILE_SUBTITLE2_SIZE,
+  MOBILE_SUBTITLE3_SIZE,
   MOBILE_TEXT_SIZE,
   MOBILE_TITLE_SIZE
 } from "../constant/size";
@@ -28,6 +30,9 @@ export interface Props extends React.Attributes {
    */
   size?: TextSize;
   bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  strikeThrough?: boolean;
   link?: boolean;
   /**
    * If this param is more than or equal 1 and the string inside is going overflown, it is clamped by an ellipsis at the end of the specified line.
@@ -51,6 +56,9 @@ export default React.forwardRef<HTMLElement, Props>(
       color,
       size,
       bold,
+      italic,
+      underline,
+      strikeThrough,
       link = false,
       maxLines,
       alignment,
@@ -63,7 +71,14 @@ export default React.forwardRef<HTMLElement, Props>(
     const _color = mergeValues(color, textTheme.color, ForegroundColor.normal);
     const _size = mergeValues(size, textTheme.size, TextSize.body);
     const _bold = mergeValues(bold, textTheme.bold, false);
-    const _maxLines = mergeValues(maxLines, textTheme.maxLines, 1);
+    const _italic = mergeValues(italic, textTheme.italic, false);
+    const _underline = mergeValues(underline, textTheme.underline, false);
+    const _strikeThrough = mergeValues(
+      strikeThrough,
+      textTheme.strikeThrough,
+      false
+    );
+    const _maxLines = mergeValues(maxLines, textTheme.maxLines, 0);
     const _alignment = mergeValues(
       alignment,
       textTheme.alignment,
@@ -74,7 +89,7 @@ export default React.forwardRef<HTMLElement, Props>(
     return (
       <>
         <LazyCSS
-          href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese"
+          href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap"
           key="sansSerifFont"
         />
 
@@ -82,6 +97,9 @@ export default React.forwardRef<HTMLElement, Props>(
           _color={_color}
           _size={_size}
           _bold={_bold}
+          _italic={_italic}
+          _underline={_underline}
+          _strikeThrough={_strikeThrough}
           _link={link}
           _maxLines={_maxLines}
           _alignment={_alignment}
@@ -94,14 +112,13 @@ export default React.forwardRef<HTMLElement, Props>(
   }
 );
 
-
-
 export enum TextSize {
   body,
   caption,
   title,
   subtitle,
-  subtitle2
+  subtitle2,
+  subtitle3
 }
 
 export enum TextAlignment {
@@ -115,6 +132,9 @@ const Root = styled.span<{
   _size: TextSize;
   _color: ForegroundColor;
   _bold: boolean;
+  _italic: boolean;
+  _underline: boolean;
+  _strikeThrough: boolean;
   _link: boolean;
   _maxLines: number;
   _alignment: TextAlignment;
@@ -129,9 +149,16 @@ const Root = styled.span<{
     _link
       ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.light
       : FOREGROUND_COLORS.get(_color)!.light};
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: ${({ _bold }) => (_bold ? "bold" : "normal")};
+  font-style: ${({ _italic }) => (_italic ? "italic" : "normal")};
   text-align: ${({ _alignment }) => _alignment};
+  text-decoration: ${({ _underline, _strikeThrough }) =>
+    _underline || _strikeThrough
+      ? `${_underline ? "underline" : ""} ${
+          _strikeThrough ? "line-through" : ""
+        }`
+      : "none"};
   word-break: break-word;
   user-select: ${({ _selectable }) => (_selectable ? "auto" : "none")};
   transition: color 150ms ease-in-out 0ms, font-size 150ms ease-in-out 0ms,
@@ -189,6 +216,7 @@ const Root = styled.span<{
 const TEXT_SIZES = {
   [TextSize.body]: `
     font-size: ${LAPTOP_TEXT_SIZE}px;
+    line-height: 1.75;
 
     ${MOBILE} {
       font-size: ${MOBILE_TEXT_SIZE}px;
@@ -196,6 +224,7 @@ const TEXT_SIZES = {
   `,
   [TextSize.caption]: `
     font-size: 17px;
+    line-height: 1.75;
 
     ${MOBILE} {
       font-size: 14px;
@@ -203,6 +232,7 @@ const TEXT_SIZES = {
   `,
   [TextSize.title]: `
     font-size: ${LAPTOP_TITLE_SIZE}px;
+    line-height: 1.5;
 
     ${MOBILE} {
       font-size: ${MOBILE_TITLE_SIZE}px;
@@ -210,6 +240,7 @@ const TEXT_SIZES = {
   `,
   [TextSize.subtitle]: `
     font-size: ${LAPTOP_SUBTITLE_SIZE}px;
+    line-height: 1.5;
 
     ${MOBILE} {
       font-size: ${MOBILE_SUBTITLE_SIZE}px;
@@ -217,9 +248,18 @@ const TEXT_SIZES = {
   `,
   [TextSize.subtitle2]: `
     font-size: ${LAPTOP_SUBTITLE2_SIZE}px;
+    line-height: 1.5;
 
     ${MOBILE} {
       font-size: ${MOBILE_SUBTITLE2_SIZE}px;
+    }
+  `,
+  [TextSize.subtitle3]: `
+    font-size: ${LAPTOP_SUBTITLE3_SIZE}px;
+    line-height: 1.5;
+
+    ${MOBILE} {
+      font-size: ${MOBILE_SUBTITLE3_SIZE}px;
     }
   `
 };
