@@ -1,17 +1,17 @@
 import * as React from "react";
 import Markdown from "react-markdown";
-import LazyCSS from './LazyCSS';
-import Blockquote from './PrettyMarkdown/Blockquote';
-import CodeBlock from './PrettyMarkdown/CodeBlock';
+import LazyCSS from "./LazyCSS";
+import Blockquote from "./PrettyMarkdown/Blockquote";
+import CodeBlock from "./PrettyMarkdown/CodeBlock";
 import CodeText from "./PrettyMarkdown/CodeText";
-import Emphasis from './PrettyMarkdown/Emphasis';
+import Emphasis from "./PrettyMarkdown/Emphasis";
 import Heading from "./PrettyMarkdown/Heading";
 import Link from "./PrettyMarkdown/Link";
 import Media from "./PrettyMarkdown/Media";
 import Paragraph from "./PrettyMarkdown/Paragraph";
 import Strong from "./PrettyMarkdown/Strong";
 import NormalText from "./PrettyMarkdown/NormalText";
-import UnorderedList from './PrettyMarkdown/UnorderedList';
+import UnorderedList from "./PrettyMarkdown/UnorderedList";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -31,10 +31,7 @@ export default function PrettyMarkdown({ ...props }: Props) {
         key="sourceCodeFont"
       />
 
-      <Markdown
-        renderers={renderers}
-        {...props}
-      />
+      <Markdown renderers={renderers} {...props} />
     </>
   );
 }
@@ -50,5 +47,5 @@ const renderers = {
   emphasis: Emphasis,
   link: Link,
   text: NormalText,
-  inlineCode: CodeText,
+  inlineCode: CodeText
 };

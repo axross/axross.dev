@@ -73,7 +73,11 @@ export default React.forwardRef<HTMLElement, Props>(
     const _bold = mergeValues(bold, textTheme.bold, false);
     const _italic = mergeValues(italic, textTheme.italic, false);
     const _underline = mergeValues(underline, textTheme.underline, false);
-    const _strikeThrough = mergeValues(strikeThrough, textTheme.strikeThrough, false);
+    const _strikeThrough = mergeValues(
+      strikeThrough,
+      textTheme.strikeThrough,
+      false
+    );
     const _maxLines = mergeValues(maxLines, textTheme.maxLines, 0);
     const _alignment = mergeValues(
       alignment,
@@ -107,8 +111,6 @@ export default React.forwardRef<HTMLElement, Props>(
     );
   }
 );
-
-
 
 export enum TextSize {
   body,
@@ -148,10 +150,15 @@ const Root = styled.span<{
       ? FOREGROUND_COLORS.get(ForegroundColor.primary)!.light
       : FOREGROUND_COLORS.get(_color)!.light};
   font-family: "Open Sans", sans-serif;
-  font-weight: ${({ _bold }) => _bold ? "bold" : "normal"};
-  font-style: ${({ _italic }) => _italic ? "italic" : "normal"};
+  font-weight: ${({ _bold }) => (_bold ? "bold" : "normal")};
+  font-style: ${({ _italic }) => (_italic ? "italic" : "normal")};
   text-align: ${({ _alignment }) => _alignment};
-  text-decoration: ${({ _underline, _strikeThrough }) => _underline || _strikeThrough ? `${_underline ? "underline" : ""} ${_strikeThrough ? "line-through" : ""}` : "none"};
+  text-decoration: ${({ _underline, _strikeThrough }) =>
+    _underline || _strikeThrough
+      ? `${_underline ? "underline" : ""} ${
+          _strikeThrough ? "line-through" : ""
+        }`
+      : "none"};
   word-break: break-word;
   user-select: ${({ _selectable }) => (_selectable ? "auto" : "none")};
   transition: color 150ms ease-in-out 0ms, font-size 150ms ease-in-out 0ms,

@@ -1,6 +1,6 @@
 import * as React from "react";
 import Person from "../../../entities/Person";
-import PrettyMarkdown from "../../components/PrettyMarkdown/PrettyMarkdown";
+import PrettyMarkdown from "../../components/PrettyMarkdown";
 
 interface Props extends React.Attributes {
   person: Person;

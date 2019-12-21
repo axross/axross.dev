@@ -1,16 +1,18 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { DARK_MODE, MOBILE } from "../../constant/mediaquery";
-import { BACKGROUND_COLORS, BackgroundColor, FOREGROUND_COLORS } from "../../constant/color";
+import {
+  BACKGROUND_COLORS,
+  BackgroundColor,
+  FOREGROUND_COLORS
+} from "../../constant/color";
 import { MOBILE_TEXT_SIZE, LAPTOP_TEXT_SIZE } from "../../constant/size";
 import { TextColor } from "../Text";
 
 interface Props extends React.Attributes {}
 
 export default function InlineCode(props: Props) {
-  return (
-    <Root {...props} />
-  );
+  return <Root {...props} />;
 }
 
 const Root = styled.code`
@@ -39,4 +41,4 @@ const Root = styled.code`
     background-color: ${BACKGROUND_COLORS.get(BackgroundColor.code)!.dark};
     color: ${FOREGROUND_COLORS.get(TextColor.normal)!.dark};
   }
-`
+`;

@@ -16,7 +16,7 @@ import {
 } from "../../constant/size";
 import mergeValues from "../../utility/mergeValues";
 import LazyCSS from "../LazyCSS";
-import { TextSize, TextColor } from '../Text';
+import { TextSize, TextColor } from "../Text";
 import TextThemeContext, { TextTheme } from "../TextThemeContext";
 
 interface Props extends React.Attributes {
@@ -38,16 +38,12 @@ export default function CodeText({ color, size, ...props }: Props) {
         key="sourceCodeFont"
       />
 
-      <Root
-        _color={_color}
-        _size={_size}
-        {...props}
-      />
+      <Root _color={_color} _size={_size} {...props} />
     </>
   );
 }
 
-const Root = styled.code<{ _color: TextColor, _size: TextSize }>`
+const Root = styled.code<{ _color: TextColor; _size: TextSize }>`
   line-height: 1.75;
   color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.light};
   font-family: "Source Code Pro", monospace;

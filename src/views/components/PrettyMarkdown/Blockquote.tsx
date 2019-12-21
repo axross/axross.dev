@@ -9,9 +9,7 @@ interface Props extends React.Attributes {
 }
 
 export default function Blockquote(props: Props) {
-  return (
-    <Root {...props} />
-  );
+  return <Root {...props} />;
 }
 
 const Root = styled.blockquote`

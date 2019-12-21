@@ -1,16 +1,26 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { MOBILE_PADDING_SIZE, LAPTOP_PADDING_SIZE, LAPTOP_TEXT_SIZE, MOBILE_TEXT_SIZE } from "../../constant/size";
+import {
+  MOBILE_PADDING_SIZE,
+  LAPTOP_PADDING_SIZE,
+  LAPTOP_TEXT_SIZE,
+  MOBILE_TEXT_SIZE
+} from "../../constant/size";
 import { MOBILE, DARK_MODE } from "../../constant/mediaquery";
-import { BACKGROUND_COLORS, BackgroundColor, CODE_COLORS, CodeColor } from "../../constant/color";
+import {
+  BACKGROUND_COLORS,
+  BackgroundColor,
+  CODE_COLORS,
+  CodeColor
+} from "../../constant/color";
 
 interface Props extends React.Attributes {
   language: string;
   value: string;
 }
 
-export default function Paragraph({language,value, ...props}: Props) {
+export default function Paragraph({ language, value, ...props }: Props) {
   return (
     <Root
       // codeTagProps={{ className: `language-${language}` }}

@@ -6,9 +6,7 @@ import { MOBILE } from "../../constant/mediaquery";
 interface Props extends React.Attributes {}
 
 export default function Paragraph(props: Props) {
-  return (
-    <Root {...props} />
-  );
+  return <Root {...props} />;
 }
 
 const Root = styled.p`
@@ -29,4 +27,4 @@ const Root = styled.p`
   &:last-child {
     margin-block-end: 0;
   }
-`
+`;

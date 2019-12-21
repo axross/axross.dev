@@ -1,5 +1,5 @@
-import * as React from 'react';
-import TextThemeContext from '../TextThemeContext';
+import * as React from "react";
+import TextThemeContext from "../TextThemeContext";
 
 interface Props extends React.Attributes {
   children: React.ReactNode;

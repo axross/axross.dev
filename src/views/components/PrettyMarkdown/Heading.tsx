@@ -1,7 +1,12 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { MOBILE } from "../../constant/mediaquery";
-import { MOBILE_PADDING_SIZE, MOBILE_MAJOR_PADDING_SIZE, LAPTOP_PADDING_SIZE, LAPTOP_MAJOR_PADDING_SIZE } from "../../constant/size";
+import {
+  MOBILE_PADDING_SIZE,
+  MOBILE_MAJOR_PADDING_SIZE,
+  LAPTOP_PADDING_SIZE,
+  LAPTOP_MAJOR_PADDING_SIZE
+} from "../../constant/size";
 import { TextColor, TextSize } from "../Text";
 import TextThemeContext from "../TextThemeContext";
 
@@ -33,11 +38,13 @@ export default function Heading({ level, children, ...props }: Props) {
 
   return (
     <Component {...props}>
-      <TextThemeContext.Provider value={{
-        color: TextColor.highlight,
-        size: SIZES.get(level),
-        bold: level !== 5,
-      }}>
+      <TextThemeContext.Provider
+        value={{
+          color: TextColor.highlight,
+          size: SIZES.get(level),
+          bold: level !== 5
+        }}
+      >
         {children}
       </TextThemeContext.Provider>
     </Component>
@@ -50,7 +57,7 @@ const SIZES = new Map([
   [3, TextSize.subtitle2],
   [4, TextSize.subtitle3],
   [5, TextSize.subtitle3],
-  [6, TextSize.body],
+  [6, TextSize.body]
 ]);
 
 const H1 = styled.h1`

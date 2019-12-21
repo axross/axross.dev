@@ -26,13 +26,7 @@ export default function Image({ src, ...props }: Props) {
     observer.observe(ref.current!);
   }, [src, ref.current]);
 
-  return (
-    <Root
-      src={_src as any}
-      ref={ref}
-      {...props}
-    />
-  );
+  return <Root src={_src as any} ref={ref} {...props} />;
 }
 
 const Root = styled.img`
@@ -45,4 +39,4 @@ const Root = styled.img`
   &:last-child {
     margin-inline-end: 0;
   }
-`
+`;

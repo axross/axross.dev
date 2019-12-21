@@ -8,7 +8,7 @@ interface Props extends React.ImgHTMLAttributes<HTMLVideoElement> {
 export default function Video({ src, ...props }: Props) {
   const ref = React.useRef<HTMLVideoElement>(null);
   const [srcs, setSrcs] = React.useState<string[]>([]);
-  
+
   React.useEffect(() => {
     if (ref.current === null) return;
     if (typeof window.IntersectionObserver === "undefined") return;
@@ -27,15 +27,10 @@ export default function Video({ src, ...props }: Props) {
   }, [src, ref.current]);
 
   return (
-    <Root
-      playsInline
-      autoPlay
-      loop
-      muted
-      ref={ref}
-      {...props}
-    >
-      {srcs.map(src => <source src={src} type="video/mp4" key={src} />)}
+    <Root playsInline autoPlay loop muted ref={ref} {...props}>
+      {srcs.map(src => (
+        <source src={src} type="video/mp4" key={src} />
+      ))}
     </Root>
   );
 }

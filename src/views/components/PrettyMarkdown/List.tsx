@@ -1,6 +1,6 @@
 import * as React from "react";
-import OrderedList from './OrderedList';
-import UnorderedList from './UnorderedList';
+import OrderedList from "./OrderedList";
+import UnorderedList from "./UnorderedList";
 
 interface Props extends React.Attributes {
   ordered: boolean;

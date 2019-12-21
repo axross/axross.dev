@@ -1,6 +1,6 @@
 import { withKnobs, text } from "@storybook/addon-knobs";
 import * as React from "react";
-import PrettyMarkdown from "./PrettyMarkdown/PrettyMarkdown";
+import PrettyMarkdown from "./PrettyMarkdown";
 
 export default {
   title: "PrettyMarkdown",
@@ -9,32 +9,25 @@ export default {
 
 export const articleA = () => (
   <div style={{ padding: 48 }}>
-    <PrettyMarkdown>
-      {ARTICLE_A.trim()}
-    </PrettyMarkdown>
+    <PrettyMarkdown>{ARTICLE_A.trim()}</PrettyMarkdown>
   </div>
 );
 
 export const articleB = () => (
   <div style={{ padding: 48 }}>
-    <PrettyMarkdown>
-      {ARTICLE_B.trim()}
-    </PrettyMarkdown>
+    <PrettyMarkdown>{ARTICLE_B.trim()}</PrettyMarkdown>
   </div>
 );
 
 export const articleC = () => (
   <div style={{ padding: 48 }}>
-    <PrettyMarkdown>
-      {ARTICLE_C.trim()}
-    </PrettyMarkdown>
+    <PrettyMarkdown>{ARTICLE_C.trim()}</PrettyMarkdown>
   </div>
 );
 
 export const playground = () => (
   <PrettyMarkdown children={text("children", "")} />
 );
-
 
 const ARTICLE_A = `
 I launched iOS/Android apps made of [Flutter](https://flutter.dev/) to app stores for the first time. *It's a tool to calculate win rates for each hands or hand ranges up to 10 players.* ~~Not just a Flutter app.~~

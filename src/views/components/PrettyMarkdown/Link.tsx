@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import TextThemeContext from "../TextThemeContext";
 import { TextColor } from "../Text";
 
@@ -14,15 +14,16 @@ export default function Link({ children, ...props }: Props) {
     <a
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      {...props}>
+      {...props}
+    >
       <TextThemeContext.Provider
         value={{
           color: isHovered ? TextColor.primaryHighlight : TextColor.primary,
-          underline: isHovered,
+          underline: isHovered
         }}
       >
         {children}
       </TextThemeContext.Provider>
     </a>
-  ) 
+  );
 }

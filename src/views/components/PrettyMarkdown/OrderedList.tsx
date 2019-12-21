@@ -1,6 +1,11 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { MOBILE_MINOR_PADDING_SIZE, MOBILE_PADDING_SIZE, LAPTOP_MINOR_PADDING_SIZE, LAPTOP_PADDING_SIZE } from "../../constant/size";
+import {
+  MOBILE_MINOR_PADDING_SIZE,
+  MOBILE_PADDING_SIZE,
+  LAPTOP_MINOR_PADDING_SIZE,
+  LAPTOP_PADDING_SIZE
+} from "../../constant/size";
 import { MOBILE } from "../../constant/mediaquery";
 
 interface Props extends React.Attributes {
@@ -8,7 +13,7 @@ interface Props extends React.Attributes {
 }
 
 export default function OrderedList(props: Props) {
-  return <Root>{props.children}</Root>
+  return <Root>{props.children}</Root>;
 }
 
 const Root = styled.ol`
@@ -64,4 +69,4 @@ const Root = styled.ol`
       }
     }
   }
-`
+`;
