@@ -1,18 +1,26 @@
 import styled from "@emotion/styled";
 import * as React from "react";
+import ColorTheme, { ThemedColor } from "../../../entities/ColorTheme";
 import { MOBILE_PADDING_SIZE, LAPTOP_PADDING_SIZE } from "../../constant/size";
-import { MOBILE, DARK_MODE } from "../../constant/mediaquery";
-import { BACKGROUND_COLORS, BackgroundColor } from "../../constant/color";
+import { MOBILE } from "../../constant/mediaquery";
+import ColorThemeContext from "../ColorThemeContext";
 
 interface Props extends React.Attributes {
   value: string;
+  children?: React.ReactNode;
 }
 
-export default function Blockquote(props: Props) {
-  return <Root {...props} />;
+export default function Blockquote({ children, ...props }: Props) {
+  const colorTheme = React.useContext(ColorThemeContext);
+
+  return (
+    <Root _colorTheme={colorTheme} {...props}>
+      {children}
+    </Root>
+  );
 }
 
-const Root = styled.blockquote`
+const Root = styled.blockquote<{ _colorTheme: ColorTheme }>`
   box-sizing: border-box;
   max-width: calc(100% + ${LAPTOP_PADDING_SIZE}px * 2);
   width: calc(100% + ${LAPTOP_PADDING_SIZE}px * 2);
@@ -25,7 +33,8 @@ const Root = styled.blockquote`
   padding-inline-start: ${LAPTOP_PADDING_SIZE}px;
   padding-inline-end: ${LAPTOP_PADDING_SIZE}px;
   border-radius: 8px;
-  background-color: ${BACKGROUND_COLORS.get(BackgroundColor.highlight)!.light};
+  background-color: ${({ _colorTheme }) =>
+    _colorTheme[ThemedColor.accentBackground]};
   font-style: italic;
 
   ${MOBILE} {
@@ -40,10 +49,6 @@ const Root = styled.blockquote`
     padding-inline-start: 20px;
     padding-inline-end: 20px;
     border-radius: 0;
-  }
-
-  ${DARK_MODE} {
-    background-color: ${BACKGROUND_COLORS.get(BackgroundColor.highlight)!.dark};
   }
 
   &:first-child {

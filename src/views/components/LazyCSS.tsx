@@ -18,11 +18,7 @@ export default function LazyCSS({ href, ...props }: Props) {
 
   return (
     <Head>
-      <link
-        href={_href}
-        rel="stylesheet"
-        {...props}
-      />
+      <link href={_href} rel="stylesheet" {...props} />
     </Head>
   );
 }

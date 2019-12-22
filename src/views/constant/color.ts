@@ -1,91 +1,27 @@
-export interface ThemedColor {
-  light: string;
-  dark: string;
-}
+import Color from "../../entities/Color";
+import ColorTheme, { ThemedColor } from "../../entities/ColorTheme";
 
-export enum ForegroundColor {
-  normal,
-  highlight,
-  primary,
-  primaryHighlight,
-  secondary,
-  secondaryHighlight
-}
+export const LIGHT: ColorTheme = {
+  [ThemedColor.foreground]: "#222f3e",
+  [ThemedColor.emphasizedForeground]: "#11181f",
+  [ThemedColor.secondaryForeground]: "#8395a7",
+  [ThemedColor.primaryForeground]: "#2e86de",
+  [ThemedColor.accentForeground]: "#ff9f43",
+  [ThemedColor.whiteForeground]: "#ffffff",
+  [ThemedColor.background]: "#ffffff",
+  [ThemedColor.accentBackground]: "#FFF2D5"
+};
 
-export const FOREGROUND_COLORS = new Map<ForegroundColor, ThemedColor>([
-  [
-    ForegroundColor.normal,
-    {
-      light: "#2F4858",
-      dark: "#e8e8c9"
-    }
-  ],
-  [
-    ForegroundColor.highlight,
-    {
-      light: "#1a304c",
-      dark: "#F2FEDC"
-    }
-  ],
-  [
-    ForegroundColor.primary,
-    {
-      light: "#0078D3",
-      dark: "#fe9583"
-    }
-  ],
-  [
-    ForegroundColor.primaryHighlight,
-    {
-      light: "#21AEFF",
-      dark: "#f15f46"
-    }
-  ],
-  [
-    ForegroundColor.secondary,
-    {
-      light: "#9CADBC",
-      dark: "#ACAC9A"
-    }
-  ],
-  [
-    ForegroundColor.secondaryHighlight,
-    {
-      light: "#9CADBC80",
-      dark: "#C8C9A3"
-    }
-  ]
-]);
-
-export enum BackgroundColor {
-  normal,
-  highlight,
-  code
-}
-
-export const BACKGROUND_COLORS = new Map<BackgroundColor, ThemedColor>([
-  [
-    BackgroundColor.normal,
-    {
-      light: "#fdfdfd",
-      dark: "#1a304c"
-    }
-  ],
-  [
-    BackgroundColor.highlight,
-    {
-      light: "#F3F9FF",
-      dark: "#2F4858"
-    }
-  ],
-  [
-    BackgroundColor.code,
-    {
-      light: "#FAFAFA",
-      dark: "#282c34"
-    }
-  ]
-]);
+export const DARK: ColorTheme = {
+  [ThemedColor.foreground]: "#eee7e0",
+  [ThemedColor.emphasizedForeground]: "#ffffff",
+  [ThemedColor.secondaryForeground]: "#8395a7",
+  [ThemedColor.primaryForeground]: "#54a0ff",
+  [ThemedColor.accentForeground]: "#feca57",
+  [ThemedColor.whiteForeground]: "#ffffff",
+  [ThemedColor.background]: "#11181f",
+  [ThemedColor.accentBackground]: "#4C442D"
+};
 
 export enum CodeColor {
   normal,
@@ -108,131 +44,25 @@ export enum CodeColor {
   hexcode
 }
 
-export const CODE_COLORS = new Map<CodeColor, ThemedColor>([
-  [
-    CodeColor.normal,
-    {
-      light: "#e45649",
-      dark: "#e06c75"
-    }
-  ],
-  [
-    CodeColor.comment,
-    {
-      light: "#A0A1A7",
-      dark: "#5c6370"
-    }
-  ],
-  [
-    CodeColor.punctuation,
-    {
-      light: "#383A42",
-      dark: "#abb2bf"
-    }
-  ],
-  [
-    CodeColor.keyword,
-    {
-      light: "#A626A4",
-      dark: "#c678dd"
-    }
-  ],
-  [
-    CodeColor.operator,
-    {
-      light: "#0184BC",
-      dark: "#56b6c2"
-    }
-  ],
-  [
-    CodeColor.function,
-    {
-      light: "#4078F2",
-      dark: "#56b6c2"
-    }
-  ],
-  [
-    CodeColor.string,
-    {
-      light: "#50A14F",
-      dark: "#98c379"
-    }
-  ],
-  [
-    CodeColor.number,
-    {
-      light: "#986801",
-      dark: "#d19a66"
-    }
-  ],
-  [
-    CodeColor.class,
-    {
-      light: "#c18401",
-      dark: "#e5c07b"
-    }
-  ],
-  [
-    CodeColor.tag,
-    {
-      light: "#e45649",
-      dark: "#f07178"
-    }
-  ],
-  [
-    CodeColor.attributeKey,
-    {
-      light: "#4078f2",
-      dark: "#c792ea"
-    }
-  ],
-  [
-    CodeColor.attributeValue,
-    {
-      light: "#50a14f",
-      dark: "#61afef"
-    }
-  ],
-  [
-    CodeColor.tagPunctuation,
-    {
-      light: "#383a42",
-      dark: "#abb2bf"
-    }
-  ],
-  [
-    CodeColor.constant,
-    {
-      light: "#986801",
-      dark: "#d19a66"
-    }
-  ],
-  [
-    CodeColor.property,
-    {
-      light: "#383a42",
-      dark: "#abb2bf"
-    }
-  ],
-  [
-    CodeColor.parameter,
-    {
-      light: "#383A42",
-      dark: "#abb2bf"
-    }
-  ],
-  [
-    CodeColor.selector,
-    {
-      light: "#e45649",
-      dark: "#e06c75"
-    }
-  ],
-  [
-    CodeColor.hexcode,
-    {
-      light: "#4078F2",
-      dark: "#56b6c2"
-    }
-  ]
-]);
+export const CODE_BACKGROUND_COLOR = "#222f3e";
+
+export const CODE_COLORS: Record<CodeColor, Color> = {
+  [CodeColor.normal]: "#e06c75",
+  [CodeColor.comment]: "#5c6370",
+  [CodeColor.punctuation]: "#abb2bf",
+  [CodeColor.keyword]: "#c678dd",
+  [CodeColor.operator]: "#56b6c2",
+  [CodeColor.function]: "#56b6c2",
+  [CodeColor.string]: "#98c379",
+  [CodeColor.number]: "#d19a66",
+  [CodeColor.class]: "#e5c07b",
+  [CodeColor.tag]: "#f07178",
+  [CodeColor.attributeKey]: "#c792ea",
+  [CodeColor.attributeValue]: "#61afef",
+  [CodeColor.tagPunctuation]: "#abb2bf",
+  [CodeColor.constant]: "#d19a66",
+  [CodeColor.property]: "#abb2bf",
+  [CodeColor.parameter]: "#abb2bf",
+  [CodeColor.selector]: "#e06c75",
+  [CodeColor.hexcode]: "#56b6c2"
+};

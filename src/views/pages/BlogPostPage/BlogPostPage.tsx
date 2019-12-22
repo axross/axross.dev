@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import BlogPost from "../../../entities/BlogPost";
+import { ThemedColor } from "../../../entities/ColorTheme";
 import Person from "../../../entities/Person";
 import LocaleSwitcher from "../../components/LocaleSwitcher";
 import PrettyMarkdown from "../../components/PrettyMarkdown";
-import BlogPostTimestamp from "./BlogPostTimestamp";
-import Text, { TextSize, TextColor } from "../../components/Text";
+import Text, { TextSize } from "../../components/Text";
 import TwoPaneView, { LeftPane, RightPane } from "../../components/TwoPaneView";
 import { MOBILE } from "../../constant/mediaquery";
 import {
@@ -15,6 +15,7 @@ import {
   LAPTOP_MAJOR_PADDING_SIZE,
   LAPTOP_PADDING_SIZE
 } from "../../constant/size";
+import BlogPostTimestamp from "./BlogPostTimestamp";
 import Profile from "./Profile";
 
 export interface Props {
@@ -40,7 +41,7 @@ export default function BlogPostPage({ myself, blogPost }: Props) {
         <Title>
           <Text
             size={TextSize.title}
-            color={TextColor.highlight}
+            color={ThemedColor.emphasizedForeground}
             bold
             maxLines={0}
           >

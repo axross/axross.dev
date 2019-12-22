@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import * as React from "react";
+import { ThemedColor } from "../../../entities/ColorTheme";
 import Person from "../../../entities/Person";
 import ExternalLink from "../../components/ExternalLink";
 import KeepLocaleLink from "../../components/KeepLocaleLink";
 import Text, { TextSize } from "../../components/Text";
-import Icon, { IconColor, IconName } from "../../components/Icon";
-import { DARK_MODE, MOBILE } from "../../constant/mediaquery";
+import Icon, { IconName } from "../../components/Icon";
+import { MOBILE } from "../../constant/mediaquery";
 import {
   MOBILE_MINOR_PADDING_SIZE,
   MOBILE_PADDING_SIZE,
@@ -43,7 +44,7 @@ export default function Profile({ person, ...props }: Props) {
           <LinkListItem key={item.name}>
             <LinkIcon
               name={ICON_NAMES.get(item.name)!}
-              fill={IconColor.secondary}
+              fill={ThemedColor.secondaryForeground}
             />
 
             <ExternalLink href={item.url.href}>
@@ -110,10 +111,6 @@ const Image = styled.img`
   ${MOBILE} {
     width: 48px;
     height: 48px;
-  }
-
-  ${DARK_MODE} {
-    filter: grayscale(25%);
   }
 `;
 

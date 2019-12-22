@@ -1,6 +1,6 @@
 import NextLink, { LinkProps } from "next/link";
 import * as React from "react";
-import { TextColor } from "./Text";
+import { ThemedColor } from "../../entities/ColorTheme";
 import TextThemeContext from "./TextThemeContext";
 
 export interface Props extends LinkProps {
@@ -25,7 +25,9 @@ export default function Link({
       >
         <TextThemeContext.Provider
           value={{
-            color: isHovered ? TextColor.primaryHighlight : TextColor.primary,
+            color: isHovered
+              ? ThemedColor.primaryForeground
+              : ThemedColor.primaryForeground,
             underline: isHovered
           }}
         >

@@ -1,6 +1,7 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import Text, { TextColor, TextSize } from "../../components/Text";
+import { ThemedColor } from "../../../entities/ColorTheme";
+import Text, { TextSize } from "../../components/Text";
 import LocaleContext from "../../contexts/LocaleContext";
 import TranslationContext from "../../contexts/TranslationContext";
 
@@ -20,7 +21,7 @@ export default function BlogPostTimestamp({
 
   return (
     <span {...props}>
-      <Text color={TextColor.secondary} size={TextSize.caption}>
+      <Text color={ThemedColor.secondaryForeground} size={TextSize.caption}>
         {new IntlMessageFormat(translation["blogPost.timestamp"]).format({
           createdAt: new Intl.DateTimeFormat(currentLocale).format(createdAt)
         })}

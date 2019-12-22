@@ -1,23 +1,23 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { DARK_MODE, MOBILE } from "../../constant/mediaquery";
-import {
-  BACKGROUND_COLORS,
-  BackgroundColor,
-  FOREGROUND_COLORS
-} from "../../constant/color";
+import ColorTheme, { ThemedColor } from "../../../entities/ColorTheme";
+import { MOBILE } from "../../constant/mediaquery";
 import { MOBILE_TEXT_SIZE, LAPTOP_TEXT_SIZE } from "../../constant/size";
-import { TextColor } from "../Text";
+import ColorThemeContext from "../ColorThemeContext";
 
 interface Props extends React.Attributes {}
 
 export default function InlineCode(props: Props) {
-  return <Root {...props} />;
+  const colorTheme = React.useContext(ColorThemeContext);
+
+  return <Root _colorTheme={colorTheme} {...props} />;
 }
 
-const Root = styled.code`
+const Root = styled.code<{ _colorTheme: ColorTheme }>`
   box-sizing: border-box;
-  background-color: ${BACKGROUND_COLORS.get(BackgroundColor.code)!.light};
+
+  background-color: ${({ _colorTheme }) =>
+    _colorTheme[ThemedColor.secondaryForeground]};
   margin-inline-start: -0.2em;
   margin-inline-end: -0.2em;
   padding-block-start: 0.2em;
@@ -26,7 +26,7 @@ const Root = styled.code`
   padding-inline-end: 0.2em;
   border-radius: 4px;
   line-height: 1.75;
-  color: ${FOREGROUND_COLORS.get(TextColor.normal)!.light};
+  color: ${({ _colorTheme }) => _colorTheme[ThemedColor.foreground]};
   font-size: ${LAPTOP_TEXT_SIZE}px;
   font-family: "Source Code Pro", monospace;
   font-weight: 500;
@@ -35,10 +35,5 @@ const Root = styled.code`
 
   ${MOBILE} {
     font-size: ${MOBILE_TEXT_SIZE}px;
-  }
-
-  ${DARK_MODE} {
-    background-color: ${BACKGROUND_COLORS.get(BackgroundColor.code)!.dark};
-    color: ${FOREGROUND_COLORS.get(TextColor.normal)!.dark};
   }
 `;
