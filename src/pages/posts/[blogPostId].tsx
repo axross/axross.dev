@@ -182,7 +182,7 @@ export default class extends React.Component<Props & GlobalPageProps, null> {
     return {
       availableLocales: Array.from(blogPosts.keys()),
       blogPostJSON: blogPost?.toJSON() ?? null,
-      myselfJSON: myself.toJSON(),
+      myselfJSON: myself.toJSON()
     };
   }
 }

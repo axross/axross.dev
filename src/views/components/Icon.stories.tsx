@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ForegroundColor } from "../constant/color";
+import { ThemedColor } from "../../entities/ColorTheme";
 import Icon, { IconName } from "./Icon";
 
 export default { title: "Icon" };
@@ -14,7 +14,7 @@ export const catalog = () => (
       return (
         <tr>
           <td>
-            <Icon name={name} fill={ForegroundColor.primary} />
+            <Icon name={name} fill={ThemedColor.primaryForeground} />
           </td>
           <td>{nameString}</td>
         </tr>

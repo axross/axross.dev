@@ -1,13 +1,14 @@
 import styled from "@emotion/styled";
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
+import { ThemedColor } from "../../../entities/ColorTheme";
 import BlogPost from "../../../entities/BlogPost";
 import { MOBILE } from "../../constant/mediaquery";
 import { MOBILE_PADDING_SIZE, LAPTOP_PADDING_SIZE } from "../../constant/size";
 import LocaleContext from "../../contexts/LocaleContext";
 import TranslationContext from "../../contexts/TranslationContext";
 import LinkKeepLocale from "../../components/KeepLocaleLink";
-import Text, { TextColor, TextSize } from "../../components/Text";
+import Text, { TextSize } from "../../components/Text";
 
 interface Props extends React.Attributes {
   blogPosts: BlogPost[];
@@ -32,7 +33,10 @@ export default function FirstNBlogPosts({ blogPosts, ...props }: Props) {
             </LinkKeepLocale>
           </Title>
 
-          <CreateDate color={TextColor.secondary} size={TextSize.caption}>
+          <CreateDate
+            color={ThemedColor.secondaryForeground}
+            size={TextSize.caption}
+          >
             {new IntlMessageFormat(translation["blogPost.written_at"]).format({
               createdAt: new Intl.DateTimeFormat(currentLocale).format(
                 blogPost.createdAt

@@ -1,6 +1,7 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import Text, { TextColor, TextSize } from "../../components/Text";
+import { ThemedColor } from "../../../entities/ColorTheme";
+import Text, { TextSize } from "../../components/Text";
 import TranslationContext from "../../contexts/TranslationContext";
 
 interface Props extends React.Attributes {
@@ -12,7 +13,12 @@ export default function FirstNBlogPostsHeading(props: Props) {
 
   return (
     <h2 {...props}>
-      <Text color={TextColor.highlight} size={TextSize.title} bold maxLines={0}>
+      <Text
+        color={ThemedColor.emphasizedForeground}
+        size={TextSize.title}
+        bold
+        maxLines={0}
+      >
         {new IntlMessageFormat(translation["recent_n_blog_posts"]).format()}
       </Text>
     </h2>

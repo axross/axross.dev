@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { FOREGROUND_COLORS, ForegroundColor } from "../../constant/color";
-import { DARK_MODE, MOBILE } from "../../constant/mediaquery";
+import ColorTheme, { ThemedColor } from "../../../entities/ColorTheme";
+import { MOBILE } from "../../constant/mediaquery";
 import {
   LAPTOP_SUBTITLE_SIZE,
   LAPTOP_SUBTITLE2_SIZE,
@@ -16,19 +16,21 @@ import {
 } from "../../constant/size";
 import mergeValues from "../../utility/mergeValues";
 import LazyCSS from "../LazyCSS";
-import { TextSize, TextColor } from "../Text";
+import { TextSize } from "../Text";
 import TextThemeContext, { TextTheme } from "../TextThemeContext";
+import ColorThemeContext from "../ColorThemeContext";
 
 interface Props extends React.Attributes {
-  color?: TextColor;
+  color?: ThemedColor;
   size?: TextSize;
   className?: string;
   children?: string;
 }
 
 export default function CodeText({ color, size, ...props }: Props) {
+  const colorTheme = React.useContext(ColorThemeContext);
   const textTheme: TextTheme = React.useContext(TextThemeContext) || {};
-  const _color = mergeValues(color, textTheme.color, ForegroundColor.normal);
+  const _color = mergeValues(color, textTheme.color, ThemedColor.foreground);
   const _size = mergeValues(size, textTheme.size, TextSize.body);
 
   return (
@@ -38,23 +40,23 @@ export default function CodeText({ color, size, ...props }: Props) {
         key="sourceCodeFont"
       />
 
-      <Root _color={_color} _size={_size} {...props} />
+      <Root _colorTheme={colorTheme} _color={_color} _size={_size} {...props} />
     </>
   );
 }
 
-const Root = styled.code<{ _color: TextColor; _size: TextSize }>`
+const Root = styled.code<{
+  _colorTheme: ColorTheme;
+  _color: ThemedColor;
+  _size: TextSize;
+}>`
   line-height: 1.75;
-  color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.light};
+  color: ${({ _colorTheme, _color }) => _colorTheme[_color]};
   font-family: "Source Code Pro", monospace;
   word-break: break-word;
   transition: font-size 150ms ease-in-out 0ms;
 
   ${({ _size }) => TEXT_SIZES[_size]}
-
-  ${DARK_MODE} {
-    color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.dark};
-  }
 `;
 
 const TEXT_SIZES = {

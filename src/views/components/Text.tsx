@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import TextThemeContext, { TextTheme } from "./TextThemeContext";
-import { FOREGROUND_COLORS, ForegroundColor } from "../constant/color";
-import { DARK_MODE, MOBILE } from "../constant/mediaquery";
+import ColorTheme, { ThemedColor } from "../../entities/ColorTheme";
+import { MOBILE } from "../constant/mediaquery";
 import {
   LAPTOP_SUBTITLE_SIZE,
   LAPTOP_SUBTITLE2_SIZE,
@@ -17,14 +17,13 @@ import {
 } from "../constant/size";
 import mergeValues from "../utility/mergeValues";
 import LazyCSS from "./LazyCSS";
-
-export { ForegroundColor as TextColor } from "../constant/color";
+import ColorThemeContext from "./ColorThemeContext";
 
 export interface Props extends React.Attributes {
   /**
    * You can use [[TextColor]] enum instead of a raw string value
    */
-  color?: ForegroundColor;
+  color?: ThemedColor;
   /**
    * You can use [[TextSize]] enum instead of a raw string value
    */
@@ -65,8 +64,9 @@ export default React.forwardRef<HTMLElement, Props>(
     },
     ref
   ) => {
+    const colorTheme = React.useContext(ColorThemeContext);
     const textTheme: TextTheme = React.useContext(TextThemeContext) || {};
-    const _color = mergeValues(color, textTheme.color, ForegroundColor.normal);
+    const _color = mergeValues(color, textTheme.color, ThemedColor.foreground);
     const _size = mergeValues(size, textTheme.size, TextSize.body);
     const _bold = mergeValues(bold, textTheme.bold, false);
     const _italic = mergeValues(italic, textTheme.italic, false);
@@ -101,6 +101,7 @@ export default React.forwardRef<HTMLElement, Props>(
           _maxLines={_maxLines}
           _alignment={_alignment}
           _selectable={_selectable}
+          _colorTheme={colorTheme}
           ref={ref}
           {...props}
         />
@@ -127,7 +128,7 @@ export enum TextAlignment {
 
 const Root = styled.span<{
   _size: TextSize;
-  _color: ForegroundColor;
+  _color: ThemedColor;
   _bold: boolean;
   _italic: boolean;
   _underline: boolean;
@@ -135,13 +136,14 @@ const Root = styled.span<{
   _maxLines: number;
   _alignment: TextAlignment;
   _selectable: boolean;
+  _colorTheme: ColorTheme;
 }>`
   margin: 0;
   margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
-  color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.light};
+  color: ${({ _color, _colorTheme }) => _colorTheme[_color]};
   font-family: "Open Sans", sans-serif;
   font-weight: ${({ _bold }) => (_bold ? "bold" : "normal")};
   font-style: ${({ _italic }) => (_italic ? "italic" : "normal")};
@@ -173,10 +175,6 @@ const Root = styled.span<{
     -webkit-line-clamp: ${_maxLines};
     overflow-y: hidden;
   `}
-
-  ${DARK_MODE} {
-    color: ${({ _color }) => FOREGROUND_COLORS.get(_color)!.dark};
-  }
 `;
 
 const TEXT_SIZES = {

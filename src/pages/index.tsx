@@ -153,7 +153,7 @@ export default class extends React.Component<Props & GlobalPageProps, null> {
 
     return {
       blogPostsJSON: blogPosts.map(blogPost => blogPost.toJSON()),
-      myselfJSON: myself.toJSON(),
+      myselfJSON: myself.toJSON()
     };
   }
 }

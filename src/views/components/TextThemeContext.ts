@@ -1,10 +1,11 @@
 import { createContext } from "react";
-import { TextAlignment, TextColor, TextSize } from "./Text";
+import { ThemedColor } from "../../entities/ColorTheme";
+import { TextAlignment, TextSize } from "./Text";
 
-export { TextAlignment, TextColor, TextSize } from "./Text";
+export { TextAlignment, TextSize } from "./Text";
 
 export interface TextTheme {
-  color?: TextColor;
+  color?: ThemedColor;
   size?: TextSize;
   bold?: boolean;
   italic?: boolean;

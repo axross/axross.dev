@@ -6,8 +6,8 @@ import {
   number
 } from "@storybook/addon-knobs";
 import * as React from "react";
+import { ThemedColor } from "../../entities/ColorTheme";
 import Text, { TextSize, TextAlignment } from "./Text";
-import { ForegroundColor } from "../constant/color";
 
 export default {
   title: "Text",
@@ -19,14 +19,14 @@ export const playground = () => (
     color={select(
       "color",
       {
-        normal: ForegroundColor.normal,
-        primary: ForegroundColor.primary,
-        primaryHighlight: ForegroundColor.primaryHighlight,
-        secondary: ForegroundColor.secondary,
-        secondaryHighlight: ForegroundColor.secondaryHighlight,
-        highlight: ForegroundColor.highlight
+        foreground: ThemedColor.foreground,
+        primaryForeground: ThemedColor.primaryForeground,
+        accentBackground: ThemedColor.accentBackground,
+        emphasizedForeground: ThemedColor.emphasizedForeground,
+        secondaryForeground: ThemedColor.secondaryForeground,
+        highlight: ThemedColor.whiteForeground
       },
-      ForegroundColor.normal
+      ThemedColor.foreground
     )}
     size={select(
       "size",

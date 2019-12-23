@@ -6,8 +6,6 @@ import NextDocument, {
   Main,
   NextScript
 } from "next/document";
-import GlobalStyle from "../views/components/GlobalStyle";
-import { FOREGROUND_COLORS, ForegroundColor } from "../views/constant/color";
 import { PRECONNECT_URLS } from "../settings";
 
 export default class Document extends NextDocument {
@@ -25,11 +23,6 @@ export default class Document extends NextDocument {
             type="image/png"
             href="/static/favicon.png"
             key="shortcutIcon"
-          />
-          <meta
-            name="theme-color"
-            content={FOREGROUND_COLORS.get(ForegroundColor.normal)!.light}
-            key="themeColor"
           />
           <script
             defer
@@ -50,17 +43,19 @@ export default class Document extends NextDocument {
             }}
           />
 
-          {Array.from(PRECONNECT_URLS).map((url) => 
-            <link rel="preconnect" href={url} key={`configured-preconnect:${url}`} />
-          )}
+          {Array.from(PRECONNECT_URLS).map(url => (
+            <link
+              rel="preconnect"
+              href={url}
+              key={`configured-preconnect:${url}`}
+            />
+          ))}
         </Head>
 
         <body>
           <Main />
 
           <NextScript />
-
-          <GlobalStyle />
         </body>
       </Html>
     );

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
+import { ThemedColor } from "../../../entities/ColorTheme";
 import { MOBILE } from "../../constant/mediaquery";
 import {
   MOBILE_PADDING_SIZE,
@@ -7,7 +8,7 @@ import {
   LAPTOP_PADDING_SIZE,
   LAPTOP_MAJOR_PADDING_SIZE
 } from "../../constant/size";
-import { TextColor, TextSize } from "../Text";
+import { TextSize } from "../Text";
 import TextThemeContext from "../TextThemeContext";
 
 interface Props extends React.Attributes {
@@ -40,7 +41,7 @@ export default function Heading({ level, children, ...props }: Props) {
     <Component {...props}>
       <TextThemeContext.Provider
         value={{
-          color: TextColor.highlight,
+          color: ThemedColor.emphasizedForeground,
           size: SIZES.get(level),
           bold: level !== 5
         }}

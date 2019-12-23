@@ -2,18 +2,17 @@ import styled from "@emotion/styled";
 import * as React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import {
+  CODE_BACKGROUND_COLOR,
+  CODE_COLORS,
+  CodeColor
+} from "../../constant/color";
+import {
   MOBILE_PADDING_SIZE,
   LAPTOP_PADDING_SIZE,
   LAPTOP_TEXT_SIZE,
   MOBILE_TEXT_SIZE
 } from "../../constant/size";
-import { MOBILE, DARK_MODE } from "../../constant/mediaquery";
-import {
-  BACKGROUND_COLORS,
-  BackgroundColor,
-  CODE_COLORS,
-  CodeColor
-} from "../../constant/color";
+import { MOBILE } from "../../constant/mediaquery";
 
 interface Props extends React.Attributes {
   language: string;
@@ -49,7 +48,7 @@ const Root = styled(SyntaxHighlighter)`
   padding-inline-start: ${LAPTOP_PADDING_SIZE}px;
   padding-inline-end: ${LAPTOP_PADDING_SIZE}px;
   border-radius: 8px;
-  background-color: ${BACKGROUND_COLORS.get(BackgroundColor.code)!.light};
+  background-color: ${CODE_BACKGROUND_COLOR};
   line-height: 1.333;
   overflow-x: scroll;
 
@@ -65,10 +64,6 @@ const Root = styled(SyntaxHighlighter)`
     padding-inline-start: 20px;
     padding-inline-end: 20px;
     border-radius: 0;
-  }
-
-  ${DARK_MODE} {
-    background-color: ${BACKGROUND_COLORS.get(BackgroundColor.code)!.dark};
   }
 
   &:first-child {
@@ -88,151 +83,82 @@ const Root = styled(SyntaxHighlighter)`
     padding-inline-start: 0;
     padding-inline-end: 0;
     border-radius: 0;
+    color: ${CODE_COLORS[CodeColor.normal]};
     font-size: calc(${LAPTOP_TEXT_SIZE}px * 0.9);
     font-family: "Source Code Pro", monospace;
     font-weight: 500;
-
-    color: ${CODE_COLORS.get(CodeColor.normal)!.light};
 
     ${MOBILE} {
       font-size: calc(${MOBILE_TEXT_SIZE}px * 0.9);
     }
 
-    ${DARK_MODE} {
-      color: ${CODE_COLORS.get(CodeColor.normal)!.dark};
-    }
-
     .token.comment {
-      color: ${CODE_COLORS.get(CodeColor.comment)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.comment)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.comment]};
     }
 
     .token.keyword {
-      color: ${CODE_COLORS.get(CodeColor.keyword)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.keyword)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.keyword]};
     }
 
     .token.operator {
-      color: ${CODE_COLORS.get(CodeColor.operator)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.operator)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.operator]};
     }
 
     .token.punctuation {
-      color: ${CODE_COLORS.get(CodeColor.punctuation)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.punctuation)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.punctuation]};
     }
 
     .token.function {
-      color: ${CODE_COLORS.get(CodeColor.function)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.function)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.function]};
     }
 
     .token.string,
     .token.attr-value {
-      color: ${CODE_COLORS.get(CodeColor.string)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.string)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.string]};
     }
 
     .token.number,
     .token.unit,
     .token.interpolation,
     .token.pseudo-element {
-      color: ${CODE_COLORS.get(CodeColor.number)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.number)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.number]};
     }
 
     .token.class-name,
     .token.maybe-class-name {
-      color: ${CODE_COLORS.get(CodeColor.class)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.class)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.class]};
     }
 
     .token.tag {
-      color: ${CODE_COLORS.get(CodeColor.tag)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.tag)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.tag]};
 
       .token.punctuation {
-        color: ${CODE_COLORS.get(CodeColor.tagPunctuation)!.light};
-
-        ${DARK_MODE} {
-          color: ${CODE_COLORS.get(CodeColor.tagPunctuation)!.dark};
-        }
+        color: ${CODE_COLORS[CodeColor.tagPunctuation]};
       }
     }
 
     .token.attr-name {
-      color: ${CODE_COLORS.get(CodeColor.attributeKey)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.attributeKey)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.attributeKey]};
     }
 
     .token.constant {
-      color: ${CODE_COLORS.get(CodeColor.constant)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.constant)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.constant]};
     }
 
     .token.parameter {
-      color: ${CODE_COLORS.get(CodeColor.parameter)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.parameter)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.parameter]};
     }
 
     .token.property {
-      color: ${CODE_COLORS.get(CodeColor.property)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.property)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.property]};
     }
 
     .token.selector {
-      color: ${CODE_COLORS.get(CodeColor.selector)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.selector)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.selector]};
     }
 
     .token.hexcode {
-      color: ${CODE_COLORS.get(CodeColor.hexcode)!.light};
-
-      ${DARK_MODE} {
-        color: ${CODE_COLORS.get(CodeColor.hexcode)!.dark};
-      }
+      color: ${CODE_COLORS[CodeColor.hexcode]};
     }
   }
 `;

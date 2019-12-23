@@ -11,7 +11,8 @@ import LocaleContext from "../contexts/LocaleContext";
 import SelfUrlContext from "../contexts/SelfUrlContext";
 import TranslationContext from "../contexts/TranslationContext";
 import Link from "./Link";
-import Text, { TextColor, TextSize } from "./Text";
+import Text, { TextSize } from "./Text";
+import { ThemedColor } from "../../entities/ColorTheme";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -32,7 +33,10 @@ export default function LocaleSwitcher(props: Props) {
 
         return locale === currentLocale ? (
           <Item key={locale}>
-            <Text color={TextColor.secondary} size={TextSize.caption}>
+            <Text
+              color={ThemedColor.secondaryForeground}
+              size={TextSize.caption}
+            >
               {new IntlMessageFormat(
                 translation[`language.${locale}`]
               ).format()}
