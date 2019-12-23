@@ -23,21 +23,19 @@ interface Props extends React.Attributes {
 export default function Profile({ person, ...props }: Props) {
   return (
     <Root {...props}>
-      <KeepLocaleLink href="/" as="/" passHref>
-        <Myself>
-          <Image
-            src="/static/profile.jpg"
-            alt={person.name}
-            {...{ loading: "lazy" }}
-          />
+      <Myself href="/" as="/" passHref>
+        <Image
+          src="/static/profile.jpg"
+          alt={person.name}
+          {...{ loading: "lazy" }}
+        />
 
-          <Name>
-            <Text size={TextSize.subtitle2} bold>
-              {person.name}
-            </Text>
-          </Name>
-        </Myself>
-      </KeepLocaleLink>
+        <Name>
+          <Text size={TextSize.subtitle2} bold>
+            {person.name}
+          </Text>
+        </Name>
+      </Myself>
 
       <LinkList>
         {person.socialLinks.map(item => (
@@ -70,7 +68,7 @@ const Root = styled.div`
   justify-items: center;
 `;
 
-const Myself = styled.a`
+const Myself = styled(KeepLocaleLink)`
   display: grid;
   grid-template-areas: "image" "name";
   row-gap: ${LAPTOP_MINOR_PADDING_SIZE}px;

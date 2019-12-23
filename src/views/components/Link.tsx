@@ -10,14 +10,18 @@ export interface Props extends LinkProps {
 export default function Link({
   href,
   as,
+  replace,
+  scroll,
+  shallow,
   passHref = true,
+  prefetch,
   children,
   ...props
 }: Props) {
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
-    <NextLink href={href} as={as} passHref={passHref}>
+    <NextLink {...{ href, as, replace, scroll, shallow, passHref, prefetch }}>
       <a
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
