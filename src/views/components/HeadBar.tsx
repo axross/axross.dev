@@ -33,8 +33,10 @@ const Root = styled.header`
 
 const _LogoLink = styled(Link)`
   grid-area: logo;
-  padding-block: 20px;
-  padding-inline: 20px;
+  padding-block-start: 20px;
+  padding-block-end: 20px;
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
 `;
 
 const _Logo = styled(Logo)`

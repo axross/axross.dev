@@ -52,8 +52,10 @@ const Root = styled.div`
     "profile . . ."
     "profile . blog-post-list .";
   max-width: 1080px;
-  margin-inline: auto;
-  padding-block: 80px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  padding-block-start: 80px;
+  padding-block-end: 80px;
 
   ${MOBILE} {
     grid-template-columns: 20px calc(100% - 20px - 20px) 20px;

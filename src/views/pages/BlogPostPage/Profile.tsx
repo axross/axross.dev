@@ -69,10 +69,14 @@ const Myself = styled(KeepLocaleLink)`
   grid-template-areas: "image" "name";
   row-gap: 12px;
   justify-items: center;
-  margin-block: -12px;
-  margin-inline: -12px;
-  padding-block: 12px;
-  padding-inline: 12px;
+  margin-block-start: -12px;
+  margin-block-end: -12px;
+  margin-inline-start: -12px;
+  margin-inline-end: -12px;
+  padding-block-start: 12px;
+  padding-block-end: 12px;
+  padding-inline-start: 12px;
+  padding-inline-end: 12px;
 `;
 
 const Image = styled.img`

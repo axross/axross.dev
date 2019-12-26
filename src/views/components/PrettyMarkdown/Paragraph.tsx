@@ -11,10 +11,12 @@ export default function Paragraph(props: Props) {
 const Root = styled.p`
   box-sizing: border-box;
   display: block;
-  margin-block: 32px;
+  margin-block-start: 32px;
+  margin-block-end: 32px;
 
   ${MOBILE} {
-    margin-block: 24px;
+    margin-block-start: 24px;
+    margin-block-end: 24px;
   }
 
   &:first-child {

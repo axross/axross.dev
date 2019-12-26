@@ -13,11 +13,13 @@ export default function OrderedList(props: Props) {
 const Root = styled.ol`
   box-sizing: border-box;
   display: block;
-  margin-block: 32px;
+  margin-block-start: 32px;
+  margin-block-end: 32px;
   padding-inline-start: 36px;
 
   ${MOBILE} {
-    margin-block: 24px;
+    margin-block-start: 24px;
+    margin-block-end: 24px;
   }
 
   &:first-child {
@@ -30,10 +32,12 @@ const Root = styled.ol`
 
   li {
     display: list-item;
-    margin-block: 12px;
+    margin-block-start: 12px;
+    margin-block-end: 12px;
 
     ${MOBILE} {
-      margin-block: 8px;
+      margin-block-start: 8px;
+      margin-block-end: 8px;
     }
 
     &:first-of-type {
@@ -55,7 +59,8 @@ const Root = styled.ol`
       margin-block-start: 12px;
 
       ${MOBILE} {
-        margin-block: 8px;
+        margin-block-start: 8px;
+        margin-block-end: 8px;
       }
     }
   }
