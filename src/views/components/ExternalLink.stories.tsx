@@ -6,8 +6,6 @@ export default { title: "ExternalLink" };
 
 export const text = () => (
   <ExternalLink href="https://google.com">
-    <Text>
-      This text is link.
-    </Text>
+    <Text>This text is link.</Text>
   </ExternalLink>
 );

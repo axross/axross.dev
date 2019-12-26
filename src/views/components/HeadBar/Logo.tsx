@@ -1,16 +1,16 @@
-import styled from '@emotion/styled';
-import * as React from 'react';
-import { ThemedColor } from '../../../entities/ColorTheme';
-import Text from '../Text';
+import styled from "@emotion/styled";
+import * as React from "react";
+import { ThemedColor } from "../../../entities/ColorTheme";
+import Text from "../Text";
 
 export default function Logo() {
-  return <Root>
-    <Image />
+  return (
+    <Root>
+      <Image />
 
-    <Text color={ThemedColor.emphasizedForeground}>
-      axross.dev
-    </Text>
-  </Root>;
+      <Text color={ThemedColor.emphasizedForeground}>axross.dev</Text>
+    </Root>
+  );
 }
 
 const Root = styled.h1`

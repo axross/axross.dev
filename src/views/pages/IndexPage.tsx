@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import * as React from "react";
 import BlogPost from "../../entities/BlogPost";
 import Person from "../../entities/Person";
-import HeadBar from '../components/HeadBar';
+import HeadBar from "../components/HeadBar";
 import LocaleSwitcher from "../components/LocaleSwitcher";
 import PrettyMarkdown from "../components/PrettyMarkdown";
 import Profile from "./BlogPostPage/Profile";
@@ -42,14 +42,15 @@ const Root = styled.div`
   display: grid;
   grid-template-columns: 320px 64px calc(100% - 320px - 64px - 64px) 64px;
   grid-template-rows: auto auto 32px auto 64px auto 32px auto;
-  grid-template-areas: "profile . locale-switcher ."
-                       "profile . whoami-heading ."
-                       "profile . . ."
-                       "profile . whoami ."
-                       "profile . . ."
-                       "profile . blog-post-list-heading ."
-                       "profile . . ."
-                       "profile . blog-post-list .";
+  grid-template-areas:
+    "profile . locale-switcher ."
+    "profile . whoami-heading ."
+    "profile . . ."
+    "profile . whoami ."
+    "profile . . ."
+    "profile . blog-post-list-heading ."
+    "profile . . ."
+    "profile . blog-post-list .";
   max-width: 1080px;
   margin-inline: auto;
   padding-block: 80px;

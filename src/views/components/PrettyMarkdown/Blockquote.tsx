@@ -5,7 +5,6 @@ import { MOBILE } from "../../constant/mediaQuery";
 import ColorThemeContext from "../ColorThemeContext";
 import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
 
-
 interface Props extends React.Attributes {
   value: string;
   children?: React.ReactNode;
@@ -32,7 +31,8 @@ const Root = styled.blockquote<{ _colorTheme: ColorTheme }>`
   padding-block: 32px;
   padding-inline: 32px;
   border-radius: 8px;
-  background-color: ${({ _colorTheme }) => _colorTheme[ThemedColor.accentBackground]};
+  background-color: ${({ _colorTheme }) =>
+    _colorTheme[ThemedColor.accentBackground]};
   line-height: 1.333;
   overflow-x: scroll;
 

@@ -20,7 +20,11 @@ export default function BlogPostTimestamp({
   const translation = React.useContext(TranslationContext);
 
   return (
-    <Text color={ThemedColor.secondaryForeground} type={TextType.label} {...props}>
+    <Text
+      color={ThemedColor.secondaryForeground}
+      type={TextType.label}
+      {...props}
+    >
       {new IntlMessageFormat(translation["blogPost.timestamp"]).format({
         createdAt: new Intl.DateTimeFormat(currentLocale).format(createdAt)
       })}

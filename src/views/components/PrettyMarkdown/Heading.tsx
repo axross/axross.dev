@@ -37,7 +37,7 @@ export default function Heading({ level, children, ...props }: Props) {
       <MarkdownTextThemeContext.Provider
         value={{
           color: ThemedColor.emphasizedForeground,
-          type: TYPES[level],
+          type: TYPES[level]
         }}
       >
         {children}
@@ -52,7 +52,7 @@ const TYPES: Record<number, TextType> = {
   3: TextType.heading3,
   4: TextType.heading4,
   5: TextType.heading5,
-  6: TextType.heading6,
+  6: TextType.heading6
 };
 
 const H1 = styled.h1`

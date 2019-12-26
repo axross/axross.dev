@@ -18,7 +18,7 @@ export default function ExternalLink({ children, ...props }: Props) {
       <TextThemeContext.Provider
         value={{
           isLink: true,
-          isLinkHovered: isHovered,
+          isLinkHovered: isHovered
         }}
       >
         {children}

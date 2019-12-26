@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
-import * as React from 'react';
+import * as React from "react";
 import BlogPost from "../../../entities/BlogPost";
 import Person from "../../../entities/Person";
 import LocaleSwitcher from "../../components/LocaleSwitcher";
 import PrettyMarkdown from "../../components/PrettyMarkdown";
 import BlogPostTimestamp from "./BlogPostTimestamp";
-import BlogPostTitle from './BlogPostTitle';
+import BlogPostTitle from "./BlogPostTitle";
 import Profile from "./Profile";
 
 interface Props extends React.Attributes {
@@ -14,28 +14,29 @@ interface Props extends React.Attributes {
   className?: string;
 }
 
-export default function TwoPaneLayout({ person, blogPost, ...props}: Props) {
-  return <Root {...props}>
-    <LeftPane>
-      <Profile person={person} />
-    </LeftPane>
+export default function TwoPaneLayout({ person, blogPost, ...props }: Props) {
+  return (
+    <Root {...props}>
+      <LeftPane>
+        <Profile person={person} />
+      </LeftPane>
 
-    <RightPane >
-      <LocaleSwitcher />
+      <RightPane>
+        <LocaleSwitcher />
 
-      <article>
-        <BlogPostTimestamp createdAt={blogPost.createdAt} lastModifiedAt={blogPost.createdAt} />
+        <article>
+          <BlogPostTimestamp
+            createdAt={blogPost.createdAt}
+            lastModifiedAt={blogPost.createdAt}
+          />
 
-        <_BlogPostTitle>
-          {blogPost.title}
-        </_BlogPostTitle>
+          <_BlogPostTitle>{blogPost.title}</_BlogPostTitle>
 
-        <PrettyMarkdown>
-          {blogPost.body}
-        </PrettyMarkdown>
-      </article>
-    </RightPane>
-  </Root>
+          <PrettyMarkdown>{blogPost.body}</PrettyMarkdown>
+        </article>
+      </RightPane>
+    </Root>
+  );
 }
 
 const Root = styled.div`

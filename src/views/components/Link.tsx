@@ -29,7 +29,7 @@ export default function Link({
         <TextThemeContext.Provider
           value={{
             isLink: true,
-            isLinkHovered: isHovered,
+            isLinkHovered: isHovered
           }}
         >
           {children}

@@ -28,10 +28,7 @@ export default function LocaleSwitcher(props: Props) {
 
         return locale === currentLocale ? (
           <Item key={locale}>
-            <Text
-              color={ThemedColor.secondaryForeground}
-              type={TextType.label}
-            >
+            <Text color={ThemedColor.secondaryForeground} type={TextType.label}>
               {new IntlMessageFormat(
                 translation[`language.${locale}`]
               ).format()}

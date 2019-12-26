@@ -44,7 +44,7 @@ interface State {
 
 export default class App extends NextApp<Props, State> {
   public state = {
-    isDarkMode: false,
+    isDarkMode: false
   };
 
   private colorScehemeMediaQuery?: MediaQueryList;
@@ -57,10 +57,13 @@ export default class App extends NextApp<Props, State> {
     this.colorScehemeMediaQueryListener = e => {
       this.setState({ isDarkMode: e.matches });
     };
-    this.colorScehemeMediaQuery.addEventListener("change", this.colorScehemeMediaQueryListener);
+    this.colorScehemeMediaQuery.addEventListener(
+      "change",
+      this.colorScehemeMediaQueryListener
+    );
 
     this.setState({
-      isDarkMode: this.colorScehemeMediaQuery.matches,
+      isDarkMode: this.colorScehemeMediaQuery.matches
     });
   }
 

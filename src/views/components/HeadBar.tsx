@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
-import * as React from 'react';
-import Logo from './HeadBar/Logo';
-import LocaleSwitcher from './LocaleSwitcher';
+import * as React from "react";
+import Logo from "./HeadBar/Logo";
+import LocaleSwitcher from "./LocaleSwitcher";
 import Link from "./Link";
 
 export interface Props extends React.Attributes {
@@ -9,16 +9,17 @@ export interface Props extends React.Attributes {
 }
 
 export default function HeadBar(props: Props) {
-  return <Root {...props}>
-    <_LogoLink href="/">
-      <_Logo />
-    </_LogoLink>
+  return (
+    <Root {...props}>
+      <_LogoLink href="/">
+        <_Logo />
+      </_LogoLink>
 
-    <_Locales>
-      <LocaleSwitcher />
-    </_Locales>
-
-  </Root>;
+      <_Locales>
+        <LocaleSwitcher />
+      </_Locales>
+    </Root>
+  );
 }
 
 const Root = styled.header`
@@ -38,7 +39,7 @@ const _LogoLink = styled(Link)`
 
 const _Logo = styled(Logo)`
   vertical-align: top;
-`
+`;
 
 const _Locales = styled.nav`
   grid-area: locales;

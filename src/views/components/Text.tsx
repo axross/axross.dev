@@ -24,21 +24,16 @@ export interface Props extends React.Attributes {
  * A fundamental text component. Every text in this repository should be made of this component.
  */
 export default React.forwardRef<HTMLElement, Props>(
-  (
-    {
-      color,
-      type,
-      maxLines,
-      alignment,
-      ...props
-    },
-    ref
-  ) => {
+  ({ color, type, maxLines, alignment, ...props }, ref) => {
     const colorTheme = React.useContext(ColorThemeContext);
     const theme: TextTheme = React.useContext(TextThemeContext) || {};
     const isLink = theme.isLink ?? false;
     const isLinkHovered = theme.isLinkHovered ?? false;
-    const _color = mergeValues(color, theme.color, isLink ? ThemedColor.primaryForeground : ThemedColor.foreground);
+    const _color = mergeValues(
+      color,
+      theme.color,
+      isLink ? ThemedColor.primaryForeground : ThemedColor.foreground
+    );
     const _type = mergeValues(type, theme.type, TextType.body);
     const _maxLines = mergeValues(maxLines, theme.maxLines, 0);
     const _alignment = mergeValues(
@@ -46,7 +41,6 @@ export default React.forwardRef<HTMLElement, Props>(
       theme.alignment,
       TextAlignment.default
     );
-    
 
     return (
       <>
@@ -75,7 +69,7 @@ export enum TextType {
   body,
   subtitle,
   label,
-  logo,
+  logo
 }
 
 export enum TextAlignment {
@@ -102,7 +96,8 @@ const Root = styled.span<{
   color: ${({ _color, _colorTheme }) => _colorTheme[_color]};
   font-family: "Open Sans", sans-serif;
   text-align: ${({ _alignment }) => _alignment};
-  text-decoration: ${({ _link, _linkHovered }) => _link && _linkHovered ? "underline": "none"};
+  text-decoration: ${({ _link, _linkHovered }) =>
+    _link && _linkHovered ? "underline" : "none"};
   word-break: break-word;
   transition: color 150ms ease-in-out 0ms, font-size 150ms ease-in-out 0ms,
     font-weight 150ms ease-in-out 0ms, text-decoration 150ms ease-in-out 0ms;
@@ -159,5 +154,5 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
     ${MOBILE} {
       font-size: 22px;
     }
-  `,
-}
+  `
+};
