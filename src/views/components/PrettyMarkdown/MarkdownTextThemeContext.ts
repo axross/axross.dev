@@ -11,6 +11,8 @@ export interface MarkdownTextTheme {
   isEmphasized?: boolean;
   isDeleted?: boolean;
   isCode?: boolean;
+  isLink?: boolean;
+  isLinkHovered?: boolean;
 }
 
 export default createContext<MarkdownTextTheme>({});

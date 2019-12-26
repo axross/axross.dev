@@ -20,7 +20,9 @@ export interface Props extends React.Attributes {
 export default function MarkdownText({ ...props }) {
   const theme: MarkdownTextTheme =
     React.useContext(MarkdownTextThemeContext) || {};
-  const color = theme.color ?? ThemedColor.foreground;
+  const isLink = theme.isLink ?? false;
+  const isLinkHovered = theme.isLinkHovered ?? false;
+  const color = theme.color ?? (isLink ? ThemedColor.primaryForeground : ThemedColor.foreground);
   const type = theme.type ?? TextType.paragraph;
   const isStrong = theme.isStrong ?? false;
   const isEmphasized = theme.isEmphasized ?? false;
@@ -48,6 +50,8 @@ export default function MarkdownText({ ...props }) {
         _emphasized={isEmphasized}
         _deleted={isDeleted}
         _code={isCode}
+        _link={isLink}
+        _linkHovered={isLinkHovered}
         {...props}
       />
     </>
@@ -71,6 +75,8 @@ const Root = styled.span<{
   _emphasized: boolean;
   _deleted: boolean;
   _code: boolean;
+  _link: boolean;
+  _linkHovered: boolean;
 }>`
   margin: 0;
   margin-block-start: 0;
@@ -82,7 +88,19 @@ const Root = styled.span<{
     _code ? '"Source Code Pro", monospace' : '"Open Sans", sans-serif'};
   font-weight: ${({ _strong }) => (_strong ? "bold" : "regular")};
   font-style: ${({ _emphasized }) => (_emphasized ? "italic" : "normal")};
-  text-decoration: ${({ _deleted }) => (_deleted ? "line-through" : "none")};
+  text-decoration: ${({ _deleted, _link, _linkHovered }) => {
+    let decoration = "";
+
+    if (_deleted) {
+      decoration += "line-through";
+    }
+
+    if (_link && _linkHovered) {
+      decoration += " underline";
+    }
+
+    return decoration === "" ? "none" : decoration;
+  }};
   word-break: break-word;
   transition: color 150ms ease-in-out 0ms, font-size 150ms ease-in-out 0ms,
     font-weight 150ms ease-in-out 0ms, text-decoration 150ms ease-in-out 0ms;
