@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { ThemedColor } from "../../../entities/ColorTheme";
 import Person from "../../../entities/Person";
 import ExternalLink from "../../components/ExternalLink";
 import KeepLocaleLink from "../../components/KeepLocaleLink";
 import Text, { TextType } from "../../components/Text";
 import Icon, { IconName } from "../../components/Icon";
+import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {
   person: Person;

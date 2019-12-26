@@ -1,7 +1,8 @@
-import Color from "../../entities/Color";
-import ColorTheme, { ThemedColor } from "../../entities/ColorTheme";
+import ThemedColor from "../types/ThemedColor";
 
-export const LIGHT: ColorTheme = {
+type ColorTheme = Record<ThemedColor, string>;
+
+export const LIGHT_COLOR: ColorTheme = {
   [ThemedColor.foreground]: "#222f3e",
   [ThemedColor.emphasizedForeground]: "#11181f",
   [ThemedColor.secondaryForeground]: "#8395a7",
@@ -12,7 +13,7 @@ export const LIGHT: ColorTheme = {
   [ThemedColor.accentBackground]: "#FFF2D5"
 };
 
-export const DARK: ColorTheme = {
+export const DARK_COLOR: ColorTheme = {
   [ThemedColor.foreground]: "#eee7e0",
   [ThemedColor.emphasizedForeground]: "#ffffff",
   [ThemedColor.secondaryForeground]: "#8395a7",
@@ -46,7 +47,7 @@ export enum CodeColor {
 
 export const CODE_BACKGROUND_COLOR = "#222f3e";
 
-export const CODE_COLORS: Record<CodeColor, Color> = {
+export const CODE_COLORS: Record<CodeColor, string> = {
   [CodeColor.normal]: "#e06c75",
   [CodeColor.comment]: "#5c6370",
   [CodeColor.punctuation]: "#abb2bf",

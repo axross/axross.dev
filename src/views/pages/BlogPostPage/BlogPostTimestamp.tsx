@@ -1,9 +1,9 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import { ThemedColor } from "../../../entities/ColorTheme";
 import Text, { TextType } from "../../components/Text";
 import LocaleContext from "../../contexts/LocaleContext";
 import TranslationContext from "../../contexts/TranslationContext";
+import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {
   createdAt: Date;

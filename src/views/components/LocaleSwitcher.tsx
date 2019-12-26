@@ -5,9 +5,9 @@ import * as React from "react";
 import LocaleContext from "../contexts/LocaleContext";
 import SelfUrlContext from "../contexts/SelfUrlContext";
 import TranslationContext from "../contexts/TranslationContext";
+import ThemedColor from "../types/ThemedColor";
 import Link from "./Link";
 import Text, { TextType } from "./Text";
-import { ThemedColor } from "../../entities/ColorTheme";
 
 interface Props extends React.Attributes {
   className?: string;

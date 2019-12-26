@@ -1,10 +1,4 @@
-import Color from "./Color";
-
-type ColorTheme = Record<ThemedColor, Color>;
-
-export default ColorTheme;
-
-export enum ThemedColor {
+enum ThemedColor {
   foreground,
   emphasizedForeground,
   secondaryForeground,
@@ -14,3 +8,5 @@ export enum ThemedColor {
   background,
   accentBackground
 }
+
+export default ThemedColor;

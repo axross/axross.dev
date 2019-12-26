@@ -1,6 +1,6 @@
 import { withKnobs, text, select, number } from "@storybook/addon-knobs";
 import * as React from "react";
-import { ThemedColor } from "../../entities/ColorTheme";
+import ThemedColor from "../types/ThemedColor";
 import Text, { TextType, TextAlignment } from "./Text";
 
 export default {

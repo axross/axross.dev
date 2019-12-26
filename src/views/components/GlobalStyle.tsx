@@ -1,18 +1,26 @@
 import { css, Global } from "@emotion/core";
 import * as React from "react";
-import { ThemedColor } from "../../entities/ColorTheme";
-import ColorThemeContext from "./ColorThemeContext";
+import { DARK_COLOR, LIGHT_COLOR } from "../constant/color";
+import { DARK_MODE } from "../constant/mediaQuery";
+import ThemedColor from "../types/ThemedColor";
 
 export default function GlobalStyle() {
-  const colorTheme = React.useContext(ColorThemeContext);
   const GLOBAL_STYLE = css`
     html {
-      background-color: ${colorTheme[ThemedColor.background]};
+      background-color: ${LIGHT_COLOR[ThemedColor.background]};
+
+      ${DARK_MODE} {
+        background-color: ${DARK_COLOR[ThemedColor.background]};
+      }
     }
 
     body {
       margin: 0;
-      color: ${colorTheme[ThemedColor.foreground]};
+      color: ${LIGHT_COLOR[ThemedColor.foreground]};
+
+      ${DARK_MODE} {
+        color: ${DARK_COLOR[ThemedColor.foreground]};
+      }
     }
 
     h1,

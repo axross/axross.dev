@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import ColorTheme, { ThemedColor } from "../../entities/ColorTheme";
-import ColorThemeContext from "./ColorThemeContext";
+import { DARK_MODE } from "../constant/mediaQuery";
+import { DARK_COLOR, LIGHT_COLOR } from "../constant/color";
+import ThemedColor from "../types/ThemedColor";
 
 interface IconProps extends React.Attributes {
   name: IconName;
@@ -17,13 +18,10 @@ export enum IconName {
 }
 
 export default function Icon({ name, fill, ...props }: IconProps) {
-  const colorTheme = React.useContext(ColorThemeContext);
-
   return (
     <Root
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      _colorTheme={colorTheme}
       _color={fill}
       {...props}
     >
@@ -32,9 +30,13 @@ export default function Icon({ name, fill, ...props }: IconProps) {
   );
 }
 
-const Root = styled.svg<{ _colorTheme: ColorTheme; _color: ThemedColor }>`
+const Root = styled.svg<{ _color: ThemedColor }>`
   & path {
-    fill: ${({ _colorTheme, _color }) => _colorTheme[_color]};
+    fill: ${({ _color }) => LIGHT_COLOR[_color]};
+
+    ${DARK_MODE} {
+      fill: ${({ _color }) => DARK_COLOR[_color]};
+    }
   }
 `;
 
