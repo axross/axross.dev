@@ -161,7 +161,7 @@ export default class extends React.Component<Props & GlobalPageProps, null> {
           </script>
         </Head>
 
-        <BlogPostPage myself={myself} blogPost={blogPost} />
+        <BlogPostPage person={myself} blogPost={blogPost} />
       </>
     );
   }

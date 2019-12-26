@@ -6,12 +6,13 @@
   "scripts": {
     "test": "jest",
     "dev": "next dev",
-    "storybook": "start-storybook",
+    "storybook": "start-storybook -s ./public",
     "build": "next build"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
+    "@juggle/resize-observer": "^3.0.0-0",
     "contentful": "^7.8.2",
     "intl-messageformat": "^5.4.3",
     "next": "^9.1.4",

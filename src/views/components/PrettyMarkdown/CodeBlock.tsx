@@ -6,13 +6,7 @@ import {
   CODE_COLORS,
   CodeColor
 } from "../../constant/color";
-import {
-  MOBILE_PADDING_SIZE,
-  LAPTOP_PADDING_SIZE,
-  LAPTOP_TEXT_SIZE,
-  MOBILE_TEXT_SIZE
-} from "../../constant/size";
-import { MOBILE } from "../../constant/mediaquery";
+import { MOBILE } from "../../constant/mediaQuery";
 
 interface Props extends React.Attributes {
   language: string;
@@ -37,16 +31,11 @@ export default function Paragraph({ language, value, ...props }: Props) {
 
 const Root = styled(SyntaxHighlighter)`
   box-sizing: border-box;
-  max-width: calc(100% + ${LAPTOP_PADDING_SIZE}px * 2);
-  width: calc(100% + ${LAPTOP_PADDING_SIZE}px * 2);
-  margin-block-start: ${LAPTOP_PADDING_SIZE}px;
-  margin-block-end: ${LAPTOP_PADDING_SIZE}px;
-  margin-inline-start: calc(-1 * ${LAPTOP_PADDING_SIZE}px);
-  margin-inline-end: calc(-1 * ${LAPTOP_PADDING_SIZE}px);
-  padding-block-start: ${LAPTOP_PADDING_SIZE}px;
-  padding-block-end: ${LAPTOP_PADDING_SIZE}px;
-  padding-inline-start: ${LAPTOP_PADDING_SIZE}px;
-  padding-inline-end: ${LAPTOP_PADDING_SIZE}px;
+  max-width: calc(100% + 32px * 2);
+  width: calc(100% + 32px * 2);
+  margin-block: 32px;
+  margin-inline: -32px;
+  padding-block: 32px;
   border-radius: 8px;
   background-color: ${CODE_BACKGROUND_COLOR};
   line-height: 1.333;
@@ -55,14 +44,9 @@ const Root = styled(SyntaxHighlighter)`
   ${MOBILE} {
     max-width: calc(100% + 20px * 2);
     width: calc(100% + 20px * 2);
-    margin-block-start: ${MOBILE_PADDING_SIZE}px;
-    margin-block-end: ${MOBILE_PADDING_SIZE}px;
-    margin-inline-start: -20px;
-    margin-inline-end: -20px;
-    padding-block-start: ${MOBILE_PADDING_SIZE}px;
-    padding-block-end: ${MOBILE_PADDING_SIZE}px;
-    padding-inline-start: 20px;
-    padding-inline-end: 20px;
+    margin-block: 24px;
+    margin-inline: -20px;
+    padding-block: 24px;
     border-radius: 0;
   }
 
@@ -80,16 +64,16 @@ const Root = styled(SyntaxHighlighter)`
     margin-inline-end: 0;
     padding-block-start: 0;
     padding-block-end: 0;
-    padding-inline-start: 0;
-    padding-inline-end: 0;
+    padding-inline: 32px;
     border-radius: 0;
     color: ${CODE_COLORS[CodeColor.normal]};
-    font-size: calc(${LAPTOP_TEXT_SIZE}px * 0.9);
+    font-size: 16px;
     font-family: "Source Code Pro", monospace;
     font-weight: 500;
 
     ${MOBILE} {
-      font-size: calc(${MOBILE_TEXT_SIZE}px * 0.9);
+      padding-inline: 24px;
+      font-size: 14px;
     }
 
     .token.comment {

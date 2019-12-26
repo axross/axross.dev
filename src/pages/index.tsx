@@ -137,7 +137,7 @@ export default class extends React.Component<Props & GlobalPageProps, null> {
           </script>
         </Head>
 
-        <IndexPage myself={myself} blogPosts={blogPosts} />
+        <IndexPage person={myself} blogPosts={blogPosts} />
       </>
     );
   }

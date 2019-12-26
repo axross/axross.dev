@@ -1,12 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import {
-  MOBILE_MINOR_PADDING_SIZE,
-  MOBILE_PADDING_SIZE,
-  LAPTOP_MINOR_PADDING_SIZE,
-  LAPTOP_PADDING_SIZE
-} from "../../constant/size";
-import { MOBILE } from "../../constant/mediaquery";
+import { MOBILE } from "../../constant/mediaQuery";
 
 interface Props extends React.Attributes {
   children: React.ReactNode;
@@ -19,13 +13,11 @@ export default function UnorderedList(props: Props) {
 const Root = styled.ul`
   box-sizing: border-box;
   display: block;
-  margin-block-start: ${LAPTOP_PADDING_SIZE}px;
-  margin-block-end: ${LAPTOP_PADDING_SIZE}px;
+  margin-block: 32px;
   padding-inline-start: 36px;
 
   ${MOBILE} {
-    margin-block-start: ${MOBILE_PADDING_SIZE}px;
-    margin-block-end: ${MOBILE_PADDING_SIZE}px;
+    margin-block: 24px;
   }
 
   &:first-child {
@@ -38,12 +30,10 @@ const Root = styled.ul`
 
   li {
     display: list-item;
-    margin-block-start: ${LAPTOP_MINOR_PADDING_SIZE}px;
-    margin-block-end: ${LAPTOP_MINOR_PADDING_SIZE}px;
+    margin-block: 12px;
 
     ${MOBILE} {
-      margin-block-start: ${MOBILE_MINOR_PADDING_SIZE}px;
-      margin-block-end: ${MOBILE_MINOR_PADDING_SIZE}px;
+      margin-block: 8px;
     }
 
     &:first-of-type {
@@ -62,10 +52,10 @@ const Root = styled.ul`
     & > p + ol,
     & > span + ul,
     & > span + ol {
-      margin-block-start: ${LAPTOP_MINOR_PADDING_SIZE}px;
+      margin-block-start: 12px;
 
       ${MOBILE} {
-        margin-block-start: ${MOBILE_MINOR_PADDING_SIZE}px;
+        margin-block-start: 8px;
       }
     }
   }

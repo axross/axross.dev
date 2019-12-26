@@ -48,25 +48,29 @@ export default class App extends NextApp<Props, State> {
   };
 
   private colorScehemeMediaQuery?: MediaQueryList;
-  private listener?: (e: MediaQueryListEvent) => void;
+  private colorScehemeMediaQueryListener?: (e: MediaQueryListEvent) => void;
 
   componentDidMount() {
     this.colorScehemeMediaQuery = window.matchMedia(
       "(prefers-color-scheme: dark)"
     );
-    this.listener = e => {
+    this.colorScehemeMediaQueryListener = e => {
       this.setState({ isDarkMode: e.matches });
     };
+    this.colorScehemeMediaQuery.addEventListener(
+      "change",
+      this.colorScehemeMediaQueryListener
+    );
 
-    this.colorScehemeMediaQuery.addEventListener("change", this.listener);
-
-    this.setState({ isDarkMode: this.colorScehemeMediaQuery.matches });
+    this.setState({
+      isDarkMode: this.colorScehemeMediaQuery.matches
+    });
   }
 
   componentWillUnmount() {
     this.colorScehemeMediaQuery?.removeEventListener(
       "change",
-      this.listener ?? (() => {})
+      this.colorScehemeMediaQueryListener ?? (() => {})
     );
   }
 

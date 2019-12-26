@@ -1,18 +1,13 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { ThemedColor } from "../../../entities/ColorTheme";
-import { MOBILE } from "../../constant/mediaquery";
-import {
-  MOBILE_PADDING_SIZE,
-  MOBILE_MAJOR_PADDING_SIZE,
-  LAPTOP_PADDING_SIZE,
-  LAPTOP_MAJOR_PADDING_SIZE
-} from "../../constant/size";
-import { TextSize } from "../Text";
-import TextThemeContext from "../TextThemeContext";
+import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
+import { TextType } from "./MarkdownText";
+import { MOBILE } from "../../constant/mediaQuery";
 
 interface Props extends React.Attributes {
   level: number;
+  className?: string;
   children: React.ReactNode;
 }
 
@@ -39,36 +34,35 @@ export default function Heading({ level, children, ...props }: Props) {
 
   return (
     <Component {...props}>
-      <TextThemeContext.Provider
+      <MarkdownTextThemeContext.Provider
         value={{
           color: ThemedColor.emphasizedForeground,
-          size: SIZES.get(level),
-          bold: level !== 5
+          type: TYPES[level]
         }}
       >
         {children}
-      </TextThemeContext.Provider>
+      </MarkdownTextThemeContext.Provider>
     </Component>
   );
 }
 
-const SIZES = new Map([
-  [1, TextSize.title],
-  [2, TextSize.subtitle],
-  [3, TextSize.subtitle2],
-  [4, TextSize.subtitle3],
-  [5, TextSize.subtitle3],
-  [6, TextSize.body]
-]);
+const TYPES: Record<number, TextType> = {
+  1: TextType.heading1,
+  2: TextType.heading2,
+  3: TextType.heading3,
+  4: TextType.heading4,
+  5: TextType.heading5,
+  6: TextType.heading6
+};
 
 const H1 = styled.h1`
   box-sizing: border-box;
-  margin-block-start: ${LAPTOP_MAJOR_PADDING_SIZE}px;
-  margin-block-end: ${LAPTOP_PADDING_SIZE}px;
+  margin-block-start: 52px;
+  margin-block-end: 32px;
 
   ${MOBILE} {
-    margin-block-start: ${MOBILE_MAJOR_PADDING_SIZE}px;
-    margin-block-end: ${MOBILE_PADDING_SIZE}px;
+    margin-block-start: 42px;
+    margin-block-end: 24px;
   }
 
   &:first-child {
