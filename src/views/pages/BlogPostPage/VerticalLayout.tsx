@@ -34,13 +34,15 @@ export default function VerticalLayout({ person, blogPost, ...props }: Props) {
 
 const Root = styled.div`
   max-width: 400px;
-  margin-inline: auto;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
 `;
 
 const Article = styled.article`
   margin-block-start: 16px;
   padding-block-end: 48px;
-  padding-inline: 20px;
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
 `;
 
 const _BlogPostTitle = styled(BlogPostTitle)`

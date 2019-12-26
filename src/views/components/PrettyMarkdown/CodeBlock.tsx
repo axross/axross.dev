@@ -33,9 +33,12 @@ const Root = styled(SyntaxHighlighter)`
   box-sizing: border-box;
   max-width: calc(100% + 32px * 2);
   width: calc(100% + 32px * 2);
-  margin-block: 32px;
-  margin-inline: -32px;
-  padding-block: 32px;
+  margin-block-start: 32px;
+  margin-block-end: 32px;
+  margin-inline-start: -32px;
+  margin-inline-end: -32px;
+  padding-block-start: 32px;
+  padding-block-end: 32px;
   border-radius: 8px;
   background-color: ${CODE_BACKGROUND_COLOR};
   line-height: 1.333;
@@ -44,9 +47,12 @@ const Root = styled(SyntaxHighlighter)`
   ${MOBILE} {
     max-width: calc(100% + 20px * 2);
     width: calc(100% + 20px * 2);
-    margin-block: 24px;
-    margin-inline: -20px;
-    padding-block: 24px;
+    margin-block-start: 24px;
+    margin-block-end: 24px;
+    margin-inline-start: -20px;
+    margin-inline-end: -20px;
+    padding-block-start: 24px;
+    padding-block-end: 24px;
     border-radius: 0;
   }
 
@@ -64,7 +70,8 @@ const Root = styled(SyntaxHighlighter)`
     margin-inline-end: 0;
     padding-block-start: 0;
     padding-block-end: 0;
-    padding-inline: 32px;
+    padding-inline-start: 32px;
+    padding-inline-end: 32px;
     border-radius: 0;
     color: ${CODE_COLORS[CodeColor.normal]};
     font-size: 16px;
@@ -72,7 +79,8 @@ const Root = styled(SyntaxHighlighter)`
     font-weight: 500;
 
     ${MOBILE} {
-      padding-inline: 24px;
+      padding-inline-start: 24px;
+      padding-inline-end: 24px;
       font-size: 14px;
     }
 

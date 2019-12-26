@@ -47,8 +47,10 @@ const Root = styled.div`
     "profile . . ."
     "profile . article .";
   max-width: 1080px;
-  margin-inline: auto;
-  padding-block: 80px;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  padding-block-start: 80px;
+  padding-block-end: 80px;
 
   ${MOBILE} {
     grid-template-columns: 20px calc(100% - 20px - 20px) 20px;
@@ -91,5 +93,6 @@ const Article = styled.article`
 
 const _BlogPostTimestamp = styled(BlogPostTimestamp)`
   display: block;
-  margin-block: 32px;
+  margin-block-start: 32px;
+  margin-block-end: 32px;
 `;
