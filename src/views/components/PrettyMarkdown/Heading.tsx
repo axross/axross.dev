@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { ThemedColor } from "../../../entities/ColorTheme";
 import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
 import { TextType } from "./MarkdownText";
 import { MOBILE } from "../../constant/mediaQuery";
+import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {
   level: number;

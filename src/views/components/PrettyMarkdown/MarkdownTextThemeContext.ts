@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ThemedColor } from "../../../entities/ColorTheme";
+import ThemedColor from "../../types/ThemedColor";
 import { TextType } from "./MarkdownText";
 
 export { TextType } from "./MarkdownText";

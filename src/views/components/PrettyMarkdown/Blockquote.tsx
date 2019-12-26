@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import ColorTheme, { ThemedColor } from "../../../entities/ColorTheme";
-import { MOBILE } from "../../constant/mediaQuery";
-import ColorThemeContext from "../ColorThemeContext";
+import { DARK_COLOR, LIGHT_COLOR } from "../../constant/color";
+import { MOBILE, DARK_MODE } from "../../constant/mediaQuery";
+import ThemedColor from "../../types/ThemedColor";
 import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
 
 interface Props extends React.Attributes {
@@ -11,10 +11,8 @@ interface Props extends React.Attributes {
 }
 
 export default function Blockquote({ children, ...props }: Props) {
-  const colorTheme = React.useContext(ColorThemeContext);
-
   return (
-    <Root _colorTheme={colorTheme} {...props}>
+    <Root {...props}>
       <MarkdownTextThemeContext.Provider value={{ isEmphasized: true }}>
         {children}
       </MarkdownTextThemeContext.Provider>
@@ -22,7 +20,7 @@ export default function Blockquote({ children, ...props }: Props) {
   );
 }
 
-const Root = styled.blockquote<{ _colorTheme: ColorTheme }>`
+const Root = styled.blockquote`
   box-sizing: border-box;
   max-width: calc(100% + 32px * 2);
   width: calc(100% + 32px * 2);
@@ -31,8 +29,7 @@ const Root = styled.blockquote<{ _colorTheme: ColorTheme }>`
   padding-block: 32px;
   padding-inline: 32px;
   border-radius: 8px;
-  background-color: ${({ _colorTheme }) =>
-    _colorTheme[ThemedColor.accentBackground]};
+  background-color: ${LIGHT_COLOR[ThemedColor.accentBackground]};
   line-height: 1.333;
   overflow-x: scroll;
 
@@ -44,6 +41,10 @@ const Root = styled.blockquote<{ _colorTheme: ColorTheme }>`
     padding-block: 24px;
     padding-inline: 24px;
     border-radius: 0;
+  }
+
+  ${DARK_MODE} {
+    background-color: ${DARK_COLOR[ThemedColor.accentBackground]};
   }
 
   &:first-child {

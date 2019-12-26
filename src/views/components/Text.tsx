@@ -1,12 +1,12 @@
 import { css, SerializedStyles } from "@emotion/core";
 import styled from "@emotion/styled";
 import * as React from "react";
-import ColorTheme, { ThemedColor } from "../../entities/ColorTheme";
 import mergeValues from "../utility/mergeValues";
-import ColorThemeContext from "./ColorThemeContext";
+import { MOBILE, DARK_MODE } from "../constant/mediaQuery";
+import { LIGHT_COLOR, DARK_COLOR } from "../constant/color";
+import ThemedColor from "../types/ThemedColor";
 import LazyCSS from "./LazyCSS";
 import TextThemeContext, { TextTheme } from "./TextThemeContext";
-import { MOBILE } from "../constant/mediaQuery";
 
 export interface Props extends React.Attributes {
   color?: ThemedColor;
@@ -25,7 +25,6 @@ export interface Props extends React.Attributes {
  */
 export default React.forwardRef<HTMLElement, Props>(
   ({ color, type, maxLines, alignment, ...props }, ref) => {
-    const colorTheme = React.useContext(ColorThemeContext);
     const theme: TextTheme = React.useContext(TextThemeContext) || {};
     const isLink = theme.isLink ?? false;
     const isLinkHovered = theme.isLinkHovered ?? false;
@@ -51,7 +50,6 @@ export default React.forwardRef<HTMLElement, Props>(
 
         <Root
           _color={_color}
-          _colorTheme={colorTheme}
           _type={_type}
           _maxLines={_maxLines}
           _alignment={_alignment}
@@ -81,7 +79,6 @@ export enum TextAlignment {
 
 const Root = styled.span<{
   _color: ThemedColor;
-  _colorTheme: ColorTheme;
   _type: TextType;
   _maxLines: number;
   _alignment: TextAlignment;
@@ -93,7 +90,7 @@ const Root = styled.span<{
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
-  color: ${({ _color, _colorTheme }) => _colorTheme[_color]};
+  color: ${({ _color }) => LIGHT_COLOR[_color]};
   font-family: "Open Sans", sans-serif;
   text-align: ${({ _alignment }) => _alignment};
   text-decoration: ${({ _link, _linkHovered }) =>
@@ -118,6 +115,10 @@ const Root = styled.span<{
     -webkit-line-clamp: ${_maxLines};
     overflow-y: hidden;
   `}
+
+  ${DARK_MODE} {
+    color: ${({ _color }) => DARK_COLOR[_color]};
+  }
 `;
 
 const TEXT_STYLE: Record<TextType, SerializedStyles> = {

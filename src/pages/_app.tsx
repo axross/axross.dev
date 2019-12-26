@@ -1,7 +1,6 @@
 import NextApp, { AppContext } from "next/app";
 import Head from "next/head";
 import * as React from "react";
-import { ThemedColor } from "../entities/ColorTheme";
 import LocaleString from "../entities/LocaleString";
 import {
   getDefaultLocale,
@@ -17,11 +16,11 @@ import respondNotFound from "../utility/respondNotFound";
 import respondRedirection from "../utility/respondRedirection";
 import setContentSecurityPolicy from "../utility/setContentSecurityPolicy";
 import GlobalStyle from "../views/components/GlobalStyle";
-import { DARK, LIGHT } from "../views/constant/color";
+import { DARK_COLOR } from "../views/constant/color";
 import LocaleSwitchContext from "../views/contexts/LocaleContext";
 import SelfUrlContext from "../views/contexts/SelfUrlContext";
 import TranslationContext from "../views/contexts/TranslationContext";
-import ColorThemeContext from "../views/components/ColorThemeContext";
+import ThemedColor from "../views/types/ThemedColor";
 
 export interface GlobalPageProps {
   url: URL;
@@ -38,42 +37,7 @@ interface Props {
   translation: Record<string, string>;
 }
 
-interface State {
-  isDarkMode: boolean;
-}
-
-export default class App extends NextApp<Props, State> {
-  public state = {
-    isDarkMode: false
-  };
-
-  private colorScehemeMediaQuery?: MediaQueryList;
-  private colorScehemeMediaQueryListener?: (e: MediaQueryListEvent) => void;
-
-  componentDidMount() {
-    this.colorScehemeMediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
-    this.colorScehemeMediaQueryListener = e => {
-      this.setState({ isDarkMode: e.matches });
-    };
-    this.colorScehemeMediaQuery.addEventListener(
-      "change",
-      this.colorScehemeMediaQueryListener
-    );
-
-    this.setState({
-      isDarkMode: this.colorScehemeMediaQuery.matches
-    });
-  }
-
-  componentWillUnmount() {
-    this.colorScehemeMediaQuery?.removeEventListener(
-      "change",
-      this.colorScehemeMediaQueryListener ?? (() => {})
-    );
-  }
-
+export default class App extends NextApp<Props> {
   render() {
     const {
       pageProps,
@@ -83,16 +47,14 @@ export default class App extends NextApp<Props, State> {
       translation,
       url
     } = this.props;
-    const colorTheme = this.state.isDarkMode ? DARK : LIGHT;
-
     return (
-      <ColorThemeContext.Provider value={colorTheme}>
+      <>
         <GlobalStyle />
 
         <Head>
           <meta
             name="theme-color"
-            content={colorTheme[ThemedColor.background]}
+            content={DARK_COLOR[ThemedColor.background]}
             key="themeColor"
           />
         </Head>
@@ -115,7 +77,7 @@ export default class App extends NextApp<Props, State> {
             </TranslationContext.Provider>
           </LocaleSwitchContext.Provider>
         </SelfUrlContext.Provider>
-      </ColorThemeContext.Provider>
+      </>
     );
   }
 

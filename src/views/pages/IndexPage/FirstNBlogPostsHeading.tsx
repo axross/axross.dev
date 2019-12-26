@@ -1,8 +1,8 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import { ThemedColor } from "../../../entities/ColorTheme";
 import Text, { TextType } from "../../components/Text";
 import TranslationContext from "../../contexts/TranslationContext";
+import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {
   className?: string;

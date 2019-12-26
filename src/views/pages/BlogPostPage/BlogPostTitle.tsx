@@ -1,9 +1,9 @@
 import * as React from "react";
-import { ThemedColor } from "../../../entities/ColorTheme";
 import Heading from "../../components/PrettyMarkdown/Heading";
 import MarkdownText, {
   TextType
 } from "../../components/PrettyMarkdown/MarkdownText";
+import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {
   className?: string;

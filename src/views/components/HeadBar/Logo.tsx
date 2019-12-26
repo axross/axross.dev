@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { ThemedColor } from "../../../entities/ColorTheme";
+import ThemedColor from "../../types/ThemedColor";
 import Text from "../Text";
 
 export default function Logo() {

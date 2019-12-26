@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import { ThemedColor } from "../../../entities/ColorTheme";
 import BlogPost from "../../../entities/BlogPost";
 import LocaleContext from "../../contexts/LocaleContext";
 import TranslationContext from "../../contexts/TranslationContext";
 import LinkKeepLocale from "../../components/KeepLocaleLink";
 import Text, { TextType } from "../../components/Text";
 import { MOBILE } from "../../constant/mediaQuery";
+import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {
   blogPosts: BlogPost[];
