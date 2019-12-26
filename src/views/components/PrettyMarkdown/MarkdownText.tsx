@@ -38,7 +38,7 @@ export default function MarkdownText({ ...props }) {
         />
       ) : (
         <LazyCSS
-          href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap"
+          href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,600i|Open+Sans:400,400i,700,700i&&display=swap"
           key="sansSerifFont"
         />
       )}
@@ -84,8 +84,6 @@ const Root = styled.span<{
   margin-inline-start: 0;
   margin-inline-end: 0;
   color: ${({ _color }) => LIGHT_COLOR[_color]};
-  font-family: ${({ _code }) =>
-    _code ? '"Source Code Pro", monospace' : '"Open Sans", sans-serif'};
   font-weight: ${({ _strong }) => (_strong ? "bold" : "regular")};
   font-style: ${({ _emphasized }) => (_emphasized ? "italic" : "normal")};
   text-decoration: ${({ _deleted, _link, _linkHovered }) => {
@@ -107,6 +105,8 @@ const Root = styled.span<{
 
   ${({ _type }) => TEXT_STYLE[_type]}
 
+  ${({ _code }) => _code ? 'font-family: "Source Code Pro", monospace;' : ""}
+
   ${DARK_MODE} {
     color: ${({ _color }) => DARK_COLOR[_color]};
   }
@@ -115,6 +115,7 @@ const Root = styled.span<{
 const TEXT_STYLE: Record<TextType, SerializedStyles> = {
   [TextType.paragraph]: css`
     font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
     line-height: 1.75;
 
     ${MOBILE} {
@@ -123,7 +124,8 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
   `,
   [TextType.heading1]: css`
     font-size: 46px;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.5;
 
     ${MOBILE} {
@@ -132,7 +134,8 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
   `,
   [TextType.heading2]: css`
     font-size: 40px;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.5;
 
     ${MOBILE} {
@@ -141,7 +144,8 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
   `,
   [TextType.heading3]: css`
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.5;
 
     ${MOBILE} {
@@ -150,7 +154,8 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
   `,
   [TextType.heading4]: css`
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.5;
 
     ${MOBILE} {
@@ -159,6 +164,7 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
   `,
   [TextType.heading5]: css`
     font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.5;
 
     ${MOBILE} {
@@ -167,7 +173,8 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
   `,
   [TextType.heading6]: css`
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.5;
 
     ${MOBILE} {
