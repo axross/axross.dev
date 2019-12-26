@@ -44,7 +44,7 @@ export default React.forwardRef<HTMLElement, Props>(
     return (
       <>
         <LazyCSS
-          href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap"
+          href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,600i|Open+Sans:400,400i,700,700i&&display=swap"
           key="sansSerifFont"
         />
 
@@ -91,7 +91,6 @@ const Root = styled.span<{
   margin-inline-start: 0;
   margin-inline-end: 0;
   color: ${({ _color }) => LIGHT_COLOR[_color]};
-  font-family: "Open Sans", sans-serif;
   text-align: ${({ _alignment }) => _alignment};
   text-decoration: ${({ _link, _linkHovered }) =>
     _link && _linkHovered ? "underline" : "none"};
@@ -124,6 +123,7 @@ const Root = styled.span<{
 const TEXT_STYLE: Record<TextType, SerializedStyles> = {
   [TextType.body]: css`
     font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
     line-height: 1.5;
 
     ${MOBILE} {
@@ -132,7 +132,8 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
   `,
   [TextType.subtitle]: css`
     font-size: 46px;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.5;
 
     ${MOBILE} {
@@ -141,6 +142,7 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
   `,
   [TextType.label]: css`
     font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
     line-height: 1.5;
 
     ${MOBILE} {
@@ -149,7 +151,8 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
   `,
   [TextType.logo]: css`
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
     line-height: 1.5;
 
     ${MOBILE} {
