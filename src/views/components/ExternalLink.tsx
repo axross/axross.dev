@@ -1,5 +1,4 @@
 import * as React from "react";
-import { ThemedColor } from "../../entities/ColorTheme";
 import TextThemeContext from "./TextThemeContext";
 
 export interface Props extends React.Attributes {
@@ -18,10 +17,8 @@ export default function ExternalLink({ children, ...props }: Props) {
     >
       <TextThemeContext.Provider
         value={{
-          color: isHovered
-            ? ThemedColor.primaryForeground
-            : ThemedColor.primaryForeground,
-          underline: isHovered
+          isLink: true,
+          isLinkHovered: isHovered,
         }}
       >
         {children}

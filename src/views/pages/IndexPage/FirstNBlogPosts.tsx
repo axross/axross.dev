@@ -3,12 +3,11 @@ import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import { ThemedColor } from "../../../entities/ColorTheme";
 import BlogPost from "../../../entities/BlogPost";
-import { MOBILE } from "../../constant/mediaquery";
-import { MOBILE_PADDING_SIZE, LAPTOP_PADDING_SIZE } from "../../constant/size";
 import LocaleContext from "../../contexts/LocaleContext";
 import TranslationContext from "../../contexts/TranslationContext";
 import LinkKeepLocale from "../../components/KeepLocaleLink";
-import Text, { TextSize } from "../../components/Text";
+import ScreenSizeContext, { ScreenSize } from "../../components/ScreenSizeContext";
+import Text, { TextType } from "../../components/Text";
 
 interface Props extends React.Attributes {
   blogPosts: BlogPost[];
@@ -18,11 +17,12 @@ interface Props extends React.Attributes {
 export default function FirstNBlogPosts({ blogPosts, ...props }: Props) {
   const { currentLocale } = React.useContext(LocaleContext);
   const translation = React.useContext(TranslationContext);
+  const screenSize = React.useContext(ScreenSizeContext);
 
   return (
     <Root {...props}>
       {blogPosts.map(blogPost => (
-        <Item key={blogPost.id}>
+        <Item key={blogPost.id} _screenSize={screenSize}>
           <Title>
             <LinkKeepLocale
               href="/posts/[blogPostId]"
@@ -35,7 +35,7 @@ export default function FirstNBlogPosts({ blogPosts, ...props }: Props) {
 
           <CreateDate
             color={ThemedColor.secondaryForeground}
-            size={TextSize.caption}
+            type={TextType.label}
           >
             {new IntlMessageFormat(translation["blogPost.written_at"]).format({
               createdAt: new Intl.DateTimeFormat(currentLocale).format(
@@ -54,17 +54,13 @@ const Root = styled.ul`
   flex-direction: column;
 `;
 
-const Item = styled.li`
+const Item = styled.li<{ _screenSize: ScreenSize }>`
   display: grid;
   grid-template-areas: "title" "createDate";
-  margin-block-start: ${LAPTOP_PADDING_SIZE}px;
+  margin-block-start: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? "32px" : "24px" };
 
   &:first-of-type {
     margin-block-start: 0;
-  }
-
-  ${MOBILE} {
-    margin-block-start: ${MOBILE_PADDING_SIZE}px;
   }
 `;
 

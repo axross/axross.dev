@@ -1,5 +1,5 @@
 import * as React from "react";
-import TextThemeContext from "../TextThemeContext";
+import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
 
 interface Props extends React.Attributes {
   children: React.ReactNode;
@@ -7,8 +7,8 @@ interface Props extends React.Attributes {
 
 export default function Emphasis({ children }: Props) {
   return (
-    <TextThemeContext.Provider value={{ italic: true }}>
+    <MarkdownTextThemeContext.Provider value={{ isEmphasized: true }}>
       {children}
-    </TextThemeContext.Provider>
+    </MarkdownTextThemeContext.Provider>
   );
 }

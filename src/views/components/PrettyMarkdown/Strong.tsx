@@ -1,5 +1,5 @@
 import * as React from "react";
-import TextThemeContext from "../TextThemeContext";
+import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
 
 interface Props extends React.Attributes {
   children: React.ReactNode;
@@ -7,8 +7,8 @@ interface Props extends React.Attributes {
 
 export default function Strong({ children }: Props) {
   return (
-    <TextThemeContext.Provider value={{ bold: true }}>
+    <MarkdownTextThemeContext.Provider value={{ isStrong: true }}>
       {children}
-    </TextThemeContext.Provider>
+    </MarkdownTextThemeContext.Provider>
   );
 }

@@ -1,32 +1,22 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import {
-  MOBILE_MINOR_PADDING_SIZE,
-  MOBILE_PADDING_SIZE,
-  LAPTOP_MINOR_PADDING_SIZE,
-  LAPTOP_PADDING_SIZE
-} from "../../constant/size";
-import { MOBILE } from "../../constant/mediaquery";
+import ScreenSizeContext, { ScreenSize } from "../ScreenSizeContext";
 
 interface Props extends React.Attributes {
   children: React.ReactNode;
 }
 
 export default function OrderedList(props: Props) {
-  return <Root>{props.children}</Root>;
+  const screenSize = React.useContext(ScreenSizeContext);
+
+  return <Root _screenSize={screenSize}>{props.children}</Root>;
 }
 
-const Root = styled.ol`
+const Root = styled.ol<{ _screenSize: ScreenSize }>`
   box-sizing: border-box;
   display: block;
-  margin-block-start: ${LAPTOP_PADDING_SIZE}px;
-  margin-block-end: ${LAPTOP_PADDING_SIZE}px;
+  margin-block: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? "32px" : "24px"};
   padding-inline-start: 36px;
-
-  ${MOBILE} {
-    margin-block-start: ${MOBILE_PADDING_SIZE}px;
-    margin-block-end: ${MOBILE_PADDING_SIZE}px;
-  }
 
   &:first-child {
     margin-block-start: 0;
@@ -38,13 +28,7 @@ const Root = styled.ol`
 
   li {
     display: list-item;
-    margin-block-start: ${LAPTOP_MINOR_PADDING_SIZE}px;
-    margin-block-end: ${LAPTOP_MINOR_PADDING_SIZE}px;
-
-    ${MOBILE} {
-      margin-block-start: ${MOBILE_MINOR_PADDING_SIZE}px;
-      margin-block-end: ${MOBILE_MINOR_PADDING_SIZE}px;
-    }
+    margin-block: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? "12px" : "8px"};
 
     &:first-of-type {
       margin-block-start: 0;
@@ -62,11 +46,7 @@ const Root = styled.ol`
     & > p + ol,
     & > span + ul,
     & > span + ol {
-      margin-block-start: ${LAPTOP_MINOR_PADDING_SIZE}px;
-
-      ${MOBILE} {
-        margin-block-start: ${MOBILE_MINOR_PADDING_SIZE}px;
-      }
+      margin-block-start: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? "12px" : "8px"};
     }
   }
 `;
