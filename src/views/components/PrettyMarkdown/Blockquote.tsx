@@ -22,7 +22,6 @@ export default function Blockquote({ children, ...props }: Props) {
 
 const Root = styled.blockquote`
   box-sizing: border-box;
-  max-width: calc(100% + 32px * 2);
   width: calc(100% + 32px * 2);
   margin-block-start: 32px;
   margin-block-end: 32px;
@@ -38,16 +37,15 @@ const Root = styled.blockquote`
   overflow-x: scroll;
 
   ${MOBILE} {
-    max-width: calc(100% + 20px * 2);
-    width: calc(100% + 20px * 2);
+    width: 100vw;
     margin-block-start: 24px;
     margin-block-end: 24px;
-    margin-inline-start: -20px;
-    margin-inline-end: -20px;
-    padding-block-start: 24px;
-    padding-block-end: 24px;
-    padding-inline-start: 24px;
-    padding-inline-end: 24px;
+    margin-inline-start: calc(-1 * (100vw - 100%) / 2);
+    margin-inline-end: calc(-1 * (100vw - 100%) / 2);
+    padding-block-start: 20px;
+    padding-block-end: 20px;
+    padding-inline-start: calc((100vw - 100%) / 2);
+    padding-inline-end: calc((100vw - 100%) / 2);
     border-radius: 0;
   }
 
