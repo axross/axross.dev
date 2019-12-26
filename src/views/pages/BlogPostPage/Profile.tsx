@@ -59,6 +59,7 @@ const Root = styled.div`
   grid-template-areas: "myself" "links";
   grid-template-columns: auto;
   grid-template-rows: auto auto;
+  align-content: flex-start;
   justify-items: center;
 `;
 

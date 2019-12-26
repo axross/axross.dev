@@ -6,8 +6,8 @@ import BlogPost from "../../../entities/BlogPost";
 import LocaleContext from "../../contexts/LocaleContext";
 import TranslationContext from "../../contexts/TranslationContext";
 import LinkKeepLocale from "../../components/KeepLocaleLink";
-import ScreenSizeContext, { ScreenSize } from "../../components/ScreenSizeContext";
 import Text, { TextType } from "../../components/Text";
+import { MOBILE } from "../../constant/mediaQuery";
 
 interface Props extends React.Attributes {
   blogPosts: BlogPost[];
@@ -17,12 +17,11 @@ interface Props extends React.Attributes {
 export default function FirstNBlogPosts({ blogPosts, ...props }: Props) {
   const { currentLocale } = React.useContext(LocaleContext);
   const translation = React.useContext(TranslationContext);
-  const screenSize = React.useContext(ScreenSizeContext);
 
   return (
     <Root {...props}>
       {blogPosts.map(blogPost => (
-        <Item key={blogPost.id} _screenSize={screenSize}>
+        <Item key={blogPost.id}>
           <Title>
             <LinkKeepLocale
               href="/posts/[blogPostId]"
@@ -54,10 +53,14 @@ const Root = styled.ul`
   flex-direction: column;
 `;
 
-const Item = styled.li<{ _screenSize: ScreenSize }>`
+const Item = styled.li`
   display: grid;
   grid-template-areas: "title" "createDate";
-  margin-block-start: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? "32px" : "24px" };
+  margin-block-start: 32px;
+
+  ${MOBILE} {
+    margin-block-start: 24px;
+  }
 
   &:first-of-type {
     margin-block-start: 0;

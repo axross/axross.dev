@@ -1,22 +1,24 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import ScreenSizeContext, { ScreenSize } from "../ScreenSizeContext";
+import { MOBILE } from "../../constant/mediaQuery";
 
 interface Props extends React.Attributes {
   children: React.ReactNode;
 }
 
 export default function UnorderedList(props: Props) {
-  const screenSize = React.useContext(ScreenSizeContext);
-
-  return <Root _screenSize={screenSize}>{props.children}</Root>;
+  return <Root>{props.children}</Root>;
 }
 
-const Root = styled.ul<{ _screenSize: ScreenSize }>`
+const Root = styled.ul`
   box-sizing: border-box;
   display: block;
-  margin-block: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? "32px" : "24px"};
+  margin-block: 32px;
   padding-inline-start: 36px;
+
+  ${MOBILE} {
+    margin-block: 24px;
+  }
 
   &:first-child {
     margin-block-start: 0;
@@ -28,7 +30,11 @@ const Root = styled.ul<{ _screenSize: ScreenSize }>`
 
   li {
     display: list-item;
-    margin-block: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? "12px" : "8px"};
+    margin-block: 12px;
+
+    ${MOBILE} {
+      margin-block: 8px;
+    }
 
     &:first-of-type {
       margin-block-start: 0;
@@ -46,7 +52,11 @@ const Root = styled.ul<{ _screenSize: ScreenSize }>`
     & > p + ol,
     & > span + ul,
     & > span + ol {
-      margin-block-start: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? "12px" : "8px"};
+      margin-block-start: 12px;
+
+      ${MOBILE} {
+        margin-block-start: 8px;
+      }
     }
   }
 `;

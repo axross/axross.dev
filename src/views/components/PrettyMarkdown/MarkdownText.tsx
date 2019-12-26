@@ -4,8 +4,8 @@ import * as React from "react";
 import ColorTheme, { ThemedColor } from "../../../entities/ColorTheme";
 import ColorThemeContext from "../ColorThemeContext";
 import LazyCSS from "../LazyCSS";
-import ScreenSizeContext, { ScreenSize } from '../ScreenSizeContext';
 import MarkdownTextThemeContext, { MarkdownTextTheme } from "./MarkdownTextThemeContext";
+import { MOBILE } from "../../constant/mediaQuery";
 
 export interface Props extends React.Attributes {
   className?: string;
@@ -17,7 +17,6 @@ export interface Props extends React.Attributes {
  */
 export default function MarkdownText({ ...props }) {
   const colorTheme = React.useContext(ColorThemeContext);
-  const screenSize = React.useContext(ScreenSizeContext);
   const theme: MarkdownTextTheme = React.useContext(MarkdownTextThemeContext) || {};
   const color = theme.color ?? ThemedColor.foreground;
   const type = theme.type ?? TextType.paragraph;
@@ -43,7 +42,6 @@ export default function MarkdownText({ ...props }) {
         _color={color}
         _colorTheme={colorTheme}
         _type={type}
-        _screenSize={screenSize}
         _strong={isStrong}
         _emphasized={isEmphasized}
         _deleted={isDeleted}
@@ -68,7 +66,6 @@ const Root = styled.span<{
   _color: ThemedColor;
   _colorTheme: ColorTheme;
   _type: TextType;
-  _screenSize: ScreenSize;
   _strong: boolean;
   _emphasized: boolean;
   _deleted: boolean;
@@ -88,78 +85,69 @@ const Root = styled.span<{
   transition: color 150ms ease-in-out 0ms, font-size 150ms ease-in-out 0ms,
     font-weight 150ms ease-in-out 0ms, text-decoration 150ms ease-in-out 0ms;
 
-  ${({ _type, _screenSize }) => TEXT_STYLE[_screenSize][_type]}
+  ${({ _type }) => TEXT_STYLE[_type]}
 `;
 
-const TEXT_STYLE: Record<ScreenSize, Record<TextType, SerializedStyles>> = {
-  [ScreenSize.laptop]: {
-    [TextType.paragraph]: css`
-      font-size: 20px;
-      line-height: 1.75;
-    `,
-    [TextType.heading1]:  css`
-      font-size: 46px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-    [TextType.heading2]:  css`
-      font-size: 40px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-    [TextType.heading3]:  css`
-      font-size: 30px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-    [TextType.heading4]:  css`
-      font-size: 24px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-    [TextType.heading5]:  css`
-      font-size: 24px;
-      line-height: 1.5;
-    `,
-    [TextType.heading6]:  css`
-      font-size: 20px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-  },
-  [ScreenSize.mobile]: {
-    [TextType.paragraph]: css`
+const TEXT_STYLE: Record<TextType, SerializedStyles> = {
+  [TextType.paragraph]: css`
+    font-size: 20px;
+    line-height: 1.75;
+
+    ${MOBILE} {
       font-size: 16px;
-      line-height: 1.75;
-    `,
-    [TextType.heading1]:  css`
+    }
+  `,
+  [TextType.heading1]:  css`
+    font-size: 46px;
+    font-weight: bold;
+    line-height: 1.5;
+
+    ${MOBILE} {
       font-size: 36px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-    [TextType.heading2]:  css`
+    }
+  `,
+  [TextType.heading2]:  css`
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1.5;
+
+    ${MOBILE} {
       font-size: 30px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-    [TextType.heading3]:  css`
+    }
+  `,
+  [TextType.heading3]:  css`
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1.5;
+
+    ${MOBILE} {
       font-size: 24px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-    [TextType.heading4]:  css`
+    }
+  `,
+  [TextType.heading4]:  css`
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+
+    ${MOBILE} {
       font-size: 20px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-    [TextType.heading5]:  css`
+    }
+  `,
+  [TextType.heading5]:  css`
+    font-size: 24px;
+    line-height: 1.5;
+
+    ${MOBILE} {
       font-size: 20px;
-      line-height: 1.5;
-    `,
-    [TextType.heading6]:  css`
+    }
+  `,
+  [TextType.heading6]:  css`
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+
+    ${MOBILE} {
       font-size: 16px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-  },
+    }
+  `,
 }

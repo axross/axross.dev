@@ -5,8 +5,8 @@ import ColorTheme, { ThemedColor } from "../../entities/ColorTheme";
 import mergeValues from "../utility/mergeValues";
 import ColorThemeContext from "./ColorThemeContext";
 import LazyCSS from "./LazyCSS";
-import ScreenSizeContext, { ScreenSize } from './ScreenSizeContext';
 import TextThemeContext, { TextTheme } from "./TextThemeContext";
+import { MOBILE } from "../constant/mediaQuery";
 
 export interface Props extends React.Attributes {
   color?: ThemedColor;
@@ -35,7 +35,6 @@ export default React.forwardRef<HTMLElement, Props>(
     ref
   ) => {
     const colorTheme = React.useContext(ColorThemeContext);
-    const screenSize = React.useContext(ScreenSizeContext);
     const theme: TextTheme = React.useContext(TextThemeContext) || {};
     const isLink = theme.isLink ?? false;
     const isLinkHovered = theme.isLinkHovered ?? false;
@@ -60,7 +59,6 @@ export default React.forwardRef<HTMLElement, Props>(
           _color={_color}
           _colorTheme={colorTheme}
           _type={_type}
-          _screenSize={screenSize}
           _maxLines={_maxLines}
           _alignment={_alignment}
           _link={isLink}
@@ -91,7 +89,6 @@ const Root = styled.span<{
   _color: ThemedColor;
   _colorTheme: ColorTheme;
   _type: TextType;
-  _screenSize: ScreenSize;
   _maxLines: number;
   _alignment: TextAlignment;
   _link: boolean;
@@ -110,7 +107,7 @@ const Root = styled.span<{
   transition: color 150ms ease-in-out 0ms, font-size 150ms ease-in-out 0ms,
     font-weight 150ms ease-in-out 0ms, text-decoration 150ms ease-in-out 0ms;
 
-  ${({ _type, _screenSize }) => TEXT_STYLE[_screenSize][_type]}
+  ${({ _type }) => TEXT_STYLE[_type]}
 
   ${({ _maxLines }) =>
     _maxLines === 0
@@ -128,45 +125,39 @@ const Root = styled.span<{
   `}
 `;
 
-const TEXT_STYLE: Record<ScreenSize, Record<TextType, SerializedStyles>> = {
-  [ScreenSize.laptop]: {
-    [TextType.body]: css`
-      font-size: 20px;
-      line-height: 1.5;
-    `,
-    [TextType.subtitle]: css`
-      font-size: 46px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-    [TextType.label]: css`
+const TEXT_STYLE: Record<TextType, SerializedStyles> = {
+  [TextType.body]: css`
+    font-size: 20px;
+    line-height: 1.5;
+
+    ${MOBILE} {
       font-size: 16px;
-      line-height: 1.5;
-    `,
-    [TextType.logo]: css`
+    }
+  `,
+  [TextType.subtitle]: css`
+    font-size: 46px;
+    font-weight: bold;
+    line-height: 1.5;
+
+    ${MOBILE} {
+      font-size: 32px;
+    }
+  `,
+  [TextType.label]: css`
+    font-size: 16px;
+    line-height: 1.5;
+
+    ${MOBILE} {
+      font-size: 12px;
+    }
+  `,
+  [TextType.logo]: css`
     font-size: 30px;
     font-weight: bold;
     line-height: 1.5;
+
+    ${MOBILE} {
+      font-size: 22px;
+    }
   `,
-  },
-  [ScreenSize.mobile]: {
-    [TextType.body]: css`
-      font-size: 16px;
-      line-height: 1.5;
-    `,
-    [TextType.subtitle]: css`
-      font-size: 32px;
-      font-weight: bold;
-      line-height: 1.5;
-    `,
-    [TextType.label]: css`
-      font-size: 12px;
-      line-height: 1.5;
-    `,
-    [TextType.logo]: css`
-    font-size: 22px;
-    font-weight: bold;
-    line-height: 1.5;
-  `,
-  },
 }

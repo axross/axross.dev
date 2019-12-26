@@ -6,7 +6,7 @@ import {
   CODE_COLORS,
   CodeColor
 } from "../../constant/color";
-import ScreenSizeContext, { ScreenSize } from "../ScreenSizeContext";
+import { MOBILE } from "../../constant/mediaQuery";
 
 interface Props extends React.Attributes {
   language: string;
@@ -14,8 +14,6 @@ interface Props extends React.Attributes {
 }
 
 export default function Paragraph({ language, value, ...props }: Props) {
-  const screenSize = React.useContext(ScreenSizeContext);
-
   return (
     <Root
       // codeTagProps={{ className: `language-${language}` }}
@@ -24,7 +22,6 @@ export default function Paragraph({ language, value, ...props }: Props) {
       style={{}}
       // workaround. disable default inline style "background-color: rgba(255, 255, 255)"
       customStyle={{ backgroundColor: undefined }}
-      _screenSize={screenSize}
       {...props}
     >
       {value}
@@ -34,28 +31,24 @@ export default function Paragraph({ language, value, ...props }: Props) {
 
 const Root = styled(SyntaxHighlighter)`
   box-sizing: border-box;
-  margin-block: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? 32 : 24}px;
+  max-width: calc(100% + 32px * 2);
+  width: calc(100% + 32px * 2);
+  margin-block: 32px;
+  margin-inline: -32px;
+  padding-block: 32px;
   border-radius: 8px;
   background-color: ${CODE_BACKGROUND_COLOR};
   line-height: 1.333;
   overflow-x: scroll;
 
-  ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? `
-    max-width: calc(100% + 32px * 2);
-    width: calc(100% + 32px * 2);
-    margin-block: 32px;
-    margin-inline: -32px;
-    padding-block: 32px;
-    border-radius: 8px;
-  `
-  : `
+  ${MOBILE} {
     max-width: calc(100% + 20px * 2);
     width: calc(100% + 20px * 2);
     margin-block: 24px;
     margin-inline: -20px;
     padding-block: 24px;
     border-radius: 0;
-  `}
+  }
 
   &:first-child {
     margin-block-start: 0;
@@ -71,12 +64,17 @@ const Root = styled(SyntaxHighlighter)`
     margin-inline-end: 0;
     padding-block-start: 0;
     padding-block-end: 0;
-    padding-inline: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? "32px" : "24px"};
+    padding-inline: 32px;
     border-radius: 0;
     color: ${CODE_COLORS[CodeColor.normal]};
-    font-size: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? "16px" : "14px"};
+    font-size: 16px;
     font-family: "Source Code Pro", monospace;
     font-weight: 500;
+
+    ${MOBILE} {
+      padding-inline: 24px;
+      font-size: 14px;
+    }
 
     .token.comment {
       color: ${CODE_COLORS[CodeColor.comment]};

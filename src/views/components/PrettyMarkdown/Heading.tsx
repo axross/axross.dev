@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { ThemedColor } from "../../../entities/ColorTheme";
-import ScreenSizeContext, { ScreenSize } from "../ScreenSizeContext";
 import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
 import { TextType } from "./MarkdownText";
+import { MOBILE } from "../../constant/mediaQuery";
 
 interface Props extends React.Attributes {
   level: number;
@@ -12,7 +12,6 @@ interface Props extends React.Attributes {
 }
 
 export default function Heading({ level, children, ...props }: Props) {
-  const screenSize = React.useContext(ScreenSizeContext);
   let Component = H1;
 
   switch (level) {
@@ -34,7 +33,7 @@ export default function Heading({ level, children, ...props }: Props) {
   }
 
   return (
-    <Component _screenSize={screenSize} {...props}>
+    <Component {...props}>
       <MarkdownTextThemeContext.Provider
         value={{
           color: ThemedColor.emphasizedForeground,
@@ -56,10 +55,15 @@ const TYPES: Record<number, TextType> = {
   6: TextType.heading6,
 };
 
-const H1 = styled.h1<{ _screenSize: ScreenSize }>`
+const H1 = styled.h1`
   box-sizing: border-box;
-  margin-block-start: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? 52 : 42}px;
-  margin-block-end: ${({ _screenSize }) => _screenSize === ScreenSize.laptop ? 32 : 24}px;
+  margin-block-start: 52px;
+  margin-block-end: 32px;
+
+  ${MOBILE} {
+    margin-block-start: 42px;
+    margin-block-end: 24px;
+  }
 
   &:first-child {
     margin-block-start: 0;

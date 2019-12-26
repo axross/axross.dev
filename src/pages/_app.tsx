@@ -1,4 +1,3 @@
-import { ResizeObserver } from '@juggle/resize-observer';
 import NextApp, { AppContext } from "next/app";
 import Head from "next/head";
 import * as React from "react";
@@ -23,7 +22,6 @@ import LocaleSwitchContext from "../views/contexts/LocaleContext";
 import SelfUrlContext from "../views/contexts/SelfUrlContext";
 import TranslationContext from "../views/contexts/TranslationContext";
 import ColorThemeContext from "../views/components/ColorThemeContext";
-import ScreenSizeContext, { ScreenSize } from "../views/components/ScreenSizeContext";
 
 export interface GlobalPageProps {
   url: URL;
@@ -42,25 +40,17 @@ interface Props {
 
 interface State {
   isDarkMode: boolean;
-  screenSize: ScreenSize;
 }
 
 export default class App extends NextApp<Props, State> {
   public state = {
     isDarkMode: false,
-    screenSize: ScreenSize.laptop,
   };
 
-  private resizeObserver?: ResizeObserver;
   private colorScehemeMediaQuery?: MediaQueryList;
   private colorScehemeMediaQueryListener?: (e: MediaQueryListEvent) => void;
 
   componentDidMount() {
-    this.resizeObserver = new ResizeObserver(([{ contentBoxSize }]) => {
-      this.setState({ screenSize: contentBoxSize.inlineSize >= 960 ? ScreenSize.laptop : ScreenSize.mobile });
-    });
-    this.resizeObserver?.observe(document.body);
-
     this.colorScehemeMediaQuery = window.matchMedia(
       "(prefers-color-scheme: dark)"
     );
@@ -70,13 +60,11 @@ export default class App extends NextApp<Props, State> {
     this.colorScehemeMediaQuery.addEventListener("change", this.colorScehemeMediaQueryListener);
 
     this.setState({
-      screenSize: window.innerWidth >= 960 ? ScreenSize.laptop : ScreenSize.mobile,
       isDarkMode: this.colorScehemeMediaQuery.matches,
     });
   }
 
   componentWillUnmount() {
-    this.resizeObserver?.unobserve(document.body);
     this.colorScehemeMediaQuery?.removeEventListener(
       "change",
       this.colorScehemeMediaQueryListener ?? (() => {})
@@ -95,38 +83,36 @@ export default class App extends NextApp<Props, State> {
     const colorTheme = this.state.isDarkMode ? DARK : LIGHT;
 
     return (
-      <ScreenSizeContext.Provider value={this.state.screenSize}>
-        <ColorThemeContext.Provider value={colorTheme}>
-          <GlobalStyle />
+      <ColorThemeContext.Provider value={colorTheme}>
+        <GlobalStyle />
 
-          <Head>
-            <meta
-              name="theme-color"
-              content={colorTheme[ThemedColor.background]}
-              key="themeColor"
-            />
-          </Head>
+        <Head>
+          <meta
+            name="theme-color"
+            content={colorTheme[ThemedColor.background]}
+            key="themeColor"
+          />
+        </Head>
 
-          <SelfUrlContext.Provider value={new URL(url)}>
-            <LocaleSwitchContext.Provider
-              value={{
-                currentLocale,
-                availableLocales
-              }}
-            >
-              <TranslationContext.Provider value={translation}>
-                <Component
-                  url={new URL(url)}
-                  availableLocales={availableLocales}
-                  currentLocale={currentLocale}
-                  translation={translation}
-                  {...pageProps}
-                />
-              </TranslationContext.Provider>
-            </LocaleSwitchContext.Provider>
-          </SelfUrlContext.Provider>
-        </ColorThemeContext.Provider>
-      </ScreenSizeContext.Provider>
+        <SelfUrlContext.Provider value={new URL(url)}>
+          <LocaleSwitchContext.Provider
+            value={{
+              currentLocale,
+              availableLocales
+            }}
+          >
+            <TranslationContext.Provider value={translation}>
+              <Component
+                url={new URL(url)}
+                availableLocales={availableLocales}
+                currentLocale={currentLocale}
+                translation={translation}
+                {...pageProps}
+              />
+            </TranslationContext.Provider>
+          </LocaleSwitchContext.Provider>
+        </SelfUrlContext.Provider>
+      </ColorThemeContext.Provider>
     );
   }
 

@@ -4,8 +4,12 @@ import Logo from './HeadBar/Logo';
 import LocaleSwitcher from './LocaleSwitcher';
 import Link from "./Link";
 
-export default function HeadBar() {
-  return <Root>
+export interface Props extends React.Attributes {
+  className?: string;
+}
+
+export default function HeadBar(props: Props) {
+  return <Root {...props}>
     <_LogoLink href="/">
       <_Logo />
     </_LogoLink>
@@ -20,7 +24,7 @@ export default function HeadBar() {
 const Root = styled.header`
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-areas: "logo localeSwitcher";
+  grid-template-areas: "logo locales";
   column-gap: 24px;
   align-items: center;
   justify-items: flex-start;
@@ -37,7 +41,7 @@ const _Logo = styled(Logo)`
 `
 
 const _Locales = styled.nav`
-  grid-area: localeSwitcher;
+  grid-area: locales;
   justify-self: flex-end;
   padding-inline-end: 20px;
 `;
