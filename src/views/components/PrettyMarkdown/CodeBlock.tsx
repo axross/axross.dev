@@ -77,6 +77,7 @@ const Root = styled(SyntaxHighlighter)`
     font-size: 18px;
     font-family: "Source Code Pro", monospace;
     font-weight: 500;
+    line-height: 1.75;
 
     ${MOBILE} {
       font-size: 15px;
