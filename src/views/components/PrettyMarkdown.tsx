@@ -7,11 +7,11 @@ import CodeBlock from "./PrettyMarkdown/CodeBlock";
 import Emphasis from "./PrettyMarkdown/Emphasis";
 import Heading from "./PrettyMarkdown/Heading";
 import InlineCode from "./PrettyMarkdown/InlineCode";
+import List from "./PrettyMarkdown/List";
 import MarkdownLink from "./PrettyMarkdown/MarkdownLink";
 import Media from "./PrettyMarkdown/Media";
 import Paragraph from "./PrettyMarkdown/Paragraph";
 import Strong from "./PrettyMarkdown/Strong";
-import UnorderedList from "./PrettyMarkdown/UnorderedList";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -41,7 +41,7 @@ const renderers = {
   heading: Heading,
   blockquote: Blockquote,
   code: CodeBlock,
-  list: UnorderedList,
+  list: List,
   image: Media,
   strong: Strong,
   emphasis: Emphasis,
