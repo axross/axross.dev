@@ -6,8 +6,10 @@ interface Props extends React.Attributes {
 }
 
 export default function Strong({ children }: Props) {
+  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
+
   return (
-    <MarkdownTextThemeContext.Provider value={{ isStrong: true }}>
+    <MarkdownTextThemeContext.Provider value={{ ...theme, isStrong: true }}>
       {children}
     </MarkdownTextThemeContext.Provider>
   );

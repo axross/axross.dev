@@ -6,8 +6,10 @@ interface Props extends React.Attributes {
 }
 
 export default function Deleted({ children }: Props) {
+  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
+
   return (
-    <MarkdownTextThemeContext.Provider value={{ isDeleted: true }}>
+    <MarkdownTextThemeContext.Provider value={{ ...theme, isDeleted: true }}>
       {children}
     </MarkdownTextThemeContext.Provider>
   );

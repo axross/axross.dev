@@ -7,6 +7,7 @@ export interface Props extends React.Attributes {
 }
 
 export default function MarkdownLink({ children, ...props }: Props) {
+  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
@@ -17,6 +18,7 @@ export default function MarkdownLink({ children, ...props }: Props) {
     >
       <MarkdownTextThemeContext.Provider
         value={{
+          ...theme,
           isLink: true,
           isLinkHovered: isHovered
         }}

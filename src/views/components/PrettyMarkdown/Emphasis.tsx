@@ -6,8 +6,10 @@ interface Props extends React.Attributes {
 }
 
 export default function Emphasis({ children }: Props) {
+  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
+
   return (
-    <MarkdownTextThemeContext.Provider value={{ isEmphasized: true }}>
+    <MarkdownTextThemeContext.Provider value={{ ...theme, isEmphasized: true }}>
       {children}
     </MarkdownTextThemeContext.Provider>
   );
