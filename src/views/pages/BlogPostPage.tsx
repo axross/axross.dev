@@ -95,4 +95,9 @@ const _BlogPostTimestamp = styled(BlogPostTimestamp)`
   display: block;
   margin-block-start: 32px;
   margin-block-end: 32px;
+
+  ${MOBILE} {
+    margin-block-start: 24px;
+    margin-block-end: 24px;
+  }
 `;
