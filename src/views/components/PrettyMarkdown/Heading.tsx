@@ -12,6 +12,7 @@ interface Props extends React.Attributes {
 }
 
 export default function Heading({ level, children, ...props }: Props) {
+  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
   let Component = H1;
 
   switch (level) {
@@ -36,6 +37,7 @@ export default function Heading({ level, children, ...props }: Props) {
     <Component {...props}>
       <MarkdownTextThemeContext.Provider
         value={{
+          ...theme,
           color: ThemedColor.emphasizedForeground,
           type: TYPES[level]
         }}
