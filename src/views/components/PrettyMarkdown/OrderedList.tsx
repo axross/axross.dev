@@ -1,13 +1,23 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { MOBILE } from "../../constant/mediaQuery";
+import { DARK_COLOR, LIGHT_COLOR } from "../../constant/color";
+import { DARK_MODE, MOBILE } from "../../constant/mediaQuery";
+import ThemedColor from "../../types/ThemedColor";
+import LazyCSS from "../LazyCSS";
 
 interface Props extends React.Attributes {
   children: React.ReactNode;
 }
 
 export default function OrderedList(props: Props) {
-  return <Root>{props.children}</Root>;
+  return <>
+    <LazyCSS
+          href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,600i|Open+Sans:400,400i,700,700i&&display=swap"
+          key="sansSerifFont"
+        />
+
+    <Root>{props.children}</Root>
+    </>;
 }
 
 const Root = styled.ol`
@@ -34,10 +44,18 @@ const Root = styled.ol`
     display: list-item;
     margin-block-start: 12px;
     margin-block-end: 12px;
+    color: ${LIGHT_COLOR[ThemedColor.foreground]};
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
 
     ${MOBILE} {
       margin-block-start: 8px;
       margin-block-end: 8px;
+      font-size: 16px;
+    }
+
+    ${DARK_MODE} {
+      color: ${DARK_COLOR[ThemedColor.foreground]};
     }
 
     &:first-of-type {
