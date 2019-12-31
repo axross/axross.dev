@@ -4,7 +4,7 @@ import { MY_NAME } from "../common/constant/data";
 import { getAllBlogPostsByLocale } from "../common/repositories/blogPostRepository";
 import { getAllAvailableLocales } from "../common/repositories/localeRepository";
 
-function handler(
+export default function handler(
   event: APIGatewayProxyEvent,
   _: any,
   callback: APIGatewayProxyCallback
@@ -123,5 +123,3 @@ function handler(
     });
   });
 }
-
-module.exports.handler = handler;
