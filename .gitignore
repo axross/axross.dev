@@ -1,4 +1,11 @@
 node_modules/*
 
-.next/*
-next-env.d.ts
+# Local Netlify folder
+.netlify
+
+# Distribution files
+dist/client/*.js
+dist/client/*.js.map
+dist/client/*.html
+dist/functions/*.js
+dist/functions/*.js.map
