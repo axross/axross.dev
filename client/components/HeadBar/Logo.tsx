@@ -8,7 +8,7 @@ export default function Logo() {
     <Root>
       <Image />
 
-      <Text color={ThemedColor.emphasizedForeground}>axross.dev</Text>
+      <Text color={ThemedColor.emphasizedForeground}>kohei.dev</Text>
     </Root>
   );
 }
