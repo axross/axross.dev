@@ -10,7 +10,11 @@ import {
 import BlogPost from "../../common/entities/BlogPost";
 import { getBlogPostsById } from "../../common/repositories/blogPostRepository";
 import LocaleContext from "../contexts/LocaleContext";
-import { WEBSITE_TITLE, WEBSITE_TITLE_BLOG_POST, WEBSITE_TITLE_BLOG_POST_NOT_FOUND } from "../dictionary";
+import {
+  WEBSITE_TITLE,
+  WEBSITE_TITLE_BLOG_POST,
+  WEBSITE_TITLE_BLOG_POST_NOT_FOUND
+} from "../dictionary";
 import BlogPostPage from "../pages/BlogPostPage";
 
 export default function BlogPostRoute({
@@ -33,38 +37,53 @@ export default function BlogPostRoute({
 
   return (
     <>
-      <AnalyticsPageView blogPost={blogPost} blogPostLoading={isBlogPostLoading} />
+      <AnalyticsPageView
+        blogPost={blogPost}
+        blogPostLoading={isBlogPostLoading}
+      />
 
-      <Meta blogPost={blogPost} />
+      <Meta blogPost={blogPost} blogPostLoading={isBlogPostLoading} />
 
       <BlogPostPage blogPost={blogPost} blogPostLoading={isBlogPostLoading} />
     </>
   );
 }
 
-function AnalyticsPageView({ blogPost, blogPostLoading }: { blogPost: BlogPost | null, blogPostLoading: boolean }) {
+function AnalyticsPageView({
+  blogPost,
+  blogPostLoading
+}: {
+  blogPost: BlogPost | null;
+  blogPostLoading: boolean;
+}) {
   const { pathname } = useLocation();
   const { currentLocale } = React.useContext(LocaleContext);
-  
+
   React.useEffect(() => {
     if (blogPostLoading) return;
 
     const url = new URL(pathname, process.env.URL);
     url.searchParams.set("hl", currentLocale);
 
-    (window as any).ga('set', "location", `${url}`);
+    (window as any).ga("set", "location", `${url}`);
 
     if (blogPost) {
-      (window as any).ga("set", "title", new IntlMessageFormat(
-        WEBSITE_TITLE_BLOG_POST[currentLocale]
-      ).format({
-        title: blogPost.title,
-        name: MY_NAME
-      }));
+      (window as any).ga(
+        "set",
+        "title",
+        new IntlMessageFormat(WEBSITE_TITLE_BLOG_POST[currentLocale]).format({
+          title: blogPost.title,
+          name: MY_NAME
+        })
+      );
     } else {
-      (window as any).ga("set", "title", new IntlMessageFormat(
-        WEBSITE_TITLE_BLOG_POST_NOT_FOUND[currentLocale]
-      ).format());
+      (window as any).ga(
+        "set",
+        "title",
+        new IntlMessageFormat(
+          WEBSITE_TITLE_BLOG_POST_NOT_FOUND[currentLocale]
+        ).format()
+      );
     }
 
     (window as any).ga("send", "pageview");
@@ -73,17 +92,35 @@ function AnalyticsPageView({ blogPost, blogPostLoading }: { blogPost: BlogPost |
   return null;
 }
 
-function Meta({ blogPost }: { blogPost: BlogPost | null }) {
-  if (!blogPost) {
+function Meta({
+  blogPost,
+  blogPostLoading
+}: {
+  blogPost: BlogPost | null;
+  blogPostLoading: boolean;
+}) {
+  const { pathname } = useLocation();
+  const { availableLocales, currentLocale } = React.useContext(LocaleContext);
+
+  if (blogPostLoading) {
     return (
       <Helmet>
         <title>Loading a blog post...</title>
       </Helmet>
-    )
+    );
   }
 
-  const { pathname } = useLocation();
-  const { availableLocales, currentLocale } = React.useContext(LocaleContext);
+  if (!blogPost) {
+    return (
+      <Helmet>
+        <title>
+          {new IntlMessageFormat(
+            WEBSITE_TITLE_BLOG_POST_NOT_FOUND[currentLocale]
+          ).format()}
+        </title>
+      </Helmet>
+    );
+  }
 
   const canonicalURL = new URL(pathname, process.env.URL);
 

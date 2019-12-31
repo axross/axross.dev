@@ -54,15 +54,19 @@ export default function IndexRoute(_: RouteChildrenProps) {
 function AnalyticsPageView() {
   const { pathname } = useLocation();
   const { currentLocale } = React.useContext(LocaleContext);
-  
+
   React.useEffect(() => {
     const url = new URL(pathname, process.env.URL);
     url.searchParams.set("hl", currentLocale);
 
-    (window as any).ga('set', "location", `${url}`);
-    (window as any).ga("set", "title", new IntlMessageFormat(WEBSITE_TITLE[currentLocale]).format({
-      name: MY_NAME
-    }));
+    (window as any).ga("set", "location", `${url}`);
+    (window as any).ga(
+      "set",
+      "title",
+      new IntlMessageFormat(WEBSITE_TITLE[currentLocale]).format({
+        name: MY_NAME
+      })
+    );
     (window as any).ga("send", "pageview");
   }, [currentLocale]);
 
@@ -125,11 +129,7 @@ function Meta() {
         })}
 
       {/* open graph */}
-      <meta
-        property="og:url"
-        content={`${canonicalURL}`}
-        key="og:url"
-      />
+      <meta property="og:url" content={`${canonicalURL}`} key="og:url" />
       <meta property="og:type" content="profile" key="og:type" />
       <meta
         property="og:description"

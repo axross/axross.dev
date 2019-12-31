@@ -27,7 +27,7 @@ export const WEBSITE_TITLE_BLOG_POST: DictionaryEntry = {
 export const WEBSITE_TITLE_BLOG_POST_NOT_FOUND: DictionaryEntry = {
   "en-US": "404 Not Found",
   "ja-JP": "404 Not Found"
-}
+};
 
 export const WEBSITE_DESCRIPTION: DictionaryEntry = {
   "en-US": "{name}'s personal website. My experience, projects and bloggging.",
