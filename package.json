@@ -1,43 +1,48 @@
 {
   "private": true,
-  "engines": {
-    "node": "10.x"
-  },
   "scripts": {
-    "test": "jest",
-    "dev": "next dev",
-    "storybook": "start-storybook -s ./public",
-    "build": "next build"
+    "test": "npm run test:unit",
+    "test:unit": "jest --config jest.unit.js",
+    "dev": "webpack-dev-server --mode development",
+    "storybook": "start-storybook -s ./public"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
-    "@juggle/resize-observer": "^3.0.0-0",
     "contentful": "^7.8.2",
     "intl-messageformat": "^5.4.3",
-    "next": "^9.1.4",
     "react": "^16.12.0",
+    "react-content-loader": "^4.3.4",
     "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1",
     "react-markdown": "^4.2.2",
+    "react-router-dom": "^5.1.2",
     "react-syntax-highlighter": "^11.0.2",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
-    "@babel/plugin-proposal-optional-chaining": "^7.7.4",
     "@storybook/addon-actions": "^5.2.6",
     "@storybook/addon-knobs": "^5.2.6",
     "@storybook/addons": "^5.2.6",
     "@storybook/react": "^5.2.6",
+    "@types/aws-lambda": "^8.10.39",
     "@types/jest": "^24.0.16",
     "@types/node": "^12.6.8",
     "@types/react": "^16.9.13",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-helmet": "^5.0.14",
+    "@types/react-router-dom": "^5.1.3",
     "@types/react-syntax-highlighter": "^10.2.1",
-    "babel-loader": "^8.0.6",
+    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-template": "^6.2.0",
     "jest": "^24.9.0",
+    "netlify-cli": "^2.25.0",
     "ts-jest": "^24.2.0",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.4",
+    "webpack-cdn-plugin": "^3.2.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
   }
 }
