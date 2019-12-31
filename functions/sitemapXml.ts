@@ -96,3 +96,12 @@ export default function handler(
     }
   );
 }
+
+function escape(string: string): string {
+  return string
+    .replace("&", "&amp")
+    .replace("'", "&apos")
+    .replace('"', "&quot")
+    .replace(">", "&gt")
+    .replace("<", "&lt");
+}
