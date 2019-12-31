@@ -94,20 +94,26 @@ function Meta() {
 
       {availableLocales
         .filter(locale => locale !== currentLocale)
-        .map(locale => (
-          <link
-            rel="alternate"
-            type="application/atom+xml"
-            title={`Blog post Atom feed (${locale})`}
-            href={`${new URL("/posts/feed.xml", process.env.URL)}`}
-            key={`atomFeed:${locale}`}
-          />
-        ))}
+        .map(locale => {
+          const url = new URL("/posts/feed.xml", process.env.URL);
+
+          url.searchParams.set("hl", locale);
+
+          return (
+            <link
+              rel="alternate"
+              type="application/atom+xml"
+              title={`Blog post Atom feed (${locale})`}
+              href={`${url}`}
+              key={`atomFeed:${locale}`}
+            />
+          );
+        })}
 
       {/* open graph */}
       <meta
         property="og:url"
-        content={`${new URL(pathname, process.env.URL)}`}
+        content={`${canonicalURL}`}
         key="og:url"
       />
       <meta property="og:type" content="profile" key="og:type" />

@@ -62,7 +62,7 @@ function Meta({ blogPost }: { blogPost: BlogPost | null }) {
 
   canonicalURL.searchParams.set("hl", currentLocale);
 
-  const profileImageURL = new URL("/static/profile.jpg", process.env.URL);
+  const profileImageURL = new URL("/profile.jpg", process.env.URL);
 
   const title = new IntlMessageFormat(
     WEBSITE_TITLE_BLOG_POST[currentLocale]
@@ -96,15 +96,21 @@ function Meta({ blogPost }: { blogPost: BlogPost | null }) {
 
       {availableLocales
         .filter(locale => locale !== currentLocale)
-        .map(locale => (
-          <link
-            rel="alternate"
-            type="application/atom+xml"
-            title={`Blog post Atom feed (${locale})`}
-            href={`${new URL("/posts/feed.xml", process.env.URL)}`}
-            key={`atomFeed:${locale}`}
-          />
-        ))}
+        .map(locale => {
+          const url = new URL("/posts/feed.xml", process.env.URL);
+
+          url.searchParams.set("hl", locale);
+
+          return (
+            <link
+              rel="alternate"
+              type="application/atom+xml"
+              title={`Blog post Atom feed (${locale})`}
+              href={`${url}`}
+              key={`atomFeed:${locale}`}
+            />
+          );
+        })}
 
       {/* open graph */}
       <meta property="og:url" content={`${canonicalURL}`} key="og:url" />
@@ -134,7 +140,7 @@ function Meta({ blogPost }: { blogPost: BlogPost | null }) {
       <meta property="og:title" content={title} key="og:title" />
       <meta
         property="og:image"
-        content={`${new URL("/static/profile.jpg", process.env.URL)}`}
+        content={`${new URL("/profile.jpg", process.env.URL)}`}
         key="og:image"
       />
 
