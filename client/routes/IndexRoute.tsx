@@ -35,14 +35,10 @@ export default function IndexRoute(_: RouteChildrenProps) {
     );
   }, [currentLocale]);
 
-  React.useEffect(() => {
-    if (typeof (window as any).ga === 'undefined') return;
-
-    (window as any).ga("send", "pageview");
-  }, [currentLocale]);
-
   return (
     <>
+      <AnalyticsPageView />
+
       <Meta />
 
       <IndexPage
@@ -53,6 +49,24 @@ export default function IndexRoute(_: RouteChildrenProps) {
       />
     </>
   );
+}
+
+function AnalyticsPageView() {
+  const { pathname } = useLocation();
+  const { currentLocale } = React.useContext(LocaleContext);
+  
+  React.useEffect(() => {
+    const url = new URL(pathname, process.env.URL);
+    url.searchParams.set("hl", currentLocale);
+
+    (window as any).ga('set', "location", `${url}`);
+    (window as any).ga("set", "title", new IntlMessageFormat(WEBSITE_TITLE[currentLocale]).format({
+      name: MY_NAME
+    }));
+    (window as any).ga("send", "pageview");
+  }, [currentLocale]);
+
+  return null;
 }
 
 function Meta() {
