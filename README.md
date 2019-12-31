@@ -1,6 +1,6 @@
 # axross.dev
 
-[![Status](https://github.com/axross/axross.dev/workflows/Deploy%20to%20Staging/badge.svg)](https://github.com/axross/axross.dev/actions?workflow=Deploy+to+Staging)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/153f81f8-6487-47f5-86b1-ce579c1b186f/deploy-status)](https://app.netlify.com/sites/kohei/deploys)
 
 This is the source code of my personal website. The following is why and how I made:
 
