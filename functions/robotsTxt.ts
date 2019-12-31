@@ -1,6 +1,6 @@
 import { APIGatewayProxyCallback, APIGatewayProxyEvent } from "aws-lambda";
 
-function handler(
+export default function handler(
   event: APIGatewayProxyEvent,
   _: any,
   callback: APIGatewayProxyCallback
@@ -21,5 +21,3 @@ function handler(
     body: `sitemap: ${new URL("/sitemap.xml", process.env.URL)}\n`
   });
 }
-
-module.exports.handler = handler;

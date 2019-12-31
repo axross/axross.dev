@@ -6,6 +6,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "./dist/functions"),
     filename: "[name].js",
+    library: "handler",
+    libraryExport: "default",
+    libraryTarget: "commonjs",
   },
   resolve: {
     extensions: [".ts", ".js"],
@@ -27,5 +30,8 @@ module.exports = {
   },
   optimization: {
     minimize: false,
+  },
+  node: {
+    process: false,
   },
 };
