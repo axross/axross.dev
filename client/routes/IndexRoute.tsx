@@ -65,7 +65,7 @@ function Meta() {
   const description = new IntlMessageFormat(
     WEBSITE_DESCRIPTION[currentLocale]
   ).format({ name: MY_NAME });
-  const canonicalURL = new URL(pathname, process.env.DEPLOY_PRIME_URL);
+  const canonicalURL = new URL(pathname, process.env.URL);
 
   canonicalURL.searchParams.set("hl", currentLocale);
 
@@ -78,7 +78,7 @@ function Meta() {
       {availableLocales
         .filter(locale => locale !== currentLocale)
         .map(locale => {
-          const alternateURL = new URL(pathname, process.env.DEPLOY_PRIME_URL);
+          const alternateURL = new URL(pathname, process.env.URL);
 
           alternateURL.searchParams.set("hl", locale);
 
@@ -95,7 +95,7 @@ function Meta() {
       {availableLocales
         .filter(locale => locale !== currentLocale)
         .map(locale => {
-          const url = new URL("/posts/feed.xml", process.env.DEPLOY_PRIME_URL);
+          const url = new URL("/posts/feed.xml", process.env.URL);
 
           url.searchParams.set("hl", locale);
 
@@ -136,7 +136,7 @@ function Meta() {
       <meta property="og:title" content={title} key="og:title" />
       <meta
         property="og:image"
-        content={`${new URL("/profile.jpg", process.env.DEPLOY_PRIME_URL)}`}
+        content={`${new URL("/profile.jpg", process.env.URL)}`}
         key="og:image"
       />
 
@@ -145,9 +145,9 @@ function Meta() {
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
-          url: `${new URL(pathname, process.env.DEPLOY_PRIME_URL)}`,
+          url: `${new URL(pathname, process.env.URL)}`,
           name: MY_NAME,
-          image: `${new URL("/profile.jpg", process.env.DEPLOY_PRIME_URL)}`,
+          image: `${new URL("/profile.jpg", process.env.URL)}`,
           jobTitle: MY_JOB_TITLE,
           sameAs: MY_SOCIAL_MEDIA_LINKS.map(({ url }) => `${url}`)
         })}

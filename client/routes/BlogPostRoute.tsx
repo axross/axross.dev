@@ -58,11 +58,11 @@ function Meta({ blogPost }: { blogPost: BlogPost | null }) {
   const { pathname } = useLocation();
   const { availableLocales, currentLocale } = React.useContext(LocaleContext);
 
-  const canonicalURL = new URL(pathname, process.env.DEPLOY_PRIME_URL);
+  const canonicalURL = new URL(pathname, process.env.URL);
 
   canonicalURL.searchParams.set("hl", currentLocale);
 
-  const profileImageURL = new URL("/profile.jpg", process.env.DEPLOY_PRIME_URL);
+  const profileImageURL = new URL("/profile.jpg", process.env.URL);
 
   const title = new IntlMessageFormat(
     WEBSITE_TITLE_BLOG_POST[currentLocale]
@@ -80,7 +80,7 @@ function Meta({ blogPost }: { blogPost: BlogPost | null }) {
       {availableLocales
         .filter(locale => locale !== currentLocale)
         .map(locale => {
-          const alternateURL = new URL(pathname, process.env.DEPLOY_PRIME_URL);
+          const alternateURL = new URL(pathname, process.env.URL);
 
           alternateURL.searchParams.set("hl", locale);
 
@@ -97,7 +97,7 @@ function Meta({ blogPost }: { blogPost: BlogPost | null }) {
       {availableLocales
         .filter(locale => locale !== currentLocale)
         .map(locale => {
-          const url = new URL("/posts/feed.xml", process.env.DEPLOY_PRIME_URL);
+          const url = new URL("/posts/feed.xml", process.env.URL);
 
           url.searchParams.set("hl", locale);
 
@@ -140,7 +140,7 @@ function Meta({ blogPost }: { blogPost: BlogPost | null }) {
       <meta property="og:title" content={title} key="og:title" />
       <meta
         property="og:image"
-        content={`${new URL("/profile.jpg", process.env.DEPLOY_PRIME_URL)}`}
+        content={`${new URL("/profile.jpg", process.env.URL)}`}
         key="og:image"
       />
 
