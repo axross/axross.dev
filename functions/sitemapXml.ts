@@ -34,7 +34,7 @@ export default function handler(
               ...availableLocales.map(locale => ({
                 loc: {
                   _text: (() => {
-                    const url = new URL("/", process.env.URL);
+                    const url = new URL("/", process.env.DEPLOY_PRIME_URL);
 
                     url.pathname = "/";
                     url.searchParams.set("hl", locale);
@@ -55,7 +55,7 @@ export default function handler(
               ...Array.from(blogPosts.entries()).reduce(
                 (entries, [locale, _blogPosts]) => {
                   for (const blogPost of _blogPosts) {
-                    const url = new URL("/", process.env.URL);
+                    const url = new URL("/", process.env.DEPLOY_PRIME_URL);
 
                     url.pathname = `/posts/${blogPost.id}`;
                     url.searchParams.set("hl", locale);

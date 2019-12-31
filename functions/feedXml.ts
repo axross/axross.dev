@@ -40,7 +40,7 @@ export default function handler(
               xmlns: "http://www.w3.org/2005/Atom"
             },
             id: {
-              _text: `${new URL("/", process.env.URL)}`
+              _text: `${new URL("/", process.env.DEPLOY_PRIME_URL)}`
             },
             title: {
               _text: `Blog posts in axross.dev`
@@ -53,20 +53,20 @@ export default function handler(
                 _text: MY_NAME
               },
               uri: {
-                _text: `${new URL("/", process.env.URL)}`
+                _text: `${new URL("/", process.env.DEPLOY_PRIME_URL)}`
               }
             },
             link: [
               {
                 _attributes: {
                   rel: "self",
-                  href: `${new URL(path, process.env.URL)}`
+                  href: `${new URL(path, process.env.DEPLOY_PRIME_URL)}`
                 }
               },
               ...availableLocales
                 .filter(locale => locale !== currentLocale)
                 .map(locale => {
-                  const alternativeURL = new URL(path, process.env.URL);
+                  const alternativeURL = new URL(path, process.env.DEPLOY_PRIME_URL);
 
                   alternativeURL.searchParams.set("hl", locale);
 
@@ -82,7 +82,7 @@ export default function handler(
             entry: blogPosts.map(blogPost => ({
               id: {
                 _text: (() => {
-                  const url = new URL(path, process.env.URL);
+                  const url = new URL(path, process.env.DEPLOY_PRIME_URL);
 
                   url.pathname = `/posts/${blogPost.id}`;
                   url.searchParams.set("hl", currentLocale);
@@ -101,7 +101,7 @@ export default function handler(
                   _text: MY_NAME
                 },
                 uri: {
-                  _text: `${new URL("/", process.env.URL)}`
+                  _text: `${new URL("/", process.env.DEPLOY_PRIME_URL)}`
                 }
               },
               summary: {

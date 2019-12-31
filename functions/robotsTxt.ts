@@ -18,6 +18,6 @@ export default function handler(
     headers: {
       "content-type": "text/plain"
     },
-    body: `sitemap: ${new URL("/sitemap.xml", process.env.URL)}\n`
+    body: `sitemap: ${new URL("/sitemap.xml", process.env.DEPLOY_PRIME_URL)}\n`
   });
 }
