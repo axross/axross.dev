@@ -1,8 +1,9 @@
 import { APIGatewayProxyCallback, APIGatewayProxyEvent } from "aws-lambda";
+import * as Contentful from 'contentful';
 import * as xmljs from "xml-js";
 import { MY_NAME } from "../common/constant/data";
-import { getAllBlogPostsByLocale } from "../common/repositories/blogPostRepository";
-import { getAllAvailableLocales } from "../common/repositories/localeRepository";
+import { ContentfulBlogPostRepository } from "../common/repositories/BlogPostRepository";
+import { ContentfulLocaleRepository } from "../common/repositories/LocaleRepository";
 
 export default function handler(
   event: APIGatewayProxyEvent,
@@ -18,15 +19,21 @@ export default function handler(
   }
 
   const currentLocale = queryStringParameters?.hl ?? null;
+  const contentful = Contentful.createClient({
+    space: process.env.CONTENTFUL_SPACE!,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
+  });
+  const localeRepository = new ContentfulLocaleRepository(contentful);
+  const blogPostRepository = new ContentfulBlogPostRepository(contentful);
 
-  getAllAvailableLocales().then(availableLocales => {
+  localeRepository.getAllAvailableOnes().then(availableLocales => {
     if (currentLocale === null || !availableLocales.includes(currentLocale)) {
       callback(null, { statusCode: 404, body: "" });
 
       return;
     }
 
-    getAllBlogPostsByLocale(currentLocale).then(blogPosts => {
+    blogPostRepository.getAllByLocale(currentLocale).then(blogPosts => {
       const xml = xmljs.js2xml(
         {
           _declaration: {

@@ -1,16 +1,23 @@
-import { Entry } from "contentful";
+import { ContentfulClientApi } from "contentful";
 import LocaleString from "../entities/LocaleString";
-import contentful from "./contentful";
 
-export async function getBioByLocale(locale: LocaleString): Promise<string> {
-  const entries = await contentful.getEntries<any>({
-    content_type: "person",
-    locale
-  });
-
-  return parseEntryItemIntoPerson(entries.items[0]);
+export default interface BioRepository {
+  getByLocale(locale: LocaleString): Promise<string>;
 }
 
-function parseEntryItemIntoPerson(entryItem: Entry<any>) {
-  return entryItem.fields.description;
+export class ContentfulBioRepository implements BioRepository {
+  constructor(contentful: ContentfulClientApi) {
+    this.contentful = contentful;
+  }
+
+  private contentful: ContentfulClientApi;
+
+  async getByLocale(locale: LocaleString): Promise<string> {
+    const entries = await this.contentful.getEntries<any>({
+      content_type: "person",
+      locale
+    });
+  
+    return entries.items[0].fields.description;
+  }
 }

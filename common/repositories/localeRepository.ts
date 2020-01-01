@@ -1,21 +1,32 @@
 import { ContentfulClientApi } from "contentful";
 import LocaleString from "../entities/LocaleString";
-import defaultContentful from "./contentful";
 
-export async function getDefaultLocale({
-  contentful = defaultContentful
-}: { contentful?: ContentfulClientApi } = {}): Promise<LocaleString> {
-  const space = await contentful.getSpace();
-  const locales: LocaleString[] = space.locales
-    .filter(({ default: def }: any) => def)
-    .map(({ code }: any) => code);
+export default interface LocaleRepository {
+  getDefaultOne(): Promise<LocaleString>;
 
-  return locales[0];
+  getAllAvailableOnes(): Promise<LocaleString[]>;
 }
 
-export async function getAllAvailableLocales(): Promise<LocaleString[]> {
-  const space = await defaultContentful.getSpace();
-  const locales: LocaleString[] = space.locales.map(({ code }: any) => code);
+export class ContentfulLocaleRepository implements LocaleRepository {
+  constructor(contentful: ContentfulClientApi) {
+    this.contentful = contentful;
+  }
 
-  return locales;
+  private contentful: ContentfulClientApi;
+
+  async getDefaultOne(): Promise<LocaleString> {
+    const space = await this.contentful.getSpace();
+    const locales: LocaleString[] = space.locales
+      .filter(({ default: def }: any) => def)
+      .map(({ code }: any) => code);
+  
+    return locales[0];
+  }
+
+  async getAllAvailableOnes(): Promise<LocaleString[]> {
+    const space = await this.contentful.getSpace();
+    const locales: LocaleString[] = space.locales.map(({ code }: any) => code);
+  
+    return locales;
+  }
 }
