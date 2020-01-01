@@ -17,7 +17,7 @@ export class ContentfulBioRepository implements BioRepository {
       content_type: "person",
       locale
     });
-  
+
     return entries.items[0].fields.description;
   }
 }

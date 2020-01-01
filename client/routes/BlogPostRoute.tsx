@@ -31,9 +31,11 @@ export default function BlogPostRoute({
   React.useEffect(() => {
     setBlogPost([null, true]);
 
-    blogPostRepository.getById(match!.params.id).then(blogPosts =>
-      setBlogPost([blogPosts.get(currentLocale) ?? null, false])
-    );
+    blogPostRepository
+      .getById(match!.params.id)
+      .then(blogPosts =>
+        setBlogPost([blogPosts.get(currentLocale) ?? null, false])
+      );
   }, [match!.params.id, currentLocale]);
 
   return (

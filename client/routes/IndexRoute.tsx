@@ -15,7 +15,9 @@ import IndexPage from "../pages/IndexPage";
 
 export default function IndexRoute(_: RouteChildrenProps) {
   const { currentLocale } = React.useContext(LocaleContext);
-  const { bioRepository, blogPostRepository } = React.useContext(RepositoryContext);
+  const { bioRepository, blogPostRepository } = React.useContext(
+    RepositoryContext
+  );
   const [[bio, isBioLoading], setBio] = React.useState<
     [string | null, boolean]
   >([null, true]);
@@ -30,9 +32,9 @@ export default function IndexRoute(_: RouteChildrenProps) {
     setBlogPosts([[], true]);
 
     bioRepository.getByLocale(currentLocale).then(bio => setBio([bio, false]));
-    blogPostRepository.getAllByLocale(currentLocale).then(blogPosts =>
-      setBlogPosts([blogPosts, false])
-    );
+    blogPostRepository
+      .getAllByLocale(currentLocale)
+      .then(blogPosts => setBlogPosts([blogPosts, false]));
   }, [currentLocale]);
 
   return (

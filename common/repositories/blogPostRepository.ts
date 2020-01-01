@@ -7,7 +7,7 @@ export default interface BlogPostRepository {
   getAll(): Promise<Map<LocaleString, BlogPost[]>>;
 
   getAllByLocale(locale: LocaleString): Promise<BlogPost[]>;
-  
+
   getById(blogPostId: string): Promise<Map<LocaleString, BlogPost>>;
 }
 
@@ -26,25 +26,31 @@ export class ContentfulBlogPostRepository implements BlogPostRepository {
       }),
       new ContentfulLocaleRepository(this.contentful).getDefaultOne()
     ]);
-  
+
     const blogPosts = new Map<LocaleString, BlogPost[]>();
-  
+
     for (const entryItem of entries.items) {
       const locales = Object.keys(entryItem.fields.isAvailable).filter(
         locale => entryItem.fields.isAvailable[locale]
       );
-  
+
       for (const locale of locales) {
         if (!blogPosts.has(locale)) {
           blogPosts.set(locale, []);
         }
-  
+
         blogPosts
           .get(locale)!
-          .push(ContentfulBlogPostRepository.parseEntryItemIntoBlogPost(entryItem, locale, defaultLocale));
+          .push(
+            ContentfulBlogPostRepository.parseEntryItemIntoBlogPost(
+              entryItem,
+              locale,
+              defaultLocale
+            )
+          );
       }
     }
-  
+
     return blogPosts;
   }
 
@@ -61,10 +67,14 @@ export class ContentfulBlogPostRepository implements BlogPostRepository {
     return entries.items
       .filter(entryItem => entryItem.fields.isAvailable[locale])
       .map(entryItem =>
-        ContentfulBlogPostRepository.parseEntryItemIntoBlogPost(entryItem, locale, defaultLocale)
+        ContentfulBlogPostRepository.parseEntryItemIntoBlogPost(
+          entryItem,
+          locale,
+          defaultLocale
+        )
       );
   }
-  
+
   async getById(blogPostId: string): Promise<Map<LocaleString, BlogPost>> {
     const [entries, defaultLocale] = await Promise.all([
       this.contentful.getEntries<any>({
@@ -90,7 +100,11 @@ export class ContentfulBlogPostRepository implements BlogPostRepository {
     for (const locale of availableLocales) {
       blogPosts.set(
         locale,
-        ContentfulBlogPostRepository.parseEntryItemIntoBlogPost(entryItem, locale, defaultLocale)
+        ContentfulBlogPostRepository.parseEntryItemIntoBlogPost(
+          entryItem,
+          locale,
+          defaultLocale
+        )
       );
     }
 
