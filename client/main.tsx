@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     import("react"),
     import("react-dom"),
     import("react-router-dom"),
-    import("./App"),
+    import("../common/App"),
     import("./repository")
   ]);
 

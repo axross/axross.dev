@@ -6,8 +6,8 @@ import {
   MY_JOB_TITLE,
   MY_NAME,
   MY_SOCIAL_MEDIA_LINKS
-} from "../../common/constant/data";
-import BlogPost from "../../common/entities/BlogPost";
+} from "../constant/data";
+import BlogPost from "../entities/BlogPost";
 import LocaleContext from "../contexts/LocaleContext";
 import RepositoryContext from "../contexts/RepositoryContext";
 import { WEBSITE_TITLE, WEBSITE_DESCRIPTION } from "../dictionary";

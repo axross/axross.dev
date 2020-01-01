@@ -6,7 +6,7 @@ import LinkKeepLocale from "../../components/KeepLocaleLink";
 import Text, { TextType } from "../../components/Text";
 import { MOBILE } from "../../constant/mediaQuery";
 import { BLOG_POST_TIMETAMP } from "../../dictionary";
-import BlogPost from "../../../common/entities/BlogPost";
+import BlogPost from "../../entities/BlogPost";
 import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {

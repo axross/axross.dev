@@ -1,4 +1,4 @@
-import LocaleString from "../common/entities/LocaleString";
+import LocaleString from "./entities/LocaleString";
 
 export type DictionaryEntry = Record<LocaleString, string>;
 
