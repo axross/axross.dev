@@ -4,7 +4,7 @@ const { EnvironmentPlugin } = require("webpack");
 const CdnPlugin = require("webpack-cdn-plugin");
 
 module.exports = {
-  entry: "./client/main.ts",
+  entry: "./client/main.tsx",
   output: {
     path: path.resolve(__dirname, './dist/client'),
     filename: "[name].js",

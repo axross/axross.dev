@@ -8,14 +8,16 @@ import {
   MY_SOCIAL_MEDIA_LINKS
 } from "../../common/constant/data";
 import BlogPost from "../../common/entities/BlogPost";
-import { getAllBlogPostsByLocale } from "../../common/repositories/blogPostRepository";
-import { getBioByLocale } from "../../common/repositories/bioRepository";
 import LocaleContext from "../contexts/LocaleContext";
+import RepositoryContext from "../contexts/RepositoryContext";
 import { WEBSITE_TITLE, WEBSITE_DESCRIPTION } from "../dictionary";
 import IndexPage from "../pages/IndexPage";
 
 export default function IndexRoute(_: RouteChildrenProps) {
   const { currentLocale } = React.useContext(LocaleContext);
+  const { bioRepository, blogPostRepository } = React.useContext(
+    RepositoryContext
+  );
   const [[bio, isBioLoading], setBio] = React.useState<
     [string | null, boolean]
   >([null, true]);
@@ -29,10 +31,10 @@ export default function IndexRoute(_: RouteChildrenProps) {
     setBio([null, true]);
     setBlogPosts([[], true]);
 
-    getBioByLocale(currentLocale).then(bio => setBio([bio, false]));
-    getAllBlogPostsByLocale(currentLocale).then(blogPosts =>
-      setBlogPosts([blogPosts, false])
-    );
+    bioRepository.getByLocale(currentLocale).then(bio => setBio([bio, false]));
+    blogPostRepository
+      .getAllByLocale(currentLocale)
+      .then(blogPosts => setBlogPosts([blogPosts, false]));
   }, [currentLocale]);
 
   return (

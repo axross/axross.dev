@@ -1,7 +1,8 @@
 import { APIGatewayProxyCallback, APIGatewayProxyEvent } from "aws-lambda";
+import * as Contentful from 'contentful';
 import * as xmljs from "xml-js";
-import { getAllBlogPosts } from "../common/repositories/blogPostRepository";
-import { getAllAvailableLocales } from "../common/repositories/localeRepository";
+import { ContentfulBlogPostRepository } from "../common/repositories/BlogPostRepository";
+import { ContentfulLocaleRepository } from "../common/repositories/LocaleRepository";
 
 export default function handler(
   event: APIGatewayProxyEvent,
@@ -16,7 +17,14 @@ export default function handler(
     return;
   }
 
-  Promise.all([getAllAvailableLocales(), getAllBlogPosts()]).then(
+  const contentful = Contentful.createClient({
+    space: process.env.CONTENTFUL_SPACE!,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
+  });
+  const localeRepository = new ContentfulLocaleRepository(contentful);
+  const blogPostRepository = new ContentfulBlogPostRepository(contentful);
+
+  Promise.all([localeRepository.getAllAvailableOnes(), blogPostRepository.getAll()]).then(
     ([availableLocales, blogPosts]) => {
       const xml = xmljs.js2xml(
         {

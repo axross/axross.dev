@@ -8,8 +8,8 @@ import {
   MY_SOCIAL_MEDIA_LINKS
 } from "../../common/constant/data";
 import BlogPost from "../../common/entities/BlogPost";
-import { getBlogPostsById } from "../../common/repositories/blogPostRepository";
 import LocaleContext from "../contexts/LocaleContext";
+import RepositoryContext from "../contexts/RepositoryContext";
 import {
   WEBSITE_TITLE,
   WEBSITE_TITLE_BLOG_POST,
@@ -21,6 +21,7 @@ export default function BlogPostRoute({
   match
 }: RouteChildrenProps<{ id: string }>) {
   const { currentLocale } = React.useContext(LocaleContext);
+  const { blogPostRepository } = React.useContext(RepositoryContext);
   const [[blogPost, isBlogPostLoading], setBlogPost] = React.useState<
     [BlogPost | null, boolean]
   >([null, true]);
@@ -30,9 +31,11 @@ export default function BlogPostRoute({
   React.useEffect(() => {
     setBlogPost([null, true]);
 
-    getBlogPostsById(match!.params.id).then(blogPosts =>
-      setBlogPost([blogPosts.get(currentLocale) ?? null, false])
-    );
+    blogPostRepository
+      .getById(match!.params.id)
+      .then(blogPosts =>
+        setBlogPost([blogPosts.get(currentLocale) ?? null, false])
+      );
   }, [match!.params.id, currentLocale]);
 
   return (

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import GlobalStyle from "./components/GlobalStyle";
 import LocaleContext from "./contexts/LocaleContext";
-import { getAllAvailableLocales } from "../common/repositories/localeRepository";
+import RepositoryContext from "./contexts/RepositoryContext";
 
 const BlogPostRoute = React.lazy(() => import("./routes/BlogPostRoute"));
 const IndexRoute = React.lazy(() => import("./routes/IndexRoute"));
@@ -10,6 +10,7 @@ const IndexRoute = React.lazy(() => import("./routes/IndexRoute"));
 export default function App() {
   const history = useHistory();
   const location = useLocation();
+  const { localeRepository } = React.useContext(RepositoryContext);
   const [
     [availableLocales, isAvailableLocalesLoading],
     setAvailableLocales
@@ -17,7 +18,7 @@ export default function App() {
   const currentLocale = new URLSearchParams(location.search).get("hl");
 
   React.useEffect(() => {
-    getAllAvailableLocales().then(availableLocales => {
+    localeRepository.getAllAvailableOnes().then(availableLocales => {
       if (currentLocale === null || !availableLocales.includes(currentLocale)) {
         const nextSearchParams = new URLSearchParams(location.search);
 
