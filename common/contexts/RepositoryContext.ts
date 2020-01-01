@@ -1,7 +1,7 @@
 import * as React from "react";
-import BioRepository from "../../common/repositories/BioRepository";
-import BlogPostRepository from "../../common/repositories/BlogPostRepository";
-import LocaleRepository from "../../common/repositories/LocaleRepository";
+import BioRepository from "../repositories/BioRepository";
+import BlogPostRepository from "../repositories/BlogPostRepository";
+import LocaleRepository from "../repositories/LocaleRepository";
 
 interface Repositories {
   bioRepository: BioRepository;

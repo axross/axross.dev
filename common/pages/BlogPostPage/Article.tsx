@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import BlogPost from "../../../common/entities/BlogPost";
+import BlogPost from "../../entities/BlogPost";
 import PrettyMarkdown from "../../components/PrettyMarkdown";
 import Heading from "../../components/PrettyMarkdown/Heading";
 import MarkdownText, {

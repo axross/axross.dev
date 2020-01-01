@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { MY_NAME, MY_SOCIAL_MEDIA_LINKS } from "../../../common/constant/data";
+import { MY_NAME, MY_SOCIAL_MEDIA_LINKS } from "../../constant/data";
 import Link from "../../components/Link";
 import KeepLocaleLink from "../../components/KeepLocaleLink";
 import Text, { TextType } from "../../components/Text";

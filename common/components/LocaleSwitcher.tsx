@@ -4,7 +4,7 @@ import * as React from "react";
 import { useLocation } from "react-router-dom";
 import LocaleContext from "../contexts/LocaleContext";
 import { DictionaryEntry, LANGUAGE_EN_US, LANGUAGE_JA_JP } from "../dictionary";
-import LocaleString from "../../common/entities/LocaleString";
+import LocaleString from "../entities/LocaleString";
 import ThemedColor from "../types/ThemedColor";
 import Link from "./Link";
 import Text, { TextType } from "./Text";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import LocaleString from "../../common/entities/LocaleString";
+import LocaleString from "../entities/LocaleString";
 
 interface LocaleContextData {
   currentLocale: LocaleString;
