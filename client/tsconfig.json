@@ -1,10 +1,6 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../common/tsconfig.json",
   "compilerOptions": {
-    "jsx": "react",
     "lib": ["DOM"],
   },
-  "exclude": [
-    "node_modules/**/*"
-  ],
 }

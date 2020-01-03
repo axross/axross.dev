@@ -3,7 +3,4 @@
   "compilerOptions": {
     "lib": ["WebWorker"]
   },
-  "exclude": [
-    "node_modules/**/*"
-  ],
 }
