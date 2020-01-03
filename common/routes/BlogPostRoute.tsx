@@ -65,6 +65,9 @@ function AnalyticsPageView({
   React.useEffect(() => {
     if (blogPostLoading) return;
 
+    // Google Analytics is not loaded if the device is offline
+    if (typeof (window as any).ga === "undefined") return;
+
     const url = new URL(pathname, process.env.URL);
     url.searchParams.set("hl", currentLocale);
 
