@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as Markdown from "react-markdown";
-import LazyCSS from "./LazyCSS";
 import Blockquote from "./PrettyMarkdown/Blockquote";
 import CodeBlock from "./PrettyMarkdown/CodeBlock";
 import Emphasis from "./PrettyMarkdown/Emphasis";
