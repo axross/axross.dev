@@ -40,7 +40,7 @@ export default function MarkdownText({ ...props }) {
         />
       ) : (
         <LazyCSS
-          href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,600i|Open+Sans:400,400i,700,700i&&display=swap"
+          href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,600i|Open+Sans:400,400i,700,700i&display=swap"
           key="sansSerifFont"
         />
       )}
