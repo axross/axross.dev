@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react",
+    "lib": ["DOM"],
+  },
+  "exclude": [
+    "node_modules/**/*"
+  ],
+}

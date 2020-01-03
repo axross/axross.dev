@@ -22,6 +22,7 @@ module.exports = {
           {
             loader: "ts-loader",
             options: {
+              configFile: path.resolve(__dirname, "./functions/tsconfig.json"),
               transpileOnly: true,
             },
           },
