@@ -55,9 +55,7 @@ module.exports = {
 
         <script defer>
           if (typeof navigator.serviceWorker !== "undefined") {
-            navigator.serviceWorker.register("/sw.js")
-              .then(reg => console.log("Service Worker is registered!", reg))
-              .catch(err => console.error(err));
+            navigator.serviceWorker.register("/sw.js");
           }
         </script>
       `,

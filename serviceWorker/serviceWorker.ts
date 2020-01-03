@@ -11,17 +11,21 @@ const ACTIVE_CACHE_NAMES = [
   CONTENT_ASSETS_CACHE_NAME,
 ];
 
-self.addEventListener("install", e => {
+self.addEventListener("install", () => {
   self.skipWaiting();
 });
 
 self.addEventListener("activate", e => {
   e.waitUntil((async () => {
-    for (const cacheName of await caches.keys()) {
-      if (ACTIVE_CACHE_NAMES.includes(cacheName)) continue;
+    await self.clients.claim();
+
+    const cacheNames = await caches.keys();
+
+    await Promise.all(cacheNames.map(async cacheName => {
+      if (ACTIVE_CACHE_NAMES.includes(cacheName)) return;
   
-      caches.delete(cacheName);
-    }
+      await caches.delete(cacheName);
+    }));
   })());
 });
 
