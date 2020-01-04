@@ -1,10 +1,8 @@
 {
   "compilerOptions": {
-    "incremental": true,
     "target": "es2015",
     "module": "esnext",
     "moduleResolution": "node",
-    "jsx": "react",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -13,7 +11,6 @@
     "forceConsistentCasingInFileNames": true,
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
-    "lib": ["dom"],
     "sourceMap": true,
   },
   "exclude": [

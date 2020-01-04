@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as Markdown from "react-markdown";
-import LazyCSS from "./LazyCSS";
 import Blockquote from "./PrettyMarkdown/Blockquote";
 import CodeBlock from "./PrettyMarkdown/CodeBlock";
 import Emphasis from "./PrettyMarkdown/Emphasis";
@@ -19,21 +18,7 @@ interface Props extends React.Attributes {
 }
 
 export default function PrettyMarkdown({ ...props }: Props) {
-  return (
-    <>
-      <LazyCSS
-        href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap"
-        key="sansSerifFont"
-      />
-
-      <LazyCSS
-        href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500&display=swap"
-        key="sourceCodeFont"
-      />
-
-      <Markdown renderers={renderers} {...props} />
-    </>
-  );
+  return <Markdown renderers={renderers} {...props} />;
 }
 
 const renderers = {

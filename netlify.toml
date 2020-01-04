@@ -8,7 +8,7 @@
   functions = "dist/functions"
 
   # Default build command.
-  command = "$(npm bin)/tsc --noEmit && $(npm bin)/webpack --config webpack.functions.js --mode production && $(npm bin)/webpack --config webpack.client.js --mode production"
+  command = "$(npm bin)/tsc --project ./client --noEmit && $(npm bin)/tsc --project ./functions --noEmit && $(npm bin)/webpack --config webpack.functions.js --mode production && $(npm bin)/webpack --config webpack.serviceWorker.js --mode production && $(npm bin)/webpack --config webpack.client.js --mode production"
 
 [dev]
   # Command to start your dev server

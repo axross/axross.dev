@@ -4,7 +4,7 @@ const { EnvironmentPlugin } = require("webpack");
 const CdnPlugin = require("webpack-cdn-plugin");
 
 module.exports = {
-  entry: "./client/main.tsx",
+  entry: "./client/client.tsx",
   output: {
     path: path.resolve(__dirname, './dist/client'),
     filename: "[name].js",
@@ -21,6 +21,7 @@ module.exports = {
           {
             loader: "ts-loader",
             options: {
+              configFile: path.resolve(__dirname, "./client/tsconfig.json"),
               transpileOnly: true,
             },
           },
@@ -35,7 +36,6 @@ module.exports = {
       favicon: path.resolve(__dirname, './dist/client/favicon.png'),
       mobile: true,
       appMountId: "app",
-      hash: true,
       googleAnalytics: {
         trackingId: "UA-79252294-3",
         pageViewOnLoad: false,
@@ -52,6 +52,12 @@ module.exports = {
             }
           }
         </style>
+
+        <script defer>
+          if (typeof navigator.serviceWorker !== "undefined") {
+            navigator.serviceWorker.register("/sw.js");
+          }
+        </script>
       `,
     }),
     new CdnPlugin({
