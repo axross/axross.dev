@@ -1,5 +1,6 @@
 import { makeDecorator } from '@storybook/addons';
-import GlobalStyle from '../src/views/components/GlobalStyle';
+import * as React from "react";
+import GlobalStyle from '../common/components/GlobalStyle';
 
 export default makeDecorator({
   name: 'withGlobalStyle',
