@@ -1,7 +1,7 @@
-https://www.axross.dev/*       https://www.kohei.dev/:splat      301!
-https://axross.dev/*           https://www.kohei.dev/:splat      301!
-https://kohei.netlify.dev/*    https://www.kohei.dev/:splat      301!
-/robots.txt                    /.netlify/functions/robotsTxt     200
-/sitemap.xml                   /.netlify/functions/sitemapXml    200
-/posts/feed.xml                /.netlify/functions/feedXml       200
-/*                             /                                 200
+https://www.axross.dev/*       hl=:hl    https://www.kohei.dev/:splat?hl=:hl    301!
+https://axross.dev/*           hl=:hl    https://www.kohei.dev/:splat?hl=:hl    301!
+https://kohei.netlify.dev/*    hl=:hl    https://www.kohei.dev/:splat?hl=:hl    301!
+/robots.txt                              /.netlify/functions/robotsTxt          200
+/sitemap.xml                             /.netlify/functions/sitemapXml         200
+/posts/feed.xml                          /.netlify/functions/feedXml            200
+/*                                       /                                      200
