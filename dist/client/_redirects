@@ -1,4 +1,3 @@
-https://kohei.dev/*            https://www.kohei.dev/:splat      301!
 https://www.axross.dev/*       https://www.kohei.dev/:splat      301!
 https://axross.dev/*           https://www.kohei.dev/:splat      301!
 https://kohei.netlify.dev/*    https://www.kohei.dev/:splat      301!
