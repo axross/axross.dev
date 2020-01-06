@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import Logo from "./HeadBar/Logo";
+import KeepLocaleLink from "./KeepLocaleLink";
 import LocaleSwitcher from "./LocaleSwitcher";
-import Link from "./Link";
 
 export interface Props extends React.Attributes {
   className?: string;
@@ -31,7 +31,7 @@ const Root = styled.header`
   justify-items: flex-start;
 `;
 
-const _LogoLink = styled(Link)`
+const _LogoLink = styled(KeepLocaleLink)`
   grid-area: logo;
   padding-block-start: 20px;
   padding-block-end: 20px;
