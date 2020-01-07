@@ -97,6 +97,8 @@ Content Security Policyはディレクティブと呼ばれるキーバリュー
 - \`connect-src\` : XHRやFetchによる読み込み
 - \`script-src\` : JavaScriptの読み込み
     - \`<script src="...">\` による読み込みだけでなく、 \`<script> ... </script>\` や \`<button onclick="alert(1)">\` のようなインラインスクリプトの実行を抑制する設定もある
+
+    qweqweqe
 - \`style-src\` : CSSの読み込み
     - \`script-src\` と同じように \`<link href="..." rel="stylesheet" type="text/css">\` による読み込みだけでなく \`<style>...</style>\` や \`<button style="...">\` のようなインラインスタイルもカバーする
 - \`img-src\` : \`<img>\` とFaviconの読み込み
@@ -170,165 +172,102 @@ Data URIはMIME Typeとコンテンツを自由に設定できるので、例え
 `;
 
 const ARTICLE_C = `
-The previous time I went over, Next.js was version 7 or 8, I guess. There was a lot of workarounds neccessary and I didn’t feel it worth and gave up to use it because of the cost for workarounds and the outcome from the framework didn't balance. Recently I needed to research how good Next.js 9 is and I made this website using it in order to go over. Here is tips what I run into throughout making this website.
+あけましておめでとうございます。年末の空いた時間を利用してこのWebサイトでローディングプレースホルダーを表示するようにしたので、その紹介をしたいと思います。
 
-## Next.js is now TypeScript
-Basically Next.js 9 is fully typed. Before this, you needed to install a plugin to use TypeScript and add a few configs in \`next.config.js\` and \`.babelrc\`. But now you need nothing. Next.js 9 looks totally TypeScript! In fact, there’s Babel is running backside, but you almost never need to care it.
+**ローディングプレースホルダー**というのは、データの取得などでユーザーに待ってもらう間、実際のコンテンツに似た形状のローディング表示をするUIのことです。
 
-> \`"esModuleInterop": true\` in \`tsconfig.json\` is supposed to be set for Babel, however, it will be automatically added if it’s not set. 
+古くから使われている丸い形のローディング表示は**スピナー**と呼ばれていますが、スピナーと違って**実際のコンテンツに似ているので視線を自然にコンテンツが表示される位置に誘導でき**、また仮の表示でコンテンツの空白を埋められるので、徐々にコンテンツが読み込まれていく時に起こるガタガタ感を軽減することができます。
 
-## Write “universal” code in general and “isomorphic” code in \`getInitialProps()\`
-All code you wrote will run on both of browsers and Node. At the initial access for each route component, it runs on Node from \`getInitialProps()\` as its starting point. After it’s served as a client-side code, it runs as a single page application, which means each route component runs on the browser from \`getInitialProps()\`. Therefore, **everything in Next.js is supposed to be “universal”.**
+## React Content Loader
+📦 \`react-content-loader\` はSVGにクリップパスを当てることで複数の矩形要素を横断したアニメーションでローディングプレースホルダーを実装できるライブラリです。
 
-> **Universal**: Not dependent to the platform. No reference to APIs only available on browsers or Node such as \`window\` nor \`require("fs")\` . Only using JavaScript’s standard APIs.
+> **danilowoz/react-content-loader**  
+> *[https://github.com/danilowoz/react-content-loader](https://github.com/danilowoz/react-content-loader)*
 > 
-> **Isomorphic**: Runs on both of browsers and Node but the code is not universal. Even like it refers to \`window\`, it checks whether it’s available (e.g. \`if (typeof window !== "undefined")\`). Use another way to do something equivalent if it’s not unavailable.
+> ちなみにVue版の **[egoist/vue-content-loader](https://github.com/egoist/vue-content-loader)** やAngular版の **[ngneat/content-loader](https://github.com/ngneat/content-loader)** などもあります。使い方は同じです。
 
-However, \`getInitialProps()\` has arguments \`req\` and \`res\` when it’s called for server-side rendering. **You can distinguish the running platform and fill the difference. This is “isomorphic”.** Here is the code to detect user’s locale isomorphicly (I wrote this for the website but I didn’t use for some reason eventually):
+\`<ContentLoader>\` というReactコンポーネントがexportされているので、この中に \`<rect>\` や \`<circle>\` を入れていきます。ローディング完了後に表示される実際のコンテンツからサイズやポジションを計算して \`<rect>\` を作ります。たとえばこのWebサイトのブログ記事ページは読み込み中に次のような表示になっています。端末をオフラインにして言語を切り替えようとすると試せます。
 
-\`\`\`typescript
-import * as http from 'http';
-import { NextPageContext } from 'next';
+> **2020/01/06 追記**  
+> 現在はService Workerによるオフライン対応が施されているので、再現にはキャッシュを全て消した上で端末をオフラインにする必要があります。
 
-SomePageRoute.getInitialProps = ({ req } :NextPageContext) => {
-  const locale = decideLocale(req);
+![Loading Placeholder Example](//images.ctfassets.net/2mfcuy3p355s/7oVtWb6lYFZ7S8tGE72RcG/86f15afd15b08262e21c3592eb9710ff/loading-placeholder2.png)
+
+一般的にテキストには文字のサイズ (\`font-size\`) と行間 (\`line-height\`) があります。これらを意識して \`<rect>\` を作っていくとかなりそれっぽくなります。
+
+とはいえ \`<rect>\` に \`line-height\` はありませんので、 \`font-size\` と加味して \`x\` と \`height\` で表示位置を設定します。考え方は次の画像のようになります。
+
+![Calculating the Layout for Loading Placeholder](//images.ctfassets.net/2mfcuy3p355s/2JCv40XkmJBQZ0YZFUU2XN/27d51693f3d370e01ce557e9bb5e650a/loading-placeholder.png)
+
+これをReactのJSXで表現すると次のようになります。
+
+\`\`\`css
+/* 記事の本文のCSS (実際とは異なりますが参考として) */
+p {
+  font-size: 16px;
+  line-height: 1.75;
 }
-
-// returns the most desired locale
-function decideLocale(req?: http.IncommingMessage): string {
-  if (req) {
-    // access to HTTP request headers if there's req
-    const acceptLanguage = req.headers["accept-language"];
-
-    if (acceptLanguage) {
-      const requestedLocales = acceptLanguage.split(",").map(part => {
-        const [locale, priority] = part.trim().split(";q=");
-
-        return { locale, priority: parseInt(priority) };
-      });
-
-      // sort requested locales by their priority
-      requestedLocales.sort((a, b) => b.priority - a.priority);
-
-      return requestedLocales.find(({ locale }) => locale !== '*') || DEFAULT_LOCALE;
-    }
-  }
-
-  if (typeof navigator !== 'undefined') {
-    // navigator is only available on the browser
-    return navigator.languages[0]
-  }
-
-  return DEFAULT_LOCALE;
-}
-
-const DEFAULT_LOCALE = "en-US"
 \`\`\`
 
-## Must create \`_document.tsx\` and \`_app.tsx\`
-There two are supposed to be placed in \`pages/\`, however, these are not routes. You can create \`_document.tsx\` to change the output HTML structure. Every route components are going to be wrapped by \`<App>\` component by creating \`_app.tsx\`.
+\`\`\`jsx
+// line-heightの1.75をpx換算すると28px
+// テキストの上下に (28 - 16) / 2 = 6pxの空白があることになる
+<ContentLoader>
+  {/* テキストの上に空白があるので一行目は y=6px になる */}
+  <rect x="0" y="6px" width="100%" height="16px" />
 
-**The default output of Next.js doesn’t have \`<html>\`’s \`lang\` attribute.** You need to set it by yourself ([example](https://github.com/axross/axross.dev/blob/9a396055f59a8ef8428b80b3682a38afb33c351d/pages/_document.tsx#L21)). In addition, I recommend you to add \`<meta>\` elements exactly same throughout every route such as \`<meta name="viewport" >\` and \`<meta name="theme-color" >\` there (if you want to set \`<meta>\` elements individually, you can use Next.js’s \`<Head>\` component).
-
-\`\`\`tsx
-import * as React from "react";
-import Document, { DocumentContext, Html, Head, Main, NextScript } from "next/document";
-
-interface Props {
-  locale: "en-US" | "ja-JP";
-}
-
-class CustomDocument extends Document<Props> {
-  render() {
-    return (
-      <Html lang={this.props.locale.split("-")[0]}>
-        <Head>
-          <meta name="viewport" content="width=device-width,height=device-height" key="viewport" />
-          <link rel="shortcut icon" href="/static/shortcut-icon.png" key="shortcutIcon" />
-          <meta name="theme-color" content="#087da1" key="themeColor" />
-        </Head>
-
-        <body>
-          <Main />
-
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
-}
-
-export default CustomDocument;
+  {/* 2行目以降は 前の行のy + 16px + 12px */}
+  <rect x="0" y="34px" width="100%" height="16px" />
+  <rect x="0" y="62px" width="40%" height="16px" />
+</ContentLoader>
 \`\`\`
 
-\`_app.tsx\` is useful to mount some common element throughout every page such as navigation bars. Furthermore, **it’s also best way to provide certain objects to descendants by [React  Context](https://reactjs.org/docs/context.html) (this is well-known pattern to make dependency injection).** I supply descendant components “current locale“, “placeholder text for translation” and something like that ([example](https://github.com/axross/axross.dev/blob/9a396055f59a8ef8428b80b3682a38afb33c351d/pages/_app.tsx#L21-L47)). Here is also the example code for the case that you make a web application and provide “authentication state”.
+## ダークモードに対応する
+塗りつぶしの色に透明度を持たせればダークモードでもそれなりの見た目になりますが、背景がピュアな黒でない時などは違和感があるかもしれません。実際このWebサイトの背景色は \`#11181f\` で、うっすら青色が強いです。こういう場合はSVGの塗りつぶしの定義となる \`<linearGradient>\` 要素内にある \`<stop>\` 要素にメディアクエリで別々の色を当てるようにするとよいです。
 
-\`\`\`tsx
-import * as React from "react";
-import NextApp, { AppContext, Container } from "next/app";
-import Session from "(somewhere...)";
-import getAuthenticationSession from "(somewhere...)";
-
-interface Props {
-  session: Session;
-  pageProps: any;
+\`\`\`css
+/* 実際にはsvg要素の代わりにclassを指定してください */
+svg > defs > linearGradient > stop:nth-of-type(2n) {
+  stop-color: #e0e4e9;
 }
 
-class App extends NextApp<Props> {
-  render() {
-    const { session, pageProps, Component } = this.props;
-
-    return (
-      <Container>
-        <SessionContext.Provider value={session}>
-          <Component {...pageProps} />
-        </SelfUrlContext.Provider>
-      </Container>
-    );
-  }
-
-  static async getInitialProps({ Component, ctx }: AppContext) {
-    const componentGetInitialProps = Component.getInitialProps || (() => Promise.resolve());
-
-    const [session, pageProps] = await Promise.all([
-      getAuthenticationSession(),
-      componentGetInitialProps(ctx),
-    ]);
-
-    return {
-      session,
-      pageProps
-    };
-  }
+svg > defs > linearGradient > stop:nth-of-type(2n + 1) {
+  stop-color: #eff2f4;
 }
 
-export default App;
+@media (prefers-color-scheme: dark) {
+  svg > defs > linearGradient > stop:nth-of-type(2n) {
+    stop-color: #1e2730;
+  }
+
+  svg > defs > linearGradient > stop:nth-of-type(2n + 1) {
+    stop-color: #2d3641;
+  }
+}
 \`\`\`
 
-## Don’t rely on useful API Routes so much
-\`/pages/api/*.tsx\` are special routes. They don’t have React component to render but can have implementation what HTTP response they return. Which means you can create Web API endpoints with that as like making Web servers .
+このWebサイトはStyled Componentsを利用しているので各要素の参照は \`&\` というシンボルを介しています。[ソースコードはこちらです。](https://github.com/axross/kohei.dev/blob/4b3e3308a451f6445b88571895037b5624ce220b/common/components/ContentLoader.tsx#L34-L54)
 
-Even though you can make “full”-stack web application with both aspect of client-side and server-side, it’s not so great idea. If you make so many Web API endpoints with API routes, it will result in super messy code because you need to carefully write universal code everywhere with Next.js.
+## レスポンシブにする
+SVGはHTMLに埋め込めるベクター画像のようなものなのでアスペクト比を維持してしまうと、幅に応じて高さが自動的に変わってしまい不自然です。次のことに気をつけましょう。
 
-What I recommend is using API routes less. You should use it just to support front-ends. Even like you write Web API endpoints in Node, it’s much better if you build a simple Node API server with [Fastify](https://www.fastify.io/), [Koa](https://koajs.com/) or [Express](https://expressjs.com/). **Because you don’t need to concern about the bundle size for the client-side code as well as there’s less restriction of the platform.**
+- 塗りつぶしの定義要素 (\`<rect>\` や \`<circle>\` など) の \`width\` や \`height\` をパーセンテージで定義する
+- \`viewBox\` や \`preserveAspectRatio\` をデフォルト値のまま変えない
+- \`width\` と \`height\` を計算して定義しておく
+  - 文字サイズ、余白などでの合計 \`height\` を算出して固定しておく ([サンプル](https://github.com/axross/kohei.dev/blob/4b3e3308a451f6445b88571895037b5624ce220b/common/pages/BlogPostPage/ArticleLoader.tsx#L40-L47)) 。
+  
+    そんなことよりうんこうんこー！
 
-## Able to serve Sitemap and RSS/Atom feeds
-\`pages/sitemap.xml.tsx\` is exposed as \`/sitemap.xml\` as the endpoint. In addition, you can control what the endpoint responds for HTTP in \`getInitialProps()\` by doing \`res.send()\` ([example](https://github.com/axross/axross.dev/blob/9a396055f59a8ef8428b80b3682a38afb33c351d/pages/sitemap.xml.ts#L66-L68)). As React component, you can just return \`null\` because **no route can be reached in client-side rendering as long as it is not specified by \`<Link>\`.** This feature enables you to serve Sitemaps or RSS/Atom feeds (As an example, [here](https://axross.dev/posts/feed.xml?hl=ja-JP) is Atom feed of this website).
+## 既知の問題: \`<base>\` との併用
+React Content LoaderはSVG要素のクリップパス (塗りつぶしをどう切り抜くか) やグラデーションの定義に相対パスでの \`url()\` を利用しているので、 \`<base>\` 要素を \`<head>\` 内に定義している場合は黒い塗りつぶしが表示されてしまいうまく動きません。クリップパスやグラデーションの定義にURLでたどり着けないためです。
 
-## Consider to use singleton
+Safariでのみこの問題が発生するのでSafariでのバグのように感じてしまいますが、[SVG WGの見解によるとそれが正しい挙動なようです。](https://www.w3.org/2015/08/25-svg-minutes.html#item08) \`<ContentLoader>\` Reactコンポーネントに \`baseUrl\` というPropsがあるのでそれを利用して \`url()\` にプレフィックスを付与するか、 \`<base>\` 要素を使わないようにするなどして回避しましょう。
 
-\`pages/_app.tsx\` is only the module every route passes. You may come up with some idea that it looks a great idea to prepare dependency injection container there and provide it to each route by React's props or contexts. But you need to remember that every page will be in server-side rendering and then going to be application entry point for the single-page application. If you put everything necessary in all routes, **Next.js cannot split code into small pieces of application endpoint. This makes huge overhead in the bundle size as well as cause the server-side rendering slow.**
+> Webpackを利用している場合は \`webpack.config.js\` で \`output.publicPath\` を設定するなどすれば大抵の場合は \`<base>\` 要素が必要なくなります。
 
-Consider that make modules refers dependencies directly or make some singleton object and make it imports dependencies as less as possible. Even in that case, there's no problem because fortunately most test frameworks have ways to mock modules.
+## まとめ
+- ローディング中のうちにユーザーの視線を誘導するためにローディングプレースホルダーを使いましょう
+- 視線を正しく誘導するためにローディングプレースホルダーを実際のコンテンツに似せましょう
 
-## Does Next.js only run on Now?
-
-The answer is "No”. ZEIT, which has [Now](https://zeit.co/now), develops and maintains Next.js as a core team. Surely Now has something like preset for Next.js. Moment after you push your Next.js application to Now, __each \`pages/**/*.tsx\` will be separately deployed as cloud functions automatically. When you go to some route by a browser, the cloud function runs, do server-side rendering and respond rendered HTML and JS.__ It works really well.
-
-My second question was “how about Google Cloud Platform? Amazon Web Services? Netlify?”. The answer is you need to manage it by yourself. Next.js supports making custom single endpoint for server-side in Next.js. It would be the best way for GCP and AWS. As for Netlify, you can generate a normal web application by \`next export\`, deploy it to Netlify, and it works as a normal single page application. In this case, you cannot do dynamic server-side rendering with \`getInitialProps()\`.
-
-## Conclusion
-Next.js 9 is pretty nice. It's the best way to create both of web applications and websites without anything struggling.
-
-If you can use Now, there is almost no configuration to make web applications working stunningly well. Even if you cannot use Now, you can use Next.js without server-side rendering. Even in this case, this enough worth as considering that the framework includes routing, \`<head>\` manipulation, static file serving, CSS in JS and Webpack configuration.
+そんなわけで、今年もよろしくお願いします！
 `;
