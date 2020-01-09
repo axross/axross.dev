@@ -60,6 +60,7 @@ export default React.forwardRef<HTMLElement, Props>(
 export enum TextType {
   body,
   subtitle,
+  subtitle2,
   label,
   logo
 }
@@ -134,6 +135,16 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
       font-size: 32px;
     }
   `,
+  [TextType.subtitle2]: css`
+    font-size: 32px;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.5;
+
+    ${MOBILE} {
+      font-size: 24px;
+    }
+  `,
   [TextType.label]: css`
     font-size: 16px;
     font-family: "Open Sans", sans-serif;
@@ -144,13 +155,13 @@ const TEXT_STYLE: Record<TextType, SerializedStyles> = {
     }
   `,
   [TextType.logo]: css`
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 600;
     font-family: "Montserrat", sans-serif;
     line-height: 1.5;
 
     ${MOBILE} {
-      font-size: 22px;
+      font-size: 16px;
     }
   `
 };
