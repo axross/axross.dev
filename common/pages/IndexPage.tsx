@@ -2,14 +2,11 @@ import styled from "@emotion/styled";
 import * as React from "react";
 import BlogPost from "../entities/BlogPost";
 import HeadBar from "../components/HeadBar";
-import LocaleSwitcher from "../components/LocaleSwitcher";
-import PrettyMarkdown from "../components/PrettyMarkdown";
 import { MOBILE } from "../constant/mediaQuery";
-import Profile from "./BlogPostPage/Profile";
 import FirstNBlogPosts from "./IndexPage/FirstNBlogPosts";
 import FirstNBlogPostsHeading from "./IndexPage/FirstNBlogPostsHeading";
 import FirstNBlogPostsLoader from "./IndexPage/FirstNBlogPostsLoader";
-import WhoamiHeading from "./IndexPage/WhoamiHeading";
+import Whoami from "./IndexPage/Whoami";
 import WhoamiLoader from "./IndexPage/WhoamiLoader";
 
 export interface Props {
@@ -27,20 +24,12 @@ export default function IndexPage({
 }: Props) {
   return (
     <Root>
-      <_HeadBar />
-
-      <_Profile />
-
-      <_LocaleSwitcher />
-
-      <_WhoamiHeading />
+      <_HeadBar noLogo />
 
       {bioLoading ? (
         <_WhoamiLoader />
       ) : (
-        <_Whoami>
-          <PrettyMarkdown>{bio!}</PrettyMarkdown>
-        </_Whoami>
+        <_Whoami bio={bio!} />
       )}
 
       <_BlogPostListHeading />
@@ -55,66 +44,44 @@ export default function IndexPage({
 }
 
 const Root = styled.div`
+  --max-width: 1080px;
+  --width: min(var(--max-width), 100%);
   display: grid;
-  grid-template-columns: 320px 64px calc(100% - 320px - 64px - 64px) 64px;
-  grid-template-rows: auto 32px auto 32px auto 64px auto 32px auto;
+  grid-template-columns: calc((var(--width) - 640px) / 2) 640px calc((var(--width) - 640px) / 2);
+  grid-template-rows: auto 32px auto 64px auto 32px auto;
   grid-template-areas:
-    "profile . locale-switcher ."
-    "profile . . ."
-    "profile . whoami-heading ."
-    "profile . . ."
-    "profile . whoami ."
-    "profile . . ."
-    "profile . blog-post-list-heading ."
-    "profile . . ."
-    "profile . blog-post-list .";
-  max-width: 1080px;
+    "head-bar head-bar head-bar"
+    ". . ."
+    ". whoami ."
+    ". . ."
+    ". blog-post-list-heading ."
+    ". . ."
+    ". blog-post-list .";
+  max-width: var(--max-width);
   margin-inline-start: auto;
   margin-inline-end: auto;
-  padding-block-start: 80px;
-  padding-block-end: 80px;
+  padding-block-end: 128px;
 
   ${MOBILE} {
+    --max-width: 480px;
     grid-template-columns: 20px calc(100% - 20px - 20px) 20px;
-    grid-template-rows: auto 16px auto 24px auto 48px auto 24px auto;
-    grid-template-areas: "head-bar head-bar head-bar" ". . ." ". whoami-heading. " ". . ." ". whoami ." ". . ." ". blog-post-list-heading ." ". . ." ". blog-post-list .";
-    max-width: 480px;
+    grid-template-rows: auto auto 48px auto 24px auto;
+    grid-template-areas:
+      "head-bar head-bar head-bar"
+      ". whoami ." ". . ."
+      ". blog-post-list-heading ."
+      ". . ."
+      ". blog-post-list .";
     padding-block-start: 0;
-    padding-block-end: 48px;
+    padding-block-end: 64px;
   }
 `;
 
 const _HeadBar = styled(HeadBar)`
   grid-area: head-bar;
-  display: none;
-
-  ${MOBILE} {
-    display: grid;
-  }
 `;
 
-const _Profile = styled(Profile)`
-  grid-area: profile;
-
-  ${MOBILE} {
-    display: none;
-  }
-`;
-
-const _LocaleSwitcher = styled(LocaleSwitcher)`
-  grid-area: locale-switcher;
-  justify-self: flex-end;
-
-  ${MOBILE} {
-    display: none;
-  }
-`;
-
-const _WhoamiHeading = styled(WhoamiHeading)`
-  grid-area: whoami-heading;
-`;
-
-const _Whoami = styled.div`
+const _Whoami = styled(Whoami)`
   grid-area: whoami;
 `;
 

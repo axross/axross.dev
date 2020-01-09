@@ -1,19 +1,24 @@
 import styled from "@emotion/styled";
 import * as React from "react";
+import { MOBILE } from "../constant/mediaQuery";
 import Logo from "./HeadBar/Logo";
+import LocaleSwitcher from "./HeadBar/LocaleSwitcher";
 import KeepLocaleLink from "./KeepLocaleLink";
-import LocaleSwitcher from "./LocaleSwitcher";
 
 export interface Props extends React.Attributes {
+  noLogo?: boolean;
   className?: string;
 }
 
-export default function HeadBar(props: Props) {
+export default function HeadBar({ noLogo = false, ...props }: Props) {
   return (
     <Root {...props}>
-      <_LogoLink to="/">
-        <_Logo />
-      </_LogoLink>
+      {noLogo
+        ? null
+        : <_LogoLink to="/">
+            <_Logo />
+          </_LogoLink>
+      }
 
       <_Locales>
         <LocaleSwitcher />
@@ -29,14 +34,22 @@ const Root = styled.header`
   column-gap: 24px;
   align-items: center;
   justify-items: flex-start;
+  height: 64px;
 `;
 
 const _LogoLink = styled(KeepLocaleLink)`
   grid-area: logo;
-  padding-block-start: 20px;
-  padding-block-end: 20px;
-  padding-inline-start: 20px;
-  padding-inline-end: 20px;
+  padding-block-start: 8px;
+  padding-block-end: 8px;
+  padding-inline-start: 16px;
+  padding-inline-end: 16px;
+
+  ${MOBILE} {
+    padding-block-start: 20px;
+    padding-block-end: 20px;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+  }
 `;
 
 const _Logo = styled(Logo)`
