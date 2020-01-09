@@ -112,6 +112,8 @@ const SocialLinkListItem = styled.li`
 
 const SocialLinkListItemIcon = styled(Icon)`
   grid-area: icon;
+  width: 20px;
+  height: 20px;
 `;
 
 const SocialLinkListItemLabel = styled(ExternalLink)`
