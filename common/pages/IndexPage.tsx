@@ -7,7 +7,6 @@ import FirstNBlogPosts from "./IndexPage/FirstNBlogPosts";
 import FirstNBlogPostsHeading from "./IndexPage/FirstNBlogPostsHeading";
 import FirstNBlogPostsLoader from "./IndexPage/FirstNBlogPostsLoader";
 import Whoami from "./IndexPage/Whoami";
-import WhoamiHeading from "./IndexPage/WhoamiHeading";
 import WhoamiLoader from "./IndexPage/WhoamiLoader";
 
 export interface Props {
@@ -80,10 +79,6 @@ const Root = styled.div`
 
 const _HeadBar = styled(HeadBar)`
   grid-area: head-bar;
-`;
-
-const _WhoamiHeading = styled(WhoamiHeading)`
-  grid-area: whoami-heading;
 `;
 
 const _Whoami = styled(Whoami)`
