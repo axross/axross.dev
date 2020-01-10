@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ContentfulBioRepository,
       ContentfulBlogPostRepository,
       ContentfulLocaleRepository,
+      ContentfulWebsitePurposeRepository,
       RepositoryContext,
       createClient
     }
@@ -35,7 +36,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const repositories = {
     bioRepository: new ContentfulBioRepository(contentful),
     blogPostRepository: new ContentfulBlogPostRepository(contentful),
-    localeRepository: new ContentfulLocaleRepository(contentful)
+    localeRepository: new ContentfulLocaleRepository(contentful),
+    websitePurposeRepository: new ContentfulWebsitePurposeRepository(contentful),
   };
 
   ReactDOM.render(
