@@ -8,7 +8,7 @@ interface Props extends React.Attributes {
   className?: string;
 }
 
-export default function WhoamiLoader(props: Props) {
+export default function TwoParagraphLoader(props: Props) {
   return (
     <Root {...props}>
       <FirstParagraphLine />
