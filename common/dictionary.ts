@@ -49,6 +49,11 @@ export const RECENT_N_BLOG_POSTS_HEADING: DictionaryEntry = {
   "ja-JP": "ブログ"
 };
 
+export const WEBSITE_PURPOSE_HEADING: DictionaryEntry = {
+  "en-US": "What's This Website?",
+  "ja-JP": "このWebサイトは？"
+};
+
 export const LANGUAGE_EN_US: DictionaryEntry = {
   "en-US": "English",
   "ja-JP": "English"

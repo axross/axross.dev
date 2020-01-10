@@ -15,7 +15,7 @@ import IndexPage from "../pages/IndexPage";
 
 export default function IndexRoute(_: RouteChildrenProps) {
   const { currentLocale } = React.useContext(LocaleContext);
-  const { bioRepository, blogPostRepository } = React.useContext(
+  const { bioRepository, blogPostRepository, websitePurposeRepository } = React.useContext(
     RepositoryContext
   );
   const [[bio, isBioLoading], setBio] = React.useState<
@@ -24,17 +24,22 @@ export default function IndexRoute(_: RouteChildrenProps) {
   const [[blogPosts, isBlogPostsLoading], setBlogPosts] = React.useState<
     [BlogPost[], boolean]
   >([[], true]);
+  const [[websitePurpose, isWebsitePurposeLoading], setWebsitePurpose] = React.useState<[string | null, boolean]>([null, true]);
 
   React.useEffect(() => window.scrollTo(0, 0), []);
 
   React.useEffect(() => {
     setBio([null, true]);
     setBlogPosts([[], true]);
+    setWebsitePurpose([null, true]);
 
     bioRepository.getByLocale(currentLocale).then(bio => setBio([bio, false]));
     blogPostRepository
       .getAllByLocale(currentLocale)
       .then(blogPosts => setBlogPosts([blogPosts, false]));
+    websitePurposeRepository
+      .getByLocale(currentLocale)
+      .then(websitePurpose => setWebsitePurpose([websitePurpose, false]));
   }, [currentLocale]);
 
   return (
@@ -48,6 +53,8 @@ export default function IndexRoute(_: RouteChildrenProps) {
         blogPosts={blogPosts}
         bioLoading={isBioLoading}
         blogPostsLoading={isBlogPostsLoading}
+        websitePurpose={websitePurpose}
+        websitePurposeLoading={isWebsitePurposeLoading}
       />
     </>
   );
