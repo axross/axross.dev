@@ -14,7 +14,7 @@ interface Props extends React.Attributes {
 export default function Blockquote({ children, ...props }: Props) {
   return (
     <Root {...props}>
-      <MarkdownTextThemeContext.Provider value={{ isEmphasized: true }}>
+      <MarkdownTextThemeContext.Provider value={{ color: ThemedColor.secondaryForeground, isEmphasized: true }}>
         {children}
       </MarkdownTextThemeContext.Provider>
     </Root>
@@ -28,12 +28,11 @@ const Root = styled.blockquote`
   margin-block-end: 32px;
   margin-inline-start: -32px;
   margin-inline-end: -32px;
-  padding-block-start: 32px;
-  padding-block-end: 32px;
-  padding-inline-start: 32px;
+  padding-block-start: 16px;
+  padding-block-end: 16px;
+  padding-inline-start: 26px;
   padding-inline-end: 32px;
-  border-radius: 8px;
-  background-color: ${LIGHT_COLOR[ThemedColor.accentBackground]};
+  border-left: 6px ${LIGHT_COLOR[ThemedColor.secondaryForeground]} solid;
   line-height: 1.333;
   overflow-x: scroll;
 
@@ -43,11 +42,11 @@ const Root = styled.blockquote`
     margin-block-end: 24px;
     margin-inline-start: calc(-1 * (100vw - 100%) / 2);
     margin-inline-end: calc(-1 * (100vw - 100%) / 2);
-    padding-block-start: 20px;
-    padding-block-end: 20px;
-    padding-inline-start: calc((100vw - 100%) / 2);
+    padding-block-start: 10px;
+    padding-block-end: 10px;
+    padding-inline-start: calc((100vw - 100%) / 2 - 4px);
     padding-inline-end: calc((100vw - 100%) / 2);
-    border-radius: 0;
+    border-left: 4px ${LIGHT_COLOR[ThemedColor.secondaryForeground]} solid;
   }
 
   ${DARK_MODE} {

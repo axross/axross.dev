@@ -22,9 +22,7 @@ export default function MarkdownText({ ...props }) {
     React.useContext(MarkdownTextThemeContext) || {};
   const isLink = theme.isLink ?? false;
   const isLinkHovered = theme.isLinkHovered ?? false;
-  const color =
-    theme.color ??
-    (isLink ? ThemedColor.primaryForeground : ThemedColor.foreground);
+  const color = isLink ? ThemedColor.primaryForeground : (theme.color ?? ThemedColor.foreground);
   const type = theme.type ?? TextType.paragraph;
   const isStrong = theme.isStrong ?? false;
   const isEmphasized = theme.isEmphasized ?? false;
