@@ -33,6 +33,10 @@ export default function handler(
       return;
     }
 
+    const websiteURL = new URL("/", process.env.URL);
+
+    websiteURL.searchParams.set("hl", currentLocale);
+
     blogPostRepository.getAllByLocale(currentLocale).then(blogPosts => {
       const xml = xmljs.js2xml(
         {
@@ -47,7 +51,7 @@ export default function handler(
               xmlns: "http://www.w3.org/2005/Atom"
             },
             id: {
-              _text: `${new URL("/", process.env.URL)}`
+              _text: `${websiteURL}`
             },
             title: {
               _text: `Blog posts in axross.dev`
@@ -60,7 +64,7 @@ export default function handler(
                 _text: MY_NAME
               },
               uri: {
-                _text: `${new URL("/", process.env.URL)}`
+                _text: `${websiteURL}`
               }
             },
             link: [
@@ -108,7 +112,7 @@ export default function handler(
                   _text: MY_NAME
                 },
                 uri: {
-                  _text: `${new URL("/", process.env.URL)}`
+                  _text: `${websiteURL}`
                 }
               },
               summary: {
