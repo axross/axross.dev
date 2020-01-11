@@ -8,17 +8,17 @@
   functions = "dist/functions"
 
   # Default build command.
-  command = "$(npm bin)/tsc --project ./client --noEmit && $(npm bin)/tsc --project ./functions --noEmit && $(npm bin)/webpack --config webpack.functions.js --mode production && $(npm bin)/webpack --config webpack.serviceWorker.js --mode production && $(npm bin)/webpack --config webpack.client.js --mode production"
+  command = "npm run dry-compile && npm run build"
 
 [dev]
   # Command to start your dev server
-  command = "$(npm bin)/webpack-dev-server --config webpack.client.js --mode development"
+  command = "npm run serve:client"
 
   # Port that the dev server will be listening on
-  port = 8080
+  port = 3000
 
   # functionsPort = 34567 # port for functions server
-  # targetPort = 8080 # Port of target app server
+  targetPort = 8080 # Port of target app server
 
   publish = "dist/client"
 

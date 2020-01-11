@@ -3,7 +3,15 @@
   "scripts": {
     "test": "npm run test:unit",
     "test:unit": "jest --config jest.unit.js",
-    "dev": "webpack-dev-server --mode development",
+    "dry-compile:client": "tsc --project ./client --noEmit",
+    "dry-compile:functions": "tsc --project ./functions --noEmit",
+    "dry-compile": "npm run dry-compile:client && npm run dry-compile:functions",
+    "build:functions": "webpack --config webpack.functions.js --mode production",
+    "build:service-worker": "webpack --config webpack.serviceWorker.js --mode production",
+    "build:client": "webpack --config webpack.client.js --mode production",
+    "build": "npm run build:functions && npm run build:service-worker && npm run build:client",
+    "serve:client": "webpack-dev-server --config webpack.client.js --mode development",
+    "dev": "netlify dev",
     "storybook": "start-storybook -s ./public"
   },
   "dependencies": {
@@ -37,7 +45,7 @@
     "html-webpack-plugin": "^3.2.0",
     "html-webpack-template": "^6.2.0",
     "jest": "^24.9.0",
-    "netlify-cli": "^2.25.0",
+    "netlify-cli": "^2.28.0",
     "ts-jest": "^24.2.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.2",
