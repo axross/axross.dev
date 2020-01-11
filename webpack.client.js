@@ -1,7 +1,6 @@
 const path = require("path");
 const HtmlPlugin = require("html-webpack-plugin");
 const { EnvironmentPlugin } = require("webpack");
-const CdnPlugin = require("webpack-cdn-plugin");
 
 module.exports = {
   entry: "./client/client.tsx",
@@ -60,43 +59,15 @@ module.exports = {
         </script>
       `,
     }),
-    new CdnPlugin({
-      modules: [
-        {
-          name: "contentful",
-          var: "contentful",
-          path: "dist/contentful.browser.min.js",
-        },
-        {
-          name: "intl-messageformat",
-          var: "IntlMessageFormat",
-          path: "dist/umd/intl-messageformat.min.js",
-        },
-        {
-          name: "react",
-          var: "React",
-          path: "umd/react.production.min.js",
-        },
-        {
-          name: "react-dom",
-          var: "ReactDOM",
-          path: "umd/react-dom.production.min.js",
-        },
-        {
-          name: "react-markdown",
-          var: "ReactMarkdown",
-          path: "umd/react-markdown.js",
-        },
-        {
-          name: "react-router-dom",
-          var: "ReactRouterDOM",
-          path: "umd/react-router-dom.min.js",
-        },
-      ]
-    }),
     new EnvironmentPlugin(['URL', 'CONTENTFUL_SPACE', 'CONTENTFUL_ACCESS_TOKEN']),
   ],
   devtool: process.env.NODE_ENV === "development" ? "eval" : "source-map",
+  optimization: {
+    minimize: process.env.NODE_ENV !== "development",
+    splitChunks: {
+      chunks: 'async',
+    }
+  },
   devServer: {
     contentBase: path.resolve(__dirname, './dist/client'),
     historyApiFallback: true,
