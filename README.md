@@ -2,10 +2,20 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/153f81f8-6487-47f5-86b1-ce579c1b186f/deploy-status)](https://app.netlify.com/sites/kohei/deploys)
 
-This is the source code of my personal website. The following is why and how I made:
+This is the source code of my personal website.
 
-- [I made a SSR-ed personal website with "full" i18n!](https://axross.dev/posts/made-ssr-i18n-website)
-  - [Japanese version / 日本語版](https://axross.dev/posts/made-ssr-i18n-website?hl=ja-JP)
+## Tech Stacks
+
+Semi-JAM Stack. **Yet no HTML built. Everything is dynamically rendered**.
+
+- Written in **TypeScript**
+- Made with **[React](https://reactjs.org)**
+- UI components are built on **[Storybook](https://storybook.js.org/)**
+- Builds with **[Webpack](https://webpack.js.org/)**
+- Blog Posts are stored in **[Contentful](https://www.contentful.com/)**
+- Hosted on **[Netlify](https://www.netlify.com/)**
+- Serves prerendered HTML (Dynamic Rendering) with **[Netlify Prerendering](https://docs.netlify.com/site-deploys/post-processing/prerendering/)**
+- Serves [RSS feeds](https://www.kohei.dev/posts/feed.xml?hl=en-US), [`sitemap.xml`](https://www.kohei.dev/sitemap.xml) and [`robots.txt`](https://www.kohei.dev/robots.txt) by **[Netlify Functions](https://www.netlify.com/products/functions/)**
 
 ## Development
 
