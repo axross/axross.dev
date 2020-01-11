@@ -59,7 +59,7 @@ module.exports = {
         </script>
       `,
     }),
-    new EnvironmentPlugin(['URL', 'CONTENTFUL_SPACE', 'CONTENTFUL_ACCESS_TOKEN']),
+    new EnvironmentPlugin(['CONTENTFUL_SPACE', 'CONTENTFUL_ACCESS_TOKEN']),
   ],
   devtool: process.env.NODE_ENV === "development" ? "eval" : "source-map",
   optimization: {

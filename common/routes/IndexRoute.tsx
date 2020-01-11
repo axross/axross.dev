@@ -68,10 +68,7 @@ function AnalyticsPageView() {
     // Google Analytics is not loaded if the device is offline
     if (typeof (window as any).ga === "undefined") return;
 
-    const url = new URL(pathname, process.env.URL);
-    url.searchParams.set("hl", currentLocale);
-
-    (window as any).ga("set", "location", `${url}`);
+    (window as any).ga("set", "page", `${pathname}?${new URLSearchParams({ hl: currentLocale })}`);
     (window as any).ga(
       "set",
       "title",
@@ -95,53 +92,41 @@ function Meta() {
   const description = new IntlMessageFormat(
     WEBSITE_DESCRIPTION[currentLocale]
   ).format({ name: MY_NAME });
-  const canonicalURL = new URL(pathname, process.env.URL);
-
-  canonicalURL.searchParams.set("hl", currentLocale);
+  const canonicalURL = `${pathname}?${new URLSearchParams({ hl: currentLocale })}`;
 
   return (
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} key="description" />
-      <link rel="canonical" href={`${canonicalURL}`} key="canonical" />
+      <link rel="canonical" href={canonicalURL} key="canonical" />
 
       {availableLocales
         .filter(locale => locale !== currentLocale)
-        .map(locale => {
-          const alternateURL = new URL(pathname, process.env.URL);
-
-          alternateURL.searchParams.set("hl", locale);
-
-          return (
-            <link
-              rel="alternate"
-              hrefLang={locale}
-              href={`${alternateURL}`}
-              key={`alternate:${locale}`}
-            />
-          );
-        })}
+        .map(locale => (
+          <link
+            rel="alternate"
+            hrefLang={locale}
+            href={`${pathname}?${new URLSearchParams({ hl: locale })}`}
+            key={`alternate:${locale}`}
+          />
+        ))
+      }
 
       {availableLocales
         .filter(locale => locale !== currentLocale)
-        .map(locale => {
-          const url = new URL("/posts/feed.xml", process.env.URL);
-
-          url.searchParams.set("hl", locale);
-
-          return (
-            <link
-              rel="alternate"
-              type="application/atom+xml"
-              title={`Blog post Atom feed (${locale})`}
-              href={`${url}`}
-              key={`atomFeed:${locale}`}
-            />
-          );
-        })}
+        .map(locale => (
+          <link
+            rel="alternate"
+            type="application/atom+xml"
+            title={`Blog post Atom feed (${locale})`}
+            href={`/posts/feed.xml?${new URLSearchParams({ hl: locale })}`}
+            key={`atomFeed:${locale}`}
+          />
+        ))
+      }
 
       {/* open graph */}
-      <meta property="og:url" content={`${canonicalURL}`} key="og:url" />
+      <meta property="og:url" content={canonicalURL} key="og:url" />
       <meta property="og:type" content="profile" key="og:type" />
       <meta
         property="og:description"
@@ -162,7 +147,7 @@ function Meta() {
       <meta property="og:title" content={title} key="og:title" />
       <meta
         property="og:image"
-        content={`${new URL("/profile.jpg", process.env.URL)}`}
+        content="/profile.jpg"
         key="og:image"
       />
 
@@ -171,9 +156,9 @@ function Meta() {
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
-          url: `${new URL(pathname, process.env.URL)}`,
+          url: canonicalURL,
           name: MY_NAME,
-          image: `${new URL("/profile.jpg", process.env.URL)}`,
+          image: "/profile.jpg",
           jobTitle: MY_JOB_TITLE,
           sameAs: MY_SOCIAL_MEDIA_LINKS.map(({ url }) => `${url}`)
         })}

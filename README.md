@@ -14,7 +14,7 @@ This is the source code of my personal website. The following is why and how I m
    npm install
    ```
 3. ```
-   URL=http://localhost:3000 CONTENTFUL_SPACE=2mfcuy3p355s CONTENTFUL_ACCESS_TOKEN=EKvjDTi2bDOjjW94G0xzRexet5yeerbiqokB2-4k-24 npm run dev
+   CONTENTFUL_SPACE=2mfcuy3p355s CONTENTFUL_ACCESS_TOKEN=EKvjDTi2bDOjjW94G0xzRexet5yeerbiqokB2-4k-24 npm run dev
    ```
 
    The access token is for development. Pass them via environement variable in order to use a different access token (and make it secret).
