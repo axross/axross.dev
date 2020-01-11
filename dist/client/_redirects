@@ -4,4 +4,5 @@ https://kohei.netlify.dev/*    hl=:hl    https://www.kohei.dev/:splat?hl=:hl    
 /robots.txt                              /.netlify/functions/robotsTxt          200
 /sitemap.xml                             /.netlify/functions/sitemapXml         200
 /posts/feed.xml                          /.netlify/functions/feedXml            200
-/*                                       /                                      200
+/posts/*                                 /index.html                            200
+/                                        /index.html                            200
