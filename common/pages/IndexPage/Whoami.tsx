@@ -24,7 +24,7 @@ export default function Whoami({ bio, ...props }: Props) {
 
       <SocialLinkList>
         {MY_SOCIAL_MEDIA_LINKS.map(link => (
-          <SocialLinkListItem>
+          <SocialLinkListItem key={`${link.url}`}>
             <SocialLinkListItemIcon
               name={detectIconNameByURL(link.url)}
               fill={ThemedColor.secondaryForeground}
