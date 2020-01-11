@@ -3,6 +3,7 @@ import { Route, Switch, useHistory, useLocation } from "react-router-dom";
 import GlobalStyle from "./components/GlobalStyle";
 import LocaleContext from "./contexts/LocaleContext";
 import RepositoryContext from "./contexts/RepositoryContext";
+import Helmet from "react-helmet";
 
 const BlogPostRoute = React.lazy(() => import("./routes/BlogPostRoute"));
 const IndexRoute = React.lazy(() => import("./routes/IndexRoute"));
@@ -44,6 +45,10 @@ export default function App() {
       }}
     >
       <GlobalStyle />
+
+      <Helmet>
+        <link rel="manifest" href="/manifest.json" />
+      </Helmet>
 
       <React.Suspense fallback={<div />}>
         <Switch>

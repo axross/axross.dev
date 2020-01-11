@@ -3,5 +3,6 @@ https://axross.dev/*           hl=:hl    https://www.kohei.dev/:splat?hl=:hl    
 https://kohei.netlify.dev/*    hl=:hl    https://www.kohei.dev/:splat?hl=:hl    301!
 /robots.txt                              /.netlify/functions/robotsTxt          200
 /sitemap.xml                             /.netlify/functions/sitemapXml         200
+/manifest.json                           /.netlify/functions/manifestJson       200
 /posts/feed.xml                          /.netlify/functions/feedXml            200
 /*                                       /                                      200
