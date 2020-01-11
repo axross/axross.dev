@@ -11,7 +11,7 @@
     "build:client": "webpack --config webpack.client.js --mode production",
     "build": "npm run build:functions && npm run build:service-worker && npm run build:client",
     "serve:client": "webpack-dev-server --config webpack.client.js --mode development",
-    "dev": "netlify dev",
+    "serve": "netlify dev",
     "storybook": "start-storybook -s ./public"
   },
   "dependencies": {
