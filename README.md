@@ -24,7 +24,7 @@ Semi-JAM Stack. **Yet no HTML built. Everything is dynamically rendered**.
    npm install
    ```
 3. ```
-   CONTENTFUL_SPACE=2mfcuy3p355s CONTENTFUL_ACCESS_TOKEN=EKvjDTi2bDOjjW94G0xzRexet5yeerbiqokB2-4k-24 npm run dev
+   CONTENTFUL_SPACE=2mfcuy3p355s CONTENTFUL_ACCESS_TOKEN=EKvjDTi2bDOjjW94G0xzRexet5yeerbiqokB2-4k-24 npm run serve
    ```
 
    The access token is for development. Pass them via environement variable in order to use a different access token (and make it secret).
