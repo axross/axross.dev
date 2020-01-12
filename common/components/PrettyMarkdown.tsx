@@ -14,6 +14,7 @@ import Strong from "./PrettyMarkdown/Strong";
 import UnorderedList from "./PrettyMarkdown/UnorderedList";
 import Deleted from "./PrettyMarkdown/Deleted";
 import ListItem from "./PrettyMarkdown/ListItem";
+import EmbededLink from "./PrettyMarkdown/EmbededLink";
 
 interface Props extends React.Attributes {
   children?: string;
@@ -52,4 +53,5 @@ const components = {
   a: MarkdownLink,
   img: Media,
   text: MarkdownText,
+  EmbededLink: EmbededLink,
 };
