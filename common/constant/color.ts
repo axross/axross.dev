@@ -10,6 +10,7 @@ export const LIGHT_COLOR: ColorTheme = {
   [ThemedColor.accentForeground]: "#ff9f43",
   [ThemedColor.whiteForeground]: "#ffffff",
   [ThemedColor.background]: "#ffffff",
+  [ThemedColor.secondaryBackground]: "#f8f9fa",
   [ThemedColor.accentBackground]: "#FFF2D5",
   [ThemedColor.loader]: "#E0E4E9",
   [ThemedColor.loaderHighlight]: "#EFF2F4"
@@ -23,6 +24,7 @@ export const DARK_COLOR: ColorTheme = {
   [ThemedColor.accentForeground]: "#feca57",
   [ThemedColor.whiteForeground]: "#ffffff",
   [ThemedColor.background]: "#11181f",
+  [ThemedColor.secondaryBackground]: "#172026",
   [ThemedColor.accentBackground]: "#4C442D",
   [ThemedColor.loader]: "#1E2730",
   [ThemedColor.loaderHighlight]: "#2D3641"

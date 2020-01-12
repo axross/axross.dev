@@ -6,6 +6,7 @@ enum ThemedColor {
   accentForeground,
   whiteForeground,
   background,
+  secondaryBackground,
   accentBackground,
   loader,
   loaderHighlight
