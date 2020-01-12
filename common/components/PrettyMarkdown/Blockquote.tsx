@@ -31,7 +31,9 @@ const Root = styled.blockquote`
   padding-block-end: 16px;
   padding-inline-start: 26px;
   padding-inline-end: 32px;
-  border-left: 6px ${LIGHT_COLOR[ThemedColor.secondaryForeground]} solid;
+  border-left-width: 6px;
+  border-left-color: ${LIGHT_COLOR[ThemedColor.secondaryForeground]};
+  border-left-style: solid;
   line-height: 1.333;
   overflow-x: scroll;
 
@@ -45,11 +47,11 @@ const Root = styled.blockquote`
     padding-block-end: 10px;
     padding-inline-start: calc((100vw - 100%) / 2 - 4px);
     padding-inline-end: calc((100vw - 100%) / 2);
-    border-left: 4px ${LIGHT_COLOR[ThemedColor.secondaryForeground]} solid;
+    border-left-width: 4px;
   }
 
   ${DARK_MODE} {
-    background-color: ${DARK_COLOR[ThemedColor.accentBackground]};
+    border-left-color: ${DARK_COLOR[ThemedColor.secondaryForeground]};
   }
 
   &:first-child {
