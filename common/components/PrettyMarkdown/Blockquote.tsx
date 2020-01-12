@@ -6,7 +6,6 @@ import ThemedColor from "../../types/ThemedColor";
 import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
 
 interface Props extends React.Attributes {
-  value: string;
   className?: string;
   children?: React.ReactNode;
 }

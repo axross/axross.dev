@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import * as React from "react";
 import BlogPost from "../../entities/BlogPost";
 import PrettyMarkdown from "../../components/PrettyMarkdown";
-import Heading from "../../components/PrettyMarkdown/Heading";
+import { Heading1 } from "../../components/PrettyMarkdown/Heading";
 import MarkdownText, {
   TextType
 } from "../../components/PrettyMarkdown/MarkdownText";
@@ -18,7 +18,7 @@ interface Props extends React.Attributes {
 export default function Article({ blogPost, ...props }: Props) {
   return (
     <article {...props}>
-      <Heading level={1} {...props}>
+      <Heading1 {...props}>
         <MarkdownText
           type={TextType.heading1}
           color={ThemedColor.emphasizedForeground}
@@ -26,7 +26,7 @@ export default function Article({ blogPost, ...props }: Props) {
         >
           {blogPost.title}
         </MarkdownText>
-      </Heading>
+      </Heading1>
 
       <Timestamp
         createdAt={blogPost.createdAt}

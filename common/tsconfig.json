@@ -2,5 +2,9 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "@mdx-js/runtime": ["./@types/mdx-runtime.d.ts"],
+    }
   },
 }

@@ -9,23 +9,27 @@ import {
 import { MOBILE } from "../../constant/mediaQuery";
 
 interface Props extends React.Attributes {
-  language: string;
-  value: string;
   className?: string;
+  children: string;
 }
 
-export default function CodeBlock({ language, value, ...props }: Props) {
+export default function CodeBlock({ className, children, ...props }: Props) {
+  const classNames = className?.split(" ") ?? [];
+  const languageClassName = classNames.find(cn => cn.startsWith("language-"));
+  const language = languageClassName?.substring(9) ?? undefined;
+  const actualClassName = classNames.filter(cn => !cn.startsWith("language-")).join(" ");
+  const actualProps = { ...props, className: actualClassName };
+
   return (
     <Root
-      // codeTagProps={{ className: `language-${language}` }}
       language={language}
       // disable default style
       style={{}}
       // workaround. disable default inline style "background-color: rgba(255, 255, 255)"
       customStyle={{ backgroundColor: undefined }}
-      {...props}
+      {...actualProps}
     >
-      {value}
+      {children}
     </Root>
   );
 }

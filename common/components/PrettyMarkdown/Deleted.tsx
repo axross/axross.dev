@@ -1,5 +1,6 @@
 import * as React from "react";
 import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
+import MarkdownText from "./MarkdownText";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -11,7 +12,9 @@ export default function Deleted({ children }: Props) {
 
   return (
     <MarkdownTextThemeContext.Provider value={{ ...theme, isDeleted: true }}>
-      {children}
+      <MarkdownText>
+        {children}
+      </MarkdownText>
     </MarkdownTextThemeContext.Provider>
   );
 }
