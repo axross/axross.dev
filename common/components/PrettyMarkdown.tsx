@@ -1,36 +1,55 @@
+import MDX from "@mdx-js/runtime";
 import * as React from "react";
-import * as Markdown from "react-markdown";
 import Blockquote from "./PrettyMarkdown/Blockquote";
 import CodeBlock from "./PrettyMarkdown/CodeBlock";
 import Emphasis from "./PrettyMarkdown/Emphasis";
-import Heading from "./PrettyMarkdown/Heading";
+import { Heading1, Heading2, Heading3, Heading4, Heading5, Heading6 } from "./PrettyMarkdown/Heading";
 import InlineCode from "./PrettyMarkdown/InlineCode";
-import List from "./PrettyMarkdown/List";
 import MarkdownLink from "./PrettyMarkdown/MarkdownLink";
 import MarkdownText from "./PrettyMarkdown/MarkdownText";
 import Media from "./PrettyMarkdown/Media";
+import OrderedList from "./PrettyMarkdown/OrderedList";
 import Paragraph from "./PrettyMarkdown/Paragraph";
 import Strong from "./PrettyMarkdown/Strong";
+import UnorderedList from "./PrettyMarkdown/UnorderedList";
+import Deleted from "./PrettyMarkdown/Deleted";
+import ListItem from "./PrettyMarkdown/ListItem";
 
 interface Props extends React.Attributes {
-  className?: string;
   children?: string;
 }
 
-export default function PrettyMarkdown({ ...props }: Props) {
-  return <Markdown renderers={renderers} {...props} />;
+export default function PrettyMarkdown({ children }: Props) {
+  return <MDX components={components}>{children}</MDX>;
 }
 
-const renderers = {
-  paragraph: Paragraph,
-  heading: Heading,
+const components = {
+  p: Paragraph,
+  h1: Heading1,
+  h2: Heading2,
+  h3: Heading3,
+  h4: Heading4,
+  h5: Heading5,
+  h6: Heading6,
+  // disabled
+  // thematicBreak: 
   blockquote: Blockquote,
+  ul: UnorderedList,
+  ol: OrderedList,
+  li: ListItem,
+  // disabled
+  // table: 
+  // tr: 
+  // td: 
+  pre: ({ children }: any) => children,
   code: CodeBlock,
-  list: List,
-  image: Media,
+  em: Emphasis,
   strong: Strong,
-  emphasis: Emphasis,
-  link: MarkdownLink,
+  delete: Deleted,
+  inlineCode: InlineCode,
+  // disabled
+  // hr: 
+  a: MarkdownLink,
+  img: Media,
   text: MarkdownText,
-  inlineCode: InlineCode
 };

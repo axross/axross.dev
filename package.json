@@ -17,13 +17,13 @@
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
+    "@mdx-js/runtime": "^1.5.3",
     "contentful": "^7.8.2",
     "intl-messageformat": "^5.4.3",
     "react": "^16.12.0",
     "react-content-loader": "^4.3.4",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
-    "react-markdown": "^4.2.2",
     "react-router-dom": "^5.1.2",
     "react-syntax-highlighter": "^11.0.2",
     "xml-js": "^1.6.11"

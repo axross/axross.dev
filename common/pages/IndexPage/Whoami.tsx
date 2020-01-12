@@ -37,7 +37,11 @@ export default function Whoami({ bio, ...props }: Props) {
         ))}
       </SocialLinkList>
 
-      <Bio>{bio!}</Bio>
+      <Bio>
+        <PrettyMarkdown>
+          {bio!}
+        </PrettyMarkdown>
+      </Bio>
     </Root>
   );
 }
@@ -80,7 +84,7 @@ const Name = styled(Text)`
   align-self: center;
 `;
 
-const Bio = styled(PrettyMarkdown)`
+const Bio = styled.div`
   grid-area: bio;
 `;
 

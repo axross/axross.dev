@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import Heading from "../../components/PrettyMarkdown/Heading";
+import { Heading1 } from "../../components/PrettyMarkdown/Heading";
 import MarkdownText, {
   TextType as MarkdownTextType
 } from "../../components/PrettyMarkdown/MarkdownText";
@@ -19,7 +19,7 @@ export default function ArticleNotFound(props: Props) {
 
   return (
     <section {...props}>
-      <Heading level={1} {...props}>
+      <Heading1 {...props}>
         <MarkdownText
           type={MarkdownTextType.heading1}
           color={ThemedColor.emphasizedForeground}
@@ -27,7 +27,7 @@ export default function ArticleNotFound(props: Props) {
         >
           {NOT_FOUND_TITLE[currentLocale]}
         </MarkdownText>
-      </Heading>
+      </Heading1>
 
       <StatusCode color={ThemedColor.secondaryForeground} type={TextType.label}>
         404 Not Found

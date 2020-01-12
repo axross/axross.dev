@@ -1,5 +1,6 @@
 import * as React from "react";
 import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
+import MarkdownText from "./MarkdownText";
 
 export interface Props extends React.Attributes {
   href: string;
@@ -23,7 +24,9 @@ export default function MarkdownLink({ children, ...props }: Props) {
           isLinkHovered: isHovered
         }}
       >
-        {children}
+        <MarkdownText>
+          {children}
+        </MarkdownText>
       </MarkdownTextThemeContext.Provider>
     </a>
   );
