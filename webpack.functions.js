@@ -3,7 +3,9 @@ const path = require("path");
 
 module.exports = {
   target: "node",
-  entry: fs.readdirSync(path.resolve(__dirname, "./functions")).reduce((obj, file) => ({ ...obj, [path.basename(file, path.extname(file))]: `./functions/${file}` }), {}),
+  entry: fs.readdirSync(path.resolve(__dirname, "./functions"))
+    .filter(file => path.extname(file) === ".ts")
+    .reduce((obj, file) => ({ ...obj, [path.basename(file, path.extname(file))]: `./functions/${file}` }), {}),
   output: {
     path: path.resolve(__dirname, "./dist/functions"),
     filename: "[name].js",
