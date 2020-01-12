@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ContentfulBlogPostRepository,
       ContentfulLocaleRepository,
       ContentfulWebsitePurposeRepository,
+      FunctionWebpageSummaryRepository,
       RepositoryContext,
       createClient
     }
@@ -37,6 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     bioRepository: new ContentfulBioRepository(contentful),
     blogPostRepository: new ContentfulBlogPostRepository(contentful),
     localeRepository: new ContentfulLocaleRepository(contentful),
+    webpageSummaryRepository: new FunctionWebpageSummaryRepository(),
     websitePurposeRepository: new ContentfulWebsitePurposeRepository(contentful),
   };
 
