@@ -1,5 +1,4 @@
 const path = require("path");
-const { EnvironmentPlugin } = require("webpack");
 
 module.exports = {
   entry: "./serviceWorker/serviceWorker.ts",
@@ -28,7 +27,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new EnvironmentPlugin(['URL', 'CONTENTFUL_SPACE', 'CONTENTFUL_ACCESS_TOKEN']),
-  ],
 };
