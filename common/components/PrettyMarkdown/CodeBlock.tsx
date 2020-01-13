@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import Highlight, { defaultProps } from "prism-react-renderer";
 import {
   CODE_BACKGROUND_COLOR,
   CODE_COLORS,
@@ -16,25 +16,41 @@ interface Props extends React.Attributes {
 export default function CodeBlock({ className, children, ...props }: Props) {
   const classNames = className?.split(" ") ?? [];
   const languageClassName = classNames.find(cn => cn.startsWith("language-"));
-  const language = languageClassName?.substring(9) ?? undefined;
+  const language = languageClassName?.substring(9) ?? "";
   const actualClassName = classNames.filter(cn => !cn.startsWith("language-")).join(" ");
   const actualProps = { ...props, className: actualClassName };
 
   return (
-    <Root
-      language={language}
-      // disable default style
-      style={{}}
-      // workaround. disable default inline style "background-color: rgba(255, 255, 255)"
-      customStyle={{ backgroundColor: undefined }}
-      {...actualProps}
-    >
-      {children}
-    </Root>
+    <Highlight {...defaultProps} code={children} language={language as any} {...actualProps}>
+      {({ tokens }) => (
+        <Pre {...actualProps}>
+          <Code>
+            {tokens.map((line, i) => (
+              <>
+                {line
+                  .filter(token => token.content !== "")
+                  .map((token, j) => {
+                    const TokenComponent = TAGS.get(token.types.find(type => TAGS.has(type))!) ?? FallbackToken;
+
+                    return (
+                      <TokenComponent key={`${i}-${j}`} data-types={token.types.join(", ")}>
+                        {token.content}
+                      </TokenComponent>
+                    );
+                  })
+                }
+
+                {"\n"}
+              </>
+            ))}
+          </Code>
+        </Pre>
+      )}
+    </Highlight>
   );
 }
 
-const Root = styled(SyntaxHighlighter)`
+const Pre = styled.pre`
   box-sizing: border-box;
   width: calc(100% + 32px * 2);
   margin-block-start: 32px;
@@ -70,91 +86,42 @@ const Root = styled(SyntaxHighlighter)`
   &:last-child {
     margin-block-end: 0;
   }
+`;
 
-  & > code {
-    background-color: transparent;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    padding-block-start: 0;
-    padding-block-end: 0;
-    border-radius: 0;
-    color: ${CODE_COLORS[CodeColor.normal]};
-    font-size: 18px;
-    font-family: "Source Code Pro", monospace;
-    font-weight: 500;
-    line-height: 1.75;
+const Code = styled.code`
+  color: ${CODE_COLORS[CodeColor.normal]};
+  font-size: 18px;
+  font-family: "Source Code Pro", monospace;
+  font-weight: 500;
+  line-height: 1.5;
 
-    ${MOBILE} {
-      font-size: 15px;
-    }
-
-    .token.comment {
-      color: ${CODE_COLORS[CodeColor.comment]};
-    }
-
-    .token.keyword {
-      color: ${CODE_COLORS[CodeColor.keyword]};
-    }
-
-    .token.operator {
-      color: ${CODE_COLORS[CodeColor.operator]};
-    }
-
-    .token.punctuation {
-      color: ${CODE_COLORS[CodeColor.punctuation]};
-    }
-
-    .token.function {
-      color: ${CODE_COLORS[CodeColor.function]};
-    }
-
-    .token.string,
-    .token.attr-value {
-      color: ${CODE_COLORS[CodeColor.string]};
-    }
-
-    .token.number,
-    .token.unit,
-    .token.interpolation,
-    .token.pseudo-element {
-      color: ${CODE_COLORS[CodeColor.number]};
-    }
-
-    .token.class-name,
-    .token.maybe-class-name {
-      color: ${CODE_COLORS[CodeColor.class]};
-    }
-
-    .token.tag {
-      color: ${CODE_COLORS[CodeColor.tag]};
-
-      .token.punctuation {
-        color: ${CODE_COLORS[CodeColor.tagPunctuation]};
-      }
-    }
-
-    .token.attr-name {
-      color: ${CODE_COLORS[CodeColor.attributeKey]};
-    }
-
-    .token.constant {
-      color: ${CODE_COLORS[CodeColor.constant]};
-    }
-
-    .token.parameter {
-      color: ${CODE_COLORS[CodeColor.parameter]};
-    }
-
-    .token.property {
-      color: ${CODE_COLORS[CodeColor.property]};
-    }
-
-    .token.selector {
-      color: ${CODE_COLORS[CodeColor.selector]};
-    }
-
-    .token.hexcode {
-      color: ${CODE_COLORS[CodeColor.hexcode]};
-    }
+  ${MOBILE} {
+    font-size: 15px;
   }
+`;
+
+const TAGS = new Map([
+  ["hexcode", styled.span`color: ${CODE_COLORS[CodeColor.hexcode]};`],
+  ["selector", styled.span`color: ${CODE_COLORS[CodeColor.selector]};`],
+  ["property", styled.span`color: ${CODE_COLORS[CodeColor.property]};`],
+  ["parameter", styled.span`color: ${CODE_COLORS[CodeColor.parameter]};`],
+  ["constant", styled.span`color: ${CODE_COLORS[CodeColor.constant]};`],
+  ["attr-name", styled.span`color: ${CODE_COLORS[CodeColor.attributeKey]};`],
+  ["punctuation", styled.span`color: ${CODE_COLORS[CodeColor.punctuation]};`],
+  ["class-name", styled.span`color: ${CODE_COLORS[CodeColor.class]};`],
+  ["maybe-class-name", styled.span`color: ${CODE_COLORS[CodeColor.class]};`],
+  ["number", styled.span`color: ${CODE_COLORS[CodeColor.number]};`],
+  ["unit", styled.span`color: ${CODE_COLORS[CodeColor.number]};`],
+  ["interpolation", styled.span`color: ${CODE_COLORS[CodeColor.number]};`],
+  ["pseudo-element", styled.span`color: ${CODE_COLORS[CodeColor.number]};`],
+  ["string", styled.span`color: ${CODE_COLORS[CodeColor.string]};`],
+  ["attr-value", styled.span`color: ${CODE_COLORS[CodeColor.string]};`],
+  ["function", styled.span`color: ${CODE_COLORS[CodeColor.function]};`],
+  ["operator", styled.span`color: ${CODE_COLORS[CodeColor.operator]};`],
+  ["keyword", styled.span`color: ${CODE_COLORS[CodeColor.keyword]};`],
+  ["comment", styled.span`color: ${CODE_COLORS[CodeColor.comment]};`],
+]);
+
+const FallbackToken = styled.span`
+  color: ${CODE_COLORS[CodeColor.normal]};
 `;
