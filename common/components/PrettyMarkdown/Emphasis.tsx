@@ -1,19 +1,17 @@
 import * as React from "react";
-import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
-import MarkdownText from "./MarkdownText";
+import RawText from "../RawText";
+import RawTextThemeContext from "../RawTextThemeContext";
 
 interface Props extends React.Attributes {
   children: React.ReactNode;
 }
 
 export default function Emphasis({ children }: Props) {
-  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
+  const theme = React.useContext(RawTextThemeContext) ?? {};
 
   return (
-    <MarkdownTextThemeContext.Provider value={{ ...theme, isEmphasized: true }}>
-      <MarkdownText>
-        {children}
-      </MarkdownText>
-    </MarkdownTextThemeContext.Provider>
+    <RawTextThemeContext.Provider value={{ ...theme, italic: true }}>
+      {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
+    </RawTextThemeContext.Provider>
   );
 }

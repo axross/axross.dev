@@ -1,6 +1,6 @@
-import { Link as RouterLink, LinkProps } from "react-router-dom";
 import * as React from "react";
-import TextThemeContext from "./TextThemeContext";
+import { Link as RouterLink, LinkProps } from "react-router-dom";
+import RawTextThemeContext, { ThemedColor } from "./RawTextThemeContext";
 
 export interface Props
   extends React.HTMLAttributes<HTMLAnchorElement>,
@@ -9,6 +9,7 @@ export interface Props
 }
 
 export default function Link({ children, ...props }: Props) {
+  const theme = React.useContext(RawTextThemeContext) ?? {};
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
@@ -17,14 +18,15 @@ export default function Link({ children, ...props }: Props) {
       onMouseLeave={() => setIsHovered(false)}
       {...props}
     >
-      <TextThemeContext.Provider
+      <RawTextThemeContext.Provider
         value={{
-          isLink: true,
-          isLinkHovered: isHovered
+          ...theme,
+          ...isHovered ? { underline: true } : {},
+          color: ThemedColor.primaryForeground,
         }}
       >
         {children}
-      </TextThemeContext.Provider>
+      </RawTextThemeContext.Provider>
     </RouterLink>
   );
 }

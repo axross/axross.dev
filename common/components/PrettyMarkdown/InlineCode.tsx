@@ -1,25 +1,17 @@
 import * as React from "react";
-import LazyCSS from "../LazyCSS";
-import MarkdownText from "./MarkdownText";
-import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
+import RawText, { Typeface } from "../RawText";
+import RawTextThemeContext from "../RawTextThemeContext";
 
 interface Props {
   children?: string;
 }
 
 export default function CodeText({ children }: Props) {
-  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
+  const theme = React.useContext(RawTextThemeContext) ?? {};
 
   return (
-    <>
-      <LazyCSS
-        href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500&display=swap"
-        key="sourceCodeFont"
-      />
-
-      <MarkdownTextThemeContext.Provider value={{ ...theme, isCode: true }}>
-        <MarkdownText>{children}</MarkdownText>
-      </MarkdownTextThemeContext.Provider>
-    </>
+    <RawTextThemeContext.Provider value={{ ...theme, typeface: Typeface.monospace }}>
+      {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
+    </RawTextThemeContext.Provider>
   );
 }

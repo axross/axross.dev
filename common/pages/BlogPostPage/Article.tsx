@@ -2,12 +2,8 @@ import styled from "@emotion/styled";
 import * as React from "react";
 import BlogPost from "../../entities/BlogPost";
 import PrettyMarkdown from "../../components/PrettyMarkdown";
-import { Heading1 } from "../../components/PrettyMarkdown/Heading";
-import MarkdownText, {
-  TextType
-} from "../../components/PrettyMarkdown/MarkdownText";
+import RawText, { TextSize, ThemedColor } from "../../components/RawText";
 import { MOBILE } from "../../constant/mediaQuery";
-import ThemedColor from "../../types/ThemedColor";
 import BlogPostTimestamp from "./BlogPostTimestamp";
 
 interface Props extends React.Attributes {
@@ -18,15 +14,9 @@ interface Props extends React.Attributes {
 export default function Article({ blogPost, ...props }: Props) {
   return (
     <article {...props}>
-      <Heading1 {...props}>
-        <MarkdownText
-          type={TextType.heading1}
-          color={ThemedColor.emphasizedForeground}
-          {...props}
-        >
-          {blogPost.title}
-        </MarkdownText>
-      </Heading1>
+      <RawText color={ThemedColor.emphasizedForeground} size={TextSize.giantic}>
+        {blogPost.title}
+      </RawText>
 
       <Timestamp
         createdAt={blogPost.createdAt}

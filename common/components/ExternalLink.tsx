@@ -1,5 +1,5 @@
 import * as React from "react";
-import TextThemeContext from "./TextThemeContext";
+import RawTextThemeContext, { ThemedColor } from "./RawTextThemeContext";
 
 export interface Props extends React.Attributes {
   href: string;
@@ -7,6 +7,7 @@ export interface Props extends React.Attributes {
 }
 
 export default function ExternalLink({ children, ...props }: Props) {
+  const theme = React.useContext(RawTextThemeContext) ?? {};
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
@@ -15,14 +16,15 @@ export default function ExternalLink({ children, ...props }: Props) {
       onMouseLeave={() => setIsHovered(false)}
       {...props}
     >
-      <TextThemeContext.Provider
+      <RawTextThemeContext.Provider
         value={{
-          isLink: true,
-          isLinkHovered: isHovered
+          ...theme,
+          color: ThemedColor.primaryForeground,
+          ...isHovered ? { underline: true } : {},
         }}
       >
         {children}
-      </TextThemeContext.Provider>
+      </RawTextThemeContext.Provider>
     </a>
   );
 }

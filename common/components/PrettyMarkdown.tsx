@@ -6,7 +6,6 @@ import Emphasis from "./PrettyMarkdown/Emphasis";
 import { Heading1, Heading2, Heading3, Heading4, Heading5, Heading6 } from "./PrettyMarkdown/Heading";
 import InlineCode from "./PrettyMarkdown/InlineCode";
 import MarkdownLink from "./PrettyMarkdown/MarkdownLink";
-import MarkdownText from "./PrettyMarkdown/MarkdownText";
 import Media from "./PrettyMarkdown/Media";
 import OrderedList from "./PrettyMarkdown/OrderedList";
 import Paragraph from "./PrettyMarkdown/Paragraph";
@@ -15,13 +14,21 @@ import UnorderedList from "./PrettyMarkdown/UnorderedList";
 import Deleted from "./PrettyMarkdown/Deleted";
 import ListItem from "./PrettyMarkdown/ListItem";
 import EmbededLink from "./PrettyMarkdown/EmbededLink";
+import RawText, { TextLineSize } from "./RawText";
+import RawTextThemeContext from "./RawTextThemeContext"
 
 interface Props extends React.Attributes {
   children?: string;
 }
 
 export default function PrettyMarkdown({ children }: Props) {
-  return <MDX components={components}>{children}</MDX>;
+  const theme = React.useContext(RawTextThemeContext) ?? {};
+  
+  return (
+    <RawTextThemeContext.Provider value={{ ...theme, lineSize: TextLineSize.large }}>
+      <MDX components={components}>{children}</MDX>
+    </RawTextThemeContext.Provider>
+  );
 }
 
 const components = {
@@ -52,6 +59,6 @@ const components = {
   // hr: 
   a: MarkdownLink,
   img: Media,
-  text: MarkdownText,
+  text: RawText,
   EmbededLink: EmbededLink,
 };

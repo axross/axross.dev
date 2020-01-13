@@ -1,7 +1,7 @@
 import * as React from "react";
 import Blockquote from "./Blockquote";
-import Paragraph from "./Paragraph";
 import MarkdownLink from "./MarkdownLink";
+import Paragraph from "./Paragraph";
 import Strong from "./Strong";
 
 export default { title: "PrettyMarkdown/Blockquote" };

@@ -1,14 +1,14 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { MOBILE } from "../../constant/mediaQuery";
-import MarkdownText from "./MarkdownText";
+import RawText, { TextLineSize } from "../RawText";
 
 interface Props extends React.Attributes {
   children?: React.ReactNode;
 }
 
 export default function Paragraph({ children, ...props }: Props) {
-  return <Root {...props}>{React.Children.map(children, (child) => typeof child === "string" ? <MarkdownText>{child}</MarkdownText> : child)}</Root>;
+  return <Root {...props}>{React.Children.map(children, (child) => typeof child === "string" ? <RawText lineSize={TextLineSize.large}>{child}</RawText> : child)}</Root>;
 }
 
 const Root = styled.p`

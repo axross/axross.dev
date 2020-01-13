@@ -1,131 +1,56 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { MOBILE } from "../../constant/mediaQuery";
-import ThemedColor from "../../types/ThemedColor";
-import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
-import MarkdownText, { TextType } from "./MarkdownText";
+import RawText, { Props as RawTextProps, TextSize, ThemedColor } from "../RawText";
+import RawTextThemeContext from "../RawTextThemeContext";
 
 interface Props extends React.Attributes {
   className?: string;
   children: React.ReactNode;
 }
 
-export function Heading1({ children, ...props }: Props) {
-  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
-
-  return (
-    <H1 {...props}>
-      <MarkdownTextThemeContext.Provider
-        value={{
-          ...theme,
-          color: ThemedColor.emphasizedForeground,
-          type: TextType.heading1,
-        }}
-      >
-        <MarkdownText>
-          {children}
-        </MarkdownText>
-      </MarkdownTextThemeContext.Provider>
-    </H1>
-  );
+interface InternalProps extends Props {
+  Component: React.ComponentType;
+  textProps: RawTextProps;
 }
 
-export function Heading2({ children, ...props }: Props) {
-  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
+function Heading({ Component, textProps, children, ...props }: InternalProps) {
+  const theme = React.useContext(RawTextThemeContext) ?? {};
 
   return (
-    <H2 {...props}>
-      <MarkdownTextThemeContext.Provider
-        value={{
-          ...theme,
-          color: ThemedColor.emphasizedForeground,
-          type: TextType.heading2,
-        }}
-      >
-        <MarkdownText>
-          {children}
-        </MarkdownText>
-      </MarkdownTextThemeContext.Provider>
-    </H2>
-  );
+    <Component {...props}>
+      <RawTextThemeContext.Provider value={{
+        ...theme,
+        ...textProps,
+      }}>
+        {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
+      </RawTextThemeContext.Provider>
+    </Component>
+  )
 }
 
-export function Heading3({ children, ...props }: Props) {
-  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
-
-  return (
-    <H3 {...props}>
-      <MarkdownTextThemeContext.Provider
-        value={{
-          ...theme,
-          color: ThemedColor.emphasizedForeground,
-          type: TextType.heading3,
-        }}
-      >
-        <MarkdownText>
-          {children}
-        </MarkdownText>
-      </MarkdownTextThemeContext.Provider>
-    </H3>
-  );
+export function Heading1(props: Props) {
+  return <Heading Component={H1} textProps={{ color: ThemedColor.emphasizedForeground, size: TextSize.giantic, bold: true }} {...props} />;
 }
 
-export function Heading4({ children, ...props }: Props) {
-  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
-
-  return (
-    <H4 {...props}>
-      <MarkdownTextThemeContext.Provider
-        value={{
-          ...theme,
-          color: ThemedColor.emphasizedForeground,
-          type: TextType.heading4,
-        }}
-      >
-        {children}
-      </MarkdownTextThemeContext.Provider>
-    </H4>
-  );
+export function Heading2(props: Props) {
+  return <Heading Component={H2} textProps={{ color: ThemedColor.emphasizedForeground, size: TextSize.huge, bold: true }} {...props} />;
 }
 
-export function Heading5({ children, ...props }: Props) {
-  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
-
-  return (
-    <H5 {...props}>
-      <MarkdownTextThemeContext.Provider
-        value={{
-          ...theme,
-          color: ThemedColor.emphasizedForeground,
-          type: TextType.heading5,
-        }}
-      >
-        <MarkdownText>
-          {children}
-        </MarkdownText>
-      </MarkdownTextThemeContext.Provider>
-    </H5>
-  );
+export function Heading3(props: Props) {
+  return <Heading Component={H3} textProps={{ color: ThemedColor.emphasizedForeground, size: TextSize.large, bold: true }} {...props} />;
 }
 
-export function Heading6({ children, ...props }: Props) {
-  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
+export function Heading4(props: Props) {
+  return <Heading Component={H4} textProps={{ color: ThemedColor.emphasizedForeground, size: TextSize.larger, bold: true }} {...props} />;
+}
 
-  return (
-    <H6 {...props}>
-      <MarkdownTextThemeContext.Provider
-        value={{
-          ...theme,
-          color: ThemedColor.emphasizedForeground,
-          type: TextType.heading6,
-        }}
-      >
-        <MarkdownText>
-          {children}
-        </MarkdownText>
-      </MarkdownTextThemeContext.Provider>
-    </H6>
-  );
+export function Heading5(props: Props) {
+  return <Heading Component={H5} textProps={{ color: ThemedColor.emphasizedForeground, size: TextSize.larger }} {...props} />;
+}
+
+export function Heading6(props: Props) {
+  return <Heading Component={H6} textProps={{ color: ThemedColor.emphasizedForeground, bold: true }} {...props} />;
 }
 
 const H1 = styled.h1`
@@ -152,7 +77,11 @@ const H1 = styled.h1`
   h4 + &,
   h5 + &,
   h6 + & {
-    margin-block-start: var(--block-padding);
+    margin-block-start: 32px;
+
+    ${MOBILE} {
+      margin-block-start: 24px;
+    }
   }
 `;
 const H2 = H1.withComponent("h2");
