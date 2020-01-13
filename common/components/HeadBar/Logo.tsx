@@ -1,15 +1,14 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { MOBILE } from "../../constant/mediaQuery";
-import ThemedColor from "../../types/ThemedColor";
-import Text, { TextType } from "../Text";
+import UIText, { UITextType } from "../UIText";
 
 export default function Logo() {
   return (
     <Root>
       <Image />
 
-      <Text type={TextType.logo} color={ThemedColor.emphasizedForeground}>kohei.dev</Text>
+      <UIText type={UITextType.subtitle2}>kohei.dev</UIText>
     </Root>
   );
 }

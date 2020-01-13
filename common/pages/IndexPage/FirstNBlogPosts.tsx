@@ -3,11 +3,10 @@ import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import LocaleContext from "../../contexts/LocaleContext";
 import LinkKeepLocale from "../../components/KeepLocaleLink";
-import Text, { TextType } from "../../components/Text";
+import UIText, { UITextType } from "../../components/UIText";
 import { MOBILE } from "../../constant/mediaQuery";
 import { BLOG_POST_TIMETAMP } from "../../dictionary";
 import BlogPost from "../../entities/BlogPost";
-import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {
   blogPosts: BlogPost[];
@@ -23,14 +22,11 @@ export default function FirstNBlogPosts({ blogPosts, ...props }: Props) {
         <Item key={blogPost.id}>
           <Title>
             <LinkKeepLocale to={`/posts/${blogPost.id}`}>
-              <Text maxLines={0}>{blogPost.title}</Text>
+              <UIText>{blogPost.title}</UIText>
             </LinkKeepLocale>
           </Title>
 
-          <Timestamp
-            color={ThemedColor.secondaryForeground}
-            type={TextType.label}
-          >
+          <Timestamp type={UITextType.caption}>
             {new IntlMessageFormat(BLOG_POST_TIMETAMP[currentLocale]).format({
               createdAt: new Intl.DateTimeFormat(currentLocale).format(
                 blogPost.createdAt
@@ -68,7 +64,7 @@ const Title = styled.h3`
   margin-block-end: 0;
 `;
 
-const Timestamp = styled(Text)`
+const Timestamp = styled(UIText)`
   grid-area: timestamp;
   margin-block-start: 8px;
 `;

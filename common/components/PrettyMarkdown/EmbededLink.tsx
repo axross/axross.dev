@@ -6,7 +6,7 @@ import RepositoryContext from "../../contexts/RepositoryContext";
 import WebpageSummary from "../../entities/WebpageSummary";
 import ThemedColor from "../../types/ThemedColor";
 import ExternalLink from "../ExternalLink";
-import Text, { TextType } from "../Text";
+import RawText from "../RawText";
 import EmbededLinkLoader from './EmbededLink/EmbededLinkLoader';
 import FallbackImage from "./EmbededLink/FallbackImage";
 
@@ -47,16 +47,16 @@ export default function EmbededLink({ url, ...props }: Props) {
       }
 
       <TitleLink href={url}>
-        <Text maxLines={2}>
+        <RawText bold maxLines={2}>
           {webpageSummary.title}
-        </Text>
+        </RawText>
       </TitleLink>
 
-      <Description type={TextType.label} color={ThemedColor.secondaryForeground} maxLines={2}>
+      <Description color={ThemedColor.secondaryForeground} maxLines={2}>
         {webpageSummary.description ?? ""}
       </Description>
 
-      <Url type={TextType.label} color={ThemedColor.secondaryForeground} maxLines={1}>
+      <Url color={ThemedColor.secondaryForeground} italic maxLines={1}>
         {webpageSummary.url.host.startsWith("www.")
           ? webpageSummary.url.host.substring(4)
           : webpageSummary.url.host
@@ -142,7 +142,7 @@ const TitleLink = styled(ExternalLink)`
   grid-area: title;
 `;
 
-const Description = styled(Text)`
+const Description = styled(RawText)`
   grid-area: description;
 
   ${MOBILE} {
@@ -150,7 +150,7 @@ const Description = styled(Text)`
   }
 `;
 
-const Url = styled(Text)`
+const Url = styled(RawText)`
   grid-area: url;
 `;
 

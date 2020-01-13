@@ -3,7 +3,7 @@ import * as React from "react";
 import ExternalLink from "../../components/ExternalLink";
 import Icon, { IconName } from "../../components/Icon";
 import PrettyMarkdown from "../../components/PrettyMarkdown";
-import Text, { TextType } from "../../components/Text";
+import UIText, { UITextType } from "../../components/UIText";
 import { MY_NAME, MY_SOCIAL_MEDIA_LINKS } from "../../constant/data";
 import { MOBILE } from "../../constant/mediaQuery";
 import ThemedColor from "../../types/ThemedColor";
@@ -18,7 +18,7 @@ export default function Whoami({ bio, ...props }: Props) {
     <Root {...props}>
       <Avatar src="/profile.jpg" />
 
-      <Name type={TextType.subtitle2}>
+      <Name type={UITextType.subtitle2}>
         {MY_NAME}
       </Name>
 
@@ -31,7 +31,7 @@ export default function Whoami({ bio, ...props }: Props) {
             />
 
             <SocialLinkListItemLabel href={`${link.url}`}>
-              <Text>{link.username}</Text>
+              <UIText>{link.username}</UIText>
             </SocialLinkListItemLabel>
           </SocialLinkListItem>
         ))}
@@ -79,7 +79,7 @@ const Avatar = styled.img`
   }
 `;
 
-const Name = styled(Text)`
+const Name = styled(UIText)`
   grid-area: name;
   align-self: center;
 `;

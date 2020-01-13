@@ -1,33 +1,21 @@
 import * as React from "react";
-import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
-import MarkdownText from "./MarkdownText";
+import ExternalLink from "../ExternalLink";
+import RawText from "../RawText";
+import RawTextThemeContext from "../RawTextThemeContext";
 
-export interface Props extends React.Attributes {
+interface Props extends React.Attributes {
   href: string;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
-export default function MarkdownLink({ children, ...props }: Props) {
-  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
-  const [isHovered, setIsHovered] = React.useState(false);
+export default function MarkdownLink({ href, children }: Props) {
+  const theme = React.useContext(RawTextThemeContext) ?? {};
 
   return (
-    <a
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      {...props}
-    >
-      <MarkdownTextThemeContext.Provider
-        value={{
-          ...theme,
-          isLink: true,
-          isLinkHovered: isHovered
-        }}
-      >
-        <MarkdownText>
-          {children}
-        </MarkdownText>
-      </MarkdownTextThemeContext.Provider>
-    </a>
+    <RawTextThemeContext.Provider value={{ ...theme, italic: true }}>
+      <ExternalLink href={href}>
+        {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
+      </ExternalLink>
+    </RawTextThemeContext.Provider>
   );
 }

@@ -1,14 +1,8 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { Heading1 } from "../../components/PrettyMarkdown/Heading";
-import MarkdownText, {
-  TextType as MarkdownTextType
-} from "../../components/PrettyMarkdown/MarkdownText";
-import Paragraph from "../../components/PrettyMarkdown/Paragraph";
-import Text, { TextType } from "../../components/Text";
+import RawText, { TextLineSize, TextSize, ThemedColor } from "../../components/RawText";
 import LocaleContext from "../../contexts/LocaleContext";
 import { NOT_FOUND_DESCRIPTION, NOT_FOUND_TITLE } from "../../dictionary";
-import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -19,39 +13,25 @@ export default function ArticleNotFound(props: Props) {
 
   return (
     <section {...props}>
-      <Heading1 {...props}>
-        <MarkdownText
-          type={MarkdownTextType.heading1}
-          color={ThemedColor.emphasizedForeground}
-          {...props}
-        >
-          {NOT_FOUND_TITLE[currentLocale]}
-        </MarkdownText>
-      </Heading1>
+      <RawText color={ThemedColor.emphasizedForeground} size={TextSize.giantic} bold>
+        {NOT_FOUND_TITLE[currentLocale]}
+      </RawText>
 
-      <StatusCode color={ThemedColor.secondaryForeground} type={TextType.label}>
+      <StatusCode color={ThemedColor.secondaryForeground}>
         404 Not Found
       </StatusCode>
 
-      <Description>
-        <Paragraph>
-          <MarkdownText
-            type={MarkdownTextType.paragraph}
-            color={ThemedColor.foreground}
-            {...props}
-          >
-            {NOT_FOUND_DESCRIPTION[currentLocale]}
-          </MarkdownText>
-        </Paragraph>
+      <Description lineSize={TextLineSize.large}>
+        {NOT_FOUND_DESCRIPTION[currentLocale]}
       </Description>
     </section>
   );
 }
 
-const Description = styled.div`
+const Description = styled(RawText)`
   margin-block-start: 32px;
 `;
 
-const StatusCode = styled(Text)`
+const StatusCode = styled(RawText)`
   margin-block-start: 32px;
 `;

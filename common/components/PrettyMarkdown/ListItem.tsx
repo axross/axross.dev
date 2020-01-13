@@ -1,5 +1,5 @@
 import * as React from "react";
-import MarkdownText from "./MarkdownText";
+import RawText from "../RawText";
 
 interface Props extends React.Attributes {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface Props extends React.Attributes {
 export default function ListItem({ children, ...props}: Props) {
   return (
     <li {...props}>
-      {React.Children.map(children, (child) => typeof child === "string" ? <MarkdownText>{child}</MarkdownText> : child)}
+      {React.Children.map(children, (child) => typeof child === "string" ? <RawText>{child}</RawText> : child)}
     </li>
   );
 }

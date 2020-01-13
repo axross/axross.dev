@@ -3,7 +3,8 @@ import * as React from "react";
 import { DARK_COLOR, LIGHT_COLOR } from "../../constant/color";
 import { MOBILE, DARK_MODE } from "../../constant/mediaQuery";
 import ThemedColor from "../../types/ThemedColor";
-import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
+import RawText from "../RawText";
+import RawTextThemeContext from "../RawTextThemeContext";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -11,11 +12,13 @@ interface Props extends React.Attributes {
 }
 
 export default function Blockquote({ children, ...props }: Props) {
+  const theme = React.useContext(RawTextThemeContext) ?? {};
+
   return (
     <Root {...props}>
-      <MarkdownTextThemeContext.Provider value={{ color: ThemedColor.secondaryForeground, isEmphasized: true }}>
-        {children}
-      </MarkdownTextThemeContext.Provider>
+      <RawTextThemeContext.Provider value={{ ...theme, color: ThemedColor.secondaryForeground, italic: true }}>
+        {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
+      </RawTextThemeContext.Provider>
     </Root>
   );
 }

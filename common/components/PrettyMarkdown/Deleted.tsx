@@ -1,6 +1,6 @@
 import * as React from "react";
-import MarkdownTextThemeContext from "./MarkdownTextThemeContext";
-import MarkdownText from "./MarkdownText";
+import RawText from "../RawText";
+import RawTextThemeContext from "../RawTextThemeContext";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -8,13 +8,11 @@ interface Props extends React.Attributes {
 }
 
 export default function Deleted({ children }: Props) {
-  const theme = React.useContext(MarkdownTextThemeContext) ?? {};
+  const theme = React.useContext(RawTextThemeContext) ?? {};
 
   return (
-    <MarkdownTextThemeContext.Provider value={{ ...theme, isDeleted: true }}>
-      <MarkdownText>
-        {children}
-      </MarkdownText>
-    </MarkdownTextThemeContext.Provider>
+    <RawTextThemeContext.Provider value={{ ...theme, lineThrough: true }}>
+      {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
+    </RawTextThemeContext.Provider>
   );
 }

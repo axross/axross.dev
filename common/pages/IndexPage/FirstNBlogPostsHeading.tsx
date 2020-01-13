@@ -1,9 +1,8 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import Text, { TextType } from "../../components/Text";
+import UIText, { UITextType } from "../../components/UIText";
 import LocaleContext from "../../contexts/LocaleContext";
 import { RECENT_N_BLOG_POSTS_HEADING } from "../../dictionary";
-import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -14,15 +13,11 @@ export default function FirstNBlogPostsHeading(props: Props) {
 
   return (
     <h2 {...props}>
-      <Text
-        color={ThemedColor.emphasizedForeground}
-        type={TextType.subtitle}
-        maxLines={0}
-      >
+      <UIText type={UITextType.subtitle}>
         {new IntlMessageFormat(
           RECENT_N_BLOG_POSTS_HEADING[currentLocale]
         ).format()}
-      </Text>
+      </UIText>
     </h2>
   );
 }

@@ -5,9 +5,8 @@ import { useLocation } from "react-router-dom";
 import LocaleContext from "../../contexts/LocaleContext";
 import { DictionaryEntry, LANGUAGE_EN_US, LANGUAGE_JA_JP } from "../../dictionary";
 import LocaleString from "../../entities/LocaleString";
-import ThemedColor from "../../types/ThemedColor";
 import Link from "../Link";
-import Text, { TextType } from "../Text";
+import UIText, { UITextType } from "../UIText";
 import LocaleSwitcherLoader from "./LocaleSwitcherLoader";
 
 interface Props extends React.Attributes {
@@ -35,20 +34,20 @@ export default function LocaleSwitcher(props: Props) {
 
         return locale === currentLocale ? (
           <Item key={locale}>
-            <Text color={ThemedColor.secondaryForeground} type={TextType.label}>
+            <UIText type={UITextType.label}>
               {new IntlMessageFormat(
                 dictionaryEntryMap[locale][currentLocale]
               ).format()}
-            </Text>
+            </UIText>
           </Item>
         ) : (
           <Item key={locale}>
             <Link to={`${location.pathname}?${searchParams}`} replace>
-              <Text type={TextType.label}>
+              <UIText type={UITextType.label}>
                 {new IntlMessageFormat(
                   dictionaryEntryMap[locale][currentLocale]
                 ).format()}
-              </Text>
+              </UIText>
             </Link>
           </Item>
         );
