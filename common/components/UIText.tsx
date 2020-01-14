@@ -43,11 +43,13 @@ const UI_TEXT_TYPE: Record<UITextType, RawTextProps> = {
     color: ThemedColor.emphasizedForeground,
     size: TextSize.huge,
     typeface: Typeface.headline,
+    bold: true,
   },
   [UITextType.subtitle2]: {
     color: ThemedColor.emphasizedForeground,
     size: TextSize.large,
     typeface: Typeface.headline,
+    bold: true,
   },
   [UITextType.logo]: {
     color: ThemedColor.emphasizedForeground,
