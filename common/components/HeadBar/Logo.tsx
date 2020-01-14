@@ -8,7 +8,7 @@ export default function Logo() {
     <Root>
       <Image />
 
-      <UIText type={UITextType.subtitle2}>kohei.dev</UIText>
+      <UIText type={UITextType.logo}>kohei.dev</UIText>
     </Root>
   );
 }
