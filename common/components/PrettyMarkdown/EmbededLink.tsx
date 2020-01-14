@@ -52,11 +52,11 @@ export default function EmbededLink({ url, ...props }: Props) {
         </RawText>
       </TitleLink>
 
-      <Description color={ThemedColor.secondaryForeground} maxLines={2}>
+      <Description color={ThemedColor.secondaryForeground} italic maxLines={2}>
         {webpageSummary.description ?? ""}
       </Description>
 
-      <Url color={ThemedColor.secondaryForeground} italic maxLines={1}>
+      <Url color={ThemedColor.secondaryForeground} maxLines={1}>
         {webpageSummary.url.host.startsWith("www.")
           ? webpageSummary.url.host.substring(4)
           : webpageSummary.url.host

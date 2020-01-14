@@ -34,7 +34,7 @@ export default function LocaleSwitcher(props: Props) {
 
         return locale === currentLocale ? (
           <Item key={locale}>
-            <UIText type={UITextType.label}>
+            <UIText type={UITextType.smallLabel}>
               {new IntlMessageFormat(
                 dictionaryEntryMap[locale][currentLocale]
               ).format()}
@@ -43,7 +43,7 @@ export default function LocaleSwitcher(props: Props) {
         ) : (
           <Item key={locale}>
             <Link to={`${location.pathname}?${searchParams}`} replace>
-              <UIText type={UITextType.label}>
+              <UIText type={UITextType.smallLabel}>
                 {new IntlMessageFormat(
                   dictionaryEntryMap[locale][currentLocale]
                 ).format()}
