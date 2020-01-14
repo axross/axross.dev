@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { LIGHT_COLOR, DARK_COLOR } from "../../../constant/color";
-import { DARK_MODE } from "../../../constant/mediaQuery";
+import { DARK_MODE, MOBILE } from "../../../constant/mediaQuery";
 import ThemedColor from "../../../types/ThemedColor";
 import Icon, { IconName } from "../../Icon";
 
@@ -25,6 +25,10 @@ const Root = styled.div`
 
   ${DARK_MODE} {
     background-color: ${DARK_COLOR[ThemedColor.background]};
+  }
+
+  ${MOBILE} {
+    padding: 16px;
   }
 `;
 
