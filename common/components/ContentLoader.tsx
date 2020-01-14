@@ -5,17 +5,16 @@ import { DARK_MODE } from "../constant/mediaQuery";
 import { DARK_COLOR, LIGHT_COLOR } from "../constant/color";
 import ThemedColor from "../types/ThemedColor";
 
-interface Props
-  extends Omit<
-    IContentLoaderProps,
-    | "viewBox"
-    | "width"
-    | "height"
-    | "primaryColor"
-    | "secondaryColor"
-    | "primaryOpacity"
-    | "secondaryOpacity"
-  > {}
+type Props = Omit<
+  IContentLoaderProps,
+  | "viewBox"
+  | "width"
+  | "height"
+  | "primaryColor"
+  | "secondaryColor"
+  | "primaryOpacity"
+  | "secondaryOpacity"
+>;
 
 export default function ContentLoader({ children, ...props }: Props) {
   return (
@@ -32,6 +31,8 @@ export default function ContentLoader({ children, ...props }: Props) {
 }
 
 const Root = styled(ReactContentLoader)`
+  width: 100%;
+
   & > defs {
     & > linearGradient {
       & > stop:nth-of-type(2n) {

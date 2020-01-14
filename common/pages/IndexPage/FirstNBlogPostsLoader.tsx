@@ -30,7 +30,6 @@ export default function FirstNBlogPostsLoader(props: Props) {
 }
 
 const Root = styled(ContentLoader)`
-  width: 100%;
   height: 463px;
 
   ${MOBILE} {

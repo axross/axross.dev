@@ -1,41 +1,39 @@
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 import * as React from "react";
-import ContentLoader from "../../components/ContentLoader";
-import { MOBILE } from "../../constant/mediaQuery";
+import { MOBILE } from "../constant/mediaQuery";
+import ContentLoader from "./ContentLoader";
 
-interface Props extends React.Attributes {
-  className?: string;
-}
+export default {
+  title: "ContentLoader",
+};
 
-export default function ArtcileLoader(props: Props) {
-  return (
-    <Root {...props}>
-      <TitleFirstLine />
-      <TitleSecondLine />
+export const mixed = () => (
+  <Root>
+    <TitleFirstLine />
+    <TitleSecondLine />
 
-      <Timestamp />
+    <Timestamp />
 
-      <FirstParagraphLine />
-      <SecondParagraphLine />
-      <ThirdParagraphLine />
+    <FirstParagraphLine />
+    <SecondParagraphLine />
+    <ThirdParagraphLine />
 
-      <Picture />
+    <Picture />
 
-      <FourthParagraphLine />
-      <FifthParagraphLine />
-      <SixthParagraphLine />
+    <FourthParagraphLine />
+    <FifthParagraphLine />
+    <SixthParagraphLine />
 
-      <SeventhParagraphLine />
-      <EighthParagraphLine />
-      <NinethParagraphLine />
+    <SeventhParagraphLine />
+    <EighthParagraphLine />
+    <NinethParagraphLine />
 
-      <TenthParagraphLine />
-      <EleventhParagraphLine />
-      <TwelvethParagraphLine />
-    </Root>
-  );
-}
+    <TenthParagraphLine />
+    <EleventhParagraphLine />
+    <TwelvethParagraphLine />
+  </Root>
+);
 
 const Root = styled(ContentLoader)`
   height: 1133px;
