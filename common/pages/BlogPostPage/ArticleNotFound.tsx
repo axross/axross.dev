@@ -13,9 +13,9 @@ export default function ArticleNotFound(props: Props) {
 
   return (
     <section {...props}>
-      <RawText color={ThemedColor.emphasizedForeground} size={TextSize.giantic} bold>
+      <Title color={ThemedColor.emphasizedForeground} size={TextSize.giantic} bold>
         {NOT_FOUND_TITLE[currentLocale]}
-      </RawText>
+      </Title>
 
       <StatusCode color={ThemedColor.secondaryForeground}>
         404 Not Found
@@ -28,10 +28,16 @@ export default function ArticleNotFound(props: Props) {
   );
 }
 
+const Title = styled(RawText)`
+  display: block;
+`
+
 const Description = styled(RawText)`
+  display: block;
   margin-block-start: 32px;
 `;
 
 const StatusCode = styled(RawText)`
+  display: block;
   margin-block-start: 32px;
 `;
