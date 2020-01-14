@@ -46,10 +46,6 @@ self.addEventListener("fetch", e => {
     return e.respondWith(networkFirst(e.request, APP_CACHE_NAME));
   }
 
-  if (url.origin === "https://unpkg.com") {
-    return e.respondWith(networkFirst(e.request, APP_CACHE_NAME));
-  }
-
   if (url.origin === "https://cdn.contentful.com") {
     return e.respondWith(networkFirst(e.request, CONTENTS_CACHE_NAME));
   }
