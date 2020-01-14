@@ -54,5 +54,6 @@ const UI_TEXT_TYPE: Record<UITextType, RawTextProps> = {
   [UITextType.logo]: {
     color: ThemedColor.emphasizedForeground,
     typeface: Typeface.headline,
+    bold: true,
   },
 };
