@@ -10,9 +10,9 @@
     "build:service-worker": "webpack --config webpack.serviceWorker.js --mode production",
     "build:client": "webpack --config webpack.client.js --mode production",
     "build": "npm run build:functions && npm run build:service-worker && npm run build:client",
-    "serve:client": "webpack-dev-server --config webpack.client.js --mode development",
     "serve": "netlify dev",
-    "storybook": "start-storybook -s ./public"
+    "serve:client": "webpack-dev-server --config webpack.client.js --mode development",
+    "serve:storybook": "start-storybook -s ./dist/client"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
