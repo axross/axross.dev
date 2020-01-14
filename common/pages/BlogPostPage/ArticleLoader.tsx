@@ -38,7 +38,6 @@ export default function ArtcileLoader(props: Props) {
 }
 
 const Root = styled(ContentLoader)`
-  width: 100%;
   height: 1133px;
 
   ${MOBILE} {

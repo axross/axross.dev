@@ -68,7 +68,6 @@ const Root = styled.div`
 `;
 
 const _ContentLoader = styled(ContentLoader)`
-  width: 100%;
   // intentionally omit 4px margin in the bottom
   // in the actual ui, it is neutralized by padding of the box
   height: 160px;
