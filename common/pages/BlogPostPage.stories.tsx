@@ -1,53 +1,34 @@
 import * as React from "react";
-import { MemoryRouter } from "react-router-dom";
-import BlogPostPage from "../BlogPostPage";
-import LocaleContext from "../../contexts/LocaleContext";
+import MockApp from "../../fixtures/MockApp";
+import BlogPostPage from "./BlogPostPage";
 
 export default { title: "BlogPostPage" };
 
 export const Loaded = () => (
-  <MemoryRouter>
-    <LocaleContext.Provider value={{
-      currentLocale: "ja-JP",
-      availableLocales: ["ja-JP"],
-      isLoading: false,
-    }}>
-      <BlogPostPage
-        blogPost={BLOG_POST}
-        blogPostLoading={false}
-      />
-    </LocaleContext.Provider>
-  </MemoryRouter>
+  <MockApp>
+    <BlogPostPage
+      blogPost={BLOG_POST}
+      blogPostLoading={false}
+    />
+  </MockApp>
 );
 
 export const Loading = () => (
-  <MemoryRouter>
-    <LocaleContext.Provider value={{
-      currentLocale: "ja-JP",
-      availableLocales: ["ja-JP"],
-      isLoading: false,
-    }}>
-      <BlogPostPage
-        blogPost={null}
-        blogPostLoading={true}
-      />
-    </LocaleContext.Provider>
-  </MemoryRouter>
+  <MockApp>
+    <BlogPostPage
+      blogPost={null}
+      blogPostLoading={true}
+    />
+  </MockApp>
 );
 
 export const Unavailable = () => (
-  <MemoryRouter>
-    <LocaleContext.Provider value={{
-      currentLocale: "ja-JP",
-      availableLocales: ["ja-JP"],
-      isLoading: false,
-    }}>
-      <BlogPostPage
-        blogPost={null}
-        blogPostLoading={false}
-      />
-    </LocaleContext.Provider>
-  </MemoryRouter>
+  <MockApp>
+    <BlogPostPage
+      blogPost={null}
+      blogPostLoading={false}
+    />
+  </MockApp>
 );
 
 const BLOG_POST = {
