@@ -1,34 +1,19 @@
 import * as React from "react";
-import { MemoryRouter } from "react-router-dom";
-import LocaleContext from "../contexts/LocaleContext";
+import MockApp from "../../fixtures/MockApp";
 import HeadBar from "./HeadBar";
 
 export default {
   title: "HeadBar",
 };
 
-function Wrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <MemoryRouter>
-      <LocaleContext.Provider value={{
-        currentLocale: "ja-JP",
-        availableLocales: ["ja-JP"],
-        isLoading: false,
-      }}>
-        {children}
-      </LocaleContext.Provider>
-    </MemoryRouter>
-  );
-}
-
 export const Normal = () => (
-  <Wrapper>
+  <MockApp>
     <HeadBar />
-  </Wrapper>
+  </MockApp>
 );
 
 export const NoLogo = () => (
-  <Wrapper>
+  <MockApp>
     <HeadBar noLogo />
-  </Wrapper>
+  </MockApp>
 );
