@@ -27,6 +27,33 @@ export interface Props extends React.Attributes {
   children?: string;
 }
 
+export enum Typeface {
+  body,
+  headline,
+  monospace,
+}
+
+export enum TextSize {
+  giantic,
+  huge,
+  large,
+  larger,
+  default,
+  small,
+}
+
+export enum TextLineSize {
+  default,
+  large
+}
+
+export enum TextAlignment {
+  default = "inherit",
+  start = "start",
+  end = "end",
+  center = "center"
+}
+
 /**
  * A fundamental text component. Every text in this repository should be made of this component.
  */
@@ -67,25 +94,10 @@ export default function RawText({ color, typeface, size, lineSize, alignment, ma
   );
 }
 
-export enum Typeface {
-  body,
-  headline,
-  monospace,
-}
-
 const TYPEFACE_CSS: Record<Typeface, SerializedStyles> = {
   [Typeface.headline]: css`font-family: "Montserrat", sans-serif;`,
   [Typeface.body]: css`font-family: "Open Sans", sans-serif;`,
   [Typeface.monospace]: css`font-family: "Source Code Pro", monospace;`,
-}
-
-export enum TextSize {
-  giantic,
-  huge,
-  large,
-  larger,
-  default,
-  small,
 }
 
 const TEXT_SIZE_CSS: Record<TextSize, SerializedStyles> = {
@@ -133,21 +145,9 @@ const TEXT_SIZE_CSS: Record<TextSize, SerializedStyles> = {
   `,
 }
 
-export enum TextLineSize {
-  default,
-  large
-}
-
 const TEXT_LINE_SIZE_CSS: Record<TextLineSize, SerializedStyles> = {
   [TextLineSize.default]: css`line-height: 1.5;`,
   [TextLineSize.large]: css`line-height: 1.75`,
-}
-
-export enum TextAlignment {
-  default = "inherit",
-  start = "start",
-  end = "end",
-  center = "center"
 }
 
 const TEXT_ALIGNMENT_CSS: Record<TextAlignment, SerializedStyles> = {
@@ -169,11 +169,6 @@ const Root = styled.span<{
   underline: boolean;
   lineThrough: boolean;
 }>`
-  // margin: 0;
-  // margin-block-start: 0;
-  // margin-block-end: 0;
-  // margin-inline-start: 0;
-  // margin-inline-end: 0;
   color: ${({ themedColor }) => LIGHT_COLOR[themedColor]};
   ${({ typeface }) => TYPEFACE_CSS[typeface]}
   ${({ size }) => TEXT_SIZE_CSS[size]}
@@ -217,54 +212,3 @@ const Root = styled.span<{
     color: ${({ themedColor }) => DARK_COLOR[themedColor]};
   }
 `;
-
-// const TEXT_STYLE: Record<TextType, SerializedStyles> = {
-//   [TextType.body]: css`
-//     font-size: 20px;
-//     font-family: "Open Sans", sans-serif;
-//     line-height: 1.5;
-
-//     ${MOBILE} {
-//       font-size: 16px;
-//     }
-//   `,
-//   [TextType.subtitle]: css`
-//     font-size: 46px;
-//     font-weight: 600;
-//     font-family: "Montserrat", sans-serif;
-//     line-height: 1.5;
-
-//     ${MOBILE} {
-//       font-size: 32px;
-//     }
-//   `,
-//   [TextType.subtitle2]: css`
-//     font-size: 32px;
-//     font-weight: 600;
-//     font-family: "Montserrat", sans-serif;
-//     line-height: 1.5;
-
-//     ${MOBILE} {
-//       font-size: 24px;
-//     }
-//   `,
-//   [TextType.label]: css`
-//     font-size: 16px;
-//     font-family: "Open Sans", sans-serif;
-//     line-height: 1.5;
-
-//     ${MOBILE} {
-//       font-size: 12px;
-//     }
-//   `,
-//   [TextType.logo]: css`
-//     font-size: 20px;
-//     font-weight: 600;
-//     font-family: "Montserrat", sans-serif;
-//     line-height: 1.5;
-
-//     ${MOBILE} {
-//       font-size: 16px;
-//     }
-//   `
-// };
