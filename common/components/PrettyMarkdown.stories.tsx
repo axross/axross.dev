@@ -3,7 +3,7 @@ import * as React from "react";
 import PrettyMarkdown from "./PrettyMarkdown";
 
 export default {
-  title: "PrettyMarkdown",
+  title: "Components/PrettyMarkdown",
   decorators: [withKnobs]
 };
 

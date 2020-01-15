@@ -4,7 +4,7 @@ import MarkdownLink from "./MarkdownLink";
 import Paragraph from "./Paragraph";
 import Strong from "./Strong";
 
-export default { title: "PrettyMarkdown/Blockquote" };
+export default { title: "Components/PrettyMarkdown/Blockquote" };
 
 export const paragraphsInside = () => (
   <div style={{ padding: "0 48px" }}>

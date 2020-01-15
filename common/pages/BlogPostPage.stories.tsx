@@ -2,7 +2,7 @@ import * as React from "react";
 import MockApp from "../../fixtures/MockApp";
 import BlogPostPage from "./BlogPostPage";
 
-export default { title: "BlogPostPage" };
+export default { title: "Pages/BlogPostPage" };
 
 export const Loaded = () => (
   <MockApp>

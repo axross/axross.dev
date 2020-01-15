@@ -2,7 +2,7 @@ import * as React from "react";
 import ThemedColor from "../types/ThemedColor";
 import Icon, { IconName } from "./Icon";
 
-export default { title: "Icon" };
+export default { title: "Components/Icon" };
 
 export const catalog = () => (
   <table>

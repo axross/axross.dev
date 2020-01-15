@@ -4,7 +4,7 @@ import ThemedColor from "../types/ThemedColor";
 import RawText, { TextAlignment, TextLineSize, TextSize, Typeface } from "./RawText";
 
 export default {
-  title: "RawText",
+  title: "Components/RawText",
   decorators: [withKnobs]
 };
 

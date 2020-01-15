@@ -3,7 +3,7 @@ import MockApp from "../../fixtures/MockApp";
 import HeadBar from "./HeadBar";
 
 export default {
-  title: "HeadBar",
+  title: "Components/HeadBar",
 };
 
 export const Normal = () => (

@@ -1,7 +1,7 @@
 import * as React from "react";
 import CodeBlock from "./CodeBlock";
 
-export default { title: "PrettyMarkdown/Codeblock" };
+export default { title: "Components/PrettyMarkdown/Codeblock" };
 
 export const JSX = () => (
   <div style={{ padding: "0 48px" }}>
@@ -21,7 +21,7 @@ export const JSX = () => (
 );
 
 export const CSS = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <CodeBlock className="language-css">
       {`/* prefer to use CSS class instead of element-type selector in production */
 svg > defs > linearGradient > stop:nth-of-type(2n) {
@@ -46,7 +46,7 @@ svg > defs > linearGradient > stop:nth-of-type(2n + 1) {
 );
 
 export const Flutter = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <CodeBlock className="language-dart">
       {`// Copyright (c) 2019, the Dart project authors.  Please see the AUTHORS file
 // for details. All rights reserved. Use of this source code is governed by a
