@@ -7,7 +7,7 @@ import Strong from "./Strong";
 export default { title: "PrettyMarkdown/Blockquote" };
 
 export const paragraphsInside = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <Blockquote>
       <Paragraph>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget gravida cum sociis natoque penatibus et.
@@ -21,7 +21,7 @@ export const paragraphsInside = () => (
 );
 
 export const linksInside = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <Blockquote>
       <Paragraph>
         {"Also there's "}

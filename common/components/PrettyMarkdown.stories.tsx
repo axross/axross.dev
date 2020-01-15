@@ -8,19 +8,19 @@ export default {
 };
 
 export const articleA = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <PrettyMarkdown>{ARTICLE_A.trim()}</PrettyMarkdown>
   </div>
 );
 
 export const articleB = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <PrettyMarkdown>{ARTICLE_B.trim()}</PrettyMarkdown>
   </div>
 );
 
 export const articleC = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <PrettyMarkdown>{ARTICLE_C.trim()}</PrettyMarkdown>
   </div>
 );

@@ -6,7 +6,7 @@ import EmbededLink from "./EmbededLink";
 export default { title: "PrettyMarkdown/EmbededLink" };
 
 export const article = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <RepositoryContext.Provider value={{ webpageSummaryRepository: new MockWebpageSummaryRepository() } as any}>
       <EmbededLink url="https://localhost:0/article" />
     </RepositoryContext.Provider>
@@ -14,7 +14,7 @@ export const article = () => (
 );
 
 export const noImage = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <RepositoryContext.Provider value={{ webpageSummaryRepository: new MockWebpageSummaryRepository() } as any}>
       <EmbededLink url="https://localhost:0/no-image" />
     </RepositoryContext.Provider>
@@ -22,7 +22,7 @@ export const noImage = () => (
 );
 
 export const longValues = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <RepositoryContext.Provider value={{ webpageSummaryRepository: new MockWebpageSummaryRepository() } as any}>
       <EmbededLink url="https://localhost:0/lorem-ipsum" />
     </RepositoryContext.Provider>
@@ -30,7 +30,7 @@ export const longValues = () => (
 );
 
 export const loading = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <RepositoryContext.Provider value={{ webpageSummaryRepository: new MockWebpageSummaryRepository() } as any}>
       <EmbededLink url="https://localhost:0/loading-forever" />
     </RepositoryContext.Provider>
@@ -38,7 +38,7 @@ export const loading = () => (
 );
 
 export const unavailable = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <RepositoryContext.Provider value={{ webpageSummaryRepository: new MockWebpageSummaryRepository() } as any}>
       <EmbededLink url="https://localhost:0/unavailable" />
     </RepositoryContext.Provider>
