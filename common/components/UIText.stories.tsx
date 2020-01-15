@@ -3,7 +3,7 @@ import * as React from "react";
 import UIText, { UITextType } from "./UIText";
 
 export default {
-  title: "UIText",
+  title: "Components/UIText",
   decorators: [withKnobs]
 };
 

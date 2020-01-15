@@ -3,7 +3,7 @@ import RepositoryContext from "../../contexts/RepositoryContext";
 import MockWebpageSummaryRepository from '../../repositories/MockWebpageSummaryRepository';
 import EmbededLink from "./EmbededLink";
 
-export default { title: "PrettyMarkdown/EmbededLink" };
+export default { title: "Components/PrettyMarkdown/EmbededLink" };
 
 export const article = () => (
   <div style={{ padding: "0 48px" }}>

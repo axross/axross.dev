@@ -5,7 +5,7 @@ import { MOBILE } from "../constant/mediaQuery";
 import ContentLoader from "./ContentLoader";
 
 export default {
-  title: "ContentLoader",
+  title: "Components/ContentLoader",
 };
 
 export const mixed = () => (
