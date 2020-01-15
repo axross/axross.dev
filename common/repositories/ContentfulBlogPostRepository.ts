@@ -1,4 +1,4 @@
-import { Entry, EntryCollection, ContentfulClientApi } from "contentful";
+import { ContentfulClientApi, EntryCollection } from "contentful";
 import BlogPost from "../entities/BlogPost";
 import LocaleString from "../entities/LocaleString";
 import BlogPostRepository from "./BlogPostRepository";
