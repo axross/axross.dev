@@ -4,7 +4,7 @@ import CodeBlock from "./CodeBlock";
 export default { title: "PrettyMarkdown/Codeblock" };
 
 export const JSX = () => (
-  <div style={{ padding: 48 }}>
+  <div style={{ padding: "0 48px" }}>
     <CodeBlock className="language-jsx">
       {`// 1.75 line-height is 28px as converted
 // there's (28 - 16) / 2 = 6px margin at the top and bottom
