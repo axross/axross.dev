@@ -32,10 +32,9 @@ export default function BlogPostRoute({
     setBlogPost([null, true]);
 
     blogPostRepository
-      .getById(match!.params.id)
-      .then(blogPosts =>
-        setBlogPost([blogPosts.get(currentLocale) ?? null, false])
-      );
+      .getByIdAndLocale(match!.params.id, currentLocale)
+      .then(blogPost => setBlogPost([blogPost, false]))
+      .catch(() => setBlogPost([null, false]));
   }, [match!.params.id, currentLocale]);
 
   return (
