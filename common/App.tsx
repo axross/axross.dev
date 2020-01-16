@@ -1,5 +1,7 @@
 import * as React from "react";
+import Helmet from "react-helmet";
 import { Route, Switch, useHistory, useLocation } from "react-router-dom";
+import profileImage from "../assets/profile.jpg";
 import GlobalStyle from "./components/GlobalStyle";
 import LocaleContext from "./contexts/LocaleContext";
 import RepositoryContext from "./contexts/RepositoryContext";
@@ -44,6 +46,10 @@ export default function App() {
       }}
     >
       <GlobalStyle />
+
+      <Helmet>
+        <link rel="shortcut icon" href={profileImage} />
+      </Helmet>
 
       <React.Suspense fallback={<div />}>
         <Switch>
