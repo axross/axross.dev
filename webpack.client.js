@@ -43,7 +43,6 @@ module.exports = {
     new HtmlPlugin({
       template: require('html-webpack-template'),
       title: "Loading...",
-      favicon: path.resolve(__dirname, './assets/favicon.png'),
       mobile: true,
       appMountId: "app",
       googleAnalytics: {
