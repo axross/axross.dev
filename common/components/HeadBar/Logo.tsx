@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import * as React from "react";
 import { MOBILE } from "../../constant/mediaQuery";
 import UIText, { UITextType } from "../UIText";
+import profileImage from "../../../assets/profile.jpg";
 
 export default function Logo() {
   return (
@@ -29,7 +30,7 @@ const Image = styled.span`
   display: block;
   width: 48px;
   height: 48px;
-  background: center/contain no-repeat url("/profile.jpg");
+  background: center/contain no-repeat url(${profileImage});
   border-radius: 50%;
 
   ${MOBILE} {

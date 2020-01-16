@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
+import profileImage from "../../../assets/profile.jpg";
 import ExternalLink from "../../components/ExternalLink";
 import Icon, { IconName } from "../../components/Icon";
 import PrettyMarkdown from "../../components/PrettyMarkdown";
@@ -16,7 +17,7 @@ interface Props extends React.Attributes {
 export default function Whoami({ bio, ...props }: Props) {
   return (
     <Root {...props}>
-      <Avatar src="/profile.jpg" />
+      <Avatar src={profileImage} />
 
       <Name type={UITextType.subtitle2}>
         {MY_NAME}
