@@ -2,6 +2,7 @@ import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import { Helmet } from "react-helmet";
 import { RouteChildrenProps, useLocation } from "react-router-dom";
+import profileImage from "../../assets/profile.jpg";
 import {
   MY_JOB_TITLE,
   MY_NAME,
@@ -147,7 +148,7 @@ function Meta() {
       <meta property="og:title" content={title} key="og:title" />
       <meta
         property="og:image"
-        content="/profile.jpg"
+        content={profileImage}
         key="og:image"
       />
 
@@ -158,7 +159,7 @@ function Meta() {
           "@type": "Person",
           url: canonicalURL,
           name: MY_NAME,
-          image: "/profile.jpg",
+          image: profileImage,
           jobTitle: MY_JOB_TITLE,
           sameAs: MY_SOCIAL_MEDIA_LINKS.map(({ url }) => `${url}`)
         })}

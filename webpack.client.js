@@ -20,8 +20,19 @@ module.exports = {
           {
             loader: "ts-loader",
             options: {
-              configFile: path.resolve(__dirname, "./client/tsconfig.json"),
+              configFile: path.resolve(__dirname, "./tsconfig.json"),
               transpileOnly: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.jpg$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              outputPath: "assets",
             },
           },
         ],
@@ -32,7 +43,7 @@ module.exports = {
     new HtmlPlugin({
       template: require('html-webpack-template'),
       title: "Loading...",
-      favicon: path.resolve(__dirname, './dist/client/favicon.png'),
+      favicon: path.resolve(__dirname, './assets/favicon.png'),
       mobile: true,
       appMountId: "app",
       googleAnalytics: {

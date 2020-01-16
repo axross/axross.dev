@@ -7,5 +7,7 @@ node_modules/*
 dist/client/*.js
 dist/client/*.js.map
 dist/client/*.html
+dist/client/assets/*.jpg
+dist/client/assets/*.png
 dist/functions/*.js
 dist/functions/*.js.map

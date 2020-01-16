@@ -3,16 +3,13 @@
   "scripts": {
     "test": "npm run test:unit",
     "test:unit": "jest --config jest.unit.js",
-    "dry-compile:client": "tsc --project ./client --noEmit",
-    "dry-compile:functions": "tsc --project ./functions --noEmit",
-    "dry-compile": "npm run dry-compile:client && npm run dry-compile:functions",
+    "dry-compile": "tsc --noEmit",
     "build:functions": "webpack --config webpack.functions.js --mode production",
     "build:service-worker": "webpack --config webpack.serviceWorker.js --mode production",
     "build:client": "webpack --config webpack.client.js --mode production",
-    "build": "npm run build:functions && npm run build:service-worker && npm run build:client",
-    "serve": "netlify dev",
-    "serve:client": "webpack-dev-server --config webpack.client.js --mode development",
-    "serve:storybook": "start-storybook -s ./dist/client"
+    "build:storybook": "build-storybook --output-dir ./dist/client/storybook",
+    "serve:client": "netlify dev",
+    "serve:storybook": "start-storybook"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
@@ -45,6 +42,7 @@
     "@types/react-router-dom": "^5.1.3",
     "@types/react-syntax-highlighter": "^10.2.1",
     "babel-loader": "^8.0.6",
+    "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
     "html-webpack-template": "^6.2.0",
     "jest": "^24.9.0",

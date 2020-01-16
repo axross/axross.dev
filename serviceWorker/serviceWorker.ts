@@ -1,5 +1,5 @@
 // hack
-declare var self: ServiceWorkerGlobalScope; export {};
+declare var self: any; export {};
 
 const APP_CACHE_NAME = "app-v1";
 const CONTENTS_CACHE_NAME = "contents-v1";
@@ -15,7 +15,7 @@ self.addEventListener("install", () => {
   self.skipWaiting();
 });
 
-self.addEventListener("activate", e => {
+self.addEventListener("activate", (e: any) => {
   e.waitUntil((async () => {
     await self.clients.claim();
 
@@ -29,7 +29,7 @@ self.addEventListener("activate", e => {
   })());
 });
 
-self.addEventListener("fetch", e => {
+self.addEventListener("fetch", (e: any) => {
   const url = new URL(e.request.url);
 
   if (url.origin === location.origin) {
