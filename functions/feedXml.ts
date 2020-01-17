@@ -5,7 +5,7 @@ import { MY_NAME } from "../common/constant/data";
 import ContentfulBlogPostRepository from "../common/repositories/ContentfulBlogPostRepository";
 import ContentfulLocaleRepository from "../common/repositories/ContentfulLocaleRepository";
 
-export default function handler(
+export function handler(
   event: APIGatewayProxyEvent,
   _: any,
   callback: APIGatewayProxyCallback
@@ -28,6 +28,9 @@ export default function handler(
 
   localeRepository.getAllAvailableOnes().then(availableLocales => {
     if (currentLocale === null || !availableLocales.includes(currentLocale)) {
+      console.log(currentLocale);
+      console.log(availableLocales);
+
       callback(null, { statusCode: 404, body: "" });
 
       return;

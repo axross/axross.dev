@@ -10,4 +10,3 @@ dist/client/*.html
 dist/client/assets/*.jpg
 dist/client/assets/*.png
 dist/functions/*.js
-dist/functions/*.js.map

@@ -1,6 +1,6 @@
 import { APIGatewayProxyCallback, APIGatewayProxyEvent } from "aws-lambda";
 
-export default function handler(
+export function handler(
   event: APIGatewayProxyEvent,
   _: any,
   callback: APIGatewayProxyCallback
