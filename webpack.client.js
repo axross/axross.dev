@@ -5,7 +5,7 @@ const { EnvironmentPlugin } = require("webpack");
 module.exports = {
   entry: "./client/client.tsx",
   output: {
-    path: path.resolve(__dirname, './dist/client'),
+    path: path.resolve(__dirname, './public'),
     filename: "[name].js",
     publicPath: "/",
   },
@@ -20,7 +20,8 @@ module.exports = {
           {
             loader: "ts-loader",
             options: {
-              configFile: path.resolve(__dirname, "./tsconfig.json"),
+              configFile: path.resolve(__dirname, "./client/tsconfig.json"),
+              compilerOptions: { sourceMap: true },
               transpileOnly: true,
             },
           },
@@ -79,7 +80,7 @@ module.exports = {
     }
   },
   devServer: {
-    contentBase: path.resolve(__dirname, './dist/client'),
+    contentBase: path.resolve(__dirname, './public'),
     historyApiFallback: true,
   },
 };

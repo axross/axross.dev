@@ -4,10 +4,8 @@ node_modules/*
 .netlify
 
 # Distribution files
-dist/client/*.js
-dist/client/*.js.map
-dist/client/*.html
-dist/client/assets/*.jpg
-dist/client/assets/*.png
-dist/functions/*.js
-dist/functions/*.js.map
+public/*.js
+public/*.js.map
+public/*.html
+public/assets/*.jpg
+public/assets/*.png

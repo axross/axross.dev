@@ -1,0 +1,10 @@
+https://www.axross.dev/*        hl=:hl      https://www.kohei.dev/:splat?hl=:hl            301!
+https://axross.dev/*            hl=:hl      https://www.kohei.dev/:splat?hl=:hl            301!
+https://kohei.netlify.dev/*     hl=:hl      https://www.kohei.dev/:splat?hl=:hl            301!
+/robots.txt                                 /.netlify/functions/robotsTxt                  200
+/sitemap.xml                                /.netlify/functions/sitemapXml                 200
+/posts/feed.xml                 hl=:hl      /.netlify/functions/feedXml?hl=:hl                    200
+/functions/getWebpageSummary    url=:url    /.netlify/functions/webpageSummary?url=:url    200
+/assets/*                                   /assets/:splat                                 200
+/posts/*                                    /index.html                                    200
+/                                           /index.html                                    200

@@ -1,4 +1,4 @@
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 import fetch from "node-fetch";
 import WebpageSummary from "../../common/entities/WebpageSummary";
 import WebpageSummaryRepository from "../../common/repositories/WebpageSummaryRepository";

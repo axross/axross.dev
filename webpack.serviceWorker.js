@@ -3,7 +3,7 @@ const path = require("path");
 module.exports = {
   entry: "./serviceWorker/serviceWorker.ts",
   output: {
-    path: path.resolve(__dirname, './dist/client'),
+    path: path.resolve(__dirname, './public'),
     filename: "sw.js",
     publicPath: "/",
   },

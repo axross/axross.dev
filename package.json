@@ -3,11 +3,12 @@
   "scripts": {
     "test": "npm run test:unit",
     "test:unit": "jest --config jest.unit.js",
-    "dry-compile": "tsc --noEmit",
-    "build:functions": "webpack --config webpack.functions.js --mode production",
+    "dry-compile": "npm run dry-compile:client && npm run dry-compile:functions",
+    "dry-compile:client": "tsc --noEmit --project ./client",
+    "dry-compile:functions": "tsc --noEmit --project ./functions",
     "build:service-worker": "webpack --config webpack.serviceWorker.js --mode production",
     "build:client": "webpack --config webpack.client.js --mode production",
-    "build:storybook": "build-storybook --output-dir ./dist/client/storybook",
+    "build:storybook": "build-storybook --output-dir ./public/storybook",
     "serve:client": "netlify dev",
     "serve:storybook": "start-storybook"
   },
@@ -26,6 +27,7 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "react-router-dom": "^5.1.2",
+    "ts-node": "^8.6.2",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {

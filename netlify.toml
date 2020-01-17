@@ -1,12 +1,12 @@
 [build]
-  command = "npm run dry-compile && npm run build:functions && npm run build:service-worker && npm run build:client"
-  publish = "dist/client"
-  functions = "dist/functions"
+  command = "npm run dry-compile && npm run build:service-worker && npm run build:client"
+  publish = "public"
+  functions = "functions"
 
 [dev]
   command = "./node_modules/.bin/webpack-dev-server --config webpack.client.js --mode development --port 8080"
   port = 3000
   targetPort = 8080
-  publish = "dist/client"
-  functions = "dist/functions"
+  publish = "public"
+  functions = "functions"
   autoLaunch = true

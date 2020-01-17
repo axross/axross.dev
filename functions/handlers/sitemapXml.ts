@@ -1,8 +1,8 @@
 import { APIGatewayProxyCallback, APIGatewayProxyEvent } from "aws-lambda";
 import * as Contentful from 'contentful';
 import * as xmljs from "xml-js";
-import ContentfulBlogPostRepository from "../common/repositories/ContentfulBlogPostRepository";
-import ContentfulLocaleRepository from "../common/repositories/ContentfulLocaleRepository";
+import ContentfulBlogPostRepository from "../../common/repositories/ContentfulBlogPostRepository";
+import ContentfulLocaleRepository from "../../common/repositories/ContentfulLocaleRepository";
 
 export default function handler(
   event: APIGatewayProxyEvent,
