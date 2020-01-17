@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["WebWorker"]
+  },
+  "include": [
+    "../@types",
+    "../common",
+    "./client"
+  ]
+}
