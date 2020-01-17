@@ -1,7 +1,7 @@
 import { APIGatewayProxyCallback, APIGatewayProxyEvent } from "aws-lambda";
-import ScrapingWebpageSummaryRepository from "../repositories/ScrapingWebpageSummaryRepository";
+import ScrapingWebpageSummaryRepository from "./repositories/ScrapingWebpageSummaryRepository";
 
-export default function handler(
+export function handler(
   event: APIGatewayProxyEvent,
   _: any,
   callback: APIGatewayProxyCallback

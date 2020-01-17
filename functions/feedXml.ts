@@ -1,11 +1,11 @@
 import { APIGatewayProxyCallback, APIGatewayProxyEvent } from "aws-lambda";
 import * as Contentful from 'contentful';
 import * as xmljs from "xml-js";
-import { MY_NAME } from "../../common/constant/data";
-import ContentfulBlogPostRepository from "../../common/repositories/ContentfulBlogPostRepository";
-import ContentfulLocaleRepository from "../../common/repositories/ContentfulLocaleRepository";
+import { MY_NAME } from "../common/constant/data";
+import ContentfulBlogPostRepository from "../common/repositories/ContentfulBlogPostRepository";
+import ContentfulLocaleRepository from "../common/repositories/ContentfulLocaleRepository";
 
-export default function handler(
+export function handler(
   event: APIGatewayProxyEvent,
   _: any,
   callback: APIGatewayProxyCallback
@@ -13,7 +13,7 @@ export default function handler(
   const { httpMethod, path, queryStringParameters } = event;
 
   if (httpMethod !== "GET") {
-    callback(null, { statusCode: 404, body: "you are unko" });
+    callback(null, { statusCode: 404, body: "" });
 
     return;
   }
@@ -31,7 +31,7 @@ export default function handler(
       console.log(currentLocale);
       console.log(availableLocales);
 
-      callback(null, { statusCode: 404, body: "baka otsu" });
+      callback(null, { statusCode: 404, body: "" });
 
       return;
     }
