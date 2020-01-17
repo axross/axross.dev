@@ -1,8 +1,3 @@
-[build]
-  command = "npm run dry-compile && npm run build:app -- --mode production"
-  publish = "dist/client"
-  functions = "dist/functions"
-
 [dev]
   command="node_modules/.bin/webpack-dev-server --config webpack.client.js --mode development --port 8080"
   port = 3000
