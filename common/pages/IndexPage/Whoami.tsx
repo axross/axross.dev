@@ -17,7 +17,7 @@ interface Props extends React.Attributes {
 export default function Whoami({ bio, ...props }: Props) {
   return (
     <Root {...props}>
-      <Avatar src={profileImage} />
+      <Avatar src={profileImage} alt="Kohei Asai" />
 
       <Name type={UITextType.subtitle2}>
         {MY_NAME}
