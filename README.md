@@ -1,6 +1,7 @@
 # axross.dev
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/153f81f8-6487-47f5-86b1-ce579c1b186f/deploy-status)](https://app.netlify.com/sites/kohei/deploys)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Faxross%2Fkohei.dev.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Faxross%2Fkohei.dev?ref=badge_shield)
 
 This is the source code of my personal website.
 
@@ -30,3 +31,7 @@ Semi-JAM Stack. **Yet no HTML built. Everything is dynamically rendered**.
    The access token is for development. Pass them via environement variable in order to use a different access token (and make it secret).
 4. The webpage will automatically open on your default browser
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Faxross%2Fkohei.dev.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Faxross%2Fkohei.dev?ref=badge_large)
