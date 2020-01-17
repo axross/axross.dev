@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const HtmlPlugin = require("html-webpack-plugin");
 const { EnvironmentPlugin } = require("webpack");
+const { GenerateSW } = require("workbox-webpack-plugin");
 
 module.exports = [
   {
@@ -67,12 +68,52 @@ module.exports = [
 
           <script defer>
             if (typeof navigator.serviceWorker !== "undefined") {
-              navigator.serviceWorker.register("/sw.js");
+              navigator.serviceWorker.register("/service-worker.js");
             }
           </script>
         `,
       }),
       new EnvironmentPlugin(['CONTENTFUL_SPACE', 'CONTENTFUL_ACCESS_TOKEN']),
+      new GenerateSW({
+        navigateFallback: "/index.html",
+        navigateFallbackWhitelist: [/\/\??/, /^\/posts\/[a-z0-9\-]+/],
+        skipWaiting: true,
+        clientsClaim: true,
+        cacheId: "app-v1",
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com\//,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'google-fonts-v1',
+            },
+          },
+          {
+            urlPattern: /^https:\/\/cdn\.contentful\.com/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'contents-v1',
+            },
+          },
+          {
+            urlPattern: /^https:\/\/images\.ctfassets\.net/,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'content-assets-v1',
+            },
+          },
+          {
+            urlPattern: /\/functions\/getWebpageSummary/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'webpage-summary-v1',
+              expiration: {
+                maxAgeSeconds: 60 * 60 * 24 * 7,
+              },
+            },
+          },
+        ],
+      }),
     ],
     devtool: process.env.NODE_ENV === "development" ? "eval" : "source-map",
     optimization: {
@@ -84,38 +125,9 @@ module.exports = [
     devServer: {
       writeToDisk: (filePath) => {
         if (/dist\/functions\/[a-zA-Z0-9\-_]+\.js$/.test(filePath)) return true;
-        if (filePath.endsWith("dist/client/sw.js")) return true;
 
         return false;
       },
-    },
-  },
-  {
-    entry: "./serviceWorker/serviceWorker.ts",
-    output: {
-      path: path.resolve(__dirname, 'dist/client'),
-      filename: "sw.js",
-      publicPath: "/",
-    },
-    resolve: {
-      extensions: [".ts", ".js"],
-    },
-    module: {
-      rules: [
-        {
-          test: /\.ts$/,
-          use: [
-            {
-              loader: "ts-loader",
-              options: {
-                configFile: path.resolve(__dirname, "serviceWorker/tsconfig.json"),
-  
-                transpileOnly: true,
-              },
-            },
-          ],
-        },
-      ],
     },
   },
   {
