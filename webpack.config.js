@@ -76,7 +76,7 @@ module.exports = [
       new EnvironmentPlugin(['CONTENTFUL_SPACE', 'CONTENTFUL_ACCESS_TOKEN']),
       new GenerateSW({
         navigateFallback: "/index.html",
-        navigateFallbackWhitelist: [/\/\??/, /^\/posts\/[a-z0-9\-]+/],
+        navigateFallbackBlacklist: [/\.[a-z]+(\?.+)?/],
         skipWaiting: true,
         clientsClaim: true,
         cacheId: "app-v1",
