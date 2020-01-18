@@ -5,3 +5,4 @@ export { default as BlogPostRepository } from "../common/repositories/Contentful
 export { default as LocaleRepository } from "../common/repositories/ContentfulLocaleRepository";
 export { default as WebsitePurposeRepository } from "../common/repositories/ContentfulWebsitePurposeRepository";
 export { default as WebpageSummaryRepository } from "./repositories/FunctionWebpageSummaryRepository";
+export { default as BlogPostCache } from "./repositories/MemoryBlogPostCache";
