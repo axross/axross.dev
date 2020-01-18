@@ -6,10 +6,11 @@ import { MOBILE } from "../constant/mediaQuery";
 import FirstNBlogPosts from "./IndexPage/FirstNBlogPosts";
 import FirstNBlogPostsHeading from "./IndexPage/FirstNBlogPostsHeading";
 import FirstNBlogPostsLoader from "./IndexPage/FirstNBlogPostsLoader";
-import TwoParagraphLoader from "./IndexPage/TwoParagraphLoader";
 import WebsitePurpose from "./IndexPage/WebsitePurpose";
 import WebsitePurposeHeading from "./IndexPage/WebsitePurposeHeading";
+import WebsitePurposeLoader from "./IndexPage/WebsitePurposeLoader";
 import Whoami from "./IndexPage/Whoami";
+import WhoamiLoader from "./IndexPage/WhoamiLoader";
 
 export interface Props {
   bio: string | null;
@@ -109,7 +110,7 @@ const _Whoami = styled(Whoami)`
   grid-area: whoami;
 `;
 
-const _WhoamiLoader = styled(TwoParagraphLoader)`
+const _WhoamiLoader = styled(WhoamiLoader)`
   grid-area: whoami;
 `;
 
@@ -133,6 +134,6 @@ const _WebsitePurpose = styled(WebsitePurpose)`
   grid-area: website-purpose;
 `;
 
-const _WebsitePurposeLoader = styled(TwoParagraphLoader)`
+const _WebsitePurposeLoader = styled(WebsitePurposeLoader)`
   grid-area: website-purpose;
 `
