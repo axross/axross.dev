@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     { default: App },
     {
       BioRepository,
-      BlogPostCache,
       BlogPostRepository,
       LocaleRepository,
       WebsitePurposeRepository,
@@ -37,7 +36,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   );
   const repositories = {
     bioRepository: new BioRepository(contentful),
-    blogPostCache: new BlogPostCache(),
     blogPostRepository: new BlogPostRepository(contentful),
     localeRepository: new LocaleRepository(contentful),
     webpageSummaryRepository: new WebpageSummaryRepository(),
