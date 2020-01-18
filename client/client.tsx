@@ -2,14 +2,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   const [
     React,
     ReactDOM,
-    { BrowserRouter },
+    { BrowserRouter, useHistory },
     { default: App },
     {
-      ContentfulBioRepository,
-      ContentfulBlogPostRepository,
-      ContentfulLocaleRepository,
-      ContentfulWebsitePurposeRepository,
-      FunctionWebpageSummaryRepository,
+      BioRepository,
+      BlogPostCache,
+      BlogPostRepository,
+      LocaleRepository,
+      WebsitePurposeRepository,
+      WebpageSummaryRepository,
       RepositoryContext,
       createClient
     }
@@ -35,19 +36,40 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
   );
   const repositories = {
-    bioRepository: new ContentfulBioRepository(contentful),
-    blogPostRepository: new ContentfulBlogPostRepository(contentful),
-    localeRepository: new ContentfulLocaleRepository(contentful),
-    webpageSummaryRepository: new FunctionWebpageSummaryRepository(),
-    websitePurposeRepository: new ContentfulWebsitePurposeRepository(contentful),
+    bioRepository: new BioRepository(contentful),
+    blogPostCache: new BlogPostCache(),
+    blogPostRepository: new BlogPostRepository(contentful),
+    localeRepository: new LocaleRepository(contentful),
+    webpageSummaryRepository: new WebpageSummaryRepository(),
+    websitePurposeRepository: new WebsitePurposeRepository(contentful),
   };
+
+  function Scroll() {
+    const history = useHistory();
+
+    React.useEffect(() => {
+      const unlisten = history.listen((_: any, action: any) => {
+        if (action === "PUSH") {
+          window.scrollTo(0, 0);
+        }
+      });
+
+      return unlisten;
+    }, []);
+
+    return (
+      <App />
+    );
+  }
 
   ReactDOM.render(
     <BrowserRouter>
       <RepositoryContext.Provider value={repositories}>
-        <App />
+        <Scroll />
       </RepositoryContext.Provider>
     </BrowserRouter>,
     document.getElementById("app")
   );
 });
+
+

@@ -8,7 +8,7 @@ import {
   MY_NAME,
   MY_SOCIAL_MEDIA_LINKS
 } from "../constant/data";
-import BlogPost from "../entities/BlogPost";
+import BlogPost, { BlogPostId } from "../entities/BlogPost";
 import LocaleContext from "../contexts/LocaleContext";
 import RepositoryContext from "../contexts/RepositoryContext";
 import {
@@ -18,33 +18,14 @@ import {
 } from "../dictionary";
 import BlogPostPage from "../pages/BlogPostPage";
 
-export default function BlogPostRoute({
-  match
-}: RouteChildrenProps<{ id: string }>) {
-  const { currentLocale } = React.useContext(LocaleContext);
-  const { blogPostRepository } = React.useContext(RepositoryContext);
-  const [[blogPost, isBlogPostLoading], setBlogPost] = React.useState<
-    [BlogPost | null, boolean]
-  >([null, true]);
+export default function BlogPostRoute({ match }: RouteChildrenProps<{ id: string }>) { 
+  const blogPostId = match!.params.id;
+  const [blogPost, isBlogPostLoading] = useBlogPost(blogPostId);
 
-  React.useEffect(() => window.scrollTo(0, 0), [match!.params.id]);
-
-  React.useEffect(() => {
-    setBlogPost([null, true]);
-
-    blogPostRepository
-      .getByIdAndLocale(match!.params.id, currentLocale)
-      .then(blogPost => setBlogPost([blogPost, false]))
-      .catch(() => setBlogPost([null, false]));
-  }, [match!.params.id, currentLocale]);
+  sendAnalyticsPageView(blogPost, isBlogPostLoading);
 
   return (
     <>
-      <AnalyticsPageView
-        blogPost={blogPost}
-        blogPostLoading={isBlogPostLoading}
-      />
-
       <Meta blogPost={blogPost} blogPostLoading={isBlogPostLoading} />
 
       <BlogPostPage blogPost={blogPost} blogPostLoading={isBlogPostLoading} />
@@ -52,13 +33,24 @@ export default function BlogPostRoute({
   );
 }
 
-function AnalyticsPageView({
-  blogPost,
-  blogPostLoading
-}: {
-  blogPost: BlogPost | null;
-  blogPostLoading: boolean;
-}) {
+function useBlogPost(blogPostId: BlogPostId): [BlogPost | null, boolean] {
+  const { blogPostRepository } = React.useContext(RepositoryContext);
+  const { currentLocale } = React.useContext(LocaleContext);
+  const [[blogPost, isLoading], set] = React.useState<
+    [BlogPost | null, boolean]
+  >([null, true]);
+
+  React.useEffect(() => {
+    blogPostRepository
+      .getByIdAndLocale(blogPostId, currentLocale)
+      .then(blogPost => set([blogPost, false]))
+      .catch(() => set([null, false]));
+  }, [blogPostId, currentLocale]);
+
+  return [blogPost, isLoading];
+}
+
+function sendAnalyticsPageView(blogPost: BlogPost | null, blogPostLoading: boolean): void {
   const { pathname } = useLocation();
   const { currentLocale } = React.useContext(LocaleContext);
 
@@ -91,8 +83,6 @@ function AnalyticsPageView({
 
     (window as any).ga("send", "pageview");
   }, [currentLocale, blogPost, blogPostLoading]);
-
-  return null;
 }
 
 function Meta({
