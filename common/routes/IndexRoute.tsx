@@ -15,38 +15,14 @@ import { WEBSITE_TITLE, WEBSITE_DESCRIPTION } from "../dictionary";
 import IndexPage from "../pages/IndexPage";
 
 export default function IndexRoute(_: RouteChildrenProps) {
-  const { currentLocale } = React.useContext(LocaleContext);
-  const { bioRepository, blogPostRepository, websitePurposeRepository } = React.useContext(
-    RepositoryContext
-  );
-  const [[bio, isBioLoading], setBio] = React.useState<
-    [string | null, boolean]
-  >([null, true]);
-  const [[blogPosts, isBlogPostsLoading], setBlogPosts] = React.useState<
-    [BlogPost[], boolean]
-  >([[], true]);
-  const [[websitePurpose, isWebsitePurposeLoading], setWebsitePurpose] = React.useState<[string | null, boolean]>([null, true]);
+  const [bio, isBioLoading] = useBio();
+  const [websitePurpose, isWebsitePurposeLoading] = useWebsitePurpose();
+  const [blogPosts, isBlogPostsLoading] = useBlogPosts();
 
-  React.useEffect(() => window.scrollTo(0, 0), []);
-
-  React.useEffect(() => {
-    setBio([null, true]);
-    setBlogPosts([[], true]);
-    setWebsitePurpose([null, true]);
-
-    bioRepository.getByLocale(currentLocale).then(bio => setBio([bio, false]));
-    blogPostRepository
-      .getAllByLocale(currentLocale)
-      .then(blogPosts => setBlogPosts([blogPosts, false]));
-    websitePurposeRepository
-      .getByLocale(currentLocale)
-      .then(websitePurpose => setWebsitePurpose([websitePurpose, false]));
-  }, [currentLocale]);
+  sendAnalyticsPageView();
 
   return (
     <>
-      <AnalyticsPageView />
-
       <Meta />
 
       <IndexPage
@@ -61,7 +37,53 @@ export default function IndexRoute(_: RouteChildrenProps) {
   );
 }
 
-function AnalyticsPageView() {
+function useBio(): [string | null, boolean] {
+  const { currentLocale } = React.useContext(LocaleContext);
+  const { bioRepository } = React.useContext(RepositoryContext);
+  const [[bio, isLoading], set] = React.useState<[string | null, boolean]>([null, true]);
+
+  React.useEffect(() => {
+    set([null, true]);
+
+    bioRepository.getByLocale(currentLocale)
+      .then(bio => set([bio, false]));
+  }, [currentLocale]);
+
+  return [bio, isLoading];
+}
+
+function useWebsitePurpose(): [string | null, boolean] {
+  const { currentLocale } = React.useContext(LocaleContext);
+  const { websitePurposeRepository } = React.useContext(RepositoryContext);
+  const [[websitePurpose, isLoading], set] = React.useState<[string | null, boolean]>([null, true]);
+
+  React.useEffect(() => {
+    set([null, true]);
+
+    websitePurposeRepository.getByLocale(currentLocale)
+      .then(websitePurpose => set([websitePurpose, false]));
+  }, [currentLocale]);
+
+  return [websitePurpose, isLoading];
+}
+
+function useBlogPosts(): [BlogPost[], boolean] {
+  const { currentLocale } = React.useContext(LocaleContext);
+  const { blogPostRepository } = React.useContext(RepositoryContext);
+  const [[blogPosts, isLoading], set] = React.useState<[BlogPost[], boolean]>([[], true]);
+
+  React.useEffect(() => {
+    set([[], true]);
+
+    blogPostRepository
+      .getAllByLocale(currentLocale)
+      .then(blogPosts => set([blogPosts, false]));
+  }, [currentLocale]);
+
+  return [blogPosts, isLoading];
+}
+
+function sendAnalyticsPageView(): void {
   const { pathname } = useLocation();
   const { currentLocale } = React.useContext(LocaleContext);
 
@@ -79,8 +101,6 @@ function AnalyticsPageView() {
     );
     (window as any).ga("send", "pageview");
   }, [currentLocale]);
-
-  return null;
 }
 
 function Meta() {
