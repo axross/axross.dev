@@ -16,22 +16,7 @@ interface Props extends React.Attributes {
 }
 
 export default function EmbededLink({ url, ...props }: Props) {
-  const { webpageSummaryRepository } = React.useContext(RepositoryContext);
-  const [[webpageSummary, isWebpageSummaryLoading], setWebpageSummary] = React.useState<[WebpageSummary | null, boolean]>([null, true]);
-
-  React.useEffect(() => {
-    webpageSummaryRepository.getByURL(new URL(url))
-      .then(webpageSummary => {
-        console.log(webpageSummary);
-
-        setWebpageSummary([webpageSummary, false]);
-      })
-      .catch(err => {
-        console.log(err);
-
-        setWebpageSummary([null, false]);
-      });
-  }, [url]);
+  const [webpageSummary, isWebpageSummaryLoading] = useWebpageSummary(url);
 
   // show the loader even if retrieving the webpage summary failed
   // and report to sentry.io
@@ -64,6 +49,19 @@ export default function EmbededLink({ url, ...props }: Props) {
       </Url>
     </Root>
   );
+}
+
+function useWebpageSummary(url: string): [WebpageSummary | null, boolean] {
+  const { webpageSummaryRepository } = React.useContext(RepositoryContext);
+  const [[webpageSummary, isWebpageSummaryLoading], setWebpageSummary] = React.useState<[WebpageSummary | null, boolean]>([null, true]);
+
+  React.useEffect(() => {
+    webpageSummaryRepository.getByURL(new URL(url))
+      .then(webpageSummary => setWebpageSummary([webpageSummary, false]))
+      .catch(() => setWebpageSummary([null, false]));
+  }, [url]);
+
+  return [webpageSummary, isWebpageSummaryLoading];
 }
 
 const Root = styled.div`
