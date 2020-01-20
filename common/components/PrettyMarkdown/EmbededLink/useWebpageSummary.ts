@@ -10,7 +10,7 @@ export default function useWebpageSummary(url: URL): [WebpageSummary | null, boo
     webpageSummaryRepository.getByURL(url)
       .then(webpageSummary => set([webpageSummary, false]))
       .catch(() => set([null, false]));
-  }, [url]);
+  }, [url.href]);
 
   return [webpageSummary, isLoading];
 }
