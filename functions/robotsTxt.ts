@@ -1,23 +1,15 @@
-import { APIGatewayProxyCallback, APIGatewayProxyEvent } from "aws-lambda";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 
-export function handler(
-  event: APIGatewayProxyEvent,
-  _: any,
-  callback: APIGatewayProxyCallback
-): void {
-  const { httpMethod } = event;
-
+export async function handler({ httpMethod }: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
   if (httpMethod !== "GET") {
-    callback(null, { statusCode: 404, body: "" });
-
-    return;
+    return { statusCode: 404, body: "" };
   }
 
-  callback(null, {
+  return {
     statusCode: 200,
     headers: {
       "content-type": "text/plain"
     },
     body: `sitemap: ${new URL("/sitemap.xml", process.env.URL)}\n`
-  });
+  };
 }
