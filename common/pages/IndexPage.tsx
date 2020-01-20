@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
 import * as React from "react";
+import styled from "styled-components";
 import BlogPost from "../entities/BlogPost";
 import HeadBar from "../components/HeadBar";
 import { MOBILE } from "../constant/mediaQuery";

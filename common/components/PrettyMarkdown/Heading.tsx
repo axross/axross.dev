@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
 import * as React from "react";
+import styled from "styled-components";
 import { MOBILE } from "../../constant/mediaQuery";
 import RawText, { Props as RawTextProps, TextSize, ThemedColor, Typeface } from "../RawText";
 import RawTextThemeContext from "../RawTextThemeContext";

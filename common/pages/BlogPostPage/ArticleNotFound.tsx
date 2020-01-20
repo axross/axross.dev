@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
 import * as React from "react";
+import styled from "styled-components";
 import RawText, { TextLineSize, TextSize, ThemedColor } from "../../components/RawText";
 import LocaleContext from "../../contexts/LocaleContext";
 import { NOT_FOUND_DESCRIPTION, NOT_FOUND_TITLE } from "../../dictionary";

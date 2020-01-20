@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
 import * as React from "react";
+import styled from "styled-components";
 import { DARK_COLOR, LIGHT_COLOR } from "../../constant/color";
 import { MOBILE, DARK_MODE } from "../../constant/mediaQuery";
 import ThemedColor from "../../types/ThemedColor";

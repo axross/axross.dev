@@ -1,4 +1,4 @@
-import { css, Global } from "@emotion/core";
+import { createGlobalStyle } from "styled-components";
 import { makeDecorator } from '@storybook/addons';
 import * as React from "react";
 import GlobalStyle from '../common/components/GlobalStyle';
@@ -16,8 +16,7 @@ export default makeDecorator({
       <>
         <GlobalStyle />
 
-        {/* override */}
-        <Global styles={OVERRIDE_GLOBAL_STYLE} />
+        <GlobalStyleOverride />
 
         {storyFn(context)}
       </>
@@ -25,7 +24,7 @@ export default makeDecorator({
   }
 })
 
-const OVERRIDE_GLOBAL_STYLE = css`
+const GlobalStyleOverride = createGlobalStyle`
   html {
     background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAABlBMVEX////Y2NgXsaIHAAAAE0lEQVR4AWNgYPj/n4oElU1jAADtvT/BfzVwSgAAAABJRU5ErkJggg==");
 

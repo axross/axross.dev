@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
 import * as React from "react";
 import ReactContentLoader, { IContentLoaderProps } from "react-content-loader";
+import styled from "styled-components";
 import { DARK_MODE } from "../constant/mediaQuery";
 import { DARK_COLOR, LIGHT_COLOR } from "../constant/color";
 import ThemedColor from "../types/ThemedColor";

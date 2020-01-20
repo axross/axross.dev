@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
 import * as React from "react";
+import styled from "styled-components";
 import BlogPost from "../../entities/BlogPost";
 import PrettyMarkdown from "../../components/PrettyMarkdown";
 import RawText, { TextSize, ThemedColor, Typeface } from "../../components/RawText";

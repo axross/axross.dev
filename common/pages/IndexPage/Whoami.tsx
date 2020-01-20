@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
 import * as React from "react";
+import styled from "styled-components";
 import profileImage from "../../../assets/profile.jpg";
 import ExternalLink from "../../components/ExternalLink";
 import Icon, { IconName } from "../../components/Icon";

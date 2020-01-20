@@ -1,7 +1,7 @@
-import styled from "@emotion/styled";
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import { useLocation } from "react-router-dom";
+import styled from "styled-components";
 import LocaleContext from "../../contexts/LocaleContext";
 import { DictionaryEntry, LANGUAGE_EN_US, LANGUAGE_JA_JP } from "../../dictionary";
 import LocaleString from "../../entities/LocaleString";

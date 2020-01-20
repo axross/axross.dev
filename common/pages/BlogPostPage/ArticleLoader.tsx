@@ -1,6 +1,5 @@
-import { css } from "@emotion/core";
-import styled from "@emotion/styled";
 import * as React from "react";
+import styled, { css } from "styled-components";
 import ContentLoader from "../../components/ContentLoader";
 import { MOBILE } from "../../constant/mediaQuery";
 

@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
+import styled from "styled-components";
 import LocaleContext from "../../contexts/LocaleContext";
 import LinkKeepLocale from "../../components/KeepLocaleLink";
 import UIText, { UITextType } from "../../components/UIText";

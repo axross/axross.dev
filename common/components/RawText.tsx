@@ -1,6 +1,5 @@
-import { css, SerializedStyles } from "@emotion/core";
-import styled from "@emotion/styled";
 import * as React from "react";
+import styled, { css, FlattenSimpleInterpolation } from "styled-components";
 import { MOBILE, DARK_MODE } from "../constant/mediaQuery";
 import { LIGHT_COLOR, DARK_COLOR } from "../constant/color";
 import ThemedColor from "../types/ThemedColor";
@@ -94,13 +93,13 @@ export default function RawText({ color, typeface, size, lineSize, alignment, ma
   );
 }
 
-const TYPEFACE_CSS: Record<Typeface, SerializedStyles> = {
+const TYPEFACE_CSS: Record<Typeface, FlattenSimpleInterpolation> = {
   [Typeface.headline]: css`font-family: "Montserrat", sans-serif;`,
   [Typeface.body]: css`font-family: "Open Sans", sans-serif;`,
   [Typeface.monospace]: css`font-family: "Source Code Pro", monospace;`,
 }
 
-const TEXT_SIZE_CSS: Record<TextSize, SerializedStyles> = {
+const TEXT_SIZE_CSS: Record<TextSize, FlattenSimpleInterpolation> = {
   [TextSize.giantic]: css`
     font-size: 46px;
 
@@ -145,12 +144,12 @@ const TEXT_SIZE_CSS: Record<TextSize, SerializedStyles> = {
   `,
 }
 
-const TEXT_LINE_SIZE_CSS: Record<TextLineSize, SerializedStyles> = {
+const TEXT_LINE_SIZE_CSS: Record<TextLineSize, FlattenSimpleInterpolation> = {
   [TextLineSize.default]: css`line-height: 1.5;`,
   [TextLineSize.large]: css`line-height: 1.75`,
 }
 
-const TEXT_ALIGNMENT_CSS: Record<TextAlignment, SerializedStyles> = {
+const TEXT_ALIGNMENT_CSS: Record<TextAlignment, FlattenSimpleInterpolation> = {
   [TextAlignment.default]: css`text-align: inherit;`,
   [TextAlignment.start]: css`text-align: start`,
   [TextAlignment.end]: css`text-align: end`,

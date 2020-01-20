@@ -1,6 +1,5 @@
-import { css } from "@emotion/core";
-import styled from "@emotion/styled";
 import * as React from "react";
+import styled, { css } from "styled-components";
 import { DARK_COLOR, LIGHT_COLOR } from "../../../constant/color";
 import { DARK_MODE, MOBILE } from "../../../constant/mediaQuery";
 import ThemedColor from "../../../types/ThemedColor";

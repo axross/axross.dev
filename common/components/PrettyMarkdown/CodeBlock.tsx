@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
-import * as React from "react";
 import Highlight, { defaultProps } from "prism-react-renderer";
+import * as React from "react";
+import styled from "styled-components";
 import {
   CODE_BACKGROUND_COLOR,
   CODE_COLORS,
