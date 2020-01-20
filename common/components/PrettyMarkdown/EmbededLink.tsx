@@ -2,13 +2,12 @@ import * as React from "react";
 import styled from "@emotion/styled";
 import { DARK_COLOR, LIGHT_COLOR } from "../../constant/color";
 import { DARK_MODE, MOBILE } from "../../constant/mediaQuery";
-import RepositoryContext from "../../contexts/RepositoryContext";
-import WebpageSummary from "../../entities/WebpageSummary";
 import ThemedColor from "../../types/ThemedColor";
 import ExternalLink from "../ExternalLink";
 import RawText from "../RawText";
 import EmbededLinkLoader from './EmbededLink/EmbededLinkLoader';
 import FallbackImage from "./EmbededLink/FallbackImage";
+import useWebpageSummary from "./EmbededLink/useWebpageSummary";
 
 interface Props extends React.Attributes {
   url: string;
@@ -16,7 +15,7 @@ interface Props extends React.Attributes {
 }
 
 export default function EmbededLink({ url, ...props }: Props) {
-  const [webpageSummary, isWebpageSummaryLoading] = useWebpageSummary(url);
+  const [webpageSummary, isWebpageSummaryLoading] = useWebpageSummary(new URL(url));
 
   // show the loader even if retrieving the webpage summary failed
   // and report to sentry.io
@@ -49,19 +48,6 @@ export default function EmbededLink({ url, ...props }: Props) {
       </Url>
     </Root>
   );
-}
-
-function useWebpageSummary(url: string): [WebpageSummary | null, boolean] {
-  const { webpageSummaryRepository } = React.useContext(RepositoryContext);
-  const [[webpageSummary, isWebpageSummaryLoading], setWebpageSummary] = React.useState<[WebpageSummary | null, boolean]>([null, true]);
-
-  React.useEffect(() => {
-    webpageSummaryRepository.getByURL(new URL(url))
-      .then(webpageSummary => setWebpageSummary([webpageSummary, false]))
-      .catch(() => setWebpageSummary([null, false]));
-  }, [url]);
-
-  return [webpageSummary, isWebpageSummaryLoading];
 }
 
 const Root = styled.div`
