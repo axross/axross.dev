@@ -84,7 +84,7 @@ module.exports = [
             options: {
               cacheName: 'webpage-summary-v1',
               expiration: {
-                maxAgeSeconds: 60 * 60 * 24 * 7,
+                maxAgeSeconds: 60 * 60 * 24 * 90,
               },
             },
           },
