@@ -1,4 +1,5 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import * as crypto from "crypto";
 import ScrapingWebpageSummaryRepository from "./repositories/ScrapingWebpageSummaryRepository";
 
 export async function handler({ httpMethod, queryStringParameters }: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
@@ -18,7 +19,9 @@ export async function handler({ httpMethod, queryStringParameters }: APIGatewayP
     return {
       statusCode: 200,
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json; charset=UTF-8",
+        "cache-control": `public, max-age=${60 * 60 * 24 * 90}`,
+        "etag": crypto.createHash("sha1").update(`${webpageSummary.title}${webpageSummary.description}`).digest("hex"),
       },
       body: JSON.stringify(webpageSummary),
     };
