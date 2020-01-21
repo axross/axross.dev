@@ -1,8 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import * as Contentful from 'contentful';
 import * as xmljs from "xml-js";
-import ContentfulBlogPostRepository from "../common/repositories/ContentfulBlogPostRepository";
-import ContentfulLocaleRepository from "../common/repositories/ContentfulLocaleRepository";
+import ContentfulBlogPostApi from "../common/repositories/ContentfulBlogPostApi";
+import ContentfulLocaleApi from "../common/repositories/ContentfulLocaleApi";
 
 export async function handler({ httpMethod }: APIGatewayProxyEvent, _: any): Promise<APIGatewayProxyResult> {
   if (httpMethod !== "GET") {
@@ -13,10 +13,10 @@ export async function handler({ httpMethod }: APIGatewayProxyEvent, _: any): Pro
     space: process.env.CONTENTFUL_SPACE!,
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
   });
-  const localeRepository = new ContentfulLocaleRepository(contentful);
-  const blogPostRepository = new ContentfulBlogPostRepository(contentful);
+  const localeApi = new ContentfulLocaleApi(contentful);
+  const blogPostApi = new ContentfulBlogPostApi(contentful);
 
-  const availableLocales = await localeRepository.getAllAvailableOnes();
+  const availableLocales = await localeApi.getAllAvailableOnes();
 
   const topPages = availableLocales.map(locale => ({
     loc: {
@@ -43,7 +43,7 @@ export async function handler({ httpMethod }: APIGatewayProxyEvent, _: any): Pro
   const blogPostPages = [];
 
   for (const locale of availableLocales) {
-    const blogPosts = await blogPostRepository.getAllByLocale(locale);
+    const blogPosts = await blogPostApi.getAllByLocale(locale);
 
     for (const blogPost of blogPosts) {
       const url = new URL("/", process.env.URL);

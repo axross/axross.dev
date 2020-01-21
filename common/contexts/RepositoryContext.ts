@@ -1,18 +1,24 @@
 import * as React from "react";
-import BioRepository from "../repositories/BioRepository";
+import BioCache from "../repositories/BioCache";
+import BioApi from "../repositories/BioApi";
 import BlogPostCache from "../repositories/BlogPostCache";
-import BlogPostRepository from "../repositories/BlogPostRepository";
-import LocaleRepository from "../repositories/LocaleRepository";
-import WebpageSummaryRepository from "../repositories/WebpageSummaryRepository";
-import WebsitePurposeRepository from "../repositories/WebsitePurposeRepository";
+import BlogPostListCache from "../repositories/BlogPostListCache";
+import BlogPostApi from "../repositories/BlogPostApi";
+import LocaleApi from "../repositories/LocaleApi";
+import WebpageSummaryApi from "../repositories/WebpageSummaryApi";
+import WebsitePurposeCache from "../repositories/WebsitePurposeCache";
+import WebsitePurposeApi from "../repositories/WebsitePurposeApi";
 
 interface Repositories {
-  bioRepository: BioRepository;
+  bioApi: BioApi;
+  bioCache: BioCache;
+  blogPostApi: BlogPostApi;
   blogPostCache: BlogPostCache;
-  blogPostRepository: BlogPostRepository;
-  localeRepository: LocaleRepository;
-  webpageSummaryRepository: WebpageSummaryRepository,
-  websitePurposeRepository: WebsitePurposeRepository,
+  blogPostListCache: BlogPostListCache;
+  localeApi: LocaleApi;
+  websitePurposeApi: WebsitePurposeApi,
+  websitePurposeCache: WebsitePurposeCache;
+  webpageSummaryApi: WebpageSummaryApi,
 }
 
 export default React.createContext<Repositories>(null as any);

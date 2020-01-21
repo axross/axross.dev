@@ -1,7 +1,7 @@
 import WebpageSummary from "../entities/WebpageSummary";
-import WebpageSummaryRepository from "./WebpageSummaryRepository";
+import WebpageSummaryApi from "./WebpageSummaryApi";
 
-export default class MockWebpageSummaryRepository implements WebpageSummaryRepository {
+export default class MockWebpageSummaryApi implements WebpageSummaryApi {
   getByURL(url: URL): Promise<WebpageSummary> {
     if (`${url}` === "https://localhost:0/article") {
       return Promise.resolve({

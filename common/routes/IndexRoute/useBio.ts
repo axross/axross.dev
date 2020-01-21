@@ -4,13 +4,22 @@ import RepositoryContext from "../../contexts/RepositoryContext";
 
 export default function useBio(): [string | null, boolean] {
   const { currentLocale } = React.useContext(LocaleContext);
-  const { bioRepository } = React.useContext(RepositoryContext);
-  const [[bio, isLoading], set] = React.useState<[string | null, boolean]>([null, true]);
+  const { bioApi, bioCache } = React.useContext(RepositoryContext);
+  const [[bio, isLoading], set] = React.useState<[string | null, boolean]>(bioCache.has(currentLocale)
+    ? [bioCache.get(currentLocale), false]
+    : [null, true]
+  );
 
   React.useEffect(() => {
-    bioRepository.getByLocale(currentLocale)
-      .then(bio => set([bio, false]))
-      .catch(() => set([null, false]))
+    if (bio === null) {
+      bioApi.getByLocale(currentLocale)
+        .then(bio => {
+          bioCache.set(currentLocale, bio);
+
+          set([bio, false]);
+        })
+        .catch(() => set([null, false]));
+    }
   }, [currentLocale]);
 
   return [bio, isLoading];

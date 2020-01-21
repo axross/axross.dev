@@ -1,7 +1,7 @@
-import WebpageSummaryRepository from "../../common/repositories/WebpageSummaryRepository";
+import WebpageSummaryApi from "../../common/repositories/WebpageSummaryApi";
 import WebpageSummary from "../../common/entities/WebpageSummary";
 
-export default class FunctionWebpageSummaryRepository implements WebpageSummaryRepository {
+export default class FunctionWebpageSummaryApi implements WebpageSummaryApi {
   async getByURL(url: URL): Promise<WebpageSummary> {
     const response = await fetch(`/functions/getWebpageSummary?url=${encodeURIComponent(`${url}`)}`);
 

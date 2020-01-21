@@ -1,8 +1,8 @@
 import { ContentfulClientApi } from "contentful";
 import LocaleString from "../entities/LocaleString";
-import BioRepository from "./BioRepository";
+import BioApi from "./BioApi";
 
-export default class ContentfulBioRepository implements BioRepository {
+export default class ContentfulBioApi implements BioApi {
   constructor(contentful: ContentfulClientApi) {
     this.contentful = contentful;
   }

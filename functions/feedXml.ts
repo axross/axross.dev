@@ -2,8 +2,8 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import * as Contentful from 'contentful';
 import * as xmljs from "xml-js";
 import { MY_NAME } from "../common/constant/data";
-import ContentfulBlogPostRepository from "../common/repositories/ContentfulBlogPostRepository";
-import ContentfulLocaleRepository from "../common/repositories/ContentfulLocaleRepository";
+import ContentfulBlogPostApi from "../common/repositories/ContentfulBlogPostApi";
+import ContentfulLocaleApi from "../common/repositories/ContentfulLocaleApi";
 
 export async function handler({ httpMethod, path, queryStringParameters }: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
   if (httpMethod !== "GET") {
@@ -15,10 +15,10 @@ export async function handler({ httpMethod, path, queryStringParameters }: APIGa
     space: process.env.CONTENTFUL_SPACE!,
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
   });
-  const localeRepository = new ContentfulLocaleRepository(contentful);
-  const blogPostRepository = new ContentfulBlogPostRepository(contentful);
+  const localeApi = new ContentfulLocaleApi(contentful);
+  const blogPostApi = new ContentfulBlogPostApi(contentful);
 
-  const availableLocales = await localeRepository.getAllAvailableOnes();
+  const availableLocales = await localeApi.getAllAvailableOnes();
 
   if (currentLocale === null || !availableLocales.includes(currentLocale)) {
     return { statusCode: 404, body: "" };
@@ -27,7 +27,7 @@ export async function handler({ httpMethod, path, queryStringParameters }: APIGa
   const websiteURL = new URL("/", process.env.URL);
   websiteURL.searchParams.set("hl", currentLocale);
 
-  const blogPosts = await blogPostRepository.getAllByLocale(currentLocale);
+  const blogPosts = await blogPostApi.getAllByLocale(currentLocale);
 
   const xml = xmljs.js2xml(
     {

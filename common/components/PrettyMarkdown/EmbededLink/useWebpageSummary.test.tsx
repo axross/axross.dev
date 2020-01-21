@@ -4,32 +4,10 @@ import RepositoryContext from "../../../contexts/RepositoryContext";
 import useWebpageSummary from "./useWebpageSummary";
 
 describe("useWebpageSummary()", () => {
-  it("calls the given WebpageSummaryRepository#getByURL() through the context", async () => {
-    const webpageSummary = Symbol("WEBPAGE_SUMMARY");
-    const url: any = Symbol("URL");
-    const getByURL = jest.fn(() => Promise.resolve(webpageSummary));
-
-    const Component = () => {
-      useWebpageSummary(url);
-
-      return null;
-    }
-
-    await act(async () => {
-      create(
-        <RepositoryContext.Provider value={{ webpageSummaryRepository: { getByURL } } as any}>
-          <Component />
-        </RepositoryContext.Provider>
-      );
-    });
-
-    expect(getByURL).toBeCalledWith(url);
-  });
-
-  it("returns values in 2 steps: [null, true] -> [webpageSummary, false]", async () => {
-    const webpageSummary = Symbol("WEBPAGE_SUMMARY");
-    const url: any = Symbol("URL");
-    const getByURL = jest.fn(() => Promise.resolve(webpageSummary));
+  it("triggers rendering twice with the values [null, true] -> [WebpageSummary, false] after getting the blog posts from API", async () => {
+    const webpageSummary = Symbol();
+    const url: any = Symbol();
+    const webpageSummaryApi = { getByURL: jest.fn(() => Promise.resolve(webpageSummary)) };
     const returnValues: any[] = [];
 
     const Component = () => {
@@ -40,7 +18,7 @@ describe("useWebpageSummary()", () => {
 
     await act(async () => {
       create(
-        <RepositoryContext.Provider value={{ webpageSummaryRepository: { getByURL } } as any}>
+        <RepositoryContext.Provider value={{ webpageSummaryApi } as any}>
           <Component />
         </RepositoryContext.Provider>
       );
@@ -49,11 +27,12 @@ describe("useWebpageSummary()", () => {
     expect(returnValues.length).toBe(2);
     expect(returnValues[0]).toEqual([null, true]);
     expect(returnValues[1]).toEqual([webpageSummary, false]);
+    expect(webpageSummaryApi.getByURL).toHaveBeenCalledWith(url);
   });
 
-  it("returns values in 2 steps: [null, true] -> [null, false] when the repository threw", async () => {
-    const url: any = Symbol("URL");
-    const getByURL = jest.fn(() => Promise.reject(new Error()));
+  it("triggers rendering twice with the values [null, true] -> [null, false] after the API thrown", async () => {
+    const url: any = Symbol();
+    const webpageSummaryApi = { getByURL: jest.fn(() => Promise.reject(new Error())) };
     const returnValues: any[] = [];
 
     const Component = () => {
@@ -64,7 +43,7 @@ describe("useWebpageSummary()", () => {
 
     await act(async () => {
       create(
-        <RepositoryContext.Provider value={{ webpageSummaryRepository: { getByURL } } as any}>
+        <RepositoryContext.Provider value={{ webpageSummaryApi } as any}>
           <Component />
         </RepositoryContext.Provider>
       );
@@ -73,5 +52,6 @@ describe("useWebpageSummary()", () => {
     expect(returnValues.length).toBe(2);
     expect(returnValues[0]).toEqual([null, true]);
     expect(returnValues[1]).toEqual([null, false]);
+    expect(webpageSummaryApi.getByURL).toHaveBeenCalledWith(url);
   });
 });

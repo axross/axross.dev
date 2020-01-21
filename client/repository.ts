@@ -1,8 +1,11 @@
 export { createClient } from "contentful";
 export { default as RepositoryContext } from "../common/contexts/RepositoryContext";
-export { default as BioRepository } from "../common/repositories/ContentfulBioRepository";
-export { default as BlogPostRepository } from "../common/repositories/ContentfulBlogPostRepository";
-export { default as LocaleRepository } from "../common/repositories/ContentfulLocaleRepository";
-export { default as WebsitePurposeRepository } from "../common/repositories/ContentfulWebsitePurposeRepository";
-export { default as WebpageSummaryRepository } from "./repositories/FunctionWebpageSummaryRepository";
+export { default as BioApi } from "../common/repositories/ContentfulBioApi";
+export { default as BlogPostApi } from "../common/repositories/ContentfulBlogPostApi";
+export { default as LocaleApi } from "../common/repositories/ContentfulLocaleApi";
+export { default as WebsitePurposeApi } from "../common/repositories/ContentfulWebsitePurposeApi";
+export { default as WebpageSummaryApi } from "./repositories/FunctionWebpageSummaryApi";
+export { default as BioCache } from "./repositories/MemoryBioCacheApi";
 export { default as BlogPostCache } from "./repositories/MemoryBlogPostCache";
+export { default as BlogPostListCache } from "./repositories/MemoryBlogPostListCache";
+export { default as WebsitePurposeCache } from "./repositories/MemoryWebsitePurposeCache";

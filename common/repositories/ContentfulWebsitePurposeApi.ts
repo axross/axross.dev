@@ -1,8 +1,8 @@
 import { ContentfulClientApi } from "contentful";
 import LocaleString from "../entities/LocaleString";
-import WebsitePurposeRepository from "./WebsitePurposeRepository";
+import WebsitePurposeApi from "./WebsitePurposeApi";
 
-export default class ContentfulWebsitePurposeRepository implements WebsitePurposeRepository {
+export default class ContentfulWebsitePurposeApi implements WebsitePurposeApi {
   constructor(contentful: ContentfulClientApi) {
     this.contentful = contentful;
   }

@@ -4,7 +4,7 @@ import RepositoryContext from "../../contexts/RepositoryContext";
 import BlogPost, { BlogPostId } from "../../entities/BlogPost";
 
 export default function useBlogPost(blogPostId: BlogPostId): [BlogPost | null, boolean] {
-  const { blogPostCache, blogPostRepository } = React.useContext(RepositoryContext);
+  const { blogPostCache, blogPostApi } = React.useContext(RepositoryContext);
   const { currentLocale } = React.useContext(LocaleContext);
   const [[blogPost, isLoading], set] = React.useState<
     [BlogPost | null, boolean]
@@ -15,7 +15,7 @@ export default function useBlogPost(blogPostId: BlogPostId): [BlogPost | null, b
 
   React.useEffect(() => {
     if (!blogPost) {
-      blogPostRepository
+      blogPostApi
         .getByIdAndLocale(blogPostId, currentLocale)
         .then(blogPost => {
           blogPostCache.set(blogPostId, currentLocale, blogPost);
