@@ -2,7 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/153f81f8-6487-47f5-86b1-ce579c1b186f/deploy-status)](https://app.netlify.com/sites/kohei/deploys)
 
-A production-level progressive web app dynamic rendering using:
+A production-level progressive web app with dynamic rendering using:
 
 - <img alt="TypeScript" src="https://user-images.githubusercontent.com/4289883/72760400-7524e080-3b8d-11ea-9b0c-f6e09280e6d8.png" height="16"> **[TypeScript](https://www.typescriptlang.org/)**
 - <img alt="React" src="https://user-images.githubusercontent.com/4289883/72760398-7524e080-3b8d-11ea-95ea-736bd3081ac9.png" height="16"> **[React](https://reactjs.org)**
