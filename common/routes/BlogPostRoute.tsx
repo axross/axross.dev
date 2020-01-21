@@ -8,15 +8,15 @@ import {
   MY_NAME,
   MY_SOCIAL_MEDIA_LINKS
 } from "../constant/data";
-import BlogPost, { BlogPostId } from "../entities/BlogPost";
 import LocaleContext from "../contexts/LocaleContext";
-import RepositoryContext from "../contexts/RepositoryContext";
 import {
   WEBSITE_TITLE,
   WEBSITE_TITLE_BLOG_POST,
   WEBSITE_TITLE_BLOG_POST_NOT_FOUND
 } from "../dictionary";
+import BlogPost from "../entities/BlogPost";
 import BlogPostPage from "../pages/BlogPostPage";
+import useBlogPost from "./BlogPostRoute/useBlogPost";
 
 export default function BlogPostRoute({ match }: RouteChildrenProps<{ id: string }>) { 
   const blogPostId = match!.params.id;
@@ -31,31 +31,6 @@ export default function BlogPostRoute({ match }: RouteChildrenProps<{ id: string
       <BlogPostPage blogPost={blogPost} blogPostLoading={isBlogPostLoading} />
     </>
   );
-}
-
-function useBlogPost(blogPostId: BlogPostId): [BlogPost | null, boolean] {
-  const { blogPostCache, blogPostRepository } = React.useContext(RepositoryContext);
-  const { currentLocale } = React.useContext(LocaleContext);
-  const [[blogPost, isLoading], set] = React.useState<
-    [BlogPost | null, boolean]
-  >(blogPostCache.has(blogPostId, currentLocale)
-    ? [blogPostCache.get(blogPostId, currentLocale), false]
-    : [null, true]);
-
-  React.useEffect(() => {
-    if (!blogPost) {
-      blogPostRepository
-      .getByIdAndLocale(blogPostId, currentLocale)
-      .then(blogPost => {
-        blogPostCache.set(blogPostId, currentLocale, blogPost);
-
-        set([blogPost, false]);
-      })
-      .catch(() => set([null, false]));
-    }
-  }, [blogPostId, currentLocale]);
-
-  return [blogPost, isLoading];
 }
 
 function sendAnalyticsPageView(blogPost: BlogPost | null, blogPostLoading: boolean): void {

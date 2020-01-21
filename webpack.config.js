@@ -45,33 +45,9 @@ module.exports = [
     },
     plugins: [
       new HtmlPlugin({
-        template: require('html-webpack-template'),
+        template: "client/index.html",
         title: "Loading...",
-        mobile: true,
-        appMountId: "app",
-        googleAnalytics: {
-          trackingId: "UA-79252294-3",
-          pageViewOnLoad: false,
-        },
-        headHtmlSnippet: `
-          <style>
-            html {
-              background-color: #ffffff;
-            }
-
-            @media (prefers-color-scheme: dark) {
-              html {
-                background-color: #11181f;
-              }
-            }
-          </style>
-
-          <script defer>
-            if (typeof navigator.serviceWorker !== "undefined") {
-              navigator.serviceWorker.register("/service-worker.js");
-            }
-          </script>
-        `,
+        googleAnalyticsTrackingId: "UA-79252294-3",
       }),
       new EnvironmentPlugin(['CONTENTFUL_SPACE', 'CONTENTFUL_ACCESS_TOKEN']),
       new GenerateSW({
@@ -108,7 +84,7 @@ module.exports = [
             options: {
               cacheName: 'webpage-summary-v1',
               expiration: {
-                maxAgeSeconds: 60 * 60 * 24 * 7,
+                maxAgeSeconds: 60 * 60 * 24 * 90,
               },
             },
           },

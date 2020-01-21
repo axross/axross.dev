@@ -1,38 +1,34 @@
-import { APIGatewayProxyCallback, APIGatewayProxyEvent } from "aws-lambda";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import * as crypto from "crypto";
 import ScrapingWebpageSummaryRepository from "./repositories/ScrapingWebpageSummaryRepository";
 
-export function handler(
-  event: APIGatewayProxyEvent,
-  _: any,
-  callback: APIGatewayProxyCallback
-): void {
-  const { httpMethod, queryStringParameters } = event;
-
+export async function handler({ httpMethod, queryStringParameters }: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
   if (httpMethod !== "GET") {
-    callback(null, { statusCode: 404, body: "" });
-
-    return;
+    return { statusCode: 404, body: "" };
   }
 
   const url = queryStringParameters?.url;
 
   if (!url) {
-    callback(null, { statusCode: 400, body: "the url must be given." });
-
-    return;
+    return { statusCode: 400, body: "the url must be given." };
   }
 
-  new ScrapingWebpageSummaryRepository()
-    .getByURL(new URL(url))
-    .then(webpageSummary => callback(null, {
+  try {
+    const webpageSummary = await new ScrapingWebpageSummaryRepository().getByURL(new URL(url));
+
+    return {
       statusCode: 200,
       headers: {
-        "content-type": "application/json"
+        "content-type": "application/json; charset=UTF-8",
+        "cache-control": `public, max-age=${60 * 60 * 24 * 90}`,
+        "etag": crypto.createHash("sha1").update(`${webpageSummary.title}${webpageSummary.description}`).digest("hex"),
       },
       body: JSON.stringify(webpageSummary),
-    }))
-    .catch(err => callback(null, {
+    };
+  } catch (err) {
+    return {
       statusCode: 404,
       body: err.message,
-    }));
+    };
+  }
 }

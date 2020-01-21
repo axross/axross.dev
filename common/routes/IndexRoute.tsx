@@ -8,11 +8,12 @@ import {
   MY_NAME,
   MY_SOCIAL_MEDIA_LINKS
 } from "../constant/data";
-import BlogPost from "../entities/BlogPost";
 import LocaleContext from "../contexts/LocaleContext";
-import RepositoryContext from "../contexts/RepositoryContext";
 import { WEBSITE_TITLE, WEBSITE_DESCRIPTION } from "../dictionary";
 import IndexPage from "../pages/IndexPage";
+import useBio from "./IndexRoute/useBio";
+import useBlogPosts from "./IndexRoute/useBlogPosts";
+import useWebsitePurpose from "./IndexRoute/useWebsitePurpose";
 
 export default function IndexRoute(_: RouteChildrenProps) {
   const [bio, isBioLoading] = useBio();
@@ -35,52 +36,6 @@ export default function IndexRoute(_: RouteChildrenProps) {
       />
     </>
   );
-}
-
-function useBio(): [string | null, boolean] {
-  const { currentLocale } = React.useContext(LocaleContext);
-  const { bioRepository } = React.useContext(RepositoryContext);
-  const [[bio, isLoading], set] = React.useState<[string | null, boolean]>([null, true]);
-
-  React.useEffect(() => {
-    set([null, true]);
-
-    bioRepository.getByLocale(currentLocale)
-      .then(bio => set([bio, false]));
-  }, [currentLocale]);
-
-  return [bio, isLoading];
-}
-
-function useWebsitePurpose(): [string | null, boolean] {
-  const { currentLocale } = React.useContext(LocaleContext);
-  const { websitePurposeRepository } = React.useContext(RepositoryContext);
-  const [[websitePurpose, isLoading], set] = React.useState<[string | null, boolean]>([null, true]);
-
-  React.useEffect(() => {
-    set([null, true]);
-
-    websitePurposeRepository.getByLocale(currentLocale)
-      .then(websitePurpose => set([websitePurpose, false]));
-  }, [currentLocale]);
-
-  return [websitePurpose, isLoading];
-}
-
-function useBlogPosts(): [BlogPost[], boolean] {
-  const { currentLocale } = React.useContext(LocaleContext);
-  const { blogPostRepository } = React.useContext(RepositoryContext);
-  const [[blogPosts, isLoading], set] = React.useState<[BlogPost[], boolean]>([[], true]);
-
-  React.useEffect(() => {
-    set([[], true]);
-
-    blogPostRepository
-      .getAllByLocale(currentLocale)
-      .then(blogPosts => set([blogPosts, false]));
-  }, [currentLocale]);
-
-  return [blogPosts, isLoading];
 }
 
 function sendAnalyticsPageView(): void {
