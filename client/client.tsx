@@ -5,11 +5,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     { BrowserRouter, useHistory },
     { default: App },
     {
-      BioRepository,
-      BlogPostRepository,
-      LocaleRepository,
-      WebsitePurposeRepository,
-      WebpageSummaryRepository,
+      BioApi,
+      BioCache,
+      BlogPostApi,
+      BlogPostCache,
+      BlogPostListCache,
+      LocaleApi,
+      WebsitePurposeApi,
+      WebsitePurposeCache,
+      WebpageSummaryApi,
       RepositoryContext,
       createClient
     }
@@ -35,11 +39,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
   );
   const repositories = {
-    bioRepository: new BioRepository(contentful),
-    blogPostRepository: new BlogPostRepository(contentful),
-    localeRepository: new LocaleRepository(contentful),
-    webpageSummaryRepository: new WebpageSummaryRepository(),
-    websitePurposeRepository: new WebsitePurposeRepository(contentful),
+    bioCache: new BioCache(),
+    bioApi: new BioApi(contentful),
+    blogPostApi: new BlogPostApi(contentful),
+    blogPostCache: new BlogPostCache(),
+    blogPostListCache: new BlogPostListCache(),
+    localeApi: new LocaleApi(contentful),
+    webpageSummaryApi: new WebpageSummaryApi(),
+    websitePurposeApi: new WebsitePurposeApi(contentful),
+    websitePurposeCache: new WebsitePurposeCache(),
   };
 
   function Scroll() {

@@ -1,8 +1,8 @@
 import { ContentfulClientApi } from "contentful";
 import LocaleString from "../entities/LocaleString";
-import LocaleRepository from "./LocaleRepository";
+import LocaleApi from "./LocaleApi";
 
-export default class ContentfulLocaleRepository implements LocaleRepository {
+export default class ContentfulLocaleApi implements LocaleApi {
   constructor(contentful: ContentfulClientApi) {
     this.contentful = contentful;
   }

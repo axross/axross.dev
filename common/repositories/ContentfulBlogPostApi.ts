@@ -1,9 +1,9 @@
 import { ContentfulClientApi, EntryCollection } from "contentful";
 import BlogPost from "../entities/BlogPost";
 import LocaleString from "../entities/LocaleString";
-import BlogPostRepository from "./BlogPostRepository";
+import BlogPostApi from "./BlogPostApi";
 
-export default class ContentfulBlogPostRepository implements BlogPostRepository {
+export default class ContentfulBlogPostApi implements BlogPostApi {
   constructor(contentful: ContentfulClientApi) {
     this.contentful = contentful;
   }

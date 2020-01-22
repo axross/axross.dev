@@ -1,9 +1,9 @@
 import * as cheerio from "cheerio";
 import fetch from "node-fetch";
 import WebpageSummary from "../../common/entities/WebpageSummary";
-import WebpageSummaryRepository from "../../common/repositories/WebpageSummaryRepository";
+import WebpageSummaryApi from "../../common/repositories/WebpageSummaryApi";
 
-export default class ScrapingWebpageSummaryRepository implements WebpageSummaryRepository {
+export default class ScrapingWebpageSummaryApi implements WebpageSummaryApi {
   async getByURL(requestedURL: URL): Promise<WebpageSummary> {
     const response = await fetch(requestedURL, { headers: { "user-agent": "facebookexternalhit/1.1" } });
 

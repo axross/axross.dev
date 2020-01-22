@@ -1,6 +1,6 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import * as crypto from "crypto";
-import ScrapingWebpageSummaryRepository from "./repositories/ScrapingWebpageSummaryRepository";
+import ScrapingWebpageSummaryApi from "./repositories/ScrapingWebpageSummaryApi";
 
 export async function handler({ httpMethod, queryStringParameters }: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
   if (httpMethod !== "GET") {
@@ -14,7 +14,7 @@ export async function handler({ httpMethod, queryStringParameters }: APIGatewayP
   }
 
   try {
-    const webpageSummary = await new ScrapingWebpageSummaryRepository().getByURL(new URL(url));
+    const webpageSummary = await new ScrapingWebpageSummaryApi().getByURL(new URL(url));
 
     return {
       statusCode: 200,

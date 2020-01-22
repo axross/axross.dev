@@ -12,7 +12,7 @@ const IndexRoute = React.lazy(() => import("./routes/IndexRoute"));
 export default function App() {
   const history = useHistory();
   const location = useLocation();
-  const { localeRepository } = React.useContext(RepositoryContext);
+  const { localeApi } = React.useContext(RepositoryContext);
   const [
     [availableLocales, isAvailableLocalesLoading],
     setAvailableLocales
@@ -20,7 +20,7 @@ export default function App() {
   const currentLocale = new URLSearchParams(location.search).get("hl");
 
   React.useEffect(() => {
-    localeRepository.getAllAvailableOnes().then(availableLocales => {
+    localeApi.getAllAvailableOnes().then(availableLocales => {
       if (currentLocale === null || !availableLocales.includes(currentLocale)) {
         const nextSearchParams = new URLSearchParams(location.search);
 
