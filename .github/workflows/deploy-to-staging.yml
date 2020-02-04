@@ -52,6 +52,6 @@ jobs:
           node-version: "10.x"
       - run: npm install
       - run: npm i --no-save now@16.3.1
-      - run: $(npm bin)/now --token $NOW_TOKEN --name $NOW_NAME -b CONTENTFUL_SPACE=$CONTENTFUL_SPACE -b CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN .
+      - run: $(npm bin)/now --token $NOW_TOKEN --name $NOW_NAME　--no-clipboard --build-env CONTENTFUL_SPACE=$CONTENTFUL_SPACE --build-env CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN .
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
