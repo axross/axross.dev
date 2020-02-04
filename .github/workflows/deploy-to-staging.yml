@@ -1,8 +1,8 @@
-name: Check on Master
+name: Deploy to Staging
 on:
   push:
     branches:
-      - "master"
+      - master
 jobs:
   dry-compile:
     name: Dry Compilation
@@ -33,11 +33,25 @@ jobs:
         with:
           node-version: "13.x"
       - run: npm install
-      - run: npm run build:app
+      - run: npm run build
         env:
           CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
-      - run: npm run build:storybook
+      - run: npm run build-storybook
         env:
           CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
+  deploy-staging:
+    name: Deploying to Staging Environment
+    needs: [dry-compile, test, dry-build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - run: npm install
+      - run: npm i --no-save now@16.3.1
+      - run: $(npm bin)/now --token $NOW_TOKEN --name $NOW_NAME -b CONTENTFUL_SPACE=$CONTENTFUL_SPACE -b CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN .
+        env:
+          NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
