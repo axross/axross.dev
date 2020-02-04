@@ -75,7 +75,7 @@ App.getInitialProps = async (context: AppContext) => {
       url.searchParams.set("hl", normalizedLocale!);
 
       res.statusCode = 303;
-      res.setHeader("location", url.href);
+      res.setHeader("location", url.href.substring(url.origin.length));
       res.end();
 
       return {};
