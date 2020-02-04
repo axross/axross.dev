@@ -1,7 +1,0 @@
-[dev]
-  command="node_modules/.bin/webpack-dev-server --mode development --port 8080"
-  port = 3000
-  targetPort = 8080
-  publish = "dist/client"
-  functions = "dist/functions"
-  autoLaunch = true

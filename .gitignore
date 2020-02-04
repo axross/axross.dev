@@ -1,11 +1,5 @@
+# npm packages
 node_modules/*
 
-# Local Netlify folder
-.netlify
-
 # Distribution files
-dist/client/*.js
-dist/client/*.js.map
-dist/client/*.html
-dist/client/assets/*
-dist/functions/*.js
+.next/*

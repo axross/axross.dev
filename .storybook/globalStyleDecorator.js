@@ -1,7 +1,7 @@
 import { css, Global } from "@emotion/core";
 import { makeDecorator } from '@storybook/addons';
 import * as React from "react";
-import GlobalStyle from '../common/components/GlobalStyle';
+import GlobalStyle from '../src/components/GlobalStyle';
 
 export default makeDecorator({
   name: 'withGlobalStyle',

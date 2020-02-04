@@ -1,8 +1,9 @@
 import { action } from "@storybook/addon-actions";
+import { RouterContext } from "next/dist/next-server/lib/router-context";
+import Router, { NextRouter } from "next/router";
 import * as React from "react";
-import { MemoryRouter, useHistory } from "react-router-dom";
-import LocaleContext from "../common/contexts/LocaleContext";
-import LocaleString from "../common/entities/LocaleString";
+import LocaleContext from "../src/contexts/LocaleContext";
+import LocaleString from "../src/entities/LocaleString";
 
 interface Props {
   currentLocale?: LocaleString;
@@ -12,29 +13,57 @@ interface Props {
 }
 
 export default function MockApp({ currentLocale = DEFAULT_CURRENT_LOCALE, availableLocales = DEFAULT_AVAILABLE_LOCALES, isLoading = DEFAULT_IS_LOADING, children }: Props) {
+  const router = React.useMemo<NextRouter>(() => ({
+    route: "/",
+    pathname: "/",
+    query: { hl: currentLocale },
+    asPath: `/?hl=${currentLocale}`,
+    push: (url, as, options) => {
+      action("router#push")(url, as, options);
+
+      return Promise.resolve(true);
+    },
+    replace: (url, as, options) => {
+      action("router#replace")(url, as, options);
+
+      return Promise.resolve(true);
+    },
+    reload: () => action("router#replace")(),
+    back: () => action("router#back")(),
+    prefetch: url => {
+      action("router#prefetch")(url);
+
+      return Promise.resolve();
+    },
+    beforePopState: cb => {
+      action("router#beforePopState")(cb);
+    },
+    events: {
+      on: (type, handler) => {
+        action("router#events.on")(type, handler);
+      },
+      off: (type, handler) => {
+        action("router#events.off")(type, handler);
+      },
+      emit: (type, ...evts) => {
+        action("router#events.emit")(type, ...evts);
+      },
+    },
+  }), []);
+
+  React.useEffect(() => {
+    Router.router = router as any;
+  }, []);
+  
   return (
-    <LocaleContext.Provider value={{ currentLocale, availableLocales, isLoading }}>
-      <MemoryRouter>
-        <MockAppInner>
-          {children}
-        </MockAppInner>
-      </MemoryRouter>
-    </LocaleContext.Provider>
+    <RouterContext.Provider value={router}>
+      <LocaleContext.Provider value={{ currentLocale, availableLocales, isLoading }}>
+        {children}
+      </LocaleContext.Provider>
+    </RouterContext.Provider>
   );
 }
 
 const DEFAULT_CURRENT_LOCALE = "en-US";
 const DEFAULT_AVAILABLE_LOCALES = ["en-US", "ja-JP"];
 const DEFAULT_IS_LOADING = false;
-
-function MockAppInner({ children }: { children: React.ReactNode }) {
-  const history = useHistory();
-
-  React.useEffect(() => {
-    const unsubscribe = history.listen((loc, act) => action("history change")(act, history.createHref(loc)));
-
-    return unsubscribe;
-  }, []);
-
-  return <>{children}</>;
-}

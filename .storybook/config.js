@@ -3,4 +3,4 @@ import globalStyleDecorator from './globalStyleDecorator';
 
 addDecorator(globalStyleDecorator);
 
-configure(require.context('../common', true, /\.stories\.tsx?$/), module);
+configure(require.context('../src', true, /\.stories\.tsx?$/), module);
