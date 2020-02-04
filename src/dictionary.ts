@@ -1,4 +1,5 @@
 import LocaleString from "./entities/LocaleString";
+import { MY_NAME } from "./constant/data";
 
 export type DictionaryEntry = Record<LocaleString, string>;
 
@@ -15,13 +16,18 @@ export const NOT_FOUND_DESCRIPTION: DictionaryEntry = {
 };
 
 export const WEBSITE_TITLE: DictionaryEntry = {
-  "en-US": "{name}",
-  "ja-JP": "{name}"
+  "en-US": MY_NAME,
+  "ja-JP": MY_NAME
 };
 
 export const WEBSITE_TITLE_BLOG_POST: DictionaryEntry = {
-  "en-US": "{title} | What {name} wrote",
-  "ja-JP": "{title} | What {name} wrote"
+  "en-US": `{title} | What ${MY_NAME} wrote`,
+  "ja-JP": `{title} | What ${MY_NAME} wrote`
+};
+
+export const WEBSITE_TITLE_BLOG_POST_LOADING: DictionaryEntry = {
+  "en-US": `Loading... | What ${MY_NAME} wrote`,
+  "ja-JP": `読み込み中... | What ${MY_NAME} wrote`
 };
 
 export const WEBSITE_TITLE_BLOG_POST_NOT_FOUND: DictionaryEntry = {
@@ -30,8 +36,8 @@ export const WEBSITE_TITLE_BLOG_POST_NOT_FOUND: DictionaryEntry = {
 };
 
 export const WEBSITE_DESCRIPTION: DictionaryEntry = {
-  "en-US": "{name}'s personal website. My experience, projects and bloggging.",
-  "ja-JP": "{name}の個人ウェブサイト。経歴や活動状況、ブログなど。"
+  "en-US": `${MY_NAME}'s personal website. My experience, projects and bloggging.`,
+  "ja-JP": `${MY_NAME}の個人ウェブサイト。経歴や活動状況、ブログなど。`
 };
 
 export const BLOG_POST_TIMETAMP: DictionaryEntry = {

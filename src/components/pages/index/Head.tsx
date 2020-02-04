@@ -12,12 +12,8 @@ export default function Head() {
   const canonicalURL = useCanonicalURL();
   const profileImageURL = new URL(PROFILE_IMAGE_PATH, process.env.ORIGIN);
 
-  const title = new IntlMessageFormat(WEBSITE_TITLE[currentLocale]).format({
-    name: MY_NAME
-  });
-  const description = new IntlMessageFormat(
-    WEBSITE_DESCRIPTION[currentLocale]
-  ).format({ name: MY_NAME });
+  const title = new IntlMessageFormat(WEBSITE_TITLE[currentLocale]).format();
+  const description = new IntlMessageFormat(WEBSITE_DESCRIPTION[currentLocale]).format();
   
   return (
     <NextHead>

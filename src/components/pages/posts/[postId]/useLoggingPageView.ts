@@ -1,6 +1,5 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import { MY_NAME } from "../../../../constant/data";
 import LocaleContext from "../../../../contexts/LocaleContext";
 import { WEBSITE_TITLE_BLOG_POST, WEBSITE_TITLE_BLOG_POST_NOT_FOUND } from "../../../../dictionary";
 import BlogPost from "../../../../entities/BlogPost";
@@ -20,7 +19,6 @@ export default function useLoggingPageView(blogPost: BlogPost | null, blogPostLo
         "title",
         new IntlMessageFormat(WEBSITE_TITLE_BLOG_POST[currentLocale]).format({
           title: blogPost.title,
-          name: MY_NAME
         })
       );
     } else {

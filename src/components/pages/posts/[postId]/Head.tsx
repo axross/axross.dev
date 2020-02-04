@@ -4,7 +4,7 @@ import IntlMessageFormat from "intl-messageformat";
 import { MY_JOB_TITLE, MY_NAME, MY_SOCIAL_MEDIA_LINKS } from "../../../../constant/data";
 import { PROFILE_IMAGE_PATH } from "../../../../constant/staticFilePaths";
 import LocaleContext from "../../../../contexts/LocaleContext";
-import { WEBSITE_TITLE, WEBSITE_TITLE_BLOG_POST_NOT_FOUND } from "../../../../dictionary";
+import { WEBSITE_TITLE, WEBSITE_TITLE_BLOG_POST, WEBSITE_TITLE_BLOG_POST_LOADING, WEBSITE_TITLE_BLOG_POST_NOT_FOUND } from "../../../../dictionary";
 import BlogPost from "../../../../entities/BlogPost";
 import useCanonicalURL from "./useCanonicalURL";
 
@@ -21,7 +21,11 @@ export default function Head({ blogPost, blogPostLoading }: Props) {
   if (blogPostLoading) {
     return (
       <NextHead>
-        <title>Loading a blog post...</title>
+        <title>
+        {new IntlMessageFormat(
+          WEBSITE_TITLE_BLOG_POST_LOADING[currentLocale]
+        ).format()}
+        </title>
       </NextHead>
     );
   }
@@ -38,8 +42,8 @@ export default function Head({ blogPost, blogPostLoading }: Props) {
     );
   }
 
-  const title = new IntlMessageFormat(WEBSITE_TITLE[currentLocale]).format({
-    name: MY_NAME
+  const title = new IntlMessageFormat(WEBSITE_TITLE_BLOG_POST[currentLocale]).format({
+    title: blogPost.title,
   });
 
   return (

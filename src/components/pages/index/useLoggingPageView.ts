@@ -1,6 +1,5 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import { MY_NAME } from "../../../constant/data";
 import LocaleContext from "../../../contexts/LocaleContext";
 import { WEBSITE_TITLE } from "../../../dictionary";
 
@@ -14,9 +13,7 @@ export default function useLoggingPageView(): void {
     (window as any).ga(
       "set",
       "title",
-      new IntlMessageFormat(WEBSITE_TITLE[currentLocale]).format({
-        name: MY_NAME
-      })
+      new IntlMessageFormat(WEBSITE_TITLE[currentLocale]).format()
     );
     (window as any).ga("send", "pageview");
   }, [currentLocale]);
