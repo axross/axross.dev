@@ -6,14 +6,12 @@ A production-level progressive web app with dynamic rendering using:
 
 - <img alt="TypeScript" src="https://user-images.githubusercontent.com/4289883/72760400-7524e080-3b8d-11ea-9b0c-f6e09280e6d8.png" height="16"> **[TypeScript](https://www.typescriptlang.org/)**
 - <img alt="React" src="https://user-images.githubusercontent.com/4289883/72760398-7524e080-3b8d-11ea-95ea-736bd3081ac9.png" height="16"> **[React](https://reactjs.org)**
-- <img alt="jest" src="https://user-images.githubusercontent.com/4289883/72760396-748c4a00-3b8d-11ea-9eba-e3df28a3f18a.png" height="16"> **[Jest](https://jestjs.io/)**
+- <img alt="Next.js" src="https://user-images.githubusercontent.com/4289883/73734536-a4416300-46f2-11ea-94c5-db97d7e9a814.png" height="16"> **[Next.js](https://nextjs.org/)**
+- <img alt="Jest" src="https://user-images.githubusercontent.com/4289883/72760396-748c4a00-3b8d-11ea-9eba-e3df28a3f18a.png" height="16"> **[Jest](https://jestjs.io/)**
 - <img alt="Emotion" src="https://user-images.githubusercontent.com/4289883/72760395-748c4a00-3b8d-11ea-9303-9730e4788357.png" height="16"> **[Emotion](https://emotion.sh/)**
-- <img alt="storybook" src="https://user-images.githubusercontent.com/4289883/72760399-7524e080-3b8d-11ea-9174-1aa265d9c239.png" height="16"> **[Storybook](https://storybook.js.org/)**
-- <img alt="webpack" src="https://user-images.githubusercontent.com/4289883/72760401-7524e080-3b8d-11ea-8f0a-4e7b5b82e835.png" height="16"> **[Webpack](https://webpack.js.org/)**
-- <img alt="contentful" src="https://user-images.githubusercontent.com/4289883/72760394-748c4a00-3b8d-11ea-9a34-13a121d2d9d8.png" height="16"> **[Contentful](https://www.contentful.com/)**
-- <img alt="netlify" src="https://user-images.githubusercontent.com/4289883/72760397-748c4a00-3b8d-11ea-886d-ba3c8836f230.png" height="16"> **[Netlify](https://www.netlify.com/)**
-    - **[Netlify Prerendering](https://docs.netlify.com/site-deploys/post-processing/prerendering/)**
-    - **[Netlify Functions](https://www.netlify.com/products/functions/)**
+- <img alt="Storybook" src="https://user-images.githubusercontent.com/4289883/72760399-7524e080-3b8d-11ea-9174-1aa265d9c239.png" height="16"> **[Storybook](https://storybook.js.org/)**
+- <img alt="Contentful" src="https://user-images.githubusercontent.com/4289883/72760394-748c4a00-3b8d-11ea-9a34-13a121d2d9d8.png" height="16"> **[Contentful](https://www.contentful.com/)**
+- <img alt="ZEIT Now" src="https://user-images.githubusercontent.com/4289883/73734728-ef5b7600-46f2-11ea-8b4e-e8b09a3bbcee.png" height="16"> **[ZEIT Now](https://zeit.co/)**
 
 ## Development
 
@@ -22,9 +20,7 @@ A production-level progressive web app with dynamic rendering using:
    npm install
    ```
 3. ```
-   CONTENTFUL_SPACE=2mfcuy3p355s CONTENTFUL_ACCESS_TOKEN=EKvjDTi2bDOjjW94G0xzRexet5yeerbiqokB2-4k-24 npm run serve:app
+   npm run serve
    ```
 
-   The access token is for development. Pass them via environement variable in order to use a different access token (and make it secret).
-4. The webpage will automatically open on your default browser
-
+   The access token for development is at `.env` and `.env.build`. To use different access tokens, rewrite them.
