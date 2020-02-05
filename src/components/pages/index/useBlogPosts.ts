@@ -4,16 +4,32 @@ import RepositoryContext from "../../../contexts/RepositoryContext";
 import BlogPost from "../../../entities/BlogPost";
 
 export default function useBlogPosts(): [BlogPost[], boolean] {
+  type State = [BlogPost[], boolean];
+
+  const { blogPostListCache, blogPostApi } = React.useContext(RepositoryContext);
   const { currentLocale } = React.useContext(LocaleContext);
-  const { blogPostApi, blogPostListCache } = React.useContext(RepositoryContext);
-  const [[blogPosts, isLoading], set] = React.useState<[BlogPost[], boolean]>(blogPostListCache.has(currentLocale)
-  ? [blogPostListCache.get(currentLocale), false]
-  : [[], true]
-);
+  const [[blogPosts, isLoading], set] = React.useState<State>(() => {
+    if (blogPostListCache.has(currentLocale)) {
+      return [blogPostListCache.get(currentLocale), false];
+    }
+
+    return [[], true];
+  });
 
   React.useEffect(() => {
-    if (blogPosts.length === 0 && isLoading === true) {
-      blogPostApi.getAllByLocale(currentLocale)
+    if (blogPostListCache.has(currentLocale)) {
+      const nextBlogPostCache = blogPostListCache.get(currentLocale);
+
+      if (nextBlogPostCache !== blogPosts) {
+        set([nextBlogPostCache, false]);
+      }
+    } else {
+      if (!isLoading) {
+        set([blogPosts, true]);
+      }
+
+      blogPostApi
+        .getAllByLocale(currentLocale)
         .then(blogPosts => {
           blogPostListCache.set(currentLocale, blogPosts);
 
