@@ -62,7 +62,7 @@ jobs:
           --build-env CONTENTFUL_SPACE=$CONTENTFUL_SPACE
           --build-env CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN
           --no-clipboard
-          .
+          "."
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
           NOW_NAME: ${{ secrets.NOW_NAME }}
