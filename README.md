@@ -2,7 +2,7 @@
 
 ![Deploy to Staging](https://github.com/axross/kohei.dev/workflows/Deploy%20to%20Staging/badge.svg)
 
-A production-level progressive web app with dynamic rendering using:
+A Production-level Single Page App with Server Side Rendering using:
 
 - <img alt="TypeScript" src="https://user-images.githubusercontent.com/4289883/72760400-7524e080-3b8d-11ea-9b0c-f6e09280e6d8.png" height="16"> **[TypeScript](https://www.typescriptlang.org/)**
 - <img alt="React" src="https://user-images.githubusercontent.com/4289883/72760398-7524e080-3b8d-11ea-95ea-736bd3081ac9.png" height="16"> **[React](https://reactjs.org)**
