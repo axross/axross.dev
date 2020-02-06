@@ -1,8 +1,8 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import UIText, { UITextType } from "../../../UIText";
-import { BLOG_POST_TIMETAMP } from "../../../../dictionary";
-import useLocale from "../../../../hooks/useLocale";
+import UIText, { UITextType } from "../UIText";
+import { BLOG_POST_TIMETAMP } from "../../dictionary";
+import useLocale from "../../hooks/useLocale";
 
 interface Props extends React.Attributes {
   createdAt: Date;

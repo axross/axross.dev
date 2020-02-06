@@ -1,6 +1,6 @@
 import * as React from "react";
-import useLocale from "../../../hooks/useLocale";
-import useRepository from "../../../hooks/useRepository";
+import useLocale from "../../hooks/useLocale";
+import useRepository from "../../hooks/useRepository";
 
 export default function useWebsitePurpose(): [string | null, boolean] {
   type State = [string | null, boolean];

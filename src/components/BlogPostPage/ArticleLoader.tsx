@@ -1,8 +1,8 @@
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 import * as React from "react";
-import ContentLoader from "../../../ContentLoader";
-import { MOBILE } from "../../../../constant/mediaQuery";
+import ContentLoader from "../ContentLoader";
+import { MOBILE } from "../../constant/mediaQuery";
 
 interface Props extends React.Attributes {
   className?: string;

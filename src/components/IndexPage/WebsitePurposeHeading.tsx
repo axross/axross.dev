@@ -1,21 +1,21 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import { RECENT_N_BLOG_POSTS_HEADING } from "../../../dictionary";
-import useLocale from "../../../hooks/useLocale";
-import UIText, { UITextType } from "../../UIText";
+import UIText, { UITextType } from "../UIText";
+import { WEBSITE_PURPOSE_HEADING } from "../../dictionary";
+import useLocale from "../../hooks/useLocale";
 
 interface Props extends React.Attributes {
   className?: string;
 }
 
-export default function FirstNBlogPostsHeading(props: Props) {
+export default function WebsitePurposeHeading(props: Props) {
   const { currentLocale } = useLocale();
 
   return (
     <h2 {...props}>
       <UIText type={UITextType.subtitle}>
         {new IntlMessageFormat(
-          RECENT_N_BLOG_POSTS_HEADING[currentLocale]
+          WEBSITE_PURPOSE_HEADING[currentLocale]
         ).format()}
       </UIText>
     </h2>

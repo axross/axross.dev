@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { NOT_FOUND_DESCRIPTION, NOT_FOUND_TITLE } from "../../../../dictionary";
-import useLocale from "../../../../hooks/useLocale";
-import RawText, { TextLineSize, TextSize, ThemedColor } from "../../../RawText";
+import { NOT_FOUND_DESCRIPTION, NOT_FOUND_TITLE } from "../../dictionary";
+import useLocale from "../../hooks/useLocale";
+import RawText, { TextLineSize, TextSize, ThemedColor } from "../RawText";
 
 interface Props extends React.Attributes {
   className?: string;
