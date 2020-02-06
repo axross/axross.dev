@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { MOBILE } from "../constant/mediaQuery";
-import LocaleContext from "../contexts/LocaleContext";
+import useLocale from "../hooks/useLocale";
 import LocaleSwitcher from "./HeadBar/LocaleSwitcher";
 import Logo from "./HeadBar/Logo";
 import Link from "./Link";
@@ -12,7 +12,7 @@ export interface Props extends React.Attributes {
 }
 
 export default function HeadBar({ noLogo = false, ...props }: Props) {
-  const { currentLocale } = React.useContext(LocaleContext);
+  const { currentLocale } = useLocale();
 
   return (
     <Root {...props}>

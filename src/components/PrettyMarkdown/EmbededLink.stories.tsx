@@ -1,5 +1,5 @@
 import * as React from "react";
-import RepositoryContext from "../../contexts/RepositoryContext";
+import { RepositoryContext } from "../../hooks/useRepository";
 import MockWebpageSummaryApi from '../../repositories/MockWebpageSummaryApi';
 import EmbededLink from "./EmbededLink";
 

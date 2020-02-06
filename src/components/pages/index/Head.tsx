@@ -3,12 +3,12 @@ import * as React from "react";
 import IntlMessageFormat from "intl-messageformat";
 import { MY_JOB_TITLE, MY_NAME, MY_SOCIAL_MEDIA_LINKS } from "../../../constant/data";
 import { PROFILE_IMAGE_PATH } from "../../../constant/staticFilePaths";
-import LocaleContext from "../../../contexts/LocaleContext";
 import { WEBSITE_DESCRIPTION, WEBSITE_TITLE } from "../../../dictionary";
+import useLocale from "../../../hooks/useLocale";
 import useCanonicalURL from "./useCanonicalURL";
 
 export default function Head() {
-  const { availableLocales, currentLocale } = React.useContext(LocaleContext);
+  const { availableLocales, currentLocale } = useLocale();
   const canonicalURL = useCanonicalURL();
   const profileImageURL = new URL(PROFILE_IMAGE_PATH, process.env.ORIGIN);
 

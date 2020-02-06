@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import IntlMessageFormat from "intl-messageformat";
 import { useRouter } from "next/router";
 import * as React from "react";
-import LocaleContext from "../../contexts/LocaleContext";
 import { DictionaryEntry, LANGUAGE_EN_US, LANGUAGE_JA_JP } from "../../dictionary";
 import LocaleString from "../../entities/LocaleString";
+import useLocale from "../../hooks/useLocale";
 import Link from "../Link";
 import UIText, { UITextType } from "../UIText";
 import LocaleSwitcherLoader from "./LocaleSwitcherLoader";
@@ -18,7 +18,7 @@ export default function LocaleSwitcher(props: Props) {
     currentLocale,
     availableLocales,
     isLoading: isLocaleLoading
-  } = React.useContext(LocaleContext);
+  } = useLocale();
   const router = useRouter();
 
   if (isLocaleLoading) {

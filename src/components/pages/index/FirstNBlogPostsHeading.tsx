@@ -1,15 +1,15 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import UIText, { UITextType } from "../../UIText";
-import LocaleContext from "../../../contexts/LocaleContext";
 import { RECENT_N_BLOG_POSTS_HEADING } from "../../../dictionary";
+import useLocale from "../../../hooks/useLocale";
+import UIText, { UITextType } from "../../UIText";
 
 interface Props extends React.Attributes {
   className?: string;
 }
 
 export default function FirstNBlogPostsHeading(props: Props) {
-  const { currentLocale } = React.useContext(LocaleContext);
+  const { currentLocale } = useLocale();
 
   return (
     <h2 {...props}>

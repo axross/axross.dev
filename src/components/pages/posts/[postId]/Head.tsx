@@ -3,9 +3,9 @@ import * as React from "react";
 import IntlMessageFormat from "intl-messageformat";
 import { MY_JOB_TITLE, MY_NAME, MY_SOCIAL_MEDIA_LINKS } from "../../../../constant/data";
 import { PROFILE_IMAGE_PATH } from "../../../../constant/staticFilePaths";
-import LocaleContext from "../../../../contexts/LocaleContext";
 import { WEBSITE_TITLE, WEBSITE_TITLE_BLOG_POST, WEBSITE_TITLE_BLOG_POST_LOADING, WEBSITE_TITLE_BLOG_POST_NOT_FOUND } from "../../../../dictionary";
 import BlogPost from "../../../../entities/BlogPost";
+import useLocale from "../../../../hooks/useLocale";
 import useCanonicalURL from "./useCanonicalURL";
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function Head({ blogPost, blogPostLoading }: Props) {
-  const { availableLocales, currentLocale } = React.useContext(LocaleContext);
+  const { availableLocales, currentLocale } = useLocale();
   const canonicalURL = useCanonicalURL();
   const profileImageURL = new URL(PROFILE_IMAGE_PATH, process.env.ORIGIN);
 

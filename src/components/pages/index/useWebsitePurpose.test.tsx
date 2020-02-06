@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ReactTestRenderer, act, create } from "react-test-renderer";
-import LocaleContext from "../../../contexts/LocaleContext";
-import RepositoryContext from "../../../contexts/RepositoryContext";
+import { LocaleContext } from "../../../hooks/useLocale";
+import { RepositoryContext } from "../../../hooks/useRepository";
 import useWebsitePurpose from "./useWebsitePurpose";
 
 describe("useWebsitePurpose()", () => {
