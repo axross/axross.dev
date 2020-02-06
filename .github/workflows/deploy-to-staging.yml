@@ -52,7 +52,7 @@ jobs:
           node-version: "10.x"
       - run: npm install
       - run: npm i --no-save now@16.3.1
-      - run: >
+      - run:
         $(npm bin)/now --token $NOW_TOKEN
                        --name $NOW_NAME
                        --env ORIGIN=$ORIGIN
