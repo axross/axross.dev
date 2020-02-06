@@ -50,7 +50,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "10.x"
-      - run: npm i --no-save now@16.3.1
       - run:
           $(npm bin)/now
             --token $NOW_TOKEN
