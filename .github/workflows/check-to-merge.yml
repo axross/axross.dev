@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "13.x"
-      - run: npm install
+      - run: npm ci
       - run: npm run dry-compile
   test:
     name: Testing
@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "13.x"
-      - run: npm install
+      - run: npm ci
       - run: npm test
   dry-build:
     name: Dry Build
@@ -33,7 +33,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "13.x"
-      - run: npm install
+      - run: npm ci
       - run: npm run build:app
         env:
           CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
