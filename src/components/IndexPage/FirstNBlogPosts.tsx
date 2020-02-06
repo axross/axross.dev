@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import { MOBILE } from "../../../constant/mediaQuery";
-import { BLOG_POST_TIMETAMP } from "../../../dictionary";
-import BlogPost from "../../../entities/BlogPost";
-import useLocale from "../../../hooks/useLocale";
-import Link from "../../Link";
-import UIText, { UITextType } from "../../UIText";
+import { MOBILE } from "../../constant/mediaQuery";
+import { BLOG_POST_TIMETAMP } from "../../dictionary";
+import BlogPost from "../../entities/BlogPost";
+import useLocale from "../../hooks/useLocale";
+import Link from "../Link";
+import UIText, { UITextType } from "../UIText";
 
 interface Props extends React.Attributes {
   blogPosts: BlogPost[];

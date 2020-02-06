@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import BlogPost from "../../../../entities/BlogPost";
-import PrettyMarkdown from "../../../PrettyMarkdown";
-import RawText, { TextSize, ThemedColor, Typeface } from "../../../RawText";
-import { MOBILE } from "../../../../constant/mediaQuery";
+import BlogPost from "../../entities/BlogPost";
+import PrettyMarkdown from "../PrettyMarkdown";
+import RawText, { TextSize, ThemedColor, Typeface } from "../RawText";
+import { MOBILE } from "../../constant/mediaQuery";
 import BlogPostTimestamp from "./BlogPostTimestamp";
 
 interface Props extends React.Attributes {

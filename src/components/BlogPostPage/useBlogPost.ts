@@ -1,7 +1,7 @@
 import * as React from "react";
-import BlogPost, { BlogPostId } from "../../../../entities/BlogPost";
-import useLocale from "../../../../hooks/useLocale";
-import useRepository from "../../../../hooks/useRepository";
+import BlogPost, { BlogPostId } from "../../entities/BlogPost";
+import useLocale from "../../hooks/useLocale";
+import useRepository from "../../hooks/useRepository";
 
 export default function useBlogPost(blogPostId: BlogPostId): [BlogPost | null, boolean] {
   type State = [BlogPost | null, boolean];

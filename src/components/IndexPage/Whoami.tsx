@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import ExternalLink from "../../ExternalLink";
-import Icon, { IconName } from "../../Icon";
-import PrettyMarkdown from "../../PrettyMarkdown";
-import UIText, { UITextType } from "../../UIText";
-import { MY_NAME, MY_SOCIAL_MEDIA_LINKS } from "../../../constant/data";
-import { MOBILE } from "../../../constant/mediaQuery";
-import { PROFILE_IMAGE_PATH } from "../../../constant/staticFilePaths";
-import ThemedColor from "../../../types/ThemedColor";
+import ExternalLink from "../ExternalLink";
+import Icon, { IconName } from "../Icon";
+import PrettyMarkdown from "../PrettyMarkdown";
+import UIText, { UITextType } from "../UIText";
+import { MY_NAME, MY_SOCIAL_MEDIA_LINKS } from "../../constant/data";
+import { MOBILE } from "../../constant/mediaQuery";
+import { PROFILE_IMAGE_PATH } from "../../constant/staticFilePaths";
+import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {
   bio: string;

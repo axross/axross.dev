@@ -1,7 +1,7 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import { WEBSITE_TITLE } from "../../../dictionary";
-import useLocale from "../../../hooks/useLocale";
+import { WEBSITE_TITLE } from "../../dictionary";
+import useLocale from "../../hooks/useLocale";
 
 export default function useLoggingPageView(): void {
   const { currentLocale } = useLocale();
