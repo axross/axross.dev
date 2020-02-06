@@ -20,7 +20,7 @@ A Production-level Single Page App with Server Side Rendering using:
    npm install
    ```
 3. ```
-   npm run serve:app
+   npm run serve
    ```
 
    The access token for development is at `.env` and `.env.build`. To use different access tokens, rewrite them.
