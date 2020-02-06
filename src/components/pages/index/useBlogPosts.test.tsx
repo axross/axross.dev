@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ReactTestRenderer, act, create } from "react-test-renderer";
 import LocaleContext from "../../../contexts/LocaleContext";
-import RepositoryContext from "../../../contexts/RepositoryContext";
+import { RepositoryContext } from "../../../hooks/useRepository";
 import useBlogPosts from "./useBlogPosts";
 
 describe("useBlogPosts()", () => {

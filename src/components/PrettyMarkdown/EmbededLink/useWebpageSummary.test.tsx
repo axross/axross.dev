@@ -1,6 +1,6 @@
 import * as React from "react";
 import { act, create } from "react-test-renderer";
-import RepositoryContext from "../../../contexts/RepositoryContext";
+import { RepositoryContext } from "../../../hooks/useRepository";
 import useWebpageSummary from "./useWebpageSummary";
 
 describe("useWebpageSummary()", () => {

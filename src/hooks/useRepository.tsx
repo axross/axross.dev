@@ -21,4 +21,8 @@ interface Repositories {
   webpageSummaryApi: WebpageSummaryApi,
 }
 
-export default React.createContext<Repositories>(null as any);
+export const RepositoryContext = React.createContext<Repositories>(null as any);
+
+export default function useRepository(): Repositories {
+  return React.useContext(RepositoryContext);
+}

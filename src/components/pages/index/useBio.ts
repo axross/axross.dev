@@ -1,11 +1,11 @@
 import * as React from "react";
 import LocaleContext from "../../../contexts/LocaleContext";
-import RepositoryContext from "../../../contexts/RepositoryContext";
+import useRepository from "../../../hooks/useRepository";
 
 export default function useBio(): [string | null, boolean] {
   type State = [string | null, boolean];
 
-  const { bioCache, bioApi } = React.useContext(RepositoryContext);
+  const { bioCache, bioApi } = useRepository();
   const { currentLocale } = React.useContext(LocaleContext);
   const [[bio, isLoading], set] = React.useState<State>(() => {
     if (bioCache.has(currentLocale)) {

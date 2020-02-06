@@ -1,12 +1,12 @@
 import * as React from "react";
 import LocaleContext from "../../../../contexts/LocaleContext";
-import RepositoryContext from "../../../../contexts/RepositoryContext";
 import BlogPost, { BlogPostId } from "../../../../entities/BlogPost";
+import useRepository from "../../../../hooks/useRepository";
 
 export default function useBlogPost(blogPostId: BlogPostId): [BlogPost | null, boolean] {
   type State = [BlogPost | null, boolean];
 
-  const { blogPostCache, blogPostApi } = React.useContext(RepositoryContext);
+  const { blogPostCache, blogPostApi } = useRepository();
   const { currentLocale } = React.useContext(LocaleContext);
   const [[blogPost, isLoading], set] = React.useState<State>(() => {
     if (blogPostCache.has(blogPostId, currentLocale)) {
