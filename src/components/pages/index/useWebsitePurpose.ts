@@ -1,12 +1,12 @@
 import * as React from "react";
-import LocaleContext from "../../../contexts/LocaleContext";
+import useLocale from "../../../hooks/useLocale";
 import useRepository from "../../../hooks/useRepository";
 
 export default function useWebsitePurpose(): [string | null, boolean] {
   type State = [string | null, boolean];
 
   const { websitePurposeApi, websitePurposeCache } = useRepository();
-  const { currentLocale } = React.useContext(LocaleContext);
+  const { currentLocale } = useLocale();
   const [[websitePurpose, isLoading], set] = React.useState<State>(() => {
     if (websitePurposeCache.has(currentLocale)) {
       return [websitePurposeCache.get(currentLocale), false];

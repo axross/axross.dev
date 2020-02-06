@@ -2,8 +2,8 @@ import { action } from "@storybook/addon-actions";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import Router, { NextRouter } from "next/router";
 import * as React from "react";
-import LocaleContext from "../src/contexts/LocaleContext";
 import LocaleString from "../src/entities/LocaleString";
+import { LocaleContext } from "../src/hooks/useLocale";
 
 interface Props {
   currentLocale?: LocaleString;

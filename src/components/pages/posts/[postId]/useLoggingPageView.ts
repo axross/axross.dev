@@ -1,11 +1,11 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import LocaleContext from "../../../../contexts/LocaleContext";
 import { WEBSITE_TITLE_BLOG_POST, WEBSITE_TITLE_BLOG_POST_NOT_FOUND } from "../../../../dictionary";
 import BlogPost from "../../../../entities/BlogPost";
+import useLocale from "../../../../hooks/useLocale";
 
 export default function useLoggingPageView(blogPost: BlogPost | null, blogPostLoading: boolean): void {
-  const { currentLocale } = React.useContext(LocaleContext);
+  const { currentLocale } = useLocale();
 
   React.useEffect(() => {
     if (typeof (window as any).ga === "undefined") return;

@@ -1,10 +1,10 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import LocaleContext from "../../../contexts/LocaleContext";
 import { WEBSITE_TITLE } from "../../../dictionary";
+import useLocale from "../../../hooks/useLocale";
 
 export default function useLoggingPageView(): void {
-  const { currentLocale } = React.useContext(LocaleContext);
+  const { currentLocale } = useLocale();
 
   React.useEffect(() => {
     if (typeof (window as any).ga === "undefined") return;

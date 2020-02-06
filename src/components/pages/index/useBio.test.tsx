@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ReactTestRenderer, act, create } from "react-test-renderer";
-import LocaleContext from "../../../contexts/LocaleContext";
+import { LocaleContext } from "../../../hooks/useLocale";
 import { RepositoryContext } from "../../../hooks/useRepository";
 import useBio from "./useBio";
 

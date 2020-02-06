@@ -1,15 +1,15 @@
 import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import UIText, { UITextType } from "../../UIText";
-import LocaleContext from "../../../contexts/LocaleContext";
 import { WEBSITE_PURPOSE_HEADING } from "../../../dictionary";
+import useLocale from "../../../hooks/useLocale";
 
 interface Props extends React.Attributes {
   className?: string;
 }
 
 export default function WebsitePurposeHeading(props: Props) {
-  const { currentLocale } = React.useContext(LocaleContext);
+  const { currentLocale } = useLocale();
 
   return (
     <h2 {...props}>
