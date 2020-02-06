@@ -20,7 +20,7 @@ A production-level progressive web app with dynamic rendering using:
    npm install
    ```
 3. ```
-   npm run serve
+   npm run serve:app
    ```
 
    The access token for development is at `.env` and `.env.build`. To use different access tokens, rewrite them.

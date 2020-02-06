@@ -4,10 +4,10 @@
     "test": "npm run test:unit",
     "test:unit": "jest --config jest.unit.js",
     "dry-compile": "tsc --noEmit",
-    "build": "next build",
-    "build-storybook": "build-storybook --output-dir dist/storybook",
-    "serve": "now dev",
-    "serve-storybook": "start-storybook"
+    "build:app": "next build",
+    "build:storybook": "build-storybook --output-dir dist/storybook",
+    "serve:app": "now dev",
+    "serve:storybook": "start-storybook"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",

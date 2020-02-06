@@ -34,11 +34,11 @@ jobs:
         with:
           node-version: "13.x"
       - run: npm install
-      - run: npm run build
+      - run: npm run build:app
         env:
           CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
-      - run: npm run build-storybook
+      - run: npm run build:storybook
         env:
           CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}

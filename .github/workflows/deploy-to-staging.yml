@@ -33,11 +33,11 @@ jobs:
         with:
           node-version: "13.x"
       - run: npm install
-      - run: npm run build
+      - run: npm run build:app
         env:
           CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
-      - run: npm run build-storybook
+      - run: npm run build:storybook
         env:
           CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
@@ -52,7 +52,19 @@ jobs:
           node-version: "10.x"
       - run: npm install
       - run: npm i --no-save now@16.3.1
-      - run: $(npm bin)/now --token $NOW_TOKEN --name $NOW_NAME --no-clipboard .
+      - run: $(npm bin)/now --token $NOW_TOKEN \
+                            --name $NOW_NAME \
+                            --env ORIGIN=$ORIGIN \
+                            --env CONTENTFUL_SPACE=$CONTENTFUL_SPACE \
+                            --env CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN \
+                            --build-env ORIGIN=$ORIGIN \
+                            --build-env CONTENTFUL_SPACE=$CONTENTFUL_SPACE \
+                            --build-env CONTENTFUL_ACCESS_TOKEN=$CONTENTFUL_ACCESS_TOKEN \
+                            --no-clipboard \
+                            .
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}
           NOW_NAME: ${{ secrets.NOW_NAME }}
+          ORIGIN: ${{ secrets.ORIGIN }}
+          CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
+          CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
