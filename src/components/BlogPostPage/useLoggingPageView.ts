@@ -10,13 +10,13 @@ export default function useLoggingPageView(blogPost: BlogPost | null, blogPostLo
   const { currentLocale } = useLocale();
 
   React.useEffect(() => {
-    if (typeof (window as any).ga === "undefined") return;
+    if (typeof globalThis.ga === "undefined") return;
     if (blogPostLoading) return;
 
     globalThis.ga("set", "location", url.href);
 
     if (blogPost) {
-      (window as any).ga(
+      globalThis.ga(
         "set",
         "title",
         new IntlMessageFormat(WEBSITE_TITLE_BLOG_POST[currentLocale]).format({
@@ -24,7 +24,7 @@ export default function useLoggingPageView(blogPost: BlogPost | null, blogPostLo
         })
       );
     } else {
-      (window as any).ga(
+      globalThis.ga(
         "set",
         "title",
         new IntlMessageFormat(
