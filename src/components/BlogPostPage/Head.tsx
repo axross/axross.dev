@@ -1,12 +1,11 @@
 import NextHead from "next/head";
 import * as React from "react";
-import IntlMessageFormat from "intl-messageformat";
 import { MY_JOB_TITLE, MY_NAME, MY_SOCIAL_MEDIA_LINKS } from "../../constant/data";
 import { PROFILE_IMAGE_PATH } from "../../constant/staticFilePaths";
-import { WEBSITE_TITLE, WEBSITE_TITLE_BLOG_POST, WEBSITE_TITLE_BLOG_POST_LOADING, WEBSITE_TITLE_BLOG_POST_NOT_FOUND } from "../../dictionary";
 import BlogPost from "../../entities/BlogPost";
 import useLocale from "../../hooks/useLocale";
 import useCanonicalURL from "./useCanonicalURL";
+import useTranslation from "../../hooks/useTranslation";
 
 interface Props {
   blogPost?: BlogPost | null;
@@ -16,15 +15,17 @@ interface Props {
 export default function Head({ blogPost, blogPostLoading }: Props) {
   const { availableLocales, currentLocale } = useLocale();
   const canonicalURL = useCanonicalURL();
+  const websiteTitle = useTranslation("WEBSITE_TITLE");
   const profileImageURL = new URL(PROFILE_IMAGE_PATH, process.env.ORIGIN);
+  const titleLoading = useTranslation("WEBSITE_TITLE_BLOG_POST_LOADING");
+  const titleNotFound = useTranslation("WEBSITE_TITLE_BLOG_POST_NOT_FOUND");
+  const title = useTranslation("WEBSITE_TITLE_BLOG_POST", { title: blogPost?.title });
 
   if (blogPostLoading) {
     return (
       <NextHead>
         <title>
-        {new IntlMessageFormat(
-          WEBSITE_TITLE_BLOG_POST_LOADING[currentLocale]
-        ).format()}
+          {titleLoading}
         </title>
       </NextHead>
     );
@@ -34,17 +35,11 @@ export default function Head({ blogPost, blogPostLoading }: Props) {
     return (
       <NextHead>
         <title>
-          {new IntlMessageFormat(
-            WEBSITE_TITLE_BLOG_POST_NOT_FOUND[currentLocale]
-          ).format()}
+          {titleNotFound}
         </title>
       </NextHead>
     );
   }
-
-  const title = new IntlMessageFormat(WEBSITE_TITLE_BLOG_POST[currentLocale]).format({
-    title: blogPost.title,
-  });
 
   return (
     <NextHead>
@@ -135,9 +130,7 @@ export default function Head({ blogPost, blogPostLoading }: Props) {
         ))}
       <meta
         property="og:site_name"
-        content={new IntlMessageFormat(WEBSITE_TITLE[currentLocale]).format({
-          name: MY_NAME
-        })}
+        content={websiteTitle}
         key="og:site_name"
       />
       <meta property="og:title" content={title} key="og:title" />

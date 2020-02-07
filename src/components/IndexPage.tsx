@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 import * as React from "react";
 import HeadBar from "../components/HeadBar";
 import { MOBILE } from "../constant/mediaQuery";
-import FirstNBlogPosts from "./IndexPage/FirstNBlogPosts";
-import FirstNBlogPostsHeading from "./IndexPage/FirstNBlogPostsHeading";
-import FirstNBlogPostsLoader from "./IndexPage/FirstNBlogPostsLoader";
+import FirstNBlogPostList from "./IndexPage/FirstNBlogPostList";
+import FirstNBlogPostListHeading from "./IndexPage/FirstNBlogPostListHeading";
+import FirstNBlogPostListLoader from "./IndexPage/FirstNBlogPostListLoader";
 import Head from "./IndexPage/Head";
 import WebsitePurpose from "./IndexPage/WebsitePurpose";
 import WebsitePurposeHeading from "./IndexPage/WebsitePurposeHeading";
@@ -115,15 +115,15 @@ const _WhoamiLoader = styled(WhoamiLoader)`
   grid-area: whoami;
 `;
 
-const _BlogPostListHeading = styled(FirstNBlogPostsHeading)`
+const _BlogPostListHeading = styled(FirstNBlogPostListHeading)`
   grid-area: blog-post-list-heading;
 `;
 
-const _BlogPostList = styled(FirstNBlogPosts)`
+const _BlogPostList = styled(FirstNBlogPostList)`
   grid-area: blog-post-list;
 `;
 
-const _BlogPostListLoading = styled(FirstNBlogPostsLoader)`
+const _BlogPostListLoading = styled(FirstNBlogPostListLoader)`
   grid-area: blog-post-list;
 `;
 

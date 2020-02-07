@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { NOT_FOUND_DESCRIPTION, NOT_FOUND_TITLE } from "../../dictionary";
-import useLocale from "../../hooks/useLocale";
+import useTranslation from "../../hooks/useTranslation";
 import RawText, { TextLineSize, TextSize, ThemedColor } from "../RawText";
 
 interface Props extends React.Attributes {
@@ -9,12 +8,13 @@ interface Props extends React.Attributes {
 }
 
 export default function ArticleNotFound(props: Props) {
-  const { currentLocale } = useLocale();
+  const title = useTranslation("NOT_FOUND_TITLE");
+  const description = useTranslation("NOT_FOUND_DESCRIPTION");
 
   return (
     <section {...props}>
       <Title color={ThemedColor.emphasizedForeground} size={TextSize.giantic} bold>
-        {NOT_FOUND_TITLE[currentLocale]}
+        {title}
       </Title>
 
       <StatusCode color={ThemedColor.secondaryForeground}>
@@ -22,7 +22,7 @@ export default function ArticleNotFound(props: Props) {
       </StatusCode>
 
       <Description lineSize={TextLineSize.large}>
-        {NOT_FOUND_DESCRIPTION[currentLocale]}
+        {description}
       </Description>
     </section>
   );

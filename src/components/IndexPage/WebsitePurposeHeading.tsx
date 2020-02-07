@@ -1,22 +1,18 @@
-import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import UIText, { UITextType } from "../UIText";
-import { WEBSITE_PURPOSE_HEADING } from "../../dictionary";
-import useLocale from "../../hooks/useLocale";
+import useTranslation from "../../hooks/useTranslation";
 
 interface Props extends React.Attributes {
   className?: string;
 }
 
 export default function WebsitePurposeHeading(props: Props) {
-  const { currentLocale } = useLocale();
+  const heading = useTranslation("WEBSITE_PURPOSE_HEADING");
 
   return (
     <h2 {...props}>
       <UIText type={UITextType.subtitle}>
-        {new IntlMessageFormat(
-          WEBSITE_PURPOSE_HEADING[currentLocale]
-        ).format()}
+        {heading}
       </UIText>
     </h2>
   );
