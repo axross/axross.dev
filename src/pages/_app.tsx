@@ -6,6 +6,7 @@ import { AVAILABLE_LOCALES } from "../constant/locale";
 import LocaleString from "../entities/LocaleString";
 import { LocaleContext } from "../hooks/useLocale";
 import { RepositoryContext } from "../hooks/useRepository";
+import { URLContext } from "../hooks/useURL";
 import ContentfulBioApi from "../repositories/ContentfulBioApi";
 import ContentfulBlogPostApi from "../repositories/ContentfulBlogPostApi";
 import ContentfulLocaleApi from "../repositories/ContentfulLocaleApi";
@@ -41,15 +42,17 @@ export default function App({ Component, pageProps, router }: AppProps) {
   const currentLocale = url.searchParams.get("hl")!;
 
   return (
-    <RepositoryContext.Provider value={repositories}>
-      <LocaleContext.Provider value={{
-        availableLocales: AVAILABLE_LOCALES,
-        currentLocale: currentLocale,
-        isLoading: false,
-      }}>
-        <Component {...pageProps} />
-      </LocaleContext.Provider>
-    </RepositoryContext.Provider>
+    <URLContext.Provider value={url}>
+      <RepositoryContext.Provider value={repositories}>
+        <LocaleContext.Provider value={{
+          availableLocales: AVAILABLE_LOCALES,
+          currentLocale: currentLocale,
+          isLoading: false,
+        }}>
+          <Component {...pageProps} />
+        </LocaleContext.Provider>
+      </RepositoryContext.Provider>
+    </URLContext.Provider>
   );
 }
 

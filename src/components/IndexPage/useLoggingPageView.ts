@@ -2,8 +2,10 @@ import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import { WEBSITE_TITLE } from "../../dictionary";
 import useLocale from "../../hooks/useLocale";
+import useURL from "../../hooks/useURL";
 
 export default function useLoggingPageView(): void {
+  const url = useURL();
   const { currentLocale } = useLocale();
 
   React.useEffect(() => {
@@ -16,5 +18,6 @@ export default function useLoggingPageView(): void {
       new IntlMessageFormat(WEBSITE_TITLE[currentLocale]).format()
     );
     (window as any).ga("send", "pageview");
+    globalThis.ga("set", "location", url.href);
   }, [currentLocale]);
 }

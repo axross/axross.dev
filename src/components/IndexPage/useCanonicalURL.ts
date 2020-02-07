@@ -1,14 +1,13 @@
-import { useRouter } from "next/router";
+import useURL from "../../hooks/useURL";
 
 export default function useCanonicalURL(): URL {
-  const router = useRouter();
-  const canonicalURL = new URL(router.asPath, process.env.ORIGIN);
+  const url = new URL(useURL().href);
 
-  for (const key of canonicalURL.searchParams.keys()) {
+  for (const key of url.searchParams.keys()) {
     if (key !== "hl") {
-      canonicalURL.searchParams.delete(key);
+      url.searchParams.delete(key);
     }
   }
 
-  return canonicalURL;
+  return url;
 }
