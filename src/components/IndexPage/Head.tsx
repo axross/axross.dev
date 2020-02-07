@@ -1,20 +1,18 @@
 import NextHead from "next/head";
 import * as React from "react";
-import IntlMessageFormat from "intl-messageformat";
 import { MY_JOB_TITLE, MY_NAME, MY_SOCIAL_MEDIA_LINKS } from "../../constant/data";
 import { PROFILE_IMAGE_PATH } from "../../constant/staticFilePaths";
-import { WEBSITE_DESCRIPTION, WEBSITE_TITLE } from "../../dictionary";
 import useLocale from "../../hooks/useLocale";
 import useCanonicalURL from "./useCanonicalURL";
+import useTranslation from "../../hooks/useTranslation";
 
 export default function Head() {
   const { availableLocales, currentLocale } = useLocale();
   const canonicalURL = useCanonicalURL();
+  const title = useTranslation("WEBSITE_TITLE");
   const profileImageURL = new URL(PROFILE_IMAGE_PATH, process.env.ORIGIN);
+  const description = useTranslation("WEBSITE_DESCRIPTION");
 
-  const title = new IntlMessageFormat(WEBSITE_TITLE[currentLocale]).format();
-  const description = new IntlMessageFormat(WEBSITE_DESCRIPTION[currentLocale]).format();
-  
   return (
     <NextHead>
       <title>{title}</title>

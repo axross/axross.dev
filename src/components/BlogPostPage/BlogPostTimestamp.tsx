@@ -1,8 +1,7 @@
-import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
 import UIText, { UITextType } from "../UIText";
-import { BLOG_POST_TIMETAMP } from "../../dictionary";
 import useLocale from "../../hooks/useLocale";
+import useTranslation from "../../hooks/useTranslation";
 
 interface Props extends React.Attributes {
   createdAt: Date;
@@ -16,12 +15,13 @@ export default function BlogPostTimestamp({
   ...props
 }: Props) {
   const { currentLocale } = useLocale();
+  const timestamp = useTranslation("BLOG_POST_TIMETAMP", {
+    createdAt: new Intl.DateTimeFormat(currentLocale).format(createdAt)
+  });
 
   return (
     <UIText type={UITextType.caption} {...props}>
-      {new IntlMessageFormat(BLOG_POST_TIMETAMP[currentLocale]).format({
-        createdAt: new Intl.DateTimeFormat(currentLocale).format(createdAt)
-      })}
+      {timestamp}
     </UIText>
   );
 }

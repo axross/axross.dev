@@ -1,13 +1,14 @@
-import IntlMessageFormat from "intl-messageformat";
 import * as React from "react";
-import { WEBSITE_TITLE_BLOG_POST, WEBSITE_TITLE_BLOG_POST_NOT_FOUND } from "../../dictionary";
 import BlogPost from "../../entities/BlogPost";
 import useLocale from "../../hooks/useLocale";
+import useTranslation from "../../hooks/useTranslation";
 import useURL from "../../hooks/useURL";
 
 export default function useLoggingPageView(blogPost: BlogPost | null, blogPostLoading: boolean): void {
   const url = useURL();
   const { currentLocale } = useLocale();
+  const title = useTranslation("WEBSITE_TITLE_BLOG_POST", { title: blogPost?.title });
+  const notFoundTitle = useTranslation("WEBSITE_TITLE_BLOG_POST_NOT_FOUND");
 
   React.useEffect(() => {
     if (typeof globalThis.ga === "undefined") return;
@@ -16,21 +17,9 @@ export default function useLoggingPageView(blogPost: BlogPost | null, blogPostLo
     globalThis.ga("set", "location", url.href);
 
     if (blogPost) {
-      globalThis.ga(
-        "set",
-        "title",
-        new IntlMessageFormat(WEBSITE_TITLE_BLOG_POST[currentLocale]).format({
-          title: blogPost.title,
-        })
-      );
+      globalThis.ga("set", "title", title);
     } else {
-      globalThis.ga(
-        "set",
-        "title",
-        new IntlMessageFormat(
-          WEBSITE_TITLE_BLOG_POST_NOT_FOUND[currentLocale]
-        ).format()
-      );
+      globalThis.ga("set", "title", notFoundTitle);
     }
 
     globalThis.ga("send", "pageview");
