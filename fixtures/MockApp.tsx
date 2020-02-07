@@ -68,7 +68,13 @@ export default function MockApp({
   }), []);
 
   React.useEffect(() => {
+    const previousRouter = Router.router;
+
     Router.router = router as any;
+
+    () => {
+      Router.router = previousRouter;
+    };
   }, []);
   
   return (

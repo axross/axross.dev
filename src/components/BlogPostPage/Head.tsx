@@ -16,10 +16,10 @@ export default function Head({ blogPost, blogPostLoading }: Props) {
   const { availableLocales, currentLocale } = useLocale();
   const canonicalURL = useCanonicalURL();
   const websiteTitle = useTranslation("WEBSITE_TITLE");
-  const profileImageURL = new URL(PROFILE_IMAGE_PATH, process.env.ORIGIN);
   const titleLoading = useTranslation("WEBSITE_TITLE_BLOG_POST_LOADING");
   const titleNotFound = useTranslation("WEBSITE_TITLE_BLOG_POST_NOT_FOUND");
   const title = useTranslation("WEBSITE_TITLE_BLOG_POST", { title: blogPost?.title });
+  const profileImageURL = new URL(PROFILE_IMAGE_PATH, canonicalURL.origin);
 
   if (blogPostLoading) {
     return (
@@ -65,15 +65,15 @@ export default function Head({ blogPost, blogPostLoading }: Props) {
       }
 
       {(() => {
-        const url = new URL("/posts/feed.xml", process.env.ORIGIN);
-        url.searchParams.set("hl", currentLocale);
+        const feedURL = new URL("/posts/feed.xml", canonicalURL.origin);
+        feedURL.searchParams.set("hl", currentLocale);
 
         return (
           <link
             rel="alternate"
             type="application/atom+xml"
             title={`Blog post Atom feed (${currentLocale})`}
-            href={url.href}
+            href={feedURL.href}
             key={`atomFeed:${currentLocale}`}
           />
         );

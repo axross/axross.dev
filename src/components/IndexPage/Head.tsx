@@ -10,8 +10,8 @@ export default function Head() {
   const { availableLocales, currentLocale } = useLocale();
   const canonicalURL = useCanonicalURL();
   const title = useTranslation("WEBSITE_TITLE");
-  const profileImageURL = new URL(PROFILE_IMAGE_PATH, process.env.ORIGIN);
   const description = useTranslation("WEBSITE_DESCRIPTION");
+  const profileImageURL = new URL(PROFILE_IMAGE_PATH, canonicalURL.origin);
 
   return (
     <NextHead>
@@ -37,7 +37,7 @@ export default function Head() {
       }
 
       {(() => {
-        const url = new URL("/posts/feed.xml", process.env.ORIGIN);
+        const url = new URL("/posts/feed.xml", canonicalURL.origin);
         url.searchParams.set("hl", currentLocale);
 
         return (
