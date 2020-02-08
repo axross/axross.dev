@@ -1,6 +1,6 @@
 module.exports = {
   preset: "ts-jest",
-  testMatch: ["**/src/storyshots.test.ts"],
+  testMatch: ["**/storyshots/*.test.ts"],
   globalSetup: "<rootDir>/.jest/visualGlobalSetup.js",
   globalTeardown: "<rootDir>/.jest/visualGlobalTeardown.js",
   setupFilesAfterEnv: ["<rootDir>/.jest/visualSetupAfterEnv.js"],
