@@ -14,8 +14,8 @@ jobs:
           node-version: "13.x"
       - run: npm ci
       - run: npm run dry-compile
-  test:
-    name: Testing
+  unit-test:
+    name: Unit Testing
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -23,7 +23,17 @@ jobs:
         with:
           node-version: "13.x"
       - run: npm ci
-      - run: npm test
+      - run: npm run test-unit -- --ci --coverage
+  visual-test:
+    name: Visual Reguression Testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "13.x"
+      - run: npm ci
+      - run: npm run test-visual -- --ci
   dry-build:
     name: Dry Build
     runs-on: ubuntu-latest
@@ -43,7 +53,7 @@ jobs:
           CONTENTFUL_ACCESS_TOKEN: ${{ secrets.CONTENTFUL_ACCESS_TOKEN }}
   deploy-staging:
     name: Deploying to Staging Environment
-    needs: [dry-compile, test, dry-build]
+    needs: [dry-compile, unit-test, visual-test, dry-build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master

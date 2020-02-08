@@ -15,8 +15,8 @@ jobs:
           node-version: "13.x"
       - run: npm ci
       - run: npm run dry-compile
-  test:
-    name: Testing
+  unit-test:
+    name: Unit Testing
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -24,7 +24,22 @@ jobs:
         with:
           node-version: "13.x"
       - run: npm ci
-      - run: npm test
+      - run: npm run test-unit -- --ci --coverage
+  visual-test:
+    name: Visual Regression Testing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "13.x"
+      - run: npm ci
+      - run: npm run test-visual -- --ci
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: Visual Regression Test Diffs
+          path: src/__image_snapshots__/__diff_output__
   dry-build:
     name: Dry Build
     runs-on: ubuntu-latest
