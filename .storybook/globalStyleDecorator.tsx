@@ -1,29 +1,21 @@
 import { css, Global } from "@emotion/core";
 import { makeDecorator } from '@storybook/addons';
 import * as React from "react";
-import GlobalStyle from '../src/components/GlobalStyle';
+import GlobalStyle from "../src/components/GlobalStyle";
 
 export default makeDecorator({
   name: 'withGlobalStyle',
   parameterName: 'globalStyle',
-  wrapper: (storyFn, context, { parameters }) => {
-    // Do something with `parameters`, which are set via { something: ... }
+  wrapper: (storyFn, context) => (
+    <>
+      <GlobalStyle />
 
-    // Note you may alter the story output if you like, although generally that's
-    // not advised
-
-    return (
-      <>
-        <GlobalStyle />
-
-        {/* override */}
-        <Global styles={OVERRIDE_GLOBAL_STYLE} />
-
-        {storyFn(context)}
-      </>
-    );
-  }
-})
+      <Global styles={OVERRIDE_GLOBAL_STYLE} />
+      
+      {storyFn(context)}
+    </>
+  ),
+});
 
 const OVERRIDE_GLOBAL_STYLE = css`
   html {
