@@ -34,6 +34,11 @@ jobs:
           node-version: "13.x"
       - run: npm ci
       - run: npm run test-visual -- --ci
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: Visual Regression Test Diffs
+          path: storyshots/__image_snapshots__/__diff_output__
   dry-build:
     name: Dry Build
     runs-on: ubuntu-latest
