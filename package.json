@@ -27,10 +27,10 @@
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.2.6",
-    "@storybook/addon-knobs": "^5.2.6",
-    "@storybook/addons": "^5.2.6",
-    "@storybook/react": "^5.2.6",
+    "@storybook/addon-actions": "^5.3.12",
+    "@storybook/addon-knobs": "^5.3.12",
+    "@storybook/addons": "^5.3.12",
+    "@storybook/react": "^5.3.12",
     "@types/google.analytics": "0.0.40",
     "@types/jest": "^24.0.16",
     "@types/node": "^12.6.8",
