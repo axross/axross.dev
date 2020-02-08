@@ -37,6 +37,10 @@ export const loading = () => (
   </div>
 );
 
+loading.story = {
+  parameters: { looseImageSnapshot: true },
+};
+
 export const unavailable = () => (
   <div style={{ padding: "0 48px" }}>
     <RepositoryContext.Provider value={{ webpageSummaryApi: new MockWebpageSummaryApi() } as any}>
@@ -44,3 +48,7 @@ export const unavailable = () => (
     </RepositoryContext.Provider>
   </div>
 );
+
+unavailable.story = {
+  parameters: { looseImageSnapshot: true },
+};

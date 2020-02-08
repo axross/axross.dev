@@ -35,6 +35,10 @@ export const mixed = () => (
   </Root>
 );
 
+mixed.story = {
+  parameters: { looseImageSnapshot: true },
+};
+
 const Root = styled(ContentLoader)`
   height: 1133px;
 
