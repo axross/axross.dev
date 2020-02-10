@@ -3,7 +3,10 @@ import { RepositoryContext } from "../../hooks/useRepository";
 import MockWebpageSummaryApi from '../../repositories/MockWebpageSummaryApi';
 import EmbededLink from "./EmbededLink";
 
-export default { title: "Components/PrettyMarkdown/EmbededLink" };
+export default {
+  title: "Components/PrettyMarkdown/EmbededLink",
+  parameters: { waitForFontLoading: true },
+};
 
 export const article = () => (
   <div style={{ padding: "0 48px" }}>
@@ -38,7 +41,10 @@ export const loading = () => (
 );
 
 loading.story = {
-  parameters: { looseImageSnapshot: true },
+  parameters: {
+    looseImageSnapshot: true,
+    waitForFontLoading: false,
+  },
 };
 
 export const unavailable = () => (
@@ -50,5 +56,8 @@ export const unavailable = () => (
 );
 
 unavailable.story = {
-  parameters: { looseImageSnapshot: true },
+  parameters: {
+    looseImageSnapshot: true,
+    waitForFontLoading: false,
+  },
 };

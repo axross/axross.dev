@@ -1,7 +1,11 @@
 import * as React from "react";
 import CodeBlock from "./CodeBlock";
 
-export default { title: "Components/PrettyMarkdown/Codeblock" };
+export default {
+  title: "Components/PrettyMarkdown/Codeblock",
+  // TODO: use <RawText> inside <Codeblock>
+  parameters: { waitForFontLoading: false },
+};
 
 export const JSX = () => (
   <div style={{ padding: "0 48px" }}>

@@ -4,7 +4,8 @@ import UIText, { UITextType } from "./UIText";
 
 export default {
   title: "Components/UIText",
-  decorators: [withKnobs]
+  decorators: [withKnobs],
+  parameters: { waitForFontLoading: true },
 };
 
 export const label = () => (

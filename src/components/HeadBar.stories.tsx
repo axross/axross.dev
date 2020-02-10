@@ -5,6 +5,7 @@ import HeadBar from "./HeadBar";
 export default {
   title: "Components/HeadBar",
   component: HeadBar,
+  parameters: { waitForFontLoading: true },
 };
 
 export const Normal = () => (

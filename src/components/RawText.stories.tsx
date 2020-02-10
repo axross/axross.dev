@@ -5,7 +5,8 @@ import RawText, { TextAlignment, TextLineSize, TextSize, Typeface } from "./RawT
 
 export default {
   title: "Components/RawText",
-  decorators: [withKnobs]
+  decorators: [withKnobs],
+  parameters: { waitForFontLoading: true },
 };
 
 export const playground = () => (

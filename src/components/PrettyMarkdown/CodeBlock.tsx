@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
-import * as React from "react";
 import Highlight, { defaultProps } from "prism-react-renderer";
+import * as React from "react";
 import {
   CODE_BACKGROUND_COLOR,
   CODE_COLORS,
   CodeColor
 } from "../../constant/color";
 import { MOBILE } from "../../constant/mediaQuery";
+import LazyCSS from "../LazyCSS";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -21,32 +22,40 @@ export default function CodeBlock({ className, children, ...props }: Props) {
   const actualProps = { ...props, className: actualClassName };
 
   return (
-    <Highlight {...defaultProps} code={children} language={language as any} {...actualProps}>
-      {({ tokens }) => (
-        <Pre {...actualProps}>
-          <Code>
-            {tokens.map((line, i) => (
-              <>
-                {line
-                  .filter(token => token.content !== "")
-                  .map((token, j) => {
-                    const TokenComponent = TAGS.get(token.types.find(type => TAGS.has(type))!) ?? FallbackToken;
+    <>
+      <LazyCSS
+        href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,600i|Open+Sans:400,400i,700,700i|Source+Code+Pro:400,400i,600,600i,700,700i&display=swap"
+        data-test-key="googlefonts"
+        key="fonts"
+      />
+    
+      <Highlight {...defaultProps} code={children} language={language as any} {...actualProps}>
+        {({ tokens }) => (
+          <Pre {...actualProps}>
+            <Code>
+              {tokens.map((line, i) => (
+                <>
+                  {line
+                    .filter(token => token.content !== "")
+                    .map((token, j) => {
+                      const TokenComponent = TAGS.get(token.types.find(type => TAGS.has(type))!) ?? FallbackToken;
 
-                    return (
-                      <TokenComponent key={`${i}-${j}`} data-types={token.types.join(", ")}>
-                        {token.content}
-                      </TokenComponent>
-                    );
-                  })
-                }
+                      return (
+                        <TokenComponent key={`${i}-${j}`} data-types={token.types.join(", ")}>
+                          {token.content}
+                        </TokenComponent>
+                      );
+                    })
+                  }
 
-                {"\n"}
-              </>
-            ))}
-          </Code>
-        </Pre>
-      )}
-    </Highlight>
+                  {"\n"}
+                </>
+              ))}
+            </Code>
+          </Pre>
+        )}
+      </Highlight>
+    </>
   );
 }
 
