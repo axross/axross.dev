@@ -1,5 +1,5 @@
 import * as React from "react";
-import RawTextThemeContext, { ThemedColor } from "./RawTextThemeContext";
+import { RawTextThemeContext, ThemedColor } from "./RawText";
 
 export interface Props extends React.Attributes {
   href: string;
