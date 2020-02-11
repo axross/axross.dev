@@ -1,0 +1,401 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Head> when currentLocale="en-US" after the blog post is loaded if the blog post is not found pushes tags into <head> and they matches with the previous snapshots 1`] = `
+Array [
+  <meta
+    content="width=device-width,minimum-scale=1,initial-scale=1"
+    name="viewport"
+  />,
+  <meta
+    charSet="utf-8"
+  />,
+  <meta
+    content="BLOG_POST_SUMMARY"
+    name="description"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=en-US"
+    rel="canonical"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=en-US"
+    hrefLang="ja-JP"
+    rel="alternate"
+  />,
+  <link
+    href="https://tests.kohei.dev/posts/feed.xml?hl=en-US"
+    rel="alternate"
+    title="Blog post Atom feed (en-US)"
+    type="application/atom+xml"
+  />,
+  <script
+    type="application/ld+json"
+  >
+    {"@context":"https://schema.org","@type":"BlogBlogPosting","url":"https://tests.kohei.dev/?hl=en-US","name":"BLOG_POST_TITLE","headline":"BLOG_POST_TITLE","description":"BLOG_POST_SUMMARY","thumbnailUrl":"https://tests.kohei.dev/profile.jpg","image":"https://tests.kohei.dev/profile.jpg","myself":{"@type":"Person","name":"Kohei Asai","image":"https://tests.kohei.dev/profile.jpg","jobTitle":"Frontend Engineer","sameAs":["https://github.com/axross","https://linkedin.com/in/axross/","https://www.facebook.com/axrossio","https://www.instagram.com/axrossio/"]},"copyrightHolder":{"@type":"Person","name":"Kohei Asai","image":"https://tests.kohei.dev/profile.jpg","jobTitle":"Frontend Engineer","sameAs":["https://github.com/axross","https://linkedin.com/in/axross/","https://www.facebook.com/axrossio","https://www.instagram.com/axrossio/"]},"copyrightYear":"function getFullYear() { [native code] }","dateCreated":"2020-02-07T21:13:59.000Z","datePublished":"2020-02-07T21:13:59.000Z","dateModified":"2020-02-10T21:16:27.000Z","mainEntityOfPage":"https://tests.kohei.dev/?hl=en-US"}
+  </script>,
+  <meta
+    content="https://tests.kohei.dev/?hl=en-US"
+    property="og:url"
+  />,
+  <meta
+    content="article"
+    property="og:type"
+  />,
+  <meta
+    content="BLOG_POST_SUMMARY"
+    property="og:description"
+  />,
+  <meta
+    content="en-US"
+    property="og:locale"
+  />,
+  <meta
+    content="ja-JP"
+    property="og:locale:alternate"
+  />,
+  <meta
+    content="Kohei Asai"
+    property="og:site_name"
+  />,
+  <meta
+    content="BLOG_POST_TITLE | What Kohei Asai wrote"
+    property="og:title"
+  />,
+  <meta
+    content="https://tests.kohei.dev/profile.jpg"
+    property="og:image"
+  />,
+  <title>
+    404 Not Found
+  </title>,
+]
+`;
+
+exports[`<Head> when currentLocale="en-US" after the blog post is loaded if the blog post is successfully loaded pushes tags into <head> and they matches with the previous snapshots 1`] = `
+Array [
+  <meta
+    content="width=device-width,minimum-scale=1,initial-scale=1"
+    name="viewport"
+  />,
+  <meta
+    charSet="utf-8"
+  />,
+  <title>
+    BLOG_POST_TITLE | What Kohei Asai wrote
+  </title>,
+  <meta
+    content="BLOG_POST_SUMMARY"
+    name="description"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=en-US"
+    rel="canonical"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=en-US"
+    hrefLang="ja-JP"
+    rel="alternate"
+  />,
+  <link
+    href="https://tests.kohei.dev/posts/feed.xml?hl=en-US"
+    rel="alternate"
+    title="Blog post Atom feed (en-US)"
+    type="application/atom+xml"
+  />,
+  <script
+    type="application/ld+json"
+  >
+    {"@context":"https://schema.org","@type":"BlogBlogPosting","url":"https://tests.kohei.dev/?hl=en-US","name":"BLOG_POST_TITLE","headline":"BLOG_POST_TITLE","description":"BLOG_POST_SUMMARY","thumbnailUrl":"https://tests.kohei.dev/profile.jpg","image":"https://tests.kohei.dev/profile.jpg","myself":{"@type":"Person","name":"Kohei Asai","image":"https://tests.kohei.dev/profile.jpg","jobTitle":"Frontend Engineer","sameAs":["https://github.com/axross","https://linkedin.com/in/axross/","https://www.facebook.com/axrossio","https://www.instagram.com/axrossio/"]},"copyrightHolder":{"@type":"Person","name":"Kohei Asai","image":"https://tests.kohei.dev/profile.jpg","jobTitle":"Frontend Engineer","sameAs":["https://github.com/axross","https://linkedin.com/in/axross/","https://www.facebook.com/axrossio","https://www.instagram.com/axrossio/"]},"copyrightYear":"function getFullYear() { [native code] }","dateCreated":"2020-02-07T21:13:59.000Z","datePublished":"2020-02-07T21:13:59.000Z","dateModified":"2020-02-10T21:16:27.000Z","mainEntityOfPage":"https://tests.kohei.dev/?hl=en-US"}
+  </script>,
+  <meta
+    content="https://tests.kohei.dev/?hl=en-US"
+    property="og:url"
+  />,
+  <meta
+    content="article"
+    property="og:type"
+  />,
+  <meta
+    content="BLOG_POST_SUMMARY"
+    property="og:description"
+  />,
+  <meta
+    content="en-US"
+    property="og:locale"
+  />,
+  <meta
+    content="ja-JP"
+    property="og:locale:alternate"
+  />,
+  <meta
+    content="Kohei Asai"
+    property="og:site_name"
+  />,
+  <meta
+    content="BLOG_POST_TITLE | What Kohei Asai wrote"
+    property="og:title"
+  />,
+  <meta
+    content="https://tests.kohei.dev/profile.jpg"
+    property="og:image"
+  />,
+]
+`;
+
+exports[`<Head> when currentLocale="en-US" while loading the blog post pushes tags into <head> and they matches with the previous snapshots 1`] = `
+Array [
+  <meta
+    content="width=device-width,minimum-scale=1,initial-scale=1"
+    name="viewport"
+  />,
+  <meta
+    charSet="utf-8"
+  />,
+  <title>
+    Loading... | What Kohei Asai wrote
+  </title>,
+]
+`;
+
+exports[`<Head> when currentLocale="ja-JP" after the blog post is loaded if the blog post is not found pushes tags into <head> and they matches with the previous snapshots 1`] = `
+Array [
+  <meta
+    content="width=device-width,minimum-scale=1,initial-scale=1"
+    name="viewport"
+  />,
+  <meta
+    charSet="utf-8"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=en-US"
+    hrefLang="ja-JP"
+    rel="alternate"
+  />,
+  <link
+    href="https://tests.kohei.dev/posts/feed.xml?hl=en-US"
+    rel="alternate"
+    title="Blog post Atom feed (en-US)"
+    type="application/atom+xml"
+  />,
+  <meta
+    content="ja-JP"
+    property="og:locale:alternate"
+  />,
+  <meta
+    content="BLOG_POST_SUMMARY"
+    name="description"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=ja-JP"
+    rel="canonical"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=ja-JP"
+    hrefLang="en-US"
+    rel="alternate"
+  />,
+  <link
+    href="https://tests.kohei.dev/posts/feed.xml?hl=ja-JP"
+    rel="alternate"
+    title="Blog post Atom feed (ja-JP)"
+    type="application/atom+xml"
+  />,
+  <script
+    type="application/ld+json"
+  >
+    {"@context":"https://schema.org","@type":"BlogBlogPosting","url":"https://tests.kohei.dev/?hl=ja-JP","name":"BLOG_POST_TITLE","headline":"BLOG_POST_TITLE","description":"BLOG_POST_SUMMARY","thumbnailUrl":"https://tests.kohei.dev/profile.jpg","image":"https://tests.kohei.dev/profile.jpg","myself":{"@type":"Person","name":"Kohei Asai","image":"https://tests.kohei.dev/profile.jpg","jobTitle":"Frontend Engineer","sameAs":["https://github.com/axross","https://linkedin.com/in/axross/","https://www.facebook.com/axrossio","https://www.instagram.com/axrossio/"]},"copyrightHolder":{"@type":"Person","name":"Kohei Asai","image":"https://tests.kohei.dev/profile.jpg","jobTitle":"Frontend Engineer","sameAs":["https://github.com/axross","https://linkedin.com/in/axross/","https://www.facebook.com/axrossio","https://www.instagram.com/axrossio/"]},"copyrightYear":"function getFullYear() { [native code] }","dateCreated":"2020-02-07T21:13:59.000Z","datePublished":"2020-02-07T21:13:59.000Z","dateModified":"2020-02-10T21:16:27.000Z","mainEntityOfPage":"https://tests.kohei.dev/?hl=ja-JP"}
+  </script>,
+  <meta
+    content="https://tests.kohei.dev/?hl=ja-JP"
+    property="og:url"
+  />,
+  <meta
+    content="article"
+    property="og:type"
+  />,
+  <meta
+    content="BLOG_POST_SUMMARY"
+    property="og:description"
+  />,
+  <meta
+    content="ja-JP"
+    property="og:locale"
+  />,
+  <meta
+    content="en-US"
+    property="og:locale:alternate"
+  />,
+  <meta
+    content="Kohei Asai"
+    property="og:site_name"
+  />,
+  <meta
+    content="BLOG_POST_TITLE | What Kohei Asai wrote"
+    property="og:title"
+  />,
+  <meta
+    content="https://tests.kohei.dev/profile.jpg"
+    property="og:image"
+  />,
+  <title>
+    404 Not Found
+  </title>,
+]
+`;
+
+exports[`<Head> when currentLocale="ja-JP" after the blog post is loaded if the blog post is successfully loaded pushes tags into <head> and they matches with the previous snapshots 1`] = `
+Array [
+  <meta
+    content="width=device-width,minimum-scale=1,initial-scale=1"
+    name="viewport"
+  />,
+  <meta
+    charSet="utf-8"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=en-US"
+    hrefLang="ja-JP"
+    rel="alternate"
+  />,
+  <link
+    href="https://tests.kohei.dev/posts/feed.xml?hl=en-US"
+    rel="alternate"
+    title="Blog post Atom feed (en-US)"
+    type="application/atom+xml"
+  />,
+  <meta
+    content="ja-JP"
+    property="og:locale:alternate"
+  />,
+  <title>
+    BLOG_POST_TITLE | What Kohei Asai wrote
+  </title>,
+  <meta
+    content="BLOG_POST_SUMMARY"
+    name="description"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=ja-JP"
+    rel="canonical"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=ja-JP"
+    hrefLang="en-US"
+    rel="alternate"
+  />,
+  <link
+    href="https://tests.kohei.dev/posts/feed.xml?hl=ja-JP"
+    rel="alternate"
+    title="Blog post Atom feed (ja-JP)"
+    type="application/atom+xml"
+  />,
+  <script
+    type="application/ld+json"
+  >
+    {"@context":"https://schema.org","@type":"BlogBlogPosting","url":"https://tests.kohei.dev/?hl=ja-JP","name":"BLOG_POST_TITLE","headline":"BLOG_POST_TITLE","description":"BLOG_POST_SUMMARY","thumbnailUrl":"https://tests.kohei.dev/profile.jpg","image":"https://tests.kohei.dev/profile.jpg","myself":{"@type":"Person","name":"Kohei Asai","image":"https://tests.kohei.dev/profile.jpg","jobTitle":"Frontend Engineer","sameAs":["https://github.com/axross","https://linkedin.com/in/axross/","https://www.facebook.com/axrossio","https://www.instagram.com/axrossio/"]},"copyrightHolder":{"@type":"Person","name":"Kohei Asai","image":"https://tests.kohei.dev/profile.jpg","jobTitle":"Frontend Engineer","sameAs":["https://github.com/axross","https://linkedin.com/in/axross/","https://www.facebook.com/axrossio","https://www.instagram.com/axrossio/"]},"copyrightYear":"function getFullYear() { [native code] }","dateCreated":"2020-02-07T21:13:59.000Z","datePublished":"2020-02-07T21:13:59.000Z","dateModified":"2020-02-10T21:16:27.000Z","mainEntityOfPage":"https://tests.kohei.dev/?hl=ja-JP"}
+  </script>,
+  <meta
+    content="https://tests.kohei.dev/?hl=ja-JP"
+    property="og:url"
+  />,
+  <meta
+    content="article"
+    property="og:type"
+  />,
+  <meta
+    content="BLOG_POST_SUMMARY"
+    property="og:description"
+  />,
+  <meta
+    content="ja-JP"
+    property="og:locale"
+  />,
+  <meta
+    content="en-US"
+    property="og:locale:alternate"
+  />,
+  <meta
+    content="Kohei Asai"
+    property="og:site_name"
+  />,
+  <meta
+    content="BLOG_POST_TITLE | What Kohei Asai wrote"
+    property="og:title"
+  />,
+  <meta
+    content="https://tests.kohei.dev/profile.jpg"
+    property="og:image"
+  />,
+]
+`;
+
+exports[`<Head> when currentLocale="ja-JP" while loading the blog post pushes tags into <head> and they matches with the previous snapshots 1`] = `
+Array [
+  <meta
+    content="width=device-width,minimum-scale=1,initial-scale=1"
+    name="viewport"
+  />,
+  <meta
+    charSet="utf-8"
+  />,
+  <meta
+    content="BLOG_POST_SUMMARY"
+    name="description"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=en-US"
+    rel="canonical"
+  />,
+  <link
+    href="https://tests.kohei.dev/?hl=en-US"
+    hrefLang="ja-JP"
+    rel="alternate"
+  />,
+  <link
+    href="https://tests.kohei.dev/posts/feed.xml?hl=en-US"
+    rel="alternate"
+    title="Blog post Atom feed (en-US)"
+    type="application/atom+xml"
+  />,
+  <script
+    type="application/ld+json"
+  >
+    {"@context":"https://schema.org","@type":"BlogBlogPosting","url":"https://tests.kohei.dev/?hl=en-US","name":"BLOG_POST_TITLE","headline":"BLOG_POST_TITLE","description":"BLOG_POST_SUMMARY","thumbnailUrl":"https://tests.kohei.dev/profile.jpg","image":"https://tests.kohei.dev/profile.jpg","myself":{"@type":"Person","name":"Kohei Asai","image":"https://tests.kohei.dev/profile.jpg","jobTitle":"Frontend Engineer","sameAs":["https://github.com/axross","https://linkedin.com/in/axross/","https://www.facebook.com/axrossio","https://www.instagram.com/axrossio/"]},"copyrightHolder":{"@type":"Person","name":"Kohei Asai","image":"https://tests.kohei.dev/profile.jpg","jobTitle":"Frontend Engineer","sameAs":["https://github.com/axross","https://linkedin.com/in/axross/","https://www.facebook.com/axrossio","https://www.instagram.com/axrossio/"]},"copyrightYear":"function getFullYear() { [native code] }","dateCreated":"2020-02-07T21:13:59.000Z","datePublished":"2020-02-07T21:13:59.000Z","dateModified":"2020-02-10T21:16:27.000Z","mainEntityOfPage":"https://tests.kohei.dev/?hl=en-US"}
+  </script>,
+  <meta
+    content="https://tests.kohei.dev/?hl=en-US"
+    property="og:url"
+  />,
+  <meta
+    content="article"
+    property="og:type"
+  />,
+  <meta
+    content="BLOG_POST_SUMMARY"
+    property="og:description"
+  />,
+  <meta
+    content="en-US"
+    property="og:locale"
+  />,
+  <meta
+    content="ja-JP"
+    property="og:locale:alternate"
+  />,
+  <meta
+    content="Kohei Asai"
+    property="og:site_name"
+  />,
+  <meta
+    content="BLOG_POST_TITLE | What Kohei Asai wrote"
+    property="og:title"
+  />,
+  <meta
+    content="https://tests.kohei.dev/profile.jpg"
+    property="og:image"
+  />,
+  <title>
+    読み込み中... | What Kohei Asai wrote
+  </title>,
+]
+`;
