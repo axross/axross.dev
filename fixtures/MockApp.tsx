@@ -1,4 +1,5 @@
 import { action } from "@storybook/addon-actions";
+import { HeadManagerContext } from "next/dist/next-server/lib/head-manager-context";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import Router, { NextRouter } from "next/router";
 import * as React from "react";
@@ -11,6 +12,7 @@ interface Props {
   currentLocale?: LocaleString;
   availableLocales?: LocaleString[];
   isLoading?: boolean;
+  onHeadChange?: (elements: React.ReactElement[]) => void;
   children: React.ReactNode;
 }
 
@@ -19,6 +21,7 @@ export default function MockApp({
   currentLocale = DEFAULT_CURRENT_LOCALE,
   availableLocales = DEFAULT_AVAILABLE_LOCALES,
   isLoading = DEFAULT_IS_LOADING,
+  onHeadChange = () => {},
   children,
 }: Props) {
   if (!url) {
@@ -76,15 +79,28 @@ export default function MockApp({
       Router.router = previousRouter;
     };
   }, []);
+
+  const headElementMap = React.useMemo(() => new Map<string, React.ReactElement>(), []);
+  const _onHeadChange = React.useMemo(() => (elements: React.ReactElement[]) => {
+    headElementMap.clear();
+
+    for (const element of elements) {
+      headElementMap.set(`${element.key}`, element);
+    }
+
+    onHeadChange(Array.from(headElementMap.values()));
+  }, []);
   
   return (
-    <URLContext.Provider value={url}>
-      <RouterContext.Provider value={router}>
-        <LocaleContext.Provider value={{ currentLocale, availableLocales, isLoading }}>
-          {children}
-        </LocaleContext.Provider>
-      </RouterContext.Provider>
-    </URLContext.Provider>
+    <HeadManagerContext.Provider value={_onHeadChange}>
+      <URLContext.Provider value={url}>
+        <RouterContext.Provider value={router}>
+          <LocaleContext.Provider value={{ currentLocale, availableLocales, isLoading }}>
+            {children}
+          </LocaleContext.Provider>
+        </RouterContext.Provider>
+      </URLContext.Provider>
+    </HeadManagerContext.Provider>
   );
 }
 
