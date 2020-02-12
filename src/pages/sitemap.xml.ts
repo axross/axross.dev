@@ -1,8 +1,8 @@
 import { NextPageContext } from "next";
 import * as Contentful from 'contentful';
 import * as xmljs from "xml-js";
-import ContentfulBlogPostApi from "../repositories/ContentfulBlogPostApi";
-import ContentfulLocaleApi from "../repositories/ContentfulLocaleApi";
+import { AVAILABLE_LOCALES } from "../constant/locale";
+import { createGetAllBlogPosts } from "../repositories/blogPost/contentful/getAllBlogPosts";
 
 export default function SitemapXml() {
   return null;
@@ -24,12 +24,9 @@ SitemapXml.getInitialProps = async ({ req, res }: NextPageContext) => {
     space: process.env.CONTENTFUL_SPACE!,
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
   });
-  const localeApi = new ContentfulLocaleApi(contentful);
-  const blogPostApi = new ContentfulBlogPostApi(contentful);
+  const getAllBlogPosts = createGetAllBlogPosts(contentful);
 
-  const availableLocales = await localeApi.getAllAvailableOnes();
-
-  const topPages = availableLocales.map(locale => ({
+  const topPages = AVAILABLE_LOCALES.map(locale => ({
     loc: {
       _text: (() => {
         const url = new URL("/", process.env.ORIGIN);
@@ -53,8 +50,8 @@ SitemapXml.getInitialProps = async ({ req, res }: NextPageContext) => {
 
   const blogPostPages = [];
 
-  for (const locale of availableLocales) {
-    const blogPosts = await blogPostApi.getAllByLocale(locale);
+  for (const locale of AVAILABLE_LOCALES) {
+    const blogPosts = await getAllBlogPosts({ locale });
 
     for (const blogPost of blogPosts) {
       const url = new URL("/", process.env.ORIGIN);
