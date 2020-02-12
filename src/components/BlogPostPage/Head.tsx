@@ -24,7 +24,7 @@ export default function Head({ blogPost, blogPostLoading }: Props) {
   if (blogPostLoading) {
     return (
       <NextHead>
-        <title>
+        <title key="title">
           {titleLoading}
         </title>
       </NextHead>
@@ -34,7 +34,7 @@ export default function Head({ blogPost, blogPostLoading }: Props) {
   if (!blogPost) {
     return (
       <NextHead>
-        <title>
+        <title key="title">
           {titleNotFound}
         </title>
       </NextHead>
@@ -43,7 +43,7 @@ export default function Head({ blogPost, blogPostLoading }: Props) {
 
   return (
     <NextHead>
-      <title>{title}</title>
+      <title key="title">{title}</title>
       <meta name="description" content={blogPost.summary} key="description" />
       <link rel="canonical" href={canonicalURL.href} key="canonical" />
 

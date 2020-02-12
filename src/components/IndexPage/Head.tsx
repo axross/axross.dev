@@ -15,7 +15,7 @@ export default function Head() {
 
   return (
     <NextHead>
-      <title>{title}</title>
+      <title key="title">{title}</title>
       <meta name="description" content={description} key="description" />
       <link rel="canonical" href={canonicalURL.href} key="canonical" />
 
