@@ -19,7 +19,7 @@ interface Props extends React.Attributes {
 export default function BlogPostPage({ prefetchedBlogPost }: Props) {
   const router = useRouter();
   const blogPostId = router.query.postId;
-  const [blogPost, isBlogPostLoading] = useBlogPost(blogPostId.toString());
+  const [blogPost, isBlogPostLoading] = useBlogPost({ id: blogPostId.toString() });
   useLoggingPageView(blogPost, isBlogPostLoading);
 
   return (
