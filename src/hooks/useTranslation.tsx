@@ -3,7 +3,7 @@ import * as React from "react";
 import dictionary from "../dictionary";
 import useLocale from "./useLocale";
 
-export default function useTranslation(key: string, args: Record<string, string | number> = {}): string {
+export default function useTranslation(key: string, args: Record<string, any> = {}): string {
   const { currentLocale } = useLocale();
 
   // TODO: https://github.com/axross/kohei.dev/issues/206
