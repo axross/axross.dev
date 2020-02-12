@@ -6,7 +6,7 @@ import useLocale from "./useLocale";
 export default function useTranslation(key: string, args: Record<string, string | number> = {}): string {
   const { currentLocale } = useLocale();
 
-  // TODO:
+  // TODO: https://github.com/axross/kohei.dev/issues/206
   // bug possiblity:
   // JSON.stringify(args) returns different values if the args' key order is not the same
   return React.useMemo(() => {
