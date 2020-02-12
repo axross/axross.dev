@@ -1,57 +1,70 @@
 import * as React from "react";
 import { act, create } from "react-test-renderer";
-import { RepositoryContext } from "../../../hooks/useRepository";
-import useWebpageSummary from "./useWebpageSummary";
+import MockApp from "../../../../fixtures/MockApp";
 
 describe("useWebpageSummary()", () => {
-  it("triggers rendering twice with the values [null, true] -> [WebpageSummary, false] after getting the blog posts from API", async () => {
-    const webpageSummary = Symbol();
-    const url: any = Symbol();
-    const webpageSummaryApi = { getByURL: jest.fn(() => Promise.resolve(webpageSummary)) };
-    const returnValues: any[] = [];
+  const url = Symbol("URL");
+  const locale = "LOCALE";
+  const webpageSummary = Symbol("WEBPAGE_SUMMARY");
+  const isLoading = Symbol("IS_LOADING");
+  const getWebpageSummary = Symbol("GET_WEBPAGE_SUMMARY");
+  const useQuery = jest.fn()
+    .mockName("useQuery")
+    .mockReturnValue({ data: webpageSummary, isLoading });
 
-    const Component = () => {
-      returnValues.push(useWebpageSummary(url));
+  let useWebpageSummary: typeof import("./useWebpageSummary").default;
 
-      return null;
-    }
+  beforeAll(async () => {
+    jest.mock("react-query", () => ({ useQuery }));
 
-    await act(async () => {
-      create(
-        <RepositoryContext.Provider value={{ webpageSummaryApi } as any}>
-          <Component />
-        </RepositoryContext.Provider>
-      );
-    });
-
-    expect(returnValues.length).toBe(2);
-    expect(returnValues[0]).toEqual([null, true]);
-    expect(returnValues[1]).toEqual([webpageSummary, false]);
-    expect(webpageSummaryApi.getByURL).toHaveBeenCalledWith(url);
+    useWebpageSummary = (await import("./useWebpageSummary")).default;
   });
 
-  it("triggers rendering twice with the values [null, true] -> [null, false] after the API thrown", async () => {
-    const url: any = Symbol();
-    const webpageSummaryApi = { getByURL: jest.fn(() => Promise.reject(new Error())) };
-    const returnValues: any[] = [];
+  afterEach(() => {
+    useQuery.mockClear();
+  });
 
-    const Component = () => {
-      returnValues.push(useWebpageSummary(url));
+  it("calls useQuery() with the key, current locale, getWebpageSummary() and initial data", async () => {
+    function Component() {
+      useWebpageSummary({ url } as any);
 
       return null;
-    }
+    };
 
     await act(async () => {
       create(
-        <RepositoryContext.Provider value={{ webpageSummaryApi } as any}>
+        <MockApp
+          repositories={{ getWebpageSummary } as any}
+          currentLocale={locale}
+        >
           <Component />
-        </RepositoryContext.Provider>
+        </MockApp>
       );
     });
 
-    expect(returnValues.length).toBe(2);
-    expect(returnValues[0]).toEqual([null, true]);
-    expect(returnValues[1]).toEqual([null, false]);
-    expect(webpageSummaryApi.getByURL).toHaveBeenCalledWith(url);
+    expect(useQuery).toHaveBeenCalledWith(["webpage-summary", { url }], getWebpageSummary, { initialData: null });
+  });
+
+  it("returns [data, isLoading] that are the received values from useQuery()", async () => {
+    let returnValue: any;
+
+    function Component() {
+      returnValue = useWebpageSummary({ url } as any);
+
+      return null;
+    };
+
+    await act(async () => {
+      create(
+        <MockApp
+        repositories={{ getWebpageSummary } as any}
+          currentLocale={locale}
+        >
+          <Component />
+        </MockApp>
+      );
+    });
+
+    expect(returnValue).toEqual([webpageSummary, isLoading]);
   });
 });
