@@ -15,7 +15,7 @@ interface Props extends React.Attributes {
 }
 
 export default function EmbededLink({ url, ...props }: Props) {
-  const [webpageSummary, isWebpageSummaryLoading] = useWebpageSummary(new URL(url));
+  const [webpageSummary, isWebpageSummaryLoading] = useWebpageSummary({ url: new URL(url) });
 
   // show the loader even if retrieving the webpage summary failed
   // and report to sentry.io

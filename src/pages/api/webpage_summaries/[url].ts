@@ -1,6 +1,6 @@
 import * as crypto from "crypto";
 import { NextApiRequest, NextApiResponse } from "next";
-import ScrapingWebpageSummaryApi from "../../../repositories/ScrapingWebpageSummaryApi";
+import getWebpageSummary from "../../../repositories/webpageSummary/scraping/getWebpageSummary";
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   if (req.method !== "GET") {
@@ -20,7 +20,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse):
   }
 
   try {
-    const webpageSummary = await new ScrapingWebpageSummaryApi().getByURL(new URL(url.toString()));
+    const webpageSummary = await getWebpageSummary({ url: new URL(url.toString()) });
 
     res.statusCode = 200;
     res.setHeader("content-type", "application/json; charset=UTF-8");
