@@ -1,6 +1,5 @@
 import * as React from "react";
-import RawText, { Typeface } from "../RawText";
-import RawTextThemeContext from "../RawTextThemeContext";
+import RawText, { RawTextThemeContext, Typeface } from "../RawText";
 
 interface Props {
   children?: string;

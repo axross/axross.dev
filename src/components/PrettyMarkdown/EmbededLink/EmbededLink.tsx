@@ -1,13 +1,13 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { DARK_COLOR, LIGHT_COLOR } from "../../constant/color";
-import { DARK_MODE, MOBILE } from "../../constant/mediaQuery";
-import ThemedColor from "../../types/ThemedColor";
-import ExternalLink from "../ExternalLink";
-import RawText from "../RawText";
-import EmbededLinkLoader from './EmbededLink/EmbededLinkLoader';
-import FallbackImage from "./EmbededLink/FallbackImage";
-import useWebpageSummary from "./EmbededLink/useWebpageSummary";
+import { DARK_COLOR, LIGHT_COLOR } from "../../../constant/color";
+import { DARK_MODE, MOBILE } from "../../../constant/mediaQuery";
+import ThemedColor from "../../../types/ThemedColor";
+import ExternalLink from "../../ExternalLink";
+import RawText from "../../RawText";
+import EmbededLinkLoader from './EmbededLinkLoader';
+import FallbackImage from "./FallbackImage";
+import useWebpageSummary from "./useWebpageSummary";
 
 interface Props extends React.Attributes {
   url: string;

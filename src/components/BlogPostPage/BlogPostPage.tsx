@@ -1,15 +1,15 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import * as React from "react";
-import { MOBILE } from "../constant/mediaQuery";
-import BlogPost from "../entities/BlogPost";
-import HeadBar from "./HeadBar";
-import Article from "./BlogPostPage/Article";
-import ArtcileLoader from "./BlogPostPage/ArticleLoader";
-import ArticleNotFound from "./BlogPostPage/ArticleNotFound";
-import Head from "./BlogPostPage/Head";
-import useBlogPost from "./BlogPostPage/useBlogPost";
-import useLoggingPageView from "./BlogPostPage/useLoggingPageView";
+import { MOBILE } from "../../constant/mediaQuery";
+import BlogPost from "../../entities/BlogPost";
+import HeadBar from "../HeadBar";
+import Article from "./Article";
+import ArtcileLoader from "./ArticleLoader";
+import ArticleNotFound from "./ArticleNotFound";
+import Head from "./Head";
+import useBlogPost from "./useBlogPost";
+import useLoggingPageView from "./useLoggingPageView";
 
 interface Props extends React.Attributes {
   prefetchedBlogPost?: BlogPost;

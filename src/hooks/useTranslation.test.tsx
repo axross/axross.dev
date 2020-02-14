@@ -1,5 +1,5 @@
 import * as React from "react";
-import { act, create } from "react-test-renderer";
+import { ReactTestRenderer, act, create } from "react-test-renderer";
 import { LocaleContext } from "./useLocale";
 
 describe("useTranslation()", () => {
@@ -53,7 +53,7 @@ describe("useTranslation()", () => {
     });
 
     it("passes the given arguments to IntlMessageFormat#format()", async () => {
-      const args = { arg1: Symbol("ARG_1"), arg2: Symbol("ARG_2") }
+      const args = { arg1: "ARG_1", arg2: "ARG_2" };
       
       function Component() {
         useTranslation(dictionaryKey, args);
@@ -90,6 +90,71 @@ describe("useTranslation()", () => {
       });
 
       expect(returnedValue).toBe(formatReturnValue);
+    });
+
+    it("memoizes the formated messages", async () => {
+      function Component() {
+        useTranslation(dictionaryKey);
+
+        return null;
+      }
+
+      let renderer: ReactTestRenderer;
+
+      await act(async () => {
+        renderer = create(
+          <LocaleContext.Provider value={{ currentLocale: locale } as any}>
+            <Component />
+          </LocaleContext.Provider>
+        );
+      });
+
+      await act(async () => {
+        renderer.update(
+          <LocaleContext.Provider value={{ currentLocale: locale } as any}>
+            <Component />
+          </LocaleContext.Provider>
+        );
+      });
+
+      expect(IntlMessageFormat).toHaveBeenCalledTimes(1);
+      expect(format).toHaveBeenCalledTimes(1);
+    });
+
+    it("calls new IntlMessageFormat() and IntlMessageFormat#format() even if the formated message is memoized when different args are used", async () => {
+      const firstArg = { foo: "ARG_1" };
+      const secondArg = { foo: "ARG_2" };
+
+      function Component({ args }: { args: any }) {
+        useTranslation(dictionaryKey, args);
+
+        return null;
+      }
+
+      let renderer: ReactTestRenderer;
+
+      await act(async () => {
+        renderer = create(
+          <LocaleContext.Provider value={{ currentLocale: locale } as any}>
+            <Component args={firstArg} />
+          </LocaleContext.Provider>
+        );
+      });
+
+      await act(async () => {
+        renderer.update(
+          <LocaleContext.Provider value={{ currentLocale: locale } as any}>
+            <Component args={secondArg} />
+          </LocaleContext.Provider>
+        );
+      });
+
+      expect(IntlMessageFormat).toHaveBeenCalledTimes(2);
+      expect(IntlMessageFormat).toHaveBeenNthCalledWith(1, dictionaryValue);
+      expect(IntlMessageFormat).toHaveBeenNthCalledWith(2, dictionaryValue);
+      expect(format).toHaveBeenCalledTimes(2);
+      expect(format).toHaveBeenNthCalledWith(1, firstArg);
+      expect(format).toHaveBeenNthCalledWith(2, secondArg);
     });
   });
 
