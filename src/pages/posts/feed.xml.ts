@@ -2,8 +2,8 @@ import * as Contentful from 'contentful';
 import { NextPageContext } from "next";
 import * as xmljs from "xml-js";
 import { MY_NAME } from "../../constant/data";
-import ContentfulBlogPostApi from "../../repositories/ContentfulBlogPostApi";
 import { AVAILABLE_LOCALES } from '../../constant/locale';
+import { createGetAllBlogPosts } from "../../repositories/blogPost/contentful/getAllBlogPosts";
 
 export default function FeedXml() {
   return null;
@@ -26,7 +26,7 @@ FeedXml.getInitialProps = async ({ req, res }: NextPageContext) => {
     space: process.env.CONTENTFUL_SPACE!,
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
   });
-  const blogPostApi = new ContentfulBlogPostApi(contentful);
+  const getAllBlogPosts = createGetAllBlogPosts(contentful);
 
   if (currentLocale === null || !AVAILABLE_LOCALES.includes(currentLocale)) {
     res.statusCode = 404;
@@ -38,7 +38,7 @@ FeedXml.getInitialProps = async ({ req, res }: NextPageContext) => {
   const websiteURL = new URL("/", process.env.ORIGIN);
   websiteURL.searchParams.set("hl", currentLocale);
 
-  const blogPosts = await blogPostApi.getAllByLocale(currentLocale);
+  const blogPosts = await getAllBlogPosts({ locale: currentLocale });
 
   const xml = xmljs.js2xml(
     {

@@ -6,9 +6,11 @@ import * as React from "react";
 import LocaleString from "../src/entities/LocaleString";
 import { LocaleContext } from "../src/hooks/useLocale";
 import { URLContext } from "../src/hooks/useURL";
+import { Repositories, RepositoryContext } from "../src/hooks/useRepository";
 
 interface Props {
   url?: URL;
+  repositories?: Partial<Repositories>
   currentLocale?: LocaleString;
   availableLocales?: LocaleString[];
   isLoading?: boolean;
@@ -18,6 +20,7 @@ interface Props {
 
 export default function MockApp({
   url,
+  repositories = {},
   currentLocale = DEFAULT_CURRENT_LOCALE,
   availableLocales = DEFAULT_AVAILABLE_LOCALES,
   isLoading = DEFAULT_IS_LOADING,
@@ -95,9 +98,11 @@ export default function MockApp({
     <HeadManagerContext.Provider value={_onHeadChange}>
       <URLContext.Provider value={url}>
         <RouterContext.Provider value={router}>
-          <LocaleContext.Provider value={{ currentLocale, availableLocales, isLoading }}>
-            {children}
-          </LocaleContext.Provider>
+          <RepositoryContext.Provider value={repositories as any}>
+            <LocaleContext.Provider value={{ currentLocale, availableLocales, isLoading }}>
+              {children}
+            </LocaleContext.Provider>
+          </RepositoryContext.Provider>
         </RouterContext.Provider>
       </URLContext.Provider>
     </HeadManagerContext.Provider>

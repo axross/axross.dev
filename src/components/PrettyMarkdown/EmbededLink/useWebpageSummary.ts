@@ -1,16 +1,17 @@
-import * as React from "react";
+import { useQuery } from "react-query";
 import WebpageSummary from "../../../entities/WebpageSummary";
 import useRepository from "../../../hooks/useRepository";
 
-export default function useWebpageSummary(url: URL): [WebpageSummary | null, boolean] {
-  const { webpageSummaryApi } = useRepository();
-  const [[webpageSummary, isLoading], set] = React.useState<[WebpageSummary | null, boolean]>([null, true]);
+export default function useWebpageSummary({ url }: { url: URL }): [WebpageSummary | null, boolean] {
+  const { getWebpageSummary } = useRepository();
 
-  React.useEffect(() => {
-    webpageSummaryApi.getByURL(url)
-      .then(webpageSummary => set([webpageSummary, false]))
-      .catch(() => set([null, false]));
-  }, [url.href]);
+  const { data: websitePurpose, isLoading } = useQuery(
+  // TODO:
+  // send error to sentry later
+    ["webpage-summary", { url }],
+    getWebpageSummary,
+    { initialData: null },
+  );
 
-  return [webpageSummary, isLoading];
+  return [websitePurpose as null, isLoading];
 }

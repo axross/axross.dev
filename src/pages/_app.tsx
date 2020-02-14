@@ -7,15 +7,11 @@ import LocaleString from "../entities/LocaleString";
 import { LocaleContext } from "../hooks/useLocale";
 import { RepositoryContext } from "../hooks/useRepository";
 import { URLContext } from "../hooks/useURL";
-import ContentfulBioApi from "../repositories/ContentfulBioApi";
-import ContentfulBlogPostApi from "../repositories/ContentfulBlogPostApi";
-import ContentfulLocaleApi from "../repositories/ContentfulLocaleApi";
-import ContentfulWebsitePurposeApi from "../repositories/ContentfulWebsitePurposeApi";
-import FunctionWebpageSummaryApi from "../repositories/FunctionWebpageSummaryApi";
-import MemoryBioCache from "../repositories/MemoryBioCacheApi";
-import MemoryBlogPostCache from "../repositories/MemoryBlogPostCache";
-import MemoryBlogPostListCache from "../repositories/MemoryBlogPostListCache";
-import MemoryWebsitePurposeCache from "../repositories/MemoryWebsitePurposeCache";
+import { createGetBio } from "../repositories/bio/contentful/getBio";
+import { createGetAllBlogPosts } from "../repositories/blogPost/contentful/getAllBlogPosts";
+import { createGetBlogPost } from "../repositories/blogPost/contentful/getBlogPost";
+import getWebpageSummary from "../repositories/webpageSummary/api/getWebpageSummary";
+import { createGetWebsitePurpose } from "../repositories/websitePurpose/contentful/getWebsitePurpose";
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const url = new URL(router.asPath, process.env.ORIGIN);
@@ -29,15 +25,11 @@ export default function App({ Component, pageProps, router }: AppProps) {
       : process.env.CONTENTFUL_ACCESS_TOKEN!,
   }), []);
   const repositories = {
-    bioApi: React.useMemo(() => new ContentfulBioApi(contentful), []),
-    blogPostApi: React.useMemo(() => new ContentfulBlogPostApi(contentful), []),
-    localeApi: React.useMemo(() => new ContentfulLocaleApi(contentful), []),
-    websitePurposeApi: React.useMemo(() => new ContentfulWebsitePurposeApi(contentful), []),
-    webpageSummaryApi: React.useMemo(() => new FunctionWebpageSummaryApi(), []),
-    bioCache: React.useMemo(() => new MemoryBioCache(), []),
-    blogPostCache: React.useMemo(() => new MemoryBlogPostCache(), []),
-    blogPostListCache: React.useMemo(() => new MemoryBlogPostListCache(), []),
-    websitePurposeCache: React.useMemo(() => new MemoryWebsitePurposeCache(), []),
+    getAllBlogPosts: createGetAllBlogPosts(contentful),
+    getBio: createGetBio(contentful),
+    getBlogPost: createGetBlogPost(contentful),
+    getWebpageSummary,
+    getWebsitePurpose: createGetWebsitePurpose(contentful),
   };
   const currentLocale = url.searchParams.get("hl")!;
 

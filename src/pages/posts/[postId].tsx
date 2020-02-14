@@ -2,7 +2,7 @@ import * as Contentful from "contentful";
 import { NextPageContext } from "next";
 import * as React from "react";
 import BlogPost from "../../entities/BlogPost";
-import ContentfulBlogPostApi from "../../repositories/ContentfulBlogPostApi";
+import { createGetBlogPost } from "../../repositories/blogPost/contentful/getBlogPost";
 import BlogPostPage from "../../components/BlogPostPage";
 
 interface Props {
@@ -26,8 +26,8 @@ Page.getInitialProps = async ({ query, asPath, req }: NextPageContext): Promise<
       space: process.env.CONTENTFUL_SPACE!,
       accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
     });
-    const blogPostApi = new ContentfulBlogPostApi(contentful);
-    const blogPost = await blogPostApi.getByIdAndLocale(query.postId.toString(), currentLocale);
+    const getBlogPost = createGetBlogPost(contentful);
+    const blogPost = await getBlogPost({ id: query.postId.toString(), locale: currentLocale });
 
     return { blogPostJSON: serializeBlogPost(blogPost) };
   }

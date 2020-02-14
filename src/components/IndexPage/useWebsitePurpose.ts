@@ -1,42 +1,18 @@
-import * as React from "react";
+import { useQuery } from "react-query";
 import useLocale from "../../hooks/useLocale";
 import useRepository from "../../hooks/useRepository";
 
 export default function useWebsitePurpose(): [string | null, boolean] {
-  type State = [string | null, boolean];
+  const { getWebsitePurpose } = useRepository();
+  const { currentLocale: locale } = useLocale();
 
-  const { websitePurposeApi, websitePurposeCache } = useRepository();
-  const { currentLocale } = useLocale();
-  const [[websitePurpose, isLoading], set] = React.useState<State>(() => {
-    if (websitePurposeCache.has(currentLocale)) {
-      return [websitePurposeCache.get(currentLocale), false];
-    }
+  // TODO:
+  // catch error and send it to Sentry later
+  const { data: websitePurpose, isLoading } = useQuery(
+    ["website-purpose", { locale }],
+    getWebsitePurpose,
+    { initialData: null },
+  );
 
-    return [null, true];
-  });
-
-  React.useEffect(() => {
-    if (websitePurposeCache.has(currentLocale)) {
-      const nextBlogPostCache = websitePurposeCache.get(currentLocale);
-
-      if (nextBlogPostCache !== websitePurpose) {
-        set([nextBlogPostCache, false]);
-      }
-    } else {
-      if (!isLoading) {
-        set([websitePurpose, true]);
-      }
-
-      websitePurposeApi
-        .getByLocale(currentLocale)
-        .then(websitePurpose => {
-          websitePurposeCache.set(currentLocale, websitePurpose);
-
-          set([websitePurpose, false]);
-        })
-        .catch(() => set([null, false]));
-    }
-  }, [currentLocale]);
-
-  return [websitePurpose, isLoading];
+  return [websitePurpose as null, isLoading];
 }

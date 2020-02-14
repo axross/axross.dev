@@ -24,6 +24,7 @@
     "react": "^16.12.0",
     "react-content-loader": "^4.3.4",
     "react-dom": "^16.12.0",
+    "react-query": "^0.3.24",
     "xml-js": "^1.6.11"
   },
   "devDependencies": {
