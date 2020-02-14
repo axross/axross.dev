@@ -1,20 +1,20 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import HeadBar from "../components/HeadBar";
-import { MOBILE } from "../constant/mediaQuery";
-import FirstNBlogPostList from "./IndexPage/FirstNBlogPostList";
-import FirstNBlogPostListHeading from "./IndexPage/FirstNBlogPostListHeading";
-import FirstNBlogPostListLoader from "./IndexPage/FirstNBlogPostListLoader";
-import Head from "./IndexPage/Head";
-import WebsitePurpose from "./IndexPage/WebsitePurpose";
-import WebsitePurposeHeading from "./IndexPage/WebsitePurposeHeading";
-import WebsitePurposeLoader from "./IndexPage/WebsitePurposeLoader";
-import Whoami from "./IndexPage/Whoami";
-import WhoamiLoader from "./IndexPage/WhoamiLoader";
-import useBio from "./IndexPage/useBio";
-import useBlogPosts from "./IndexPage/useBlogPosts";
-import useLoggingPageView from "./IndexPage/useLoggingPageView";
-import useWebsitePurpose from "./IndexPage/useWebsitePurpose";
+import HeadBar from "../HeadBar";
+import { MOBILE } from "../../constant/mediaQuery";
+import FirstNBlogPostList from "./FirstNBlogPostList";
+import FirstNBlogPostListHeading from "./FirstNBlogPostListHeading";
+import FirstNBlogPostListLoader from "./FirstNBlogPostListLoader";
+import Head from "./Head";
+import WebsitePurpose from "./WebsitePurpose";
+import WebsitePurposeHeading from "./WebsitePurposeHeading";
+import WebsitePurposeLoader from "./WebsitePurposeLoader";
+import Whoami from "./Whoami";
+import WhoamiLoader from "./WhoamiLoader";
+import useBio from "./useBio";
+import useBlogPosts from "./useBlogPosts";
+import useLoggingPageView from "./useLoggingPageView";
+import useWebsitePurpose from "./useWebsitePurpose";
 
 interface Props extends React.Attributes {
   className?: string;

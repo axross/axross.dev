@@ -1,6 +1,6 @@
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
 import * as React from "react";
-import RawTextThemeContext, { ThemedColor } from "./RawTextThemeContext";
+import { RawTextThemeContext, ThemedColor } from "./RawText";
 
 export interface Props extends NextLinkProps {
   className?: string;

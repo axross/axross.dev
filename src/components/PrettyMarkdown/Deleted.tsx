@@ -1,6 +1,5 @@
 import * as React from "react";
-import RawText from "../RawText";
-import RawTextThemeContext from "../RawTextThemeContext";
+import RawText, { RawTextThemeContext } from "../RawText";
 
 interface Props extends React.Attributes {
   className?: string;

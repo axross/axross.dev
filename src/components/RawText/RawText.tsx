@@ -1,13 +1,15 @@
 import { css, SerializedStyles } from "@emotion/core";
 import styled from "@emotion/styled";
 import * as React from "react";
-import { MOBILE, DARK_MODE } from "../constant/mediaQuery";
-import { LIGHT_COLOR, DARK_COLOR } from "../constant/color";
-import ThemedColor from "../types/ThemedColor";
-import LazyCSS from "./LazyCSS";
+import { MOBILE, DARK_MODE } from "../../constant/mediaQuery";
+import { LIGHT_COLOR, DARK_COLOR } from "../../constant/color";
+import ThemedColor from "../../types/ThemedColor";
+import LazyCSS from "../LazyCSS";
 import RawTextThemeContext from "./RawTextThemeContext";
-
-export { default as ThemedColor } from "../types/ThemedColor";
+import TextAlignment from "./TextAlignment";
+import TextLineSize from "./TextLineSize";
+import TextSize from "./TextSize";
+import Typeface from "./Typeface";
 
 export interface Props extends React.Attributes {
   color?: ThemedColor;
@@ -25,33 +27,6 @@ export interface Props extends React.Attributes {
   lineThrough?: boolean;
   className?: string;
   children?: string;
-}
-
-export enum Typeface {
-  body,
-  headline,
-  monospace,
-}
-
-export enum TextSize {
-  giantic,
-  huge,
-  large,
-  larger,
-  default,
-  small,
-}
-
-export enum TextLineSize {
-  default,
-  large
-}
-
-export enum TextAlignment {
-  default = "inherit",
-  start = "start",
-  end = "end",
-  center = "center"
 }
 
 /**

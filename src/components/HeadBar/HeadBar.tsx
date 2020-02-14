@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { MOBILE } from "../constant/mediaQuery";
-import useLocale from "../hooks/useLocale";
-import LocaleSwitcher from "./HeadBar/LocaleSwitcher";
-import Logo from "./HeadBar/Logo";
-import Link from "./Link";
+import { MOBILE } from "../../constant/mediaQuery";
+import useLocale from "../../hooks/useLocale";
+import LocaleSwitcher from "./LocaleSwitcher";
+import Logo from "./Logo";
+import Link from "../Link";
 
 export interface Props extends React.Attributes {
   noLogo?: boolean;

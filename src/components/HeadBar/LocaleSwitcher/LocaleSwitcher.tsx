@@ -1,7 +1,7 @@
 import * as React from "react";
-import useLocale from "../../hooks/useLocale";
-import ActualLocaleSwitcher from "./LocaleSwitcher/ActualLocaleSwitcher";
-import LocaleSwitcherLoader from "./LocaleSwitcher/LocaleSwitcherLoader";
+import useLocale from "../../../hooks/useLocale";
+import ActualLocaleSwitcher from "./ActualLocaleSwitcher";
+import LocaleSwitcherLoader from "./LocaleSwitcherLoader";
 
 interface Props extends React.Attributes {
   className?: string;

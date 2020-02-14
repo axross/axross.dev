@@ -1,21 +1,20 @@
 import MDX from "@mdx-js/runtime";
 import * as React from "react";
-import Blockquote from "./PrettyMarkdown/Blockquote";
-import CodeBlock from "./PrettyMarkdown/CodeBlock";
-import Emphasis from "./PrettyMarkdown/Emphasis";
-import { Heading1, Heading2, Heading3, Heading4, Heading5, Heading6 } from "./PrettyMarkdown/Heading";
-import InlineCode from "./PrettyMarkdown/InlineCode";
-import MarkdownLink from "./PrettyMarkdown/MarkdownLink";
-import Media from "./PrettyMarkdown/Media";
-import OrderedList from "./PrettyMarkdown/OrderedList";
-import Paragraph from "./PrettyMarkdown/Paragraph";
-import Strong from "./PrettyMarkdown/Strong";
-import UnorderedList from "./PrettyMarkdown/UnorderedList";
-import Deleted from "./PrettyMarkdown/Deleted";
-import ListItem from "./PrettyMarkdown/ListItem";
-import EmbededLink from "./PrettyMarkdown/EmbededLink";
-import RawText, { TextLineSize } from "./RawText";
-import RawTextThemeContext from "./RawTextThemeContext"
+import Blockquote from "./Blockquote";
+import CodeBlock from "./CodeBlock";
+import Emphasis from "./Emphasis";
+import { Heading1, Heading2, Heading3, Heading4, Heading5, Heading6 } from "./Heading";
+import InlineCode from "./InlineCode";
+import MarkdownLink from "./MarkdownLink";
+import Media from "./Media";
+import OrderedList from "./OrderedList";
+import Paragraph from "./Paragraph";
+import Strong from "./Strong";
+import UnorderedList from "./UnorderedList";
+import Deleted from "./Deleted";
+import ListItem from "./ListItem";
+import EmbededLink from "./EmbededLink";
+import RawText, { RawTextThemeContext, TextLineSize } from "../RawText";
 
 interface Props extends React.Attributes {
   children?: string;

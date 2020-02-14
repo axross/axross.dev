@@ -1,7 +1,11 @@
 import { boolean, withKnobs, text, select, number } from "@storybook/addon-knobs";
 import * as React from "react";
-import ThemedColor from "../types/ThemedColor";
-import RawText, { TextAlignment, TextLineSize, TextSize, Typeface } from "./RawText";
+import ThemedColor from "../../types/ThemedColor";
+import RawText from "./RawText";
+import TextAlignment from "./TextAlignment";
+import TextLineSize from "./TextLineSize";
+import TextSize from "./TextSize";
+import Typeface from "./Typeface";
 
 export default {
   title: "Components/RawText",

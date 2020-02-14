@@ -1,6 +1,6 @@
 import * as React from "react";
-import { RepositoryContext } from "../../hooks/useRepository";
-import MockWebpageSummaryApi from '../../repositories/MockWebpageSummaryApi';
+import { RepositoryContext } from "../../../hooks/useRepository";
+import MockWebpageSummaryApi from '../../../repositories/MockWebpageSummaryApi';
 import EmbededLink from "./EmbededLink";
 
 export default { title: "Components/PrettyMarkdown/EmbededLink" };

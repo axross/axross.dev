@@ -3,8 +3,7 @@ import * as React from "react";
 import { DARK_COLOR, LIGHT_COLOR } from "../../constant/color";
 import { MOBILE, DARK_MODE } from "../../constant/mediaQuery";
 import ThemedColor from "../../types/ThemedColor";
-import RawText from "../RawText";
-import RawTextThemeContext from "../RawTextThemeContext";
+import RawText, { RawTextThemeContext } from "../RawText";
 
 interface Props extends React.Attributes {
   className?: string;

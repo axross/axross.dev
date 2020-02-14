@@ -1,6 +1,7 @@
 import { text, withKnobs, } from "@storybook/addon-knobs";
 import * as React from "react";
-import UIText, { UITextType } from "./UIText";
+import UIText from "./UIText";
+import UITextType from "./UITextType"
 
 export default {
   title: "Components/UIText",

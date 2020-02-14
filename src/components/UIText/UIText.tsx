@@ -1,6 +1,7 @@
 import * as React from "react";
-import ThemedColor from "../types/ThemedColor";
-import RawText, { Props as RawTextProps, TextSize, Typeface } from "./RawText";
+import ThemedColor from "../../types/ThemedColor";
+import RawText, { RawTextProps, TextSize, Typeface } from "../RawText";
+import UITextType from "./UITextType";
 
 interface Props extends React.Attributes {
   type?: UITextType;
@@ -14,15 +15,6 @@ export default function UIText({ type = UITextType.label, children, ...props }: 
       {children}
     </RawText>
   );
-}
-
-export enum UITextType {
-  label,
-  smallLabel,
-  caption,
-  subtitle,
-  subtitle2,
-  logo,
 }
 
 const UI_TEXT_TYPE: Record<UITextType, RawTextProps> = {
