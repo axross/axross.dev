@@ -1,6 +1,5 @@
 import * as React from "react";
-import ThemedColor from "../../types/ThemedColor";
-import RawText, { RawTextProps, TextSize, Typeface } from "../RawText";
+import RawText, { RawTextProps, TextColor, TextSize, Typeface } from "../RawText";
 import UITextType from "./UITextType";
 
 interface Props extends React.Attributes {
@@ -27,24 +26,24 @@ const UI_TEXT_TYPE: Record<UITextType, RawTextProps> = {
     typeface: Typeface.body,
   },
   [UITextType.caption]: {
-    color: ThemedColor.secondaryForeground,
+    color: TextColor.secondaryForeground,
     size: TextSize.small,
     typeface: Typeface.body,
   },
   [UITextType.subtitle]: {
-    color: ThemedColor.emphasizedForeground,
+    color: TextColor.emphasizedForeground,
     size: TextSize.huge,
     typeface: Typeface.headline,
     bold: true,
   },
   [UITextType.subtitle2]: {
-    color: ThemedColor.emphasizedForeground,
+    color: TextColor.emphasizedForeground,
     size: TextSize.large,
     typeface: Typeface.headline,
     bold: true,
   },
   [UITextType.logo]: {
-    color: ThemedColor.emphasizedForeground,
+    color: TextColor.emphasizedForeground,
     typeface: Typeface.headline,
     bold: true,
   },

@@ -1,6 +1,6 @@
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
 import * as React from "react";
-import { RawTextThemeContext, ThemedColor } from "./RawText";
+import { RawTextThemeContext, TextColor } from "./RawText";
 
 export interface Props extends NextLinkProps {
   className?: string;
@@ -22,7 +22,7 @@ export default function Link({ className, children, ...props }: Props) {
           value={{
             ...theme,
             ...isHovered ? { underline: true } : {},
-            color: ThemedColor.primaryForeground,
+            color: TextColor.primaryForeground,
           }}
         >
           {children}

@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import ReactContentLoader, { IContentLoaderProps } from "react-content-loader";
+import { DARK_LOADER_COLOR, LIGHT_LOADER_COLOR, DARK_LOADER_HIGHLIGHT_COLOR, LIGHT_LOADER_HIGHLIGHT_COLOR } from "../constant/color";
 import { DARK_MODE } from "../constant/mediaQuery";
-import { DARK_COLOR, LIGHT_COLOR } from "../constant/color";
-import ThemedColor from "../types/ThemedColor";
 
 type Props = Omit<
   IContentLoaderProps,
@@ -36,18 +35,18 @@ const Root = styled(ReactContentLoader)`
   & > defs {
     & > linearGradient {
       & > stop:nth-of-type(2n) {
-        stop-color: ${LIGHT_COLOR[ThemedColor.loaderHighlight]};
+        stop-color: ${LIGHT_LOADER_HIGHLIGHT_COLOR};
 
         ${DARK_MODE} {
-          stop-color: ${DARK_COLOR[ThemedColor.loaderHighlight]};
+          stop-color: ${DARK_LOADER_HIGHLIGHT_COLOR};
         }
       }
 
       & > stop:nth-of-type(2n + 1) {
-        stop-color: ${LIGHT_COLOR[ThemedColor.loader]};
+        stop-color: ${LIGHT_LOADER_COLOR};
 
         ${DARK_MODE} {
-          stop-color: ${DARK_COLOR[ThemedColor.loader]};
+          stop-color: ${DARK_LOADER_COLOR};
         }
       }
     }

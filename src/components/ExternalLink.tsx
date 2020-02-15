@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RawTextThemeContext, ThemedColor } from "./RawText";
+import { RawTextThemeContext, TextColor } from "./RawText";
 
 export interface Props extends React.Attributes {
   href: string;
@@ -19,7 +19,7 @@ export default function ExternalLink({ children, ...props }: Props) {
       <RawTextThemeContext.Provider
         value={{
           ...theme,
-          color: ThemedColor.primaryForeground,
+          color: TextColor.primaryForeground,
           ...isHovered ? { underline: true } : {},
         }}
       >

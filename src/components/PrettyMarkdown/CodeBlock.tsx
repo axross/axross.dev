@@ -2,9 +2,22 @@ import styled from "@emotion/styled";
 import * as React from "react";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import {
-  CODE_BACKGROUND_COLOR,
-  CODE_COLORS,
-  CodeColor
+  SYNTAX_HIGHLIGHT_ATTRIBUTE_KEY_COLOR,
+  SYNTAX_HIGHLIGHT_BACKGROUND_COLOR,
+  SYNTAX_HIGHLIGHT_CLASS_COLOR,
+  SYNTAX_HIGHLIGHT_COMMENT_COLOR,
+  SYNTAX_HIGHLIGHT_CONSTANT_COLOR,
+  SYNTAX_HIGHLIGHT_FUNCTION_COLOR,
+  SYNTAX_HIGHLIGHT_HEXCODE_COLOR,
+  SYNTAX_HIGHLIGHT_KEYWORD_COLOR,
+  SYNTAX_HIGHLIGHT_NORMAL_COLOR,
+  SYNTAX_HIGHLIGHT_NUMBER_COLOR,
+  SYNTAX_HIGHLIGHT_OPERATOR_COLOR,
+  SYNTAX_HIGHLIGHT_PARAMETER_COLOR,
+  SYNTAX_HIGHLIGHT_PROPERTY_COLOR,
+  SYNTAX_HIGHLIGHT_PUNCTUATION_COLOR,
+  SYNTAX_HIGHLIGHT_SELECTOR_COLOR,
+  SYNTAX_HIGHLIGHT_STRING_COLOR,
 } from "../../constant/color";
 import { MOBILE } from "../../constant/mediaQuery";
 
@@ -62,7 +75,7 @@ const Pre = styled.pre`
   padding-inline-start: 32px;
   padding-inline-end: 32px;
   border-radius: 8px;
-  background-color: ${CODE_BACKGROUND_COLOR};
+  background-color: ${SYNTAX_HIGHLIGHT_BACKGROUND_COLOR};
   line-height: 1.333;
   overflow-x: scroll;
 
@@ -89,7 +102,7 @@ const Pre = styled.pre`
 `;
 
 const Code = styled.code`
-  color: ${CODE_COLORS[CodeColor.normal]};
+  color: ${SYNTAX_HIGHLIGHT_NORMAL_COLOR};
   font-size: 18px;
   font-family: "Source Code Pro", monospace;
   font-weight: 500;
@@ -101,27 +114,27 @@ const Code = styled.code`
 `;
 
 const TAGS = new Map([
-  ["hexcode", styled.span`color: ${CODE_COLORS[CodeColor.hexcode]};`],
-  ["selector", styled.span`color: ${CODE_COLORS[CodeColor.selector]};`],
-  ["property", styled.span`color: ${CODE_COLORS[CodeColor.property]};`],
-  ["parameter", styled.span`color: ${CODE_COLORS[CodeColor.parameter]};`],
-  ["constant", styled.span`color: ${CODE_COLORS[CodeColor.constant]};`],
-  ["attr-name", styled.span`color: ${CODE_COLORS[CodeColor.attributeKey]};`],
-  ["punctuation", styled.span`color: ${CODE_COLORS[CodeColor.punctuation]};`],
-  ["class-name", styled.span`color: ${CODE_COLORS[CodeColor.class]};`],
-  ["maybe-class-name", styled.span`color: ${CODE_COLORS[CodeColor.class]};`],
-  ["number", styled.span`color: ${CODE_COLORS[CodeColor.number]};`],
-  ["unit", styled.span`color: ${CODE_COLORS[CodeColor.number]};`],
-  ["interpolation", styled.span`color: ${CODE_COLORS[CodeColor.number]};`],
-  ["pseudo-element", styled.span`color: ${CODE_COLORS[CodeColor.number]};`],
-  ["string", styled.span`color: ${CODE_COLORS[CodeColor.string]};`],
-  ["attr-value", styled.span`color: ${CODE_COLORS[CodeColor.string]};`],
-  ["function", styled.span`color: ${CODE_COLORS[CodeColor.function]};`],
-  ["operator", styled.span`color: ${CODE_COLORS[CodeColor.operator]};`],
-  ["keyword", styled.span`color: ${CODE_COLORS[CodeColor.keyword]};`],
-  ["comment", styled.span`color: ${CODE_COLORS[CodeColor.comment]};`],
+  ["hexcode", styled.span`color: ${SYNTAX_HIGHLIGHT_HEXCODE_COLOR};`],
+  ["selector", styled.span`color: ${SYNTAX_HIGHLIGHT_SELECTOR_COLOR};`],
+  ["property", styled.span`color: ${SYNTAX_HIGHLIGHT_PROPERTY_COLOR};`],
+  ["parameter", styled.span`color: ${SYNTAX_HIGHLIGHT_PARAMETER_COLOR};`],
+  ["constant", styled.span`color: ${SYNTAX_HIGHLIGHT_CONSTANT_COLOR};`],
+  ["attr-name", styled.span`color: ${SYNTAX_HIGHLIGHT_ATTRIBUTE_KEY_COLOR};`],
+  ["punctuation", styled.span`color: ${SYNTAX_HIGHLIGHT_PUNCTUATION_COLOR};`],
+  ["class-name", styled.span`color: ${SYNTAX_HIGHLIGHT_CLASS_COLOR};`],
+  ["maybe-class-name", styled.span`color: ${SYNTAX_HIGHLIGHT_CLASS_COLOR};`],
+  ["number", styled.span`color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};`],
+  ["unit", styled.span`color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};`],
+  ["interpolation", styled.span`color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};`],
+  ["pseudo-element", styled.span`color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};`],
+  ["string", styled.span`color: ${SYNTAX_HIGHLIGHT_STRING_COLOR};`],
+  ["attr-value", styled.span`color: ${SYNTAX_HIGHLIGHT_STRING_COLOR};`],
+  ["function", styled.span`color: ${SYNTAX_HIGHLIGHT_FUNCTION_COLOR};`],
+  ["operator", styled.span`color: ${SYNTAX_HIGHLIGHT_OPERATOR_COLOR};`],
+  ["keyword", styled.span`color: ${SYNTAX_HIGHLIGHT_KEYWORD_COLOR};`],
+  ["comment", styled.span`color: ${SYNTAX_HIGHLIGHT_COMMENT_COLOR};`],
 ]);
 
 const FallbackToken = styled.span`
-  color: ${CODE_COLORS[CodeColor.normal]};
+  color: ${SYNTAX_HIGHLIGHT_NORMAL_COLOR};
 `;

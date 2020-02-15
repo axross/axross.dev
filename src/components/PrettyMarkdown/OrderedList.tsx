@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { DARK_COLOR, LIGHT_COLOR } from "../../constant/color";
+import { DARK_FOREGROUND_COLOR, LIGHT_FOREGROUND_COLOR } from "../../constant/color";
 import { DARK_MODE, MOBILE } from "../../constant/mediaQuery";
-import ThemedColor from "../../types/ThemedColor";
 import LazyCSS from "../LazyCSS";
 
 interface Props extends React.Attributes {
@@ -46,7 +45,7 @@ const Root = styled.ol`
     display: list-item;
     margin-block-start: 12px;
     margin-block-end: 12px;
-    color: ${LIGHT_COLOR[ThemedColor.foreground]};
+    color: ${LIGHT_FOREGROUND_COLOR};
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
 
@@ -57,7 +56,7 @@ const Root = styled.ol`
     }
 
     ${DARK_MODE} {
-      color: ${DARK_COLOR[ThemedColor.foreground]};
+      color: ${DARK_FOREGROUND_COLOR};
     }
 
     &:first-of-type {

@@ -1,12 +1,12 @@
 import { createContext } from "react";
-import ThemedColor from "../../types/ThemedColor";
 import TextAlignment from "./TextAlignment";
+import TextColor from "./TextColor";
 import TextLineSize from "./TextLineSize";
 import TextSize from "./TextSize";
 import Typeface from "./Typeface";
 
 export interface RawTextTheme {
-  color?: ThemedColor;
+  color?: TextColor;
   typeface?: Typeface;
   size?: TextSize;
   lineSize?: TextLineSize;

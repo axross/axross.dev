@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { MOBILE } from "../../constant/mediaQuery";
-import RawText, { RawTextProps, RawTextThemeContext, TextSize, ThemedColor, Typeface } from "../RawText";
+import RawText, { RawTextProps, RawTextThemeContext, TextColor, TextSize, Typeface } from "../RawText";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -20,7 +20,7 @@ function Heading({ Component, textProps, children, ...props }: InternalProps) {
     <Component {...props}>
       <RawTextThemeContext.Provider value={{
         ...theme,
-        color: ThemedColor.emphasizedForeground,
+        color: TextColor.emphasizedForeground,
         typeface: Typeface.headline,
         ...textProps,
       }}>

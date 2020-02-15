@@ -1,8 +1,8 @@
 import { boolean, withKnobs, text, select, number } from "@storybook/addon-knobs";
 import * as React from "react";
-import ThemedColor from "../../types/ThemedColor";
 import RawText from "./RawText";
 import TextAlignment from "./TextAlignment";
+import TextColor from "./TextColor";
 import TextLineSize from "./TextLineSize";
 import TextSize from "./TextSize";
 import Typeface from "./Typeface";
@@ -17,14 +17,14 @@ export const playground = () => (
     color={select(
       "color",
       {
-        foreground: ThemedColor.foreground,
-        emphasizedForeground: ThemedColor.emphasizedForeground,
-        secondaryForeground: ThemedColor.secondaryForeground,
-        primaryForeground: ThemedColor.primaryForeground,
-        accentForeground: ThemedColor.accentForeground,
-        whiteForeground: ThemedColor.whiteForeground,
+        foreground: TextColor.foreground,
+        emphasizedForeground: TextColor.emphasizedForeground,
+        secondaryForeground: TextColor.secondaryForeground,
+        primaryForeground: TextColor.primaryForeground,
+        accentForeground: TextColor.accentForeground,
+        whiteForeground: TextColor.whiteForeground,
       },
-      ThemedColor.foreground
+      TextColor.foreground
     )}
     typeface={select(
       "typeface",

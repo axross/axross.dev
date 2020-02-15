@@ -1,18 +1,31 @@
 import { css, SerializedStyles } from "@emotion/core";
 import styled from "@emotion/styled";
 import * as React from "react";
-import { MOBILE, DARK_MODE } from "../../constant/mediaQuery";
-import { LIGHT_COLOR, DARK_COLOR } from "../../constant/color";
-import ThemedColor from "../../types/ThemedColor";
+import {
+  DARK_ACCENT_FOREGROUND_COLOR,
+  DARK_EMPHASIZED_FOREGROUND_COLOR,
+  DARK_FOREGROUND_COLOR,
+  DARK_PRIMARY_FOREGROUND_COLOR,
+  DARK_SECONDARY_FOREGROUND_COLOR,
+  DARK_WHITE_FOREGROUND_COLOR,
+  LIGHT_ACCENT_FOREGROUND_COLOR,
+  LIGHT_EMPHASIZED_FOREGROUND_COLOR,
+  LIGHT_FOREGROUND_COLOR,
+  LIGHT_PRIMARY_FOREGROUND_COLOR,
+  LIGHT_SECONDARY_FOREGROUND_COLOR,
+  LIGHT_WHITE_FOREGROUND_COLOR
+} from "../../constant/color";
+import { DARK_MODE, MOBILE } from "../../constant/mediaQuery";
 import LazyCSS from "../LazyCSS";
 import RawTextThemeContext from "./RawTextThemeContext";
 import TextAlignment from "./TextAlignment";
+import TextColor from "./TextColor";
 import TextLineSize from "./TextLineSize";
 import TextSize from "./TextSize";
 import Typeface from "./Typeface";
 
 export interface Props extends React.Attributes {
-  color?: ThemedColor;
+  color?: TextColor;
   typeface?: Typeface;
   size?: TextSize;
   lineSize?: TextLineSize;
@@ -32,9 +45,10 @@ export interface Props extends React.Attributes {
 /**
  * A fundamental text component. Every text in this repository should be made of this component.
  */
-export default function RawText({ color, typeface, size, lineSize, alignment, maxLines, bold, italic, underline, lineThrough, ...props }: Props) {
+export default function RawText({ color,
+  typeface, size, lineSize, alignment, maxLines, bold, italic, underline, lineThrough, ...props }: Props) {
   const theme = React.useContext(RawTextThemeContext) ?? {};
-  const _color = color ?? theme.color ?? ThemedColor.foreground;
+  const _color = color ?? theme.color ?? TextColor.foreground;
   const _typeface = typeface ?? theme.typeface ?? Typeface.body;
   const _size = size ?? theme.size ?? TextSize.default;
   const _lineSize = lineSize ?? theme.lineSize ?? TextLineSize.default;
@@ -53,7 +67,7 @@ export default function RawText({ color, typeface, size, lineSize, alignment, ma
       />
 
       <Root
-        themedColor={_color}
+        _color={_color}
         typeface={_typeface}
         size={_size}
         lineSize={_lineSize}
@@ -69,11 +83,56 @@ export default function RawText({ color, typeface, size, lineSize, alignment, ma
   );
 }
 
+const COLOR_CSS: Record<TextColor, SerializedStyles> = {
+  [TextColor.foreground]: css`
+    color: ${LIGHT_FOREGROUND_COLOR};
+
+    ${DARK_MODE} {
+      color: ${DARK_FOREGROUND_COLOR};
+    }
+  `,
+  [TextColor.emphasizedForeground]: css`
+    color: ${LIGHT_EMPHASIZED_FOREGROUND_COLOR};
+
+    ${DARK_MODE} {
+      color: ${DARK_EMPHASIZED_FOREGROUND_COLOR};
+    }
+  `,
+  [TextColor.secondaryForeground]: css`
+    color: ${LIGHT_SECONDARY_FOREGROUND_COLOR};
+
+    ${DARK_MODE} {
+      color: ${DARK_SECONDARY_FOREGROUND_COLOR};
+    }
+  `,
+  [TextColor.primaryForeground]: css`
+    color: ${LIGHT_PRIMARY_FOREGROUND_COLOR};
+
+    ${DARK_MODE} {
+      color: ${DARK_PRIMARY_FOREGROUND_COLOR};
+    }
+  `,
+  [TextColor.accentForeground]: css`
+    color: ${LIGHT_ACCENT_FOREGROUND_COLOR};
+
+    ${DARK_MODE} {
+      color: ${DARK_ACCENT_FOREGROUND_COLOR};
+    }
+  `,
+  [TextColor.whiteForeground]: css`
+    color: ${LIGHT_WHITE_FOREGROUND_COLOR};
+
+    ${DARK_MODE} {
+      color: ${DARK_WHITE_FOREGROUND_COLOR};
+    }
+  `,
+};
+
 const TYPEFACE_CSS: Record<Typeface, SerializedStyles> = {
   [Typeface.headline]: css`font-family: "Montserrat", sans-serif;`,
   [Typeface.body]: css`font-family: "Open Sans", sans-serif;`,
   [Typeface.monospace]: css`font-family: "Source Code Pro", monospace;`,
-}
+};
 
 const TEXT_SIZE_CSS: Record<TextSize, SerializedStyles> = {
   [TextSize.giantic]: css`
@@ -118,22 +177,22 @@ const TEXT_SIZE_CSS: Record<TextSize, SerializedStyles> = {
       font-size: 12px;
     }
   `,
-}
+};
 
 const TEXT_LINE_SIZE_CSS: Record<TextLineSize, SerializedStyles> = {
   [TextLineSize.default]: css`line-height: 1.5;`,
   [TextLineSize.large]: css`line-height: 1.75`,
-}
+};
 
 const TEXT_ALIGNMENT_CSS: Record<TextAlignment, SerializedStyles> = {
   [TextAlignment.default]: css`text-align: inherit;`,
   [TextAlignment.start]: css`text-align: start`,
   [TextAlignment.end]: css`text-align: end`,
   [TextAlignment.center]: css`text-align: center`,
-}
+};
 
 const Root = styled.span<{
-  themedColor: ThemedColor;
+  _color: TextColor;
   typeface: Typeface;
   size: TextSize;
   lineSize: TextLineSize;
@@ -144,7 +203,7 @@ const Root = styled.span<{
   underline: boolean;
   lineThrough: boolean;
 }>`
-  color: ${({ themedColor }) => LIGHT_COLOR[themedColor]};
+  ${({ _color }) => COLOR_CSS[_color]}
   ${({ typeface }) => TYPEFACE_CSS[typeface]}
   ${({ size }) => TEXT_SIZE_CSS[size]}
   ${({ lineSize }) => TEXT_LINE_SIZE_CSS[lineSize]}
@@ -181,9 +240,5 @@ const Root = styled.span<{
           -webkit-line-clamp: ${maxLines};
           overflow-y: hidden;
         `
-  }
-
-  ${DARK_MODE} {
-    color: ${({ themedColor }) => DARK_COLOR[themedColor]};
   }
 `;

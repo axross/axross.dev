@@ -1,10 +1,9 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { DARK_COLOR, LIGHT_COLOR } from "../../../constant/color";
+import { DARK_SECONDARY_BACKGROUND_COLOR, LIGHT_SECONDARY_BACKGROUND_COLOR } from "../../../constant/color";
 import { DARK_MODE, MOBILE } from "../../../constant/mediaQuery";
-import ThemedColor from "../../../types/ThemedColor";
 import ExternalLink from "../../ExternalLink";
-import RawText from "../../RawText";
+import RawText, { TextColor } from "../../RawText";
 import EmbededLinkLoader from './EmbededLinkLoader';
 import FallbackImage from "./FallbackImage";
 import useWebpageSummary from "./useWebpageSummary";
@@ -36,11 +35,11 @@ export default function EmbededLink({ url, ...props }: Props) {
         </RawText>
       </TitleLink>
 
-      <Description color={ThemedColor.secondaryForeground} italic maxLines={2}>
+      <Description color={TextColor.secondaryForeground} italic maxLines={2}>
         {webpageSummary.description ?? ""}
       </Description>
 
-      <Url color={ThemedColor.secondaryForeground} maxLines={1}>
+      <Url color={TextColor.secondaryForeground} maxLines={1}>
         {webpageSummary.url.host.startsWith("www.")
           ? webpageSummary.url.host.substring(4)
           : webpageSummary.url.host
@@ -64,11 +63,11 @@ const Root = styled.div`
   padding-block-end: 32px;
   padding-inline-start: 32px;
   padding-inline-end: 32px;
-  background-color: ${LIGHT_COLOR[ThemedColor.secondaryBackground]};
+  background-color: ${LIGHT_SECONDARY_BACKGROUND_COLOR};
   border-radius: 8px;
 
   ${DARK_MODE} {
-    background-color: ${DARK_COLOR[ThemedColor.secondaryBackground]};
+    background-color: ${DARK_SECONDARY_BACKGROUND_COLOR};
   }
 
   ${MOBILE} {

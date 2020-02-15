@@ -1,7 +1,7 @@
-export { default as ThemedColor } from "../../types/ThemedColor";
 export { default } from "./RawText";
 export { default as RawTextThemeContext } from "./RawTextThemeContext";
 export { default as TextAlignment } from "./TextAlignment";
+export { default as TextColor } from "./TextColor";
 export { default as TextLineSize } from "./TextLineSize";
 export { default as TextSize } from "./TextSize";
 export { default as Typeface } from "./Typeface";

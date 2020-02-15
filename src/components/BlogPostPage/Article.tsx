@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import * as React from "react";
 import BlogPost from "../../entities/BlogPost";
 import PrettyMarkdown from "../PrettyMarkdown";
-import RawText, { TextSize, ThemedColor, Typeface } from "../RawText";
+import RawText, { TextColor, TextSize, Typeface } from "../RawText";
 import { MOBILE } from "../../constant/mediaQuery";
 import BlogPostTimestamp from "./BlogPostTimestamp";
 
@@ -14,7 +14,7 @@ interface Props extends React.Attributes {
 export default function Article({ blogPost, ...props }: Props) {
   return (
     <article {...props}>
-      <RawText color={ThemedColor.emphasizedForeground} typeface={Typeface.headline} size={TextSize.giantic} bold>
+      <RawText color={TextColor.emphasizedForeground} typeface={Typeface.headline} size={TextSize.giantic} bold>
         {blogPost.title}
       </RawText>
 

@@ -1,9 +1,8 @@
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 import * as React from "react";
-import { DARK_COLOR, LIGHT_COLOR } from "../../../constant/color";
+import { DARK_SECONDARY_BACKGROUND_COLOR, LIGHT_SECONDARY_BACKGROUND_COLOR } from "../../../constant/color";
 import { DARK_MODE, MOBILE } from "../../../constant/mediaQuery";
-import ThemedColor from "../../../types/ThemedColor";
 import ContentLoader from "../../ContentLoader";
 
 interface Props extends React.Attributes {
@@ -38,11 +37,11 @@ const Root = styled.div`
   padding-block-end: 32px;
   padding-inline-start: 32px;
   padding-inline-end: 32px;
-  background-color: ${LIGHT_COLOR[ThemedColor.secondaryBackground]};
+  background-color: ${LIGHT_SECONDARY_BACKGROUND_COLOR};
   border-radius: 8px;
 
   ${DARK_MODE} {
-    background-color: ${DARK_COLOR[ThemedColor.secondaryBackground]};
+    background-color: ${DARK_SECONDARY_BACKGROUND_COLOR};
   }
 
   ${MOBILE} {

@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { DARK_COLOR, LIGHT_COLOR } from "../../constant/color";
+import { DARK_FOREGROUND_COLOR, LIGHT_FOREGROUND_COLOR } from "../../constant/color";
 import { DARK_MODE, MOBILE } from "../../constant/mediaQuery";
-import ThemedColor from "../../types/ThemedColor";
 
 interface Props extends React.Attributes {
   children: React.ReactNode;
@@ -18,7 +17,7 @@ const Root = styled.ul`
   margin-block-start: 32px;
   margin-block-end: 32px;
   padding-inline-start: 36px;
-  color: ${LIGHT_COLOR[ThemedColor.foreground]};
+  color: ${LIGHT_FOREGROUND_COLOR};
   font-size: 20px;
 
   ${MOBILE} {
@@ -28,7 +27,7 @@ const Root = styled.ul`
   }
 
   ${DARK_MODE} {
-    color: ${DARK_COLOR[ThemedColor.foreground]};
+    color: ${DARK_FOREGROUND_COLOR};
   }
 
   &:first-child {
