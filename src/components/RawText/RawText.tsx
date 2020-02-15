@@ -2,26 +2,16 @@ import { css, SerializedStyles } from "@emotion/core";
 import styled from "@emotion/styled";
 import * as React from "react";
 import {
-  // DARK_ACCENT_BACKGROUND_COLOR,
   DARK_ACCENT_FOREGROUND_COLOR,
-  // DARK_BACKGROUND_COLOR,
   DARK_EMPHASIZED_FOREGROUND_COLOR,
   DARK_FOREGROUND_COLOR,
-  // DARK_LOADER_COLOR,
-  // DARK_LOADER_HIGHLIGHT_COLOR,
   DARK_PRIMARY_FOREGROUND_COLOR,
-  // DARK_SECONDARY_BACKGROUND_COLOR,
   DARK_SECONDARY_FOREGROUND_COLOR,
   DARK_WHITE_FOREGROUND_COLOR,
-  // LIGHT_ACCENT_BACKGROUND_COLOR,
   LIGHT_ACCENT_FOREGROUND_COLOR,
-  // LIGHT_BACKGROUND_COLOR,
   LIGHT_EMPHASIZED_FOREGROUND_COLOR,
   LIGHT_FOREGROUND_COLOR,
-  // LIGHT_LOADER_COLOR,
-  // LIGHT_LOADER_HIGHLIGHT_COLOR,
   LIGHT_PRIMARY_FOREGROUND_COLOR,
-  // LIGHT_SECONDARY_BACKGROUND_COLOR,
   LIGHT_SECONDARY_FOREGROUND_COLOR,
   LIGHT_WHITE_FOREGROUND_COLOR
 } from "../../constant/color";
@@ -136,41 +126,6 @@ const COLOR_CSS: Record<TextColor, SerializedStyles> = {
       color: ${DARK_WHITE_FOREGROUND_COLOR};
     }
   `,
-  // [TextColor.background]: css`
-  //   color: ${LIGHT_BACKGROUND_COLOR};
-
-  //   ${DARK_MODE} {
-  //     color: ${DARK_BACKGROUND_COLOR};
-  //   }
-  // `,
-  // [TextColor.secondaryBackground]: css`
-  //   color: ${LIGHT_SECONDARY_BACKGROUND_COLOR};
-
-  //   ${DARK_MODE} {
-  //     color: ${DARK_SECONDARY_BACKGROUND_COLOR};
-  //   }
-  // `,
-  // [TextColor.accentBackground]: css`
-  //   color: ${LIGHT_ACCENT_BACKGROUND_COLOR};
-
-  //   ${DARK_MODE} {
-  //     color: ${DARK_ACCENT_BACKGROUND_COLOR};
-  //   }
-  // `,
-  // [TextColor.loader]: css`
-  //   color: ${LIGHT_LOADER_COLOR};
-
-  //   ${DARK_MODE} {
-  //     color: ${DARK_LOADER_COLOR};
-  //   }
-  // `,
-  // [TextColor.loaderHighlight]: css`
-  //   color: ${LIGHT_LOADER_HIGHLIGHT_COLOR};
-
-  //   ${DARK_MODE} {
-  //     color: ${DARK_LOADER_HIGHLIGHT_COLOR};
-  //   }
-  // `,
 };
 
 const TYPEFACE_CSS: Record<Typeface, SerializedStyles> = {
