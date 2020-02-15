@@ -1,21 +1,28 @@
+import { SerializedStyles, css } from "@emotion/core";
 import styled from "@emotion/styled";
 import * as React from "react";
-import { DARK_COLOR, LIGHT_COLOR } from "../constant/color";
-import { DARK_MODE } from "../constant/mediaQuery";
-import ThemedColor from "../types/ThemedColor";
+import {
+  DARK_ACCENT_FOREGROUND_COLOR,
+  DARK_EMPHASIZED_FOREGROUND_COLOR,
+  DARK_FOREGROUND_COLOR,
+  DARK_PRIMARY_FOREGROUND_COLOR,
+  DARK_SECONDARY_FOREGROUND_COLOR,
+  DARK_WHITE_FOREGROUND_COLOR,
+  LIGHT_ACCENT_FOREGROUND_COLOR,
+  LIGHT_EMPHASIZED_FOREGROUND_COLOR,
+  LIGHT_FOREGROUND_COLOR,
+  LIGHT_PRIMARY_FOREGROUND_COLOR,
+  LIGHT_SECONDARY_FOREGROUND_COLOR,
+  LIGHT_WHITE_FOREGROUND_COLOR
+} from "../../constant/color";
+import { DARK_MODE } from "../../constant/mediaQuery";
+import IconColor from "./IconColor";
+import IconName from "./IconName";
 
 interface IconProps extends React.Attributes {
   name: IconName;
-  fill: ThemedColor;
+  fill: IconColor;
   className?: string;
-}
-
-export enum IconName {
-  facebook,
-  github,
-  instagram,
-  linkedIn,
-  website,
 }
 
 export default function Icon({ name, fill, ...props }: IconProps) {
@@ -31,14 +38,65 @@ export default function Icon({ name, fill, ...props }: IconProps) {
   );
 }
 
-const Root = styled.svg<{ _color: ThemedColor }>`
-  & path {
-    fill: ${({ _color }) => LIGHT_COLOR[_color]};
+const COLOR_CSS: Record<IconColor, SerializedStyles> = {
+  [IconColor.foreground]: css`
+    & path {
+      fill: ${LIGHT_FOREGROUND_COLOR};
 
-    ${DARK_MODE} {
-      fill: ${({ _color }) => DARK_COLOR[_color]};
+      ${DARK_MODE} {
+        fill: ${DARK_FOREGROUND_COLOR};
+      }
     }
-  }
+  `,
+  [IconColor.emphasizedForeground]: css`
+    & path {
+      fill: ${LIGHT_EMPHASIZED_FOREGROUND_COLOR};
+
+      ${DARK_MODE} {
+        fill: ${DARK_EMPHASIZED_FOREGROUND_COLOR};
+      }
+    }
+  `,
+  [IconColor.secondaryForeground]: css`
+    & path {
+      fill: ${LIGHT_SECONDARY_FOREGROUND_COLOR};
+
+      ${DARK_MODE} {
+        fill: ${DARK_SECONDARY_FOREGROUND_COLOR};
+      }
+    }
+  `,
+  [IconColor.primaryForeground]: css`
+    & path {
+      fill: ${LIGHT_PRIMARY_FOREGROUND_COLOR};
+
+      ${DARK_MODE} {
+        fill: ${DARK_PRIMARY_FOREGROUND_COLOR};
+      }
+    }
+  `,
+  [IconColor.accentForeground]: css`
+    & path {
+      fill: ${LIGHT_ACCENT_FOREGROUND_COLOR};
+
+      ${DARK_MODE} {
+        fill: ${DARK_ACCENT_FOREGROUND_COLOR};
+      }
+    }
+  `,
+  [IconColor.whiteForeground]: css`
+    & path {
+      fill: ${LIGHT_WHITE_FOREGROUND_COLOR};
+
+      ${DARK_MODE} {
+        fill: ${DARK_WHITE_FOREGROUND_COLOR};
+      }
+    }
+  `,
+}
+
+const Root = styled.svg<{ _color: IconColor }>`
+  ${({ _color }) => COLOR_CSS[_color]}
 `;
 
 const CONTENTS = new Map<IconName, React.ReactElement>([
