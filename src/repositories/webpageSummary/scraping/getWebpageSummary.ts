@@ -1,3 +1,5 @@
+import cheerio from "cheerio";
+import fetch from "node-fetch";
 import GetWebpageSummary from "../GetWebpageSummary";
 
 const getWebpageSummary: GetWebpageSummary = async ({ url }) => {
