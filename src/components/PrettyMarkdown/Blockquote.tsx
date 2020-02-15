@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { DARK_COLOR, LIGHT_COLOR } from "../../constant/color";
-import { MOBILE, DARK_MODE } from "../../constant/mediaQuery";
-import ThemedColor from "../../types/ThemedColor";
-import RawText, { RawTextThemeContext } from "../RawText";
+import { DARK_SECONDARY_FOREGROUND_COLOR, LIGHT_SECONDARY_FOREGROUND_COLOR } from "../../constant/color";
+import { DARK_MODE, MOBILE } from "../../constant/mediaQuery";
+import RawText, { RawTextThemeContext, TextColor } from "../RawText";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -15,7 +14,7 @@ export default function Blockquote({ children, ...props }: Props) {
 
   return (
     <Root {...props}>
-      <RawTextThemeContext.Provider value={{ ...theme, color: ThemedColor.secondaryForeground, italic: true }}>
+      <RawTextThemeContext.Provider value={{ ...theme, color: TextColor.secondaryForeground, italic: true }}>
         {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
       </RawTextThemeContext.Provider>
     </Root>
@@ -34,7 +33,7 @@ const Root = styled.blockquote`
   padding-inline-start: 26px;
   padding-inline-end: 32px;
   border-left-width: 6px;
-  border-left-color: ${LIGHT_COLOR[ThemedColor.secondaryForeground]};
+  border-left-color: ${LIGHT_SECONDARY_FOREGROUND_COLOR};
   border-left-style: solid;
   line-height: 1.333;
   overflow-x: scroll;
@@ -53,7 +52,7 @@ const Root = styled.blockquote`
   }
 
   ${DARK_MODE} {
-    border-left-color: ${DARK_COLOR[ThemedColor.secondaryForeground]};
+    border-left-color: ${DARK_SECONDARY_FOREGROUND_COLOR};
   }
 
   &:first-child {

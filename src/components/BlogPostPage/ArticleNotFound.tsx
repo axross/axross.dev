@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import useTranslation from "../../hooks/useTranslation";
-import RawText, { TextLineSize, TextSize, ThemedColor } from "../RawText";
+import RawText, { TextColor, TextLineSize, TextSize } from "../RawText";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -13,11 +13,11 @@ export default function ArticleNotFound(props: Props) {
 
   return (
     <section {...props}>
-      <Title color={ThemedColor.emphasizedForeground} size={TextSize.giantic} bold>
+      <Title color={TextColor.emphasizedForeground} size={TextSize.giantic} bold>
         {title}
       </Title>
 
-      <StatusCode color={ThemedColor.secondaryForeground}>
+      <StatusCode color={TextColor.secondaryForeground}>
         404 Not Found
       </StatusCode>
 
