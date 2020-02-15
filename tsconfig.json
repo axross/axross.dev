@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "moduleResolution": "node",
-    "esModuleInterop": true,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -16,12 +15,13 @@
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
     "noEmit": true,
     "module": "esnext",
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "skipLibCheck": false,
+    "allowJs": false,
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules"
