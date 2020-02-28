@@ -39,7 +39,7 @@ export default function CodeBlock({ className, children, ...props }: Props) {
         <Pre {...actualProps}>
           <Code>
             {tokens.map((line, i) => (
-              <>
+              <React.Fragment key={i}>
                 {line
                   .filter(token => token.content !== "")
                   .map((token, j) => {
@@ -53,8 +53,8 @@ export default function CodeBlock({ className, children, ...props }: Props) {
                   })
                 }
 
-                {"\n"}
-              </>
+                {i < tokens.length - 1 ? "\n" : null}
+              </React.Fragment>
             ))}
           </Code>
         </Pre>
