@@ -69,7 +69,7 @@ export default function RawText({ color,
       <Root
         _color={_color}
         typeface={_typeface}
-        size={_size}
+        _size={_size}
         lineSize={_lineSize}
         alignment={_alignment}
         maxLines={_maxLines}
@@ -194,7 +194,7 @@ const TEXT_ALIGNMENT_CSS: Record<TextAlignment, SerializedStyles> = {
 const Root = styled.span<{
   _color: TextColor;
   typeface: Typeface;
-  size: TextSize;
+  _size: TextSize;
   lineSize: TextLineSize;
   alignment: TextAlignment;
   maxLines: number;
@@ -205,7 +205,7 @@ const Root = styled.span<{
 }>`
   ${({ _color }) => COLOR_CSS[_color]}
   ${({ typeface }) => TYPEFACE_CSS[typeface]}
-  ${({ size }) => TEXT_SIZE_CSS[size]}
+  ${({ _size }) => TEXT_SIZE_CSS[_size]}
   ${({ lineSize }) => TEXT_LINE_SIZE_CSS[lineSize]}
   ${({ alignment }) => TEXT_ALIGNMENT_CSS[alignment]}
   font-weight: ${({ bold }) => bold ? 600 : 400};
