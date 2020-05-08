@@ -2,7 +2,7 @@ import { describe, expect, it, jest } from "@jest/globals";
 import * as React from "react";
 import { act, create } from "react-test-renderer";
 import BlogPost from "../../entities/BlogPost";
-import MockApp from "../../../fixtures/MockApp";
+import MockApp from "../../fixtures/MockApp";
 import Head from "./Head";
 
 describe("<Head>", () => {

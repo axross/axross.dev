@@ -3,10 +3,10 @@ import { HeadManagerContext } from "next/dist/next-server/lib/head-manager-conte
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import Router, { NextRouter } from "next/router";
 import * as React from "react";
-import LocaleString from "../src/entities/LocaleString";
-import { LocaleContext } from "../src/hooks/useLocale";
-import { URLContext } from "../src/hooks/useURL";
-import { Repositories, RepositoryContext } from "../src/hooks/useRepository";
+import LocaleString from "../entities/LocaleString";
+import { LocaleContext } from "../hooks/useLocale";
+import { URLContext } from "../hooks/useURL";
+import { Repositories, RepositoryContext } from "../hooks/useRepository";
 
 interface Props {
   url?: URL;

@@ -8,33 +8,33 @@ import {
 } from "@jest/globals";
 import * as React from "react";
 import { act, create } from "react-test-renderer";
-import MockApp from "../../../fixtures/MockApp";
+import MockApp from "../../fixtures/MockApp";
 
-describe("useWebsitePurpose()", () => {
+describe("useBlogPosts()", () => {
   const locale = "LOCALE";
-  const websitePurpose = Symbol("WEBSITE_PURPOSE");
+  const blogPosts = Symbol("BLOG_POSTS");
   const isLoading = Symbol("IS_LOADING");
-  const getWebsitePurpose = Symbol("GET_WEBSITE_PURPOSE");
+  const getAllBlogPosts = Symbol("GET_ALL_BLOG_POSTS");
   const useQuery = jest
     .fn()
     .mockName("useQuery")
-    .mockReturnValue({ data: websitePurpose, isLoading });
+    .mockReturnValue({ data: blogPosts, isLoading });
 
-  let useWebsitePurpose: typeof import("./useWebsitePurpose").default;
+  let useBlogPosts: typeof import("./useBlogPosts").default;
 
   beforeAll(async () => {
     jest.mock("react-query", () => ({ useQuery }));
 
-    useWebsitePurpose = (await import("./useWebsitePurpose")).default;
+    useBlogPosts = (await import("./useBlogPosts")).default;
   });
 
   afterEach(() => {
     useQuery.mockClear();
   });
 
-  it("calls useQuery() with the key, current locale, getWebsitePurpose() and initial data", async () => {
+  it("calls useQuery() with the key, current locale, getAllBlogPosts() and initial data", async () => {
     function Component() {
-      useWebsitePurpose();
+      useBlogPosts();
 
       return null;
     }
@@ -42,7 +42,7 @@ describe("useWebsitePurpose()", () => {
     await act(async () => {
       create(
         <MockApp
-          repositories={{ getWebsitePurpose } as any}
+          repositories={{ getAllBlogPosts } as any}
           currentLocale={locale}
         >
           <Component />
@@ -51,9 +51,9 @@ describe("useWebsitePurpose()", () => {
     });
 
     expect(useQuery).toHaveBeenCalledWith(
-      ["website-purpose", { locale }],
-      getWebsitePurpose,
-      { initialData: null }
+      ["blog-posts", { locale }],
+      getAllBlogPosts,
+      { initialData: [] }
     );
   });
 
@@ -61,7 +61,7 @@ describe("useWebsitePurpose()", () => {
     let returnValue: any;
 
     function Component() {
-      returnValue = useWebsitePurpose();
+      returnValue = useBlogPosts();
 
       return null;
     }
@@ -69,7 +69,7 @@ describe("useWebsitePurpose()", () => {
     await act(async () => {
       create(
         <MockApp
-          repositories={{ getWebsitePurpose } as any}
+          repositories={{ getAllBlogPosts } as any}
           currentLocale={locale}
         >
           <Component />
@@ -77,6 +77,6 @@ describe("useWebsitePurpose()", () => {
       );
     });
 
-    expect(returnValue).toEqual([websitePurpose, isLoading]);
+    expect(returnValue).toEqual([blogPosts, isLoading]);
   });
 });

@@ -8,52 +8,50 @@ import {
 } from "@jest/globals";
 import * as React from "react";
 import { act, create } from "react-test-renderer";
-import MockApp from "../../../fixtures/MockApp";
+import MockApp from "../../fixtures/MockApp";
 
-describe("useBlogPosts()", () => {
+describe("useBlogPost()", () => {
+  const blogPostId = Symbol("BLOG_POST_ID");
   const locale = "LOCALE";
-  const blogPosts = Symbol("BLOG_POSTS");
+  const blogPost = Symbol("BLOG_POST");
   const isLoading = Symbol("IS_LOADING");
-  const getAllBlogPosts = Symbol("GET_ALL_BLOG_POSTS");
+  const getBlogPost = Symbol("GET_BLOG_POST");
   const useQuery = jest
     .fn()
     .mockName("useQuery")
-    .mockReturnValue({ data: blogPosts, isLoading });
+    .mockReturnValue({ data: blogPost, isLoading });
 
-  let useBlogPosts: typeof import("./useBlogPosts").default;
+  let useBlogPost: typeof import("./useBlogPost").default;
 
   beforeAll(async () => {
     jest.mock("react-query", () => ({ useQuery }));
 
-    useBlogPosts = (await import("./useBlogPosts")).default;
+    useBlogPost = (await import("./useBlogPost")).default;
   });
 
   afterEach(() => {
     useQuery.mockClear();
   });
 
-  it("calls useQuery() with the key, current locale, getAllBlogPosts() and initial data", async () => {
+  it("calls useQuery() with the key, given blog post id, current locale, getBlogPost() and initial data", async () => {
     function Component() {
-      useBlogPosts();
+      useBlogPost({ id: blogPostId } as any);
 
       return null;
     }
 
     await act(async () => {
       create(
-        <MockApp
-          repositories={{ getAllBlogPosts } as any}
-          currentLocale={locale}
-        >
+        <MockApp repositories={{ getBlogPost } as any} currentLocale={locale}>
           <Component />
         </MockApp>
       );
     });
 
     expect(useQuery).toHaveBeenCalledWith(
-      ["blog-posts", { locale }],
-      getAllBlogPosts,
-      { initialData: [] }
+      ["blog-post", { id: blogPostId, locale }],
+      getBlogPost,
+      { initialData: null }
     );
   });
 
@@ -61,22 +59,19 @@ describe("useBlogPosts()", () => {
     let returnValue: any;
 
     function Component() {
-      returnValue = useBlogPosts();
+      returnValue = useBlogPost({ id: blogPostId } as any);
 
       return null;
     }
 
     await act(async () => {
       create(
-        <MockApp
-          repositories={{ getAllBlogPosts } as any}
-          currentLocale={locale}
-        >
+        <MockApp repositories={{ getBlogPost } as any} currentLocale={locale}>
           <Component />
         </MockApp>
       );
     });
 
-    expect(returnValue).toEqual([blogPosts, isLoading]);
+    expect(returnValue).toEqual([blogPost, isLoading]);
   });
 });

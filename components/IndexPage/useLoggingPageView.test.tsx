@@ -8,7 +8,7 @@ import {
 } from "@jest/globals";
 import * as React from "react";
 import { act, create } from "react-test-renderer";
-import MockApp from "../../../fixtures/MockApp";
+import MockApp from "../../fixtures/MockApp";
 import useLoggingPageView from "./useLoggingPageView";
 
 describe("useLoggingPageView()", () => {
