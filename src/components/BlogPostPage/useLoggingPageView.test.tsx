@@ -1,3 +1,11 @@
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from "@jest/globals";
 import * as React from "react";
 import { act, create } from "react-test-renderer";
 import BlogPost from "../../entities/BlogPost";
@@ -19,7 +27,7 @@ describe("useLoggingPageView()", () => {
   });
 
   afterEach(() => {
-    ((globalThis.ga as any) as jest.Mock).mockRestore();
+    ((globalThis.ga as any) as ReturnType<typeof jest.fn>).mockRestore();
   });
 
   describe("if Google Analytics SDK is loaded", () => {
@@ -27,10 +35,10 @@ describe("useLoggingPageView()", () => {
       it("doesn't call globalThis.ga()", async () => {
         function Component() {
           useLoggingPageView(blogPost, true);
-          
+
           return null;
         }
-    
+
         await act(async () => {
           create(
             <MockApp>
@@ -45,10 +53,10 @@ describe("useLoggingPageView()", () => {
       it("sets the location (URL) to the current Google Analytics session", async () => {
         function Component() {
           useLoggingPageView(blogPost, false);
-          
+
           return null;
         }
-    
+
         await act(async () => {
           create(
             <MockApp url={new URL("https://tests.kohei.dev/?hl=en-US")}>
@@ -56,17 +64,21 @@ describe("useLoggingPageView()", () => {
             </MockApp>
           );
         });
-  
-        expect(globalThis.ga).toHaveBeenCalledWith("set", "location", `https://tests.kohei.dev/?hl=en-US`);
+
+        expect(globalThis.ga).toHaveBeenCalledWith(
+          "set",
+          "location",
+          `https://tests.kohei.dev/?hl=en-US`
+        );
       });
-  
+
       it("sets the document title that contains blog post's title to the current Google Analytics session", async () => {
         function Component() {
           useLoggingPageView(blogPost, false);
-          
+
           return null;
         }
-    
+
         await act(async () => {
           create(
             <MockApp>
@@ -74,17 +86,21 @@ describe("useLoggingPageView()", () => {
             </MockApp>
           );
         });
-  
-        expect(globalThis.ga).toHaveBeenCalledWith("set", "title", expect.stringContaining(blogPost.title));
+
+        expect(globalThis.ga).toHaveBeenCalledWith(
+          "set",
+          "title",
+          expect.stringContaining(blogPost.title)
+        );
       });
-  
+
       it("sends a pageview", async () => {
         function Component() {
           useLoggingPageView(blogPost, false);
-          
+
           return null;
         }
-    
+
         await act(async () => {
           create(
             <MockApp>
@@ -92,7 +108,7 @@ describe("useLoggingPageView()", () => {
             </MockApp>
           );
         });
-  
+
         expect(globalThis.ga).toHaveBeenCalledWith("send", "pageview");
       });
     });
@@ -102,10 +118,10 @@ describe("useLoggingPageView()", () => {
     it("doesn't call globalThis.ga()", async () => {
       function Component() {
         useLoggingPageView(blogPost, false);
-        
+
         return null;
       }
-  
+
       await act(async () => {
         create(
           <MockApp>

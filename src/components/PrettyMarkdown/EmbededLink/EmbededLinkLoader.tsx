@@ -1,7 +1,10 @@
 import { css } from "@emotion/core";
 import styled from "@emotion/styled";
 import * as React from "react";
-import { DARK_SECONDARY_BACKGROUND_COLOR, LIGHT_SECONDARY_BACKGROUND_COLOR } from "../../../constant/color";
+import {
+  DARK_SECONDARY_BACKGROUND_COLOR,
+  LIGHT_SECONDARY_BACKGROUND_COLOR,
+} from "../../../constant/color";
 import { DARK_MODE, MOBILE } from "../../../constant/mediaQuery";
 import ContentLoader from "../../ContentLoader";
 
@@ -18,8 +21,8 @@ export default function EmbededLinkLoader({ ...props }: Props) {
         <TitleFirstLine />
         <TitleSecondLine />
 
-        <DescriptionFirstLine/>
-        <DescriptionSecondLine/>
+        <DescriptionFirstLine />
+        <DescriptionSecondLine />
 
         <URLLine />
       </_ContentLoader>
@@ -154,7 +157,7 @@ const DescriptionSecondLine = styled.rect`
   ${descriptionLineCSS}
 
   y: 104px;
-  width: calc((100%  - 160px - 32px) * 0.55);
+  width: calc((100% - 160px - 32px) * 0.55);
 
   ${MOBILE} {
     display: none;
@@ -165,7 +168,7 @@ const URLLine = styled.rect`
   ${descriptionLineCSS}
 
   y: 144px;
-  width: calc((100%  - 160px - 32px) * 0.7);
+  width: calc((100% - 160px - 32px) * 0.7);
 
   ${MOBILE} {
     y: 63px;

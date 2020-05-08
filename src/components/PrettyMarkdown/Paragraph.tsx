@@ -8,7 +8,17 @@ interface Props extends React.Attributes {
 }
 
 export default function Paragraph({ children, ...props }: Props) {
-  return <Root {...props}>{React.Children.map(children, (child) => typeof child === "string" ? <RawText lineSize={TextLineSize.large}>{child}</RawText> : child)}</Root>;
+  return (
+    <Root {...props}>
+      {React.Children.map(children, (child) =>
+        typeof child === "string" ? (
+          <RawText lineSize={TextLineSize.large}>{child}</RawText>
+        ) : (
+          child
+        )
+      )}
+    </Root>
+  );
 }
 
 const Root = styled.p`

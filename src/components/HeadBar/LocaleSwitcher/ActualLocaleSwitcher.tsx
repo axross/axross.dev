@@ -12,7 +12,9 @@ export default function ActualLocaleSwitcher(props: Props) {
 
   return (
     <Root {...props}>
-      {availableLocales.map(locale => <Item locale={locale} key={locale} />)}
+      {availableLocales.map((locale) => (
+        <Item locale={locale} key={locale} />
+      ))}
     </Root>
   );
 }

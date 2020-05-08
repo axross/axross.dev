@@ -31,7 +31,7 @@ Page.getInitialProps = async ({
     });
     const getBlogPost = createGetBlogPost(contentful);
     const blogPost = await getBlogPost({
-      id: query.postId.toString(),
+      id: `${query.postId}`,
       locale: currentLocale,
     });
 

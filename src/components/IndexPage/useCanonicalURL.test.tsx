@@ -1,11 +1,17 @@
+import {
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  jest,
+} from "@jest/globals";
 import * as React from "react";
 import { act, create } from "react-test-renderer";
 
 describe("useCanonicalURL()", () => {
   const url = new URL("https://tests.kohei.dev/useCanonicalURL?test");
-  const useURL = jest.fn()
-    .mockName("useURL")
-    .mockReturnValue(url);
+  const useURL = jest.fn().mockName("useURL").mockReturnValue(url);
 
   beforeAll(() => {
     jest.mock("../../hooks/useURL", () => useURL);
@@ -20,7 +26,7 @@ describe("useCanonicalURL()", () => {
 
     function Component() {
       useCanonicalURL();
-      
+
       return null;
     }
 
@@ -37,7 +43,7 @@ describe("useCanonicalURL()", () => {
 
     function Component() {
       returnedURL = useCanonicalURL();
-      
+
       return null;
     }
 

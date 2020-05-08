@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { DARK_FOREGROUND_COLOR, LIGHT_FOREGROUND_COLOR } from "../../constant/color";
+import {
+  DARK_FOREGROUND_COLOR,
+  LIGHT_FOREGROUND_COLOR,
+} from "../../constant/color";
 import { DARK_MODE, MOBILE } from "../../constant/mediaQuery";
 import LazyCSS from "../LazyCSS";
 

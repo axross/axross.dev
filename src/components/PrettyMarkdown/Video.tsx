@@ -27,8 +27,16 @@ export default function Video({ src, ...props }: Props) {
   }, [src, ref.current]);
 
   return (
-    <Root playsInline autoPlay loop muted crossOrigin="anonymous" ref={ref} {...props}>
-      {srcs.map(src => (
+    <Root
+      playsInline
+      autoPlay
+      loop
+      muted
+      crossOrigin="anonymous"
+      ref={ref}
+      {...props}
+    >
+      {srcs.map((src) => (
         <source src={src} type="video/mp4" key={src} />
       ))}
     </Root>

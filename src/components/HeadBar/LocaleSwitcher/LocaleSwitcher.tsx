@@ -14,7 +14,5 @@ export default function LocaleSwitcher(props: Props) {
     return <LocaleSwitcherLoader {...props} />;
   }
 
-  return (
-    <ActualLocaleSwitcher {...props} />
-  );
+  return <ActualLocaleSwitcher {...props} />;
 }

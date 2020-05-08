@@ -1,6 +1,10 @@
 import NextHead from "next/head";
 import * as React from "react";
-import { MY_JOB_TITLE, MY_NAME, MY_SOCIAL_MEDIA_LINKS } from "../../constant/data";
+import {
+  MY_JOB_TITLE,
+  MY_NAME,
+  MY_SOCIAL_MEDIA_LINKS,
+} from "../../constant/data";
 import { PROFILE_IMAGE_PATH } from "../../constant/staticFilePaths";
 import useLocale from "../../hooks/useLocale";
 import useCanonicalURL from "./useCanonicalURL";
@@ -20,12 +24,12 @@ export default function Head() {
       <link rel="canonical" href={canonicalURL.href} key="canonical" />
 
       {availableLocales
-        .filter(locale => locale !== currentLocale)
-        .map(locale => {
+        .filter((locale) => locale !== currentLocale)
+        .map((locale) => {
           const url = new URL(canonicalURL.href);
           url.searchParams.set("hl", locale);
 
-          return ( 
+          return (
             <link
               rel="alternate"
               hrefLang={locale}
@@ -33,8 +37,7 @@ export default function Head() {
               key={`alternate:${locale}`}
             />
           );
-        })
-      }
+        })}
 
       {(() => {
         const url = new URL("/posts/feed.xml", canonicalURL.origin);
@@ -59,7 +62,7 @@ export default function Head() {
           name: MY_NAME,
           image: profileImageURL.href,
           jobTitle: MY_JOB_TITLE,
-          sameAs: MY_SOCIAL_MEDIA_LINKS.map(({ url }) => `${url}`)
+          sameAs: MY_SOCIAL_MEDIA_LINKS.map(({ url }) => `${url}`),
         })}
       </script>
 
@@ -72,8 +75,8 @@ export default function Head() {
       />
       <meta property="og:locale" content={currentLocale} key="og:locale" />
       {availableLocales
-        .filter(locale => locale !== currentLocale)
-        .map(locale => (
+        .filter((locale) => locale !== currentLocale)
+        .map((locale) => (
           <meta
             property="og:locale:alternate"
             content={locale}
@@ -82,11 +85,7 @@ export default function Head() {
         ))}
       <meta property="og:site_name" content={title} key="og:site_name" />
       <meta property="og:title" content={title} key="og:title" />
-      <meta
-        property="og:image"
-        content={profileImageURL.href}
-        key="og:image"
-      />
+      <meta property="og:image" content={profileImageURL.href} key="og:image" />
     </NextHead>
-  )
+  );
 }

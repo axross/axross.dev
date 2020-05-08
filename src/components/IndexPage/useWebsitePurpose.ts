@@ -11,7 +11,7 @@ export default function useWebsitePurpose(): [string | null, boolean] {
   const { data: websitePurpose, isLoading } = useQuery(
     ["website-purpose", { locale }],
     getWebsitePurpose,
-    { initialData: null },
+    { initialData: null }
   );
 
   return [websitePurpose as null, isLoading];

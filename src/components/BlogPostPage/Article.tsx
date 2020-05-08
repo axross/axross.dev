@@ -14,7 +14,12 @@ interface Props extends React.Attributes {
 export default function Article({ blogPost, ...props }: Props) {
   return (
     <article {...props}>
-      <RawText color={TextColor.emphasizedForeground} typeface={Typeface.headline} size={TextSize.giantic} bold>
+      <RawText
+        color={TextColor.emphasizedForeground}
+        typeface={Typeface.headline}
+        size={TextSize.giantic}
+        bold
+      >
         {blogPost.title}
       </RawText>
 

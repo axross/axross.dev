@@ -10,7 +10,9 @@ export default function Emphasis({ children }: Props) {
 
   return (
     <RawTextThemeContext.Provider value={{ ...theme, italic: true }}>
-      {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
+      {React.Children.map(children, (child) =>
+        typeof child === "string" ? <RawText>{child}</RawText> : child
+      )}
     </RawTextThemeContext.Provider>
   );
 }

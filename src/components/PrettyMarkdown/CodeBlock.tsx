@@ -28,30 +28,41 @@ interface Props extends React.Attributes {
 
 export default function CodeBlock({ className, children, ...props }: Props) {
   const classNames = className?.split(" ") ?? [];
-  const languageClassName = classNames.find(cn => cn.startsWith("language-"));
+  const languageClassName = classNames.find((cn) => cn.startsWith("language-"));
   const language = languageClassName?.substring(9) ?? "";
-  const actualClassName = classNames.filter(cn => !cn.startsWith("language-")).join(" ");
+  const actualClassName = classNames
+    .filter((cn) => !cn.startsWith("language-"))
+    .join(" ");
   const actualProps = { ...props, className: actualClassName };
 
   return (
-    <Highlight {...defaultProps} code={children} language={language as any} {...actualProps}>
+    <Highlight
+      {...defaultProps}
+      code={children}
+      language={language as any}
+      {...actualProps}
+    >
       {({ tokens }) => (
         <Pre {...actualProps}>
           <Code>
             {tokens.map((line, i) => (
               <React.Fragment key={i}>
                 {line
-                  .filter(token => token.content !== "")
+                  .filter((token) => token.content !== "")
                   .map((token, j) => {
-                    const TokenComponent = TAGS.get(token.types.find(type => TAGS.has(type))!) ?? FallbackToken;
+                    const TokenComponent =
+                      TAGS.get(token.types.find((type) => TAGS.has(type))!) ??
+                      FallbackToken;
 
                     return (
-                      <TokenComponent key={`${i}-${j}`} data-types={token.types.join(", ")}>
+                      <TokenComponent
+                        key={`${i}-${j}`}
+                        data-types={token.types.join(", ")}
+                      >
                         {token.content}
                       </TokenComponent>
                     );
-                  })
-                }
+                  })}
 
                 {i < tokens.length - 1 ? "\n" : null}
               </React.Fragment>
@@ -114,25 +125,120 @@ const Code = styled.code`
 `;
 
 const TAGS = new Map([
-  ["hexcode", styled.span`color: ${SYNTAX_HIGHLIGHT_HEXCODE_COLOR};`],
-  ["selector", styled.span`color: ${SYNTAX_HIGHLIGHT_SELECTOR_COLOR};`],
-  ["property", styled.span`color: ${SYNTAX_HIGHLIGHT_PROPERTY_COLOR};`],
-  ["parameter", styled.span`color: ${SYNTAX_HIGHLIGHT_PARAMETER_COLOR};`],
-  ["constant", styled.span`color: ${SYNTAX_HIGHLIGHT_CONSTANT_COLOR};`],
-  ["attr-name", styled.span`color: ${SYNTAX_HIGHLIGHT_ATTRIBUTE_KEY_COLOR};`],
-  ["punctuation", styled.span`color: ${SYNTAX_HIGHLIGHT_PUNCTUATION_COLOR};`],
-  ["class-name", styled.span`color: ${SYNTAX_HIGHLIGHT_CLASS_COLOR};`],
-  ["maybe-class-name", styled.span`color: ${SYNTAX_HIGHLIGHT_CLASS_COLOR};`],
-  ["number", styled.span`color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};`],
-  ["unit", styled.span`color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};`],
-  ["interpolation", styled.span`color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};`],
-  ["pseudo-element", styled.span`color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};`],
-  ["string", styled.span`color: ${SYNTAX_HIGHLIGHT_STRING_COLOR};`],
-  ["attr-value", styled.span`color: ${SYNTAX_HIGHLIGHT_STRING_COLOR};`],
-  ["function", styled.span`color: ${SYNTAX_HIGHLIGHT_FUNCTION_COLOR};`],
-  ["operator", styled.span`color: ${SYNTAX_HIGHLIGHT_OPERATOR_COLOR};`],
-  ["keyword", styled.span`color: ${SYNTAX_HIGHLIGHT_KEYWORD_COLOR};`],
-  ["comment", styled.span`color: ${SYNTAX_HIGHLIGHT_COMMENT_COLOR};`],
+  [
+    "hexcode",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_HEXCODE_COLOR};
+    `,
+  ],
+  [
+    "selector",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_SELECTOR_COLOR};
+    `,
+  ],
+  [
+    "property",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_PROPERTY_COLOR};
+    `,
+  ],
+  [
+    "parameter",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_PARAMETER_COLOR};
+    `,
+  ],
+  [
+    "constant",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_CONSTANT_COLOR};
+    `,
+  ],
+  [
+    "attr-name",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_ATTRIBUTE_KEY_COLOR};
+    `,
+  ],
+  [
+    "punctuation",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_PUNCTUATION_COLOR};
+    `,
+  ],
+  [
+    "class-name",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_CLASS_COLOR};
+    `,
+  ],
+  [
+    "maybe-class-name",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_CLASS_COLOR};
+    `,
+  ],
+  [
+    "number",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};
+    `,
+  ],
+  [
+    "unit",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};
+    `,
+  ],
+  [
+    "interpolation",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};
+    `,
+  ],
+  [
+    "pseudo-element",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_NUMBER_COLOR};
+    `,
+  ],
+  [
+    "string",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_STRING_COLOR};
+    `,
+  ],
+  [
+    "attr-value",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_STRING_COLOR};
+    `,
+  ],
+  [
+    "function",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_FUNCTION_COLOR};
+    `,
+  ],
+  [
+    "operator",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_OPERATOR_COLOR};
+    `,
+  ],
+  [
+    "keyword",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_KEYWORD_COLOR};
+    `,
+  ],
+  [
+    "comment",
+    styled.span`
+      color: ${SYNTAX_HIGHLIGHT_COMMENT_COLOR};
+    `,
+  ],
 ]);
 
 const FallbackToken = styled.span`

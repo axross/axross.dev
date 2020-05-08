@@ -20,7 +20,7 @@ export default function ExternalLink({ children, ...props }: Props) {
         value={{
           ...theme,
           color: TextColor.primaryForeground,
-          ...isHovered ? { underline: true } : {},
+          ...(isHovered ? { underline: true } : {}),
         }}
       >
         {children}

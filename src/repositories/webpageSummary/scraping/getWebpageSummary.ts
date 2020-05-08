@@ -3,14 +3,18 @@ import fetch from "node-fetch";
 import GetWebpageSummary from "../GetWebpageSummary";
 
 const getWebpageSummary: GetWebpageSummary = async ({ url }) => {
-  const response = await fetch(url.href, { headers: { "user-agent": "facebookexternalhit/1.1" } });
+  const response = await fetch(url.href, {
+    headers: { "user-agent": "facebookexternalhit/1.1" },
+  });
 
   if (response.status < 200 || response.status >= 300) {
     throw new Error(`${url.href} responded ${response.status}.`);
   }
 
   if (!response.headers.get("content-type")?.includes("text/html")) {
-    throw new Error(`${url.href} responded ${response.headers.get("content-type")}.`);
+    throw new Error(
+      `${url.href} responded ${response.headers.get("content-type")}.`
+    );
   }
 
   const $ = cheerio.load(await response.text());
@@ -42,7 +46,9 @@ const getWebpageSummary: GetWebpageSummary = async ({ url }) => {
   }
 
   if (title === null) {
-    throw new Error(`${url.href} responded a HTML that doesn't have the document title.`);
+    throw new Error(
+      `${url.href} responded a HTML that doesn't have the document title.`
+    );
   }
 
   return {
@@ -51,6 +57,6 @@ const getWebpageSummary: GetWebpageSummary = async ({ url }) => {
     description,
     imageURL,
   };
-}
+};
 
 export default getWebpageSummary;

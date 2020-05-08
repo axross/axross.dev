@@ -5,7 +5,7 @@ export function createGetBio(contentful: ContentfulClientApi): GetBio {
   return async ({ locale }) => {
     const entries = await contentful.getEntries<any>({
       content_type: "person",
-      locale
+      locale,
     });
 
     return entries.items[0].fields.description;

@@ -26,7 +26,9 @@ export default function Image({ src, ...props }: Props) {
     observer.observe(ref.current!);
   }, [src, ref.current]);
 
-  return <Root src={_src as any} crossOrigin="anonymous" ref={ref} {...props} />;
+  return (
+    <Root src={_src as any} crossOrigin="anonymous" ref={ref} {...props} />
+  );
 }
 
 const Root = styled.img`

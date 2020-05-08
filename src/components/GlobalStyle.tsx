@@ -1,6 +1,11 @@
 import { css, Global } from "@emotion/core";
 import * as React from "react";
-import { LIGHT_BACKGROUND_COLOR, DARK_BACKGROUND_COLOR, DARK_FOREGROUND_COLOR, LIGHT_FOREGROUND_COLOR } from "../constant/color";
+import {
+  LIGHT_BACKGROUND_COLOR,
+  DARK_BACKGROUND_COLOR,
+  DARK_FOREGROUND_COLOR,
+  LIGHT_FOREGROUND_COLOR,
+} from "../constant/color";
 import { DARK_MODE } from "../constant/mediaQuery";
 
 export default function GlobalStyle() {

@@ -18,8 +18,10 @@ interface Props extends React.Attributes {
 
 export default function BlogPostPage({ prefetchedBlogPost }: Props) {
   const router = useRouter();
-  const blogPostId = router.query.postId;
-  const [blogPost, isBlogPostLoading] = useBlogPost({ id: blogPostId.toString() });
+  const blogPostId = `${router.query.postId}`;
+  const [blogPost, isBlogPostLoading] = useBlogPost({
+    id: blogPostId.toString(),
+  });
   useLoggingPageView(blogPost, isBlogPostLoading);
 
   return (
@@ -48,7 +50,9 @@ const Root = styled.div`
   --max-width: 1080px;
   --width: min(var(--max-width), 100%);
   display: grid;
-  grid-template-columns: calc((var(--width) - 640px) / 2) 640px calc((var(--width) - 640px) / 2);
+  grid-template-columns: calc((var(--width) - 640px) / 2) 640px calc(
+      (var(--width) - 640px) / 2
+    );
   grid-template-rows: auto 32px auto;
   grid-template-areas:
     "head-bar head-bar head-bar"
@@ -83,4 +87,3 @@ const _ArtcileLoader = styled(ArtcileLoader)`
 const _ArticleNotFound = styled(ArticleNotFound)`
   grid-area: article;
 `;
-

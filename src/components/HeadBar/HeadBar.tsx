@@ -16,12 +16,11 @@ export default function HeadBar({ noLogo = false, ...props }: Props) {
 
   return (
     <Root {...props}>
-      {noLogo
-        ? null
-        : <_LogoLink href={{ pathname: "/", query: { hl: currentLocale } }}>
-            <_Logo />
-          </_LogoLink>
-      }
+      {noLogo ? null : (
+        <_LogoLink href={{ pathname: "/", query: { hl: currentLocale } }}>
+          <_Logo />
+        </_LogoLink>
+      )}
 
       <_Locales>
         <LocaleSwitcher />

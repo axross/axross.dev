@@ -1,10 +1,13 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { DARK_SECONDARY_BACKGROUND_COLOR, LIGHT_SECONDARY_BACKGROUND_COLOR } from "../../../constant/color";
+import {
+  DARK_SECONDARY_BACKGROUND_COLOR,
+  LIGHT_SECONDARY_BACKGROUND_COLOR,
+} from "../../../constant/color";
 import { DARK_MODE, MOBILE } from "../../../constant/mediaQuery";
 import ExternalLink from "../../ExternalLink";
 import RawText, { TextColor } from "../../RawText";
-import EmbededLinkLoader from './EmbededLinkLoader';
+import EmbededLinkLoader from "./EmbededLinkLoader";
 import FallbackImage from "./FallbackImage";
 import useWebpageSummary from "./useWebpageSummary";
 
@@ -14,7 +17,9 @@ interface Props extends React.Attributes {
 }
 
 export default function EmbededLink({ url, ...props }: Props) {
-  const [webpageSummary, isWebpageSummaryLoading] = useWebpageSummary({ url: new URL(url) });
+  const [webpageSummary, isWebpageSummaryLoading] = useWebpageSummary({
+    url: new URL(url),
+  });
 
   // show the loader even if retrieving the webpage summary failed
   // and report to sentry.io
@@ -24,10 +29,11 @@ export default function EmbededLink({ url, ...props }: Props) {
 
   return (
     <Root {...props}>
-      {webpageSummary.imageURL
-        ? <Image _src={`${webpageSummary!.imageURL}`} />
-        : <_FallbackImage></_FallbackImage>
-      }
+      {webpageSummary.imageURL ? (
+        <Image _src={`${webpageSummary!.imageURL}`} />
+      ) : (
+        <_FallbackImage></_FallbackImage>
+      )}
 
       <TitleLink href={url}>
         <RawText bold maxLines={2}>
@@ -42,8 +48,7 @@ export default function EmbededLink({ url, ...props }: Props) {
       <Url color={TextColor.secondaryForeground} maxLines={1}>
         {webpageSummary.url.host.startsWith("www.")
           ? webpageSummary.url.host.substring(4)
-          : webpageSummary.url.host
-        }
+          : webpageSummary.url.host}
       </Url>
     </Root>
   );
@@ -119,7 +124,7 @@ const _FallbackImage = styled(FallbackImage)`
     width: 64px;
     height: 64px;
   }
-`
+`;
 
 const TitleLink = styled(ExternalLink)`
   grid-area: title;
@@ -136,4 +141,3 @@ const Description = styled(RawText)`
 const Url = styled(RawText)`
   grid-area: url;
 `;
-

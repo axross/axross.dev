@@ -1,7 +1,9 @@
 import GetWebpageSummary from "../GetWebpageSummary";
 
 const getWebpageSummary: GetWebpageSummary = async ({ url }) => {
-  const response = await fetch(`/api/webpage_summaries/${encodeURIComponent(url.href)}`);
+  const response = await fetch(
+    `/api/webpage_summaries/${encodeURIComponent(url.href)}`
+  );
 
   if (!response.ok) new Error();
 
@@ -13,6 +15,6 @@ const getWebpageSummary: GetWebpageSummary = async ({ url }) => {
     description: json.description,
     imageURL: new URL(json.imageURL),
   };
-}
+};
 
 export default getWebpageSummary;

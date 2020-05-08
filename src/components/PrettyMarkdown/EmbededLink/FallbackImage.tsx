@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { DARK_BACKGROUND_COLOR, LIGHT_BACKGROUND_COLOR } from "../../../constant/color";
+import {
+  DARK_BACKGROUND_COLOR,
+  LIGHT_BACKGROUND_COLOR,
+} from "../../../constant/color";
 import { DARK_MODE, MOBILE } from "../../../constant/mediaQuery";
 import Icon, { IconColor, IconName } from "../../Icon";
 
@@ -13,7 +16,7 @@ export default function FallbackImage({ ...props }: Props) {
     <Root {...props}>
       <_Icon name={IconName.website} fill={IconColor.secondaryForeground} />
     </Root>
-  )
+  );
 }
 
 const Root = styled.div`
@@ -31,6 +34,4 @@ const Root = styled.div`
   }
 `;
 
-const _Icon = styled(Icon)`
-
-`;
+const _Icon = styled(Icon)``;

@@ -1,3 +1,4 @@
+import { describe, expect, it, jest } from "@jest/globals";
 import * as React from "react";
 import { act, create } from "react-test-renderer";
 import BlogPost from "../../entities/BlogPost";
@@ -14,11 +15,11 @@ describe("<Head>", () => {
     body: "BLOG_POST_BODY",
   };
 
-  describe("when currentLocale=\"en-US\"", () => {
+  describe('when currentLocale="en-US"', () => {
     describe("while loading the blog post", () => {
       it("pushes tags into <head> and they matches with the previous snapshots", async () => {
         const onHeadChange = jest.fn().mockName("onHeadChange");
-    
+
         await act(async () => {
           create(
             <MockApp onHeadChange={onHeadChange} currentLocale="en-US">
@@ -26,16 +27,16 @@ describe("<Head>", () => {
             </MockApp>
           );
         });
-    
+
         expect(onHeadChange.mock.calls[0][0]).toMatchSnapshot();
       });
     });
-  
+
     describe("after the blog post is loaded", () => {
       describe("if the blog post is successfully loaded", () => {
         it("pushes tags into <head> and they matches with the previous snapshots", async () => {
           const onHeadChange = jest.fn().mockName("onHeadChange");
-      
+
           await act(async () => {
             create(
               <MockApp onHeadChange={onHeadChange} currentLocale="en-US">
@@ -43,15 +44,15 @@ describe("<Head>", () => {
               </MockApp>
             );
           });
-      
+
           expect(onHeadChange.mock.calls[0][0]).toMatchSnapshot();
         });
       });
-      
+
       describe("if the blog post is not found", () => {
         it("pushes tags into <head> and they matches with the previous snapshots", async () => {
           const onHeadChange = jest.fn().mockName("onHeadChange");
-      
+
           await act(async () => {
             create(
               <MockApp onHeadChange={onHeadChange} currentLocale="en-US">
@@ -59,18 +60,18 @@ describe("<Head>", () => {
               </MockApp>
             );
           });
-      
+
           expect(onHeadChange.mock.calls[0][0]).toMatchSnapshot();
         });
       });
     });
   });
 
-  describe("when currentLocale=\"ja-JP\"", () => {
+  describe('when currentLocale="ja-JP"', () => {
     describe("while loading the blog post", () => {
       it("pushes tags into <head> and they matches with the previous snapshots", async () => {
         const onHeadChange = jest.fn().mockName("onHeadChange");
-    
+
         await act(async () => {
           create(
             <MockApp onHeadChange={onHeadChange} currentLocale="ja-JP">
@@ -78,16 +79,16 @@ describe("<Head>", () => {
             </MockApp>
           );
         });
-    
+
         expect(onHeadChange.mock.calls[0][0]).toMatchSnapshot();
       });
     });
-  
+
     describe("after the blog post is loaded", () => {
       describe("if the blog post is successfully loaded", () => {
         it("pushes tags into <head> and they matches with the previous snapshots", async () => {
           const onHeadChange = jest.fn().mockName("onHeadChange");
-      
+
           await act(async () => {
             create(
               <MockApp onHeadChange={onHeadChange} currentLocale="ja-JP">
@@ -95,15 +96,15 @@ describe("<Head>", () => {
               </MockApp>
             );
           });
-      
+
           expect(onHeadChange.mock.calls[0][0]).toMatchSnapshot();
         });
       });
-      
+
       describe("if the blog post is not found", () => {
         it("pushes tags into <head> and they matches with the previous snapshots", async () => {
           const onHeadChange = jest.fn().mockName("onHeadChange");
-      
+
           await act(async () => {
             create(
               <MockApp onHeadChange={onHeadChange} currentLocale="ja-JP">
@@ -111,7 +112,7 @@ describe("<Head>", () => {
               </MockApp>
             );
           });
-      
+
           expect(onHeadChange.mock.calls[0][0]).toMatchSnapshot();
         });
       });

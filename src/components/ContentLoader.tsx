@@ -1,7 +1,12 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import ReactContentLoader, { IContentLoaderProps } from "react-content-loader";
-import { DARK_LOADER_COLOR, LIGHT_LOADER_COLOR, DARK_LOADER_HIGHLIGHT_COLOR, LIGHT_LOADER_HIGHLIGHT_COLOR } from "../constant/color";
+import {
+  DARK_LOADER_COLOR,
+  LIGHT_LOADER_COLOR,
+  DARK_LOADER_HIGHLIGHT_COLOR,
+  LIGHT_LOADER_HIGHLIGHT_COLOR,
+} from "../constant/color";
 import { DARK_MODE } from "../constant/mediaQuery";
 
 type Props = Omit<

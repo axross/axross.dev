@@ -28,5 +28,5 @@ const icons = new Map([
   ["IconName.facebook", IconName.facebook],
   ["IconName.github", IconName.github],
   ["IconName.instagram", IconName.instagram],
-  ["IconName.linkedIn", IconName.linkedIn]
+  ["IconName.linkedIn", IconName.linkedIn],
 ]);

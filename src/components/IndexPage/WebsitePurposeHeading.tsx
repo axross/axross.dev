@@ -11,9 +11,7 @@ export default function WebsitePurposeHeading(props: Props) {
 
   return (
     <h2 {...props}>
-      <UIText type={UITextType.subtitle}>
-        {heading}
-      </UIText>
+      <UIText type={UITextType.subtitle}>{heading}</UIText>
     </h2>
   );
 }

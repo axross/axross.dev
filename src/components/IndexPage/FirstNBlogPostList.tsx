@@ -12,7 +12,9 @@ interface Props extends React.Attributes {
 export default function FirstNBlogPostList({ blogPosts, ...props }: Props) {
   return (
     <Root {...props}>
-      {blogPosts.map(blogPost => <Item blogPost={blogPost} key={blogPost.id} />)}
+      {blogPosts.map((blogPost) => (
+        <Item blogPost={blogPost} key={blogPost.id} />
+      ))}
     </Root>
   );
 }

@@ -1,5 +1,10 @@
 import * as React from "react";
-import RawText, { RawTextProps, TextColor, TextSize, Typeface } from "../RawText";
+import RawText, {
+  RawTextProps,
+  TextColor,
+  TextSize,
+  Typeface,
+} from "../RawText";
 import UITextType from "./UITextType";
 
 interface Props extends React.Attributes {
@@ -8,7 +13,11 @@ interface Props extends React.Attributes {
   children?: string;
 }
 
-export default function UIText({ type = UITextType.label, children, ...props }: Props) {
+export default function UIText({
+  type = UITextType.label,
+  children,
+  ...props
+}: Props) {
   return (
     <RawText {...UI_TEXT_TYPE[type]} {...props}>
       {children}

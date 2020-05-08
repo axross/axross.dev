@@ -33,11 +33,7 @@ export default function IndexPage(props: Props) {
       <Root {...props}>
         <_HeadBar noLogo />
 
-        {isBioLoading ? (
-          <_WhoamiLoader />
-        ) : (
-          <_Whoami bio={bio!} />
-        )}
+        {isBioLoading ? <_WhoamiLoader /> : <_Whoami bio={bio!} />}
 
         <_BlogPostListHeading />
 
@@ -52,9 +48,7 @@ export default function IndexPage(props: Props) {
         {isWebsitePurposeLoading ? (
           <_WebsitePurposeLoader />
         ) : (
-          <_WebsitePurpose>
-            {websitePurpose!}
-          </_WebsitePurpose>
+          <_WebsitePurpose>{websitePurpose!}</_WebsitePurpose>
         )}
       </Root>
     </>
@@ -65,7 +59,9 @@ const Root = styled.div`
   --max-width: 1080px;
   --width: min(var(--max-width), 100%);
   display: grid;
-  grid-template-columns: calc((var(--width) - 640px) / 2) 640px calc((var(--width) - 640px) / 2);
+  grid-template-columns: calc((var(--width) - 640px) / 2) 640px calc(
+      (var(--width) - 640px) / 2
+    );
   grid-template-rows: auto 32px auto 64px auto 32px auto 64px auto 32px auto;
   grid-template-areas:
     "head-bar head-bar head-bar"

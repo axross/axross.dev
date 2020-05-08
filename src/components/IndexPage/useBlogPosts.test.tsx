@@ -1,3 +1,11 @@
+import {
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  jest,
+} from "@jest/globals";
 import * as React from "react";
 import { act, create } from "react-test-renderer";
 import MockApp from "../../../fixtures/MockApp";
@@ -7,7 +15,8 @@ describe("useBlogPosts()", () => {
   const blogPosts = Symbol("BLOG_POSTS");
   const isLoading = Symbol("IS_LOADING");
   const getAllBlogPosts = Symbol("GET_ALL_BLOG_POSTS");
-  const useQuery = jest.fn()
+  const useQuery = jest
+    .fn()
     .mockName("useQuery")
     .mockReturnValue({ data: blogPosts, isLoading });
 
@@ -28,7 +37,7 @@ describe("useBlogPosts()", () => {
       useBlogPosts();
 
       return null;
-    };
+    }
 
     await act(async () => {
       create(
@@ -41,7 +50,11 @@ describe("useBlogPosts()", () => {
       );
     });
 
-    expect(useQuery).toHaveBeenCalledWith(["blog-posts", { locale }], getAllBlogPosts, { initialData: [] });
+    expect(useQuery).toHaveBeenCalledWith(
+      ["blog-posts", { locale }],
+      getAllBlogPosts,
+      { initialData: [] }
+    );
   });
 
   it("returns [data, isLoading] that are the received values from useQuery()", async () => {
@@ -51,7 +64,7 @@ describe("useBlogPosts()", () => {
       returnValue = useBlogPosts();
 
       return null;
-    };
+    }
 
     await act(async () => {
       create(

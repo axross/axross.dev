@@ -4,10 +4,15 @@ import useLocale from "../../hooks/useLocale";
 import useTranslation from "../../hooks/useTranslation";
 import useURL from "../../hooks/useURL";
 
-export default function useLoggingPageView(blogPost: BlogPost | null, blogPostLoading: boolean): void {
+export default function useLoggingPageView(
+  blogPost: BlogPost | null,
+  blogPostLoading: boolean
+): void {
   const url = useURL();
   const { currentLocale } = useLocale();
-  const title = useTranslation("WEBSITE_TITLE_BLOG_POST", { title: blogPost?.title });
+  const title = useTranslation("WEBSITE_TITLE_BLOG_POST", {
+    title: blogPost?.title,
+  });
   const notFoundTitle = useTranslation("WEBSITE_TITLE_BLOG_POST_NOT_FOUND");
 
   React.useEffect(() => {

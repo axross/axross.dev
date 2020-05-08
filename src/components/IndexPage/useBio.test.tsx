@@ -1,3 +1,11 @@
+import {
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  jest,
+} from "@jest/globals";
 import * as React from "react";
 import { act, create } from "react-test-renderer";
 import MockApp from "../../../fixtures/MockApp";
@@ -7,7 +15,8 @@ describe("useBio()", () => {
   const bio = Symbol("BIO");
   const isLoading = Symbol("IS_LOADING");
   const getBio = Symbol("GET_BIO");
-  const useQuery = jest.fn()
+  const useQuery = jest
+    .fn()
     .mockName("useQuery")
     .mockReturnValue({ data: bio, isLoading });
 
@@ -28,20 +37,19 @@ describe("useBio()", () => {
       useBio();
 
       return null;
-    };
+    }
 
     await act(async () => {
       create(
-        <MockApp
-          repositories={{ getBio } as any}
-          currentLocale={locale}
-        >
+        <MockApp repositories={{ getBio } as any} currentLocale={locale}>
           <Component />
         </MockApp>
       );
     });
 
-    expect(useQuery).toHaveBeenCalledWith(["bio", { locale }], getBio, { initialData: null });
+    expect(useQuery).toHaveBeenCalledWith(["bio", { locale }], getBio, {
+      initialData: null,
+    });
   });
 
   it("returns [data, isLoading] that are the received values from useQuery()", async () => {
@@ -51,14 +59,11 @@ describe("useBio()", () => {
       returnValue = useBio();
 
       return null;
-    };
+    }
 
     await act(async () => {
       create(
-        <MockApp
-          repositories={{ getBio } as any}
-          currentLocale={locale}
-        >
+        <MockApp repositories={{ getBio } as any} currentLocale={locale}>
           <Component />
         </MockApp>
       );
