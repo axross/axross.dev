@@ -1,3 +1,11 @@
+import {
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  jest,
+} from "@jest/globals";
 import * as React from "react";
 import { act, create } from "react-test-renderer";
 import MockApp from "../../../../fixtures/MockApp";
@@ -8,7 +16,8 @@ describe("useWebpageSummary()", () => {
   const webpageSummary = Symbol("WEBPAGE_SUMMARY");
   const isLoading = Symbol("IS_LOADING");
   const getWebpageSummary = Symbol("GET_WEBPAGE_SUMMARY");
-  const useQuery = jest.fn()
+  const useQuery = jest
+    .fn()
     .mockName("useQuery")
     .mockReturnValue({ data: webpageSummary, isLoading });
 
@@ -29,7 +38,7 @@ describe("useWebpageSummary()", () => {
       useWebpageSummary({ url } as any);
 
       return null;
-    };
+    }
 
     await act(async () => {
       create(
@@ -42,7 +51,11 @@ describe("useWebpageSummary()", () => {
       );
     });
 
-    expect(useQuery).toHaveBeenCalledWith(["webpage-summary", { url }], getWebpageSummary, { initialData: null });
+    expect(useQuery).toHaveBeenCalledWith(
+      ["webpage-summary", { url }],
+      getWebpageSummary,
+      { initialData: null }
+    );
   });
 
   it("returns [data, isLoading] that are the received values from useQuery()", async () => {
@@ -52,12 +65,12 @@ describe("useWebpageSummary()", () => {
       returnValue = useWebpageSummary({ url } as any);
 
       return null;
-    };
+    }
 
     await act(async () => {
       create(
         <MockApp
-        repositories={{ getWebpageSummary } as any}
+          repositories={{ getWebpageSummary } as any}
           currentLocale={locale}
         >
           <Component />

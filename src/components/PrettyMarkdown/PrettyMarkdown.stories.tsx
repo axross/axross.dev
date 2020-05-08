@@ -4,7 +4,7 @@ import PrettyMarkdown from "./PrettyMarkdown";
 
 export default {
   title: "Components/PrettyMarkdown",
-  decorators: [withKnobs]
+  decorators: [withKnobs],
 };
 
 export const articleA = () => (

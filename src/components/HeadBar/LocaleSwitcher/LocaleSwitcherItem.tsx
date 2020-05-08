@@ -19,9 +19,7 @@ export default function LocaleSwitcherItem({ locale, ...props }: Props) {
   if (locale === currentLocale) {
     return (
       <li {...props}>
-        <UIText type={UITextType.smallLabel}>
-          {label}
-        </UIText>
+        <UIText type={UITextType.smallLabel}>{label}</UIText>
       </li>
     );
   }
@@ -33,9 +31,7 @@ export default function LocaleSwitcherItem({ locale, ...props }: Props) {
         as={{ pathname: router.asPath.split("?")[0], query: { hl: locale } }}
         replace
       >
-        <UIText type={UITextType.smallLabel}>
-          {label}
-        </UIText>
+        <UIText type={UITextType.smallLabel}>{label}</UIText>
       </Link>
     </li>
   );

@@ -1,7 +1,13 @@
 import styled from "@emotion/styled";
 import * as React from "react";
 import { MOBILE } from "../../constant/mediaQuery";
-import RawText, { RawTextProps, RawTextThemeContext, TextColor, TextSize, Typeface } from "../RawText";
+import RawText, {
+  RawTextProps,
+  RawTextThemeContext,
+  TextColor,
+  TextSize,
+  Typeface,
+} from "../RawText";
 
 interface Props extends React.Attributes {
   className?: string;
@@ -18,36 +24,66 @@ function Heading({ Component, textProps, children, ...props }: InternalProps) {
 
   return (
     <Component {...props}>
-      <RawTextThemeContext.Provider value={{
-        ...theme,
-        color: TextColor.emphasizedForeground,
-        typeface: Typeface.headline,
-        ...textProps,
-      }}>
-        {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
+      <RawTextThemeContext.Provider
+        value={{
+          ...theme,
+          color: TextColor.emphasizedForeground,
+          typeface: Typeface.headline,
+          ...textProps,
+        }}
+      >
+        {React.Children.map(children, (child) =>
+          typeof child === "string" ? <RawText>{child}</RawText> : child
+        )}
       </RawTextThemeContext.Provider>
     </Component>
-  )
+  );
 }
 
 export function Heading1(props: Props) {
-  return <Heading Component={H1} textProps={{ size: TextSize.giantic, bold: true }} {...props} />;
+  return (
+    <Heading
+      Component={H1}
+      textProps={{ size: TextSize.giantic, bold: true }}
+      {...props}
+    />
+  );
 }
 
 export function Heading2(props: Props) {
-  return <Heading Component={H2} textProps={{ size: TextSize.huge, bold: true }} {...props} />;
+  return (
+    <Heading
+      Component={H2}
+      textProps={{ size: TextSize.huge, bold: true }}
+      {...props}
+    />
+  );
 }
 
 export function Heading3(props: Props) {
-  return <Heading Component={H3} textProps={{ size: TextSize.large, bold: true }} {...props} />;
+  return (
+    <Heading
+      Component={H3}
+      textProps={{ size: TextSize.large, bold: true }}
+      {...props}
+    />
+  );
 }
 
 export function Heading4(props: Props) {
-  return <Heading Component={H4} textProps={{ size: TextSize.larger, bold: true }} {...props} />;
+  return (
+    <Heading
+      Component={H4}
+      textProps={{ size: TextSize.larger, bold: true }}
+      {...props}
+    />
+  );
 }
 
 export function Heading5(props: Props) {
-  return <Heading Component={H5} textProps={{ size: TextSize.larger }} {...props} />;
+  return (
+    <Heading Component={H5} textProps={{ size: TextSize.larger }} {...props} />
+  );
 }
 
 export function Heading6(props: Props) {

@@ -3,7 +3,7 @@
 exports[`<Head> when currentLocale="en-US" after the blog post is loaded if the blog post is not found pushes tags into <head> and they matches with the previous snapshots 1`] = `
 Array [
   <meta
-    content="width=device-width,minimum-scale=1,initial-scale=1"
+    content="width=device-width"
     name="viewport"
   />,
   <meta
@@ -74,7 +74,7 @@ Array [
 exports[`<Head> when currentLocale="en-US" after the blog post is loaded if the blog post is successfully loaded pushes tags into <head> and they matches with the previous snapshots 1`] = `
 Array [
   <meta
-    content="width=device-width,minimum-scale=1,initial-scale=1"
+    content="width=device-width"
     name="viewport"
   />,
   <meta
@@ -145,7 +145,7 @@ Array [
 exports[`<Head> when currentLocale="en-US" while loading the blog post pushes tags into <head> and they matches with the previous snapshots 1`] = `
 Array [
   <meta
-    content="width=device-width,minimum-scale=1,initial-scale=1"
+    content="width=device-width"
     name="viewport"
   />,
   <meta
@@ -160,7 +160,7 @@ Array [
 exports[`<Head> when currentLocale="ja-JP" after the blog post is loaded if the blog post is not found pushes tags into <head> and they matches with the previous snapshots 1`] = `
 Array [
   <meta
-    content="width=device-width,minimum-scale=1,initial-scale=1"
+    content="width=device-width"
     name="viewport"
   />,
   <meta
@@ -246,7 +246,7 @@ Array [
 exports[`<Head> when currentLocale="ja-JP" after the blog post is loaded if the blog post is successfully loaded pushes tags into <head> and they matches with the previous snapshots 1`] = `
 Array [
   <meta
-    content="width=device-width,minimum-scale=1,initial-scale=1"
+    content="width=device-width"
     name="viewport"
   />,
   <meta
@@ -332,7 +332,7 @@ Array [
 exports[`<Head> when currentLocale="ja-JP" while loading the blog post pushes tags into <head> and they matches with the previous snapshots 1`] = `
 Array [
   <meta
-    content="width=device-width,minimum-scale=1,initial-scale=1"
+    content="width=device-width"
     name="viewport"
   />,
   <meta

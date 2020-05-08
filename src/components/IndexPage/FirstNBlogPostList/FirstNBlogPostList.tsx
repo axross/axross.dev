@@ -14,7 +14,9 @@ interface Props extends React.Attributes {
 export default function FirstNBlogPostListItem({ blogPost, ...props }: Props) {
   const { currentLocale } = useLocale();
   const timestamp = useTranslation("BLOG_POST_TIMETAMP", {
-    createdAt: new Intl.DateTimeFormat(currentLocale).format(blogPost?.createdAt),
+    createdAt: new Intl.DateTimeFormat(currentLocale).format(
+      blogPost?.createdAt
+    ),
   });
 
   return (
@@ -22,15 +24,16 @@ export default function FirstNBlogPostListItem({ blogPost, ...props }: Props) {
       <Title>
         <Link
           href={{ pathname: "/posts/[postId]", query: { hl: currentLocale } }}
-          as={{ pathname: `/posts/${blogPost.id}`, query: { hl: currentLocale } }}
+          as={{
+            pathname: `/posts/${blogPost.id}`,
+            query: { hl: currentLocale },
+          }}
         >
           <UIText>{blogPost.title}</UIText>
         </Link>
       </Title>
 
-      <Timestamp type={UITextType.caption}>
-        {timestamp}
-      </Timestamp>
+      <Timestamp type={UITextType.caption}>{timestamp}</Timestamp>
     </Root>
   );
 }

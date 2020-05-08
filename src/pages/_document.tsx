@@ -1,5 +1,5 @@
-import NextDocument, { Html, Head, Main, NextScript } from "next/document"
-import GlobalStyle from "../components/GlobalStyle"
+import NextDocument, { Html, Head, Main, NextScript } from "next/document";
+import GlobalStyle from "../components/GlobalStyle";
 
 export default class Document extends NextDocument {
   render() {
@@ -14,6 +14,6 @@ export default class Document extends NextDocument {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }

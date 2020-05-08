@@ -21,7 +21,7 @@ export default function Link({ className, children, ...props }: Props) {
         <RawTextThemeContext.Provider
           value={{
             ...theme,
-            ...isHovered ? { underline: true } : {},
+            ...(isHovered ? { underline: true } : {}),
             color: TextColor.primaryForeground,
           }}
         >

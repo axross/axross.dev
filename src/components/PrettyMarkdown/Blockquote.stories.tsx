@@ -10,12 +10,12 @@ export const paragraphsInside = () => (
   <div style={{ padding: "0 48px" }}>
     <Blockquote>
       <Paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget gravida cum sociis natoque penatibus et.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Eget gravida cum
+        sociis natoque penatibus et.
       </Paragraph>
 
-      <Paragraph>
-        Montes nascetur ridiculus mus mauris vitae.
-      </Paragraph>
+      <Paragraph>Montes nascetur ridiculus mus mauris vitae.</Paragraph>
     </Blockquote>
   </div>
 );

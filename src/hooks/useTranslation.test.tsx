@@ -1,3 +1,11 @@
+import {
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  jest,
+} from "@jest/globals";
 import * as React from "react";
 import { ReactTestRenderer, act, create } from "react-test-renderer";
 import { LocaleContext } from "./useLocale";
@@ -7,11 +15,13 @@ describe("useTranslation()", () => {
   const dictionaryKey: any = Symbol("DICTIONARY_KEY");
   const dictionaryValue: any = Symbol("DICTIONARY_VALUE");
   const formatReturnValue: any = Symbol("FORMAT_RETURN_VALUE");
-  const IntlMessageFormat = jest.fn()
+  const IntlMessageFormat = jest
+    .fn()
     .mockName("IntlMessageFormat")
     // must use .mockImplementation() for return value of new Xxx().
     .mockImplementation(() => ({ format }));
-  const format = jest.fn()
+  const format = jest
+    .fn()
     .mockName("IntlMessageFormat#format")
     .mockReturnValue(formatReturnValue);
   let useTranslation: typeof import("./useTranslation")["default"];
@@ -21,7 +31,7 @@ describe("useTranslation()", () => {
     jest.mock("../dictionary", () => ({
       [dictionaryKey]: {
         [locale]: dictionaryValue,
-      }
+      },
     }));
 
     useTranslation = (await import("./useTranslation")).default;
@@ -34,7 +44,6 @@ describe("useTranslation()", () => {
 
   describe("when the specified dictionary entry is found", () => {
     it("uses IntlMessageFormat to build messages", async () => {
-      
       function Component() {
         useTranslation(dictionaryKey);
 
@@ -54,7 +63,7 @@ describe("useTranslation()", () => {
 
     it("passes the given arguments to IntlMessageFormat#format()", async () => {
       const args = { arg1: "ARG_1", arg2: "ARG_2" };
-      
+
       function Component() {
         useTranslation(dictionaryKey, args);
 
@@ -163,7 +172,7 @@ describe("useTranslation()", () => {
       expect.assertions(1);
 
       const anotherDictionaryKey: any = Symbol("ANOTHER_DICTIONARY_KEY");
-      
+
       function Component() {
         expect(() => useTranslation(anotherDictionaryKey)).toThrow();
 
@@ -185,7 +194,7 @@ describe("useTranslation()", () => {
       expect.assertions(1);
 
       const anotherLocale: any = Symbol("ANOTHER_LOCALE");
-      
+
       function Component() {
         expect(() => useTranslation(dictionaryKey)).toThrow();
 
@@ -194,7 +203,9 @@ describe("useTranslation()", () => {
 
       await act(async () => {
         create(
-          <LocaleContext.Provider value={{ currentLocale: anotherLocale } as any}>
+          <LocaleContext.Provider
+            value={{ currentLocale: anotherLocale } as any}
+          >
             <Component />
           </LocaleContext.Provider>
         );

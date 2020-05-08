@@ -12,7 +12,7 @@ export default function TwoParagraphLoader(props: Props) {
   return (
     <Root {...props}>
       <Avatar />
-      <Name/>
+      <Name />
 
       <FirstSocialLinkIcon />
       <FirstSocialLinkLabel />

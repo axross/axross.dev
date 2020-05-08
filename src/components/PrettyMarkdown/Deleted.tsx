@@ -11,7 +11,9 @@ export default function Deleted({ children }: Props) {
 
   return (
     <RawTextThemeContext.Provider value={{ ...theme, lineThrough: true }}>
-      {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
+      {React.Children.map(children, (child) =>
+        typeof child === "string" ? <RawText>{child}</RawText> : child
+      )}
     </RawTextThemeContext.Provider>
   );
 }

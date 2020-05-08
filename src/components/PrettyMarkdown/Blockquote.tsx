@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import * as React from "react";
-import { DARK_SECONDARY_FOREGROUND_COLOR, LIGHT_SECONDARY_FOREGROUND_COLOR } from "../../constant/color";
+import {
+  DARK_SECONDARY_FOREGROUND_COLOR,
+  LIGHT_SECONDARY_FOREGROUND_COLOR,
+} from "../../constant/color";
 import { DARK_MODE, MOBILE } from "../../constant/mediaQuery";
 import RawText, { RawTextThemeContext, TextColor } from "../RawText";
 
@@ -14,8 +17,12 @@ export default function Blockquote({ children, ...props }: Props) {
 
   return (
     <Root {...props}>
-      <RawTextThemeContext.Provider value={{ ...theme, color: TextColor.secondaryForeground, italic: true }}>
-        {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
+      <RawTextThemeContext.Provider
+        value={{ ...theme, color: TextColor.secondaryForeground, italic: true }}
+      >
+        {React.Children.map(children, (child) =>
+          typeof child === "string" ? <RawText>{child}</RawText> : child
+        )}
       </RawTextThemeContext.Provider>
     </Root>
   );

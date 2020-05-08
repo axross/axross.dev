@@ -10,13 +10,9 @@ interface Props extends React.Attributes {
 export default function WebsitePurpose({ children, ...props }: Props) {
   return (
     <Root {...props}>
-      <PrettyMarkdown>
-        {children}
-      </PrettyMarkdown>
+      <PrettyMarkdown>{children}</PrettyMarkdown>
     </Root>
   );
 }
 
-const Root = styled.div`
-  
-`;
+const Root = styled.div``;

@@ -13,7 +13,7 @@ import {
   LIGHT_FOREGROUND_COLOR,
   LIGHT_PRIMARY_FOREGROUND_COLOR,
   LIGHT_SECONDARY_FOREGROUND_COLOR,
-  LIGHT_WHITE_FOREGROUND_COLOR
+  LIGHT_WHITE_FOREGROUND_COLOR,
 } from "../../constant/color";
 import { DARK_MODE, MOBILE } from "../../constant/mediaQuery";
 import LazyCSS from "../LazyCSS";
@@ -45,8 +45,19 @@ export interface Props extends React.Attributes {
 /**
  * A fundamental text component. Every text in this repository should be made of this component.
  */
-export default function RawText({ color,
-  typeface, size, lineSize, alignment, maxLines, bold, italic, underline, lineThrough, ...props }: Props) {
+export default function RawText({
+  color,
+  typeface,
+  size,
+  lineSize,
+  alignment,
+  maxLines,
+  bold,
+  italic,
+  underline,
+  lineThrough,
+  ...props
+}: Props) {
   const theme = React.useContext(RawTextThemeContext) ?? {};
   const _color = color ?? theme.color ?? TextColor.foreground;
   const _typeface = typeface ?? theme.typeface ?? Typeface.body;
@@ -129,9 +140,15 @@ const COLOR_CSS: Record<TextColor, SerializedStyles> = {
 };
 
 const TYPEFACE_CSS: Record<Typeface, SerializedStyles> = {
-  [Typeface.headline]: css`font-family: "Montserrat", sans-serif;`,
-  [Typeface.body]: css`font-family: "Open Sans", sans-serif;`,
-  [Typeface.monospace]: css`font-family: "Source Code Pro", monospace;`,
+  [Typeface.headline]: css`
+    font-family: "Montserrat", sans-serif;
+  `,
+  [Typeface.body]: css`
+    font-family: "Open Sans", sans-serif;
+  `,
+  [Typeface.monospace]: css`
+    font-family: "Source Code Pro", monospace;
+  `,
 };
 
 const TEXT_SIZE_CSS: Record<TextSize, SerializedStyles> = {
@@ -180,15 +197,27 @@ const TEXT_SIZE_CSS: Record<TextSize, SerializedStyles> = {
 };
 
 const TEXT_LINE_SIZE_CSS: Record<TextLineSize, SerializedStyles> = {
-  [TextLineSize.default]: css`line-height: 1.5;`,
-  [TextLineSize.large]: css`line-height: 1.75`,
+  [TextLineSize.default]: css`
+    line-height: 1.5;
+  `,
+  [TextLineSize.large]: css`
+    line-height: 1.75;
+  `,
 };
 
 const TEXT_ALIGNMENT_CSS: Record<TextAlignment, SerializedStyles> = {
-  [TextAlignment.default]: css`text-align: inherit;`,
-  [TextAlignment.start]: css`text-align: start`,
-  [TextAlignment.end]: css`text-align: end`,
-  [TextAlignment.center]: css`text-align: center`,
+  [TextAlignment.default]: css`
+    text-align: inherit;
+  `,
+  [TextAlignment.start]: css`
+    text-align: start;
+  `,
+  [TextAlignment.end]: css`
+    text-align: end;
+  `,
+  [TextAlignment.center]: css`
+    text-align: center;
+  `,
 };
 
 const Root = styled.span<{
@@ -208,8 +237,8 @@ const Root = styled.span<{
   ${({ _size }) => TEXT_SIZE_CSS[_size]}
   ${({ lineSize }) => TEXT_LINE_SIZE_CSS[lineSize]}
   ${({ alignment }) => TEXT_ALIGNMENT_CSS[alignment]}
-  font-weight: ${({ bold }) => bold ? 600 : 400};
-  font-style: ${({ italic }) => italic ? "italic" : "normal"};
+  font-weight: ${({ bold }) => (bold ? 600 : 400)};
+  font-style: ${({ italic }) => (italic ? "italic" : "normal")};
   text-decoration: ${({ underline, lineThrough }) => {
     let decoration = "";
 
@@ -239,6 +268,5 @@ const Root = styled.span<{
           line-clamp: ${maxLines};
           -webkit-line-clamp: ${maxLines};
           overflow-y: hidden;
-        `
-  }
+        `}
 `;

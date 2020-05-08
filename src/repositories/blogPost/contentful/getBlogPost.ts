@@ -1,10 +1,12 @@
 import { ContentfulClientApi, EntryCollection } from "contentful";
 import GetBlogPost from "../GetBlogPost";
 
-export function createGetBlogPost(contentful: ContentfulClientApi): GetBlogPost {
+export function createGetBlogPost(
+  contentful: ContentfulClientApi
+): GetBlogPost {
   return async ({ id, locale }) => {
     let entries: EntryCollection<any>;
-  
+
     try {
       entries = await contentful.getEntries<any>({
         content_type: "blogPost",
@@ -14,11 +16,15 @@ export function createGetBlogPost(contentful: ContentfulClientApi): GetBlogPost 
         "fields.isAvailable": true,
       });
     } catch (err) {
-      throw new Error(`the request for (id: ${id}, locale: ${locale}) has failed.`);
+      throw new Error(
+        `the request for (id: ${id}, locale: ${locale}) has failed.`
+      );
     }
 
     if (entries.items.length === 0) {
-      throw new Error(`the blog post (id: ${id}, locale: ${locale}) is not found.`);
+      throw new Error(
+        `the blog post (id: ${id}, locale: ${locale}) is not found.`
+      );
     }
 
     return {

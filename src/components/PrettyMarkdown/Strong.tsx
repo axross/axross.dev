@@ -10,7 +10,9 @@ export default function Strong({ children }: Props) {
 
   return (
     <RawTextThemeContext.Provider value={{ ...theme, bold: true }}>
-      {React.Children.map(children, child => typeof child === "string" ? <RawText>{child}</RawText> : child)}
+      {React.Children.map(children, (child) =>
+        typeof child === "string" ? <RawText>{child}</RawText> : child
+      )}
     </RawTextThemeContext.Provider>
   );
 }

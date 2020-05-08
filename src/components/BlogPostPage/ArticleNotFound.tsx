@@ -13,7 +13,11 @@ export default function ArticleNotFound(props: Props) {
 
   return (
     <section {...props}>
-      <Title color={TextColor.emphasizedForeground} size={TextSize.giantic} bold>
+      <Title
+        color={TextColor.emphasizedForeground}
+        size={TextSize.giantic}
+        bold
+      >
         {title}
       </Title>
 
@@ -21,16 +25,14 @@ export default function ArticleNotFound(props: Props) {
         404 Not Found
       </StatusCode>
 
-      <Description lineSize={TextLineSize.large}>
-        {description}
-      </Description>
+      <Description lineSize={TextLineSize.large}>{description}</Description>
     </section>
   );
 }
 
 const Title = styled(RawText)`
   display: block;
-`
+`;
 
 const Description = styled(RawText)`
   display: block;

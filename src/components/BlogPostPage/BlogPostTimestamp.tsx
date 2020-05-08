@@ -16,7 +16,7 @@ export default function BlogPostTimestamp({
 }: Props) {
   const { currentLocale } = useLocale();
   const timestamp = useTranslation("BLOG_POST_TIMETAMP", {
-    createdAt: new Intl.DateTimeFormat(currentLocale).format(createdAt)
+    createdAt: new Intl.DateTimeFormat(currentLocale).format(createdAt),
   });
 
   return (

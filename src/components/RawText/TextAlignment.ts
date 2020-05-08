@@ -2,7 +2,7 @@ enum TextAlignment {
   default = "inherit",
   start = "start",
   end = "end",
-  center = "center"
+  center = "center",
 }
 
 export default TextAlignment;

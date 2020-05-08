@@ -1,6 +1,6 @@
 enum TextLineSize {
   default,
-  large
+  large,
 }
 
 export default TextLineSize;

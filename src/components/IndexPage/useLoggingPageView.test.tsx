@@ -1,3 +1,11 @@
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  jest,
+} from "@jest/globals";
 import * as React from "react";
 import { act, create } from "react-test-renderer";
 import MockApp from "../../../fixtures/MockApp";
@@ -10,16 +18,16 @@ describe("useLoggingPageView()", () => {
     });
 
     afterEach(() => {
-      ((globalThis.ga as any) as jest.Mock).mockRestore();
+      ((globalThis.ga as any) as ReturnType<typeof jest.fn>).mockRestore();
     });
 
     it("sets the location (URL) to the current Google Analytics session", async () => {
       function Component() {
         useLoggingPageView();
-        
+
         return null;
       }
-  
+
       await act(async () => {
         create(
           <MockApp url={new URL("https://tests.kohei.dev/?hl=en-US")}>
@@ -28,16 +36,20 @@ describe("useLoggingPageView()", () => {
         );
       });
 
-      expect(globalThis.ga).toHaveBeenCalledWith("set", "location", `https://tests.kohei.dev/?hl=en-US`);
+      expect(globalThis.ga).toHaveBeenCalledWith(
+        "set",
+        "location",
+        `https://tests.kohei.dev/?hl=en-US`
+      );
     });
 
     it("sets the document title to the current Google Analytics session", async () => {
       function Component() {
         useLoggingPageView();
-        
+
         return null;
       }
-  
+
       await act(async () => {
         create(
           <MockApp>
@@ -46,16 +58,20 @@ describe("useLoggingPageView()", () => {
         );
       });
 
-      expect(globalThis.ga).toHaveBeenCalledWith("set", "title", expect.any(String));
+      expect(globalThis.ga).toHaveBeenCalledWith(
+        "set",
+        "title",
+        expect.any(String)
+      );
     });
 
     it("sends a pageview", async () => {
       function Component() {
         useLoggingPageView();
-        
+
         return null;
       }
-  
+
       await act(async () => {
         create(
           <MockApp>
@@ -72,10 +88,10 @@ describe("useLoggingPageView()", () => {
     it("doesn't call globalThis.ga()", async () => {
       function Component() {
         useLoggingPageView();
-        
+
         return null;
       }
-  
+
       await act(async () => {
         create(
           <MockApp>

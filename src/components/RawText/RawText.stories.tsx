@@ -1,4 +1,10 @@
-import { boolean, withKnobs, text, select, number } from "@storybook/addon-knobs";
+import {
+  boolean,
+  withKnobs,
+  text,
+  select,
+  number,
+} from "@storybook/addon-knobs";
 import * as React from "react";
 import RawText from "./RawText";
 import TextAlignment from "./TextAlignment";
@@ -9,7 +15,7 @@ import Typeface from "./Typeface";
 
 export default {
   title: "Components/RawText",
-  decorators: [withKnobs]
+  decorators: [withKnobs],
 };
 
 export const playground = () => (
@@ -62,7 +68,7 @@ export const playground = () => (
         default: TextAlignment.default,
         start: TextAlignment.start,
         end: TextAlignment.end,
-        center: TextAlignment.center
+        center: TextAlignment.center,
       },
       TextAlignment.default
     )}

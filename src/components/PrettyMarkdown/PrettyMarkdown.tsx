@@ -3,7 +3,14 @@ import * as React from "react";
 import Blockquote from "./Blockquote";
 import CodeBlock from "./CodeBlock";
 import Emphasis from "./Emphasis";
-import { Heading1, Heading2, Heading3, Heading4, Heading5, Heading6 } from "./Heading";
+import {
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
+} from "./Heading";
 import InlineCode from "./InlineCode";
 import MarkdownLink from "./MarkdownLink";
 import Media from "./Media";
@@ -22,9 +29,11 @@ interface Props extends React.Attributes {
 
 export default function PrettyMarkdown({ children }: Props) {
   const theme = React.useContext(RawTextThemeContext) ?? {};
-  
+
   return (
-    <RawTextThemeContext.Provider value={{ ...theme, lineSize: TextLineSize.large }}>
+    <RawTextThemeContext.Provider
+      value={{ ...theme, lineSize: TextLineSize.large }}
+    >
       <MDX components={components}>{children}</MDX>
     </RawTextThemeContext.Provider>
   );
@@ -39,15 +48,15 @@ const components = {
   h5: Heading5,
   h6: Heading6,
   // disabled
-  // thematicBreak: 
+  // thematicBreak:
   blockquote: Blockquote,
   ul: UnorderedList,
   ol: OrderedList,
   li: ListItem,
   // disabled
-  // table: 
-  // tr: 
-  // td: 
+  // table:
+  // tr:
+  // td:
   pre: ({ children }: any) => children,
   code: CodeBlock,
   em: Emphasis,
@@ -55,7 +64,7 @@ const components = {
   delete: Deleted,
   inlineCode: InlineCode,
   // disabled
-  // hr: 
+  // hr:
   a: MarkdownLink,
   img: Media,
   text: RawText,

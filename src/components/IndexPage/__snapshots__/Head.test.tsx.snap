@@ -3,7 +3,7 @@
 exports[`<Head> when currentLocale="en-US" pushes tags into <head> and they matches with the previous snapshots 1`] = `
 Array [
   <meta
-    content="width=device-width,minimum-scale=1,initial-scale=1"
+    content="width=device-width"
     name="viewport"
   />,
   <meta
@@ -74,7 +74,7 @@ Array [
 exports[`<Head> when currentLocale="ja-JP" pushes tags into <head> and they matches with the previous snapshots 1`] = `
 Array [
   <meta
-    content="width=device-width,minimum-scale=1,initial-scale=1"
+    content="width=device-width"
     name="viewport"
   />,
   <meta

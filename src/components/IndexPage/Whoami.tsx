@@ -18,12 +18,10 @@ export default function Whoami({ bio, ...props }: Props) {
     <Root {...props}>
       <Avatar src={PROFILE_IMAGE_PATH} alt="Kohei Asai" />
 
-      <Name type={UITextType.subtitle2}>
-        {MY_NAME}
-      </Name>
+      <Name type={UITextType.subtitle2}>{MY_NAME}</Name>
 
       <SocialLinkList>
-        {MY_SOCIAL_MEDIA_LINKS.map(link => (
+        {MY_SOCIAL_MEDIA_LINKS.map((link) => (
           <SocialLinkListItem key={`${link.url}`}>
             <SocialLinkListItemIcon
               name={detectIconNameByURL(link.url)}
@@ -38,9 +36,7 @@ export default function Whoami({ bio, ...props }: Props) {
       </SocialLinkList>
 
       <Bio>
-        <PrettyMarkdown>
-          {bio!}
-        </PrettyMarkdown>
+        <PrettyMarkdown>{bio!}</PrettyMarkdown>
       </Bio>
     </Root>
   );
