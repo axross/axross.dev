@@ -1,9 +1,10 @@
 import * as Contentful from "contentful";
 import { NextPageContext } from "next";
 import * as React from "react";
+import BlogPostPage from "../../components/BlogPostPage";
+import { SELF_URL } from "../../constant/general";
 import BlogPost from "../../entities/BlogPost";
 import { createGetBlogPost } from "../../repositories/blogPost/contentful/getBlogPost";
-import BlogPostPage from "../../components/BlogPostPage";
 
 interface Props {
   blogPostJSON?: Record<string, any>;
@@ -12,14 +13,16 @@ interface Props {
 export default function Page({ blogPostJSON }: Props) {
   const blogPost = blogPostJSON ? deserializeBlogPost(blogPostJSON) : undefined;
 
-  return (
-    <BlogPostPage prefetchedBlogPost={blogPost} />
-  );
+  return <BlogPostPage prefetchedBlogPost={blogPost} />;
 }
 
-Page.getInitialProps = async ({ query, asPath, req }: NextPageContext): Promise<Props> => {
+Page.getInitialProps = async ({
+  query,
+  asPath,
+  req,
+}: NextPageContext): Promise<Props> => {
   if (req) {
-    const url = new URL(asPath!, process.env.ORIGIN);
+    const url = new URL(asPath!, SELF_URL.origin);
     const currentLocale = url.searchParams.get("hl")!;
     const contentful = Contentful.createClient({
       // do not specify hosts and preview access token for safety
@@ -27,7 +30,10 @@ Page.getInitialProps = async ({ query, asPath, req }: NextPageContext): Promise<
       accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
     });
     const getBlogPost = createGetBlogPost(contentful);
-    const blogPost = await getBlogPost({ id: query.postId.toString(), locale: currentLocale });
+    const blogPost = await getBlogPost({
+      id: query.postId.toString(),
+      locale: currentLocale,
+    });
 
     return { blogPostJSON: serializeBlogPost(blogPost) };
   }

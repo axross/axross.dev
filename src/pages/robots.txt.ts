@@ -1,4 +1,5 @@
 import { NextPageContext } from "next";
+import { SELF_URL } from "../constant/general";
 
 export default function RobotsTxt() {
   return null;
@@ -18,5 +19,5 @@ RobotsTxt.getInitialProps = async ({ req, res }: NextPageContext) => {
 
   res.statusCode = 200;
   res.setHeader("content-type", "text/plain");
-  res.end(`sitemap: ${new URL("/sitemap.xml", process.env.ORIGIN)}\n`);
+  res.end(`sitemap: ${new URL("/sitemap.xml", SELF_URL.origin)}\n`);
 };

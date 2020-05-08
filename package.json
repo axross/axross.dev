@@ -6,8 +6,8 @@
     "dry-compile": "tsc --noEmit",
     "build": "next build",
     "build-storybook": "build-storybook --output-dir dist/storybook",
-    "serve": "now dev",
-    "serve-storybook": "start-storybook"
+    "dev": "next dev",
+    "storybook": "start-storybook"
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
@@ -41,8 +41,8 @@
     "@types/react-syntax-highlighter": "^10.2.1",
     "@types/react-test-renderer": "^16.9.1",
     "babel-loader": "^8.0.6",
+    "dotenv": "^8.2.0",
     "jest": "^24.9.0",
-    "now": "^16.7.3",
     "react-test-renderer": "^16.12.0",
     "ts-jest": "^24.2.0",
     "ts-loader": "^6.2.1",

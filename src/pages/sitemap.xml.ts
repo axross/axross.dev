@@ -1,6 +1,7 @@
 import { NextPageContext } from "next";
-import * as Contentful from 'contentful';
+import * as Contentful from "contentful";
 import * as xmljs from "xml-js";
+import { SELF_URL } from "../constant/general";
 import { AVAILABLE_LOCALES } from "../constant/locale";
 import { createGetAllBlogPosts } from "../repositories/blogPost/contentful/getAllBlogPosts";
 
@@ -22,30 +23,30 @@ SitemapXml.getInitialProps = async ({ req, res }: NextPageContext) => {
 
   const contentful = Contentful.createClient({
     space: process.env.CONTENTFUL_SPACE!,
-    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN!,
   });
   const getAllBlogPosts = createGetAllBlogPosts(contentful);
 
-  const topPages = AVAILABLE_LOCALES.map(locale => ({
+  const topPages = AVAILABLE_LOCALES.map((locale) => ({
     loc: {
       _text: (() => {
-        const url = new URL("/", process.env.ORIGIN);
+        const url = new URL("/", SELF_URL.origin);
 
         url.pathname = "/";
         url.searchParams.set("hl", locale);
 
         return escape(`${url}`);
-      })()
+      })(),
     },
     lastmod: {
-      _text: new Date().toISOString()
+      _text: new Date().toISOString(),
     },
     changefreq: {
-      _text: "monthly"
+      _text: "monthly",
     },
     priority: {
-      _text: 0.5
-    }
+      _text: 0.5,
+    },
   }));
 
   const blogPostPages = [];
@@ -54,45 +55,42 @@ SitemapXml.getInitialProps = async ({ req, res }: NextPageContext) => {
     const blogPosts = await getAllBlogPosts({ locale });
 
     for (const blogPost of blogPosts) {
-      const url = new URL("/", process.env.ORIGIN);
+      const url = new URL("/", SELF_URL.origin);
 
       url.pathname = `/posts/${blogPost.id}`;
       url.searchParams.set("hl", locale);
 
       blogPostPages.push({
         loc: {
-          _text: escape(`${url}`)
+          _text: escape(`${url}`),
         },
         lastmod: {
-          _text: blogPost.lastModifiedAt.toISOString()
+          _text: blogPost.lastModifiedAt.toISOString(),
         },
         changefreq: {
-          _text: "weekly"
+          _text: "weekly",
         },
         priority: {
-          _text: 0.5
-        }
+          _text: 0.5,
+        },
       });
     }
   }
-  
+
   const xml = xmljs.js2xml(
     {
       _declaration: {
         _attributes: {
           version: "1.0",
-          encoding: "utf-8"
-        }
+          encoding: "utf-8",
+        },
       },
       urlset: {
         _attributes: {
-          xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9"
+          xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9",
         },
-        url: [
-          ...topPages,
-          ...blogPostPages,
-        ]
-      }
+        url: [...topPages, ...blogPostPages],
+      },
     },
     { compact: true }
   );
