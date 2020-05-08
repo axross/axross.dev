@@ -9,7 +9,7 @@ import {
 import * as React from "react";
 import { act, create } from "react-test-renderer";
 import BlogPost from "../../entities/BlogPost";
-import MockApp from "../../../fixtures/MockApp";
+import MockApp from "../../fixtures/MockApp";
 import useLoggingPageView from "./useLoggingPageView";
 
 describe("useLoggingPageView()", () => {
