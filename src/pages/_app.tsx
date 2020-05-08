@@ -12,18 +12,23 @@ import { createGetAllBlogPosts } from "../repositories/blogPost/contentful/getAl
 import { createGetBlogPost } from "../repositories/blogPost/contentful/getBlogPost";
 import getWebpageSummary from "../repositories/webpageSummary/api/getWebpageSummary";
 import { createGetWebsitePurpose } from "../repositories/websitePurpose/contentful/getWebsitePurpose";
+import { SELF_URL } from "../constant/general";
 
 export default function App({ Component, pageProps, router }: AppProps) {
-  const url = new URL(router.asPath, process.env.ORIGIN);
-  const contentful = React.useMemo(() => Contentful.createClient({
-    host: url.searchParams.has("preview")
-      ? "preview.contentful.com"
-      : undefined,
-    space: process.env.CONTENTFUL_SPACE!,
-    accessToken: url.searchParams.has("preview")
-      ? url.searchParams.get("preview")!
-      : process.env.CONTENTFUL_ACCESS_TOKEN!,
-  }), []);
+  const url = new URL(router.asPath, SELF_URL.origin);
+  const contentful = React.useMemo(
+    () =>
+      Contentful.createClient({
+        host: url.searchParams.has("preview")
+          ? "preview.contentful.com"
+          : undefined,
+        space: process.env.CONTENTFUL_SPACE!,
+        accessToken: url.searchParams.has("preview")
+          ? url.searchParams.get("preview")!
+          : process.env.CONTENTFUL_ACCESS_TOKEN!,
+      }),
+    []
+  );
   const repositories = {
     getAllBlogPosts: createGetAllBlogPosts(contentful),
     getBio: createGetBio(contentful),
@@ -36,11 +41,13 @@ export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <URLContext.Provider value={url}>
       <RepositoryContext.Provider value={repositories}>
-        <LocaleContext.Provider value={{
-          availableLocales: AVAILABLE_LOCALES,
-          currentLocale: currentLocale,
-          isLoading: false,
-        }}>
+        <LocaleContext.Provider
+          value={{
+            availableLocales: AVAILABLE_LOCALES,
+            currentLocale: currentLocale,
+            isLoading: false,
+          }}
+        >
           <Component {...pageProps} />
         </LocaleContext.Provider>
       </RepositoryContext.Provider>
@@ -49,7 +56,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
 }
 
 App.getInitialProps = async (context: AppContext) => {
-  const { ctx: { query, asPath, req, res } } = context;
+  const {
+    ctx: { query, asPath, req, res },
+  } = context;
 
   if (req && res && !LOCALE_COERCION_EXCLUDES.includes(asPath!.split("?")[0])) {
     const localeByQuery = query.hl?.toString() ?? null;
@@ -66,7 +75,7 @@ App.getInitialProps = async (context: AppContext) => {
     }
 
     if (localeByQuery !== normalizedLocale) {
-      const url = new URL(asPath!, process.env.ORIGIN);
+      const url = new URL(asPath!, SELF_URL.origin);
       url.searchParams.set("hl", normalizedLocale!);
 
       res.statusCode = 303;
@@ -82,7 +91,4 @@ App.getInitialProps = async (context: AppContext) => {
   return { ...appProps };
 };
 
-const LOCALE_COERCION_EXCLUDES = [
-  "/robots.txt",
-  "/sitemap.xml",
-];
+const LOCALE_COERCION_EXCLUDES = ["/robots.txt", "/sitemap.xml"];
