@@ -19,7 +19,7 @@
     "contentful": "^7.8.2",
     "intl-messageformat": "^5.4.3",
     "next": "^9.2.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "prism-react-renderer": "^1.0.2",
     "react": "^16.13.1",
     "react-content-loader": "^4.3.4",
