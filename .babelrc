@@ -1,0 +1,11 @@
+{
+  "presets": ["@linaria", "next/babel"],
+  "plugins": [
+    [
+      "formatjs",
+      {
+        "idInterpolationPattern": "[sha512:contenthash:base64:6]"
+      }
+    ]
+  ]
+}
