@@ -15,7 +15,18 @@ jobs:
           node-version: '14'
           check-latest: true
       - uses: microsoft/playwright-github-action@v1
-      - name: Install dependencies
+      - name: Restore/cache npm packages
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-npm-packages
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install npm packages
         run: npm ci
       - name: Run E2E tests
         run: npx start-server-and-test "npm run build && npx next start" "http://localhost:3000" "npm run e2e-test -- --ci --verbose"
