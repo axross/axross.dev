@@ -5,12 +5,15 @@ jobs:
     name: E2E Test
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA: e2e-test
+      NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA: ${{ github.sha }}
       NEXT_PUBLIC_GRAPHCMS_ENDPOINT: ${{ secrets.E2E_GRAPHCMS_ENDPOINT }}
       NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN: ${{ secrets.E2E_SIMPLE_LOCALIZE_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+          check-latest: true
       - uses: microsoft/playwright-github-action@v1
       - name: Install dependencies
         run: npm ci
