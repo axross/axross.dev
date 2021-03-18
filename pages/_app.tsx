@@ -15,16 +15,20 @@ import { getIntlMessages } from "../services/translation";
 
 const AppEntrypoint: React.FC<AppProps> = (props) => {
   const ErrorBoundary = React.useMemo(() => {
-    Bugsnag.start({
-      apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY!,
-      appVersion: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
-      releaseStage: "local",
-      appType: typeof window !== "undefined" ? "client" : "server",
-      enabledReleaseStages: ["production", "preview", "local"],
-      plugins: [new BugsnagPluginReact()],
-    });
+    if (process.env.NEXT_PUBLIC_BUGSNAG_API_KEY) {
+      Bugsnag.start({
+        apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
+        appVersion: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
+        releaseStage: "local",
+        appType: typeof window !== "undefined" ? "client" : "server",
+        enabledReleaseStages: ["production", "preview", "local"],
+        plugins: [new BugsnagPluginReact()],
+      });
 
-    return Bugsnag.getPlugin("react")!.createErrorBoundary(React);
+      return Bugsnag.getPlugin("react")!.createErrorBoundary(React);
+    }
+
+    return ({ children }: React.PropsWithChildren<any>) => children;
   }, []);
 
   return (
@@ -42,7 +46,9 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   >(pageProps.intlMessages);
 
   React.useEffect(() => {
-    LogRocket.init(process.env.NEXT_PUBLIC_LOGROCKET_APP_ID!);
+    if (process.env.NEXT_PUBLIC_LOGROCKET_APP_ID) {
+      LogRocket.init(process.env.NEXT_PUBLIC_LOGROCKET_APP_ID);
+    }
   }, []);
 
   React.useEffect(() => {
