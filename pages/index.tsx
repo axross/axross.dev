@@ -130,6 +130,7 @@ const Page: React.VFC<PageProps> = (props) => {
                     padding-inline-end: var(--space-md);
                   }
                 `}
+                data-testid="article-title"
               >
                 {title}
               </h1>
