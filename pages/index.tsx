@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { GetServerSidePropsContext, NextPage, NextPageContext } from "next";
+import { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import * as React from "react";
 import { useIntl } from "react-intl";
