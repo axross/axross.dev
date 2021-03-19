@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { GetServerSidePropsContext, NextPageContext } from "next";
+import { GetServerSidePropsContext, NextPage, NextPageContext } from "next";
 import Head from "next/head";
 import * as React from "react";
 import { useIntl } from "react-intl";
@@ -20,14 +20,12 @@ import { getOriginFromRequest } from "../helpers/next";
 import { getIndexPageJson, getPostEntryListJson } from "../services/cms-json";
 import { getIntlMessages } from "../services/translation";
 
-interface ServerSideProps extends CommonServerSideProps {
-  indexPage: NonNullable<PromiseValue<ReturnType<typeof getIndexPageJson>>>;
-  posts: PromiseValue<ReturnType<typeof getPostEntryListJson>>;
-}
-
-interface PageProps extends NextPageContext, ServerSideProps {}
-
-const Page: React.VFC<PageProps> = (props) => {
+const Page: NextPage<
+  CommonServerSideProps & {
+    indexPage: NonNullable<PromiseValue<ReturnType<typeof getIndexPageJson>>>;
+    posts: PromiseValue<ReturnType<typeof getPostEntryListJson>>;
+  }
+> = (props) => {
   const intl = useIntl();
   const origin = useOrigin();
   const {
