@@ -19,9 +19,9 @@ const AppEntrypoint: React.FC<AppProps> = (props) => {
       Bugsnag.start({
         apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
         appVersion: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
-        releaseStage: "local",
+        releaseStage: process.env.NEXT_PUBLIC_RELEASE_STAGE,
         appType: typeof window !== "undefined" ? "client" : "server",
-        enabledReleaseStages: ["production", "preview", "local"],
+        enabledReleaseStages: ["production", "preview", "test", "local"],
         plugins: [new BugsnagPluginReact()],
       });
 
@@ -46,8 +46,15 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   >(pageProps.intlMessages);
 
   React.useEffect(() => {
-    if (process.env.NEXT_PUBLIC_LOGROCKET_APP_ID) {
-      LogRocket.init(process.env.NEXT_PUBLIC_LOGROCKET_APP_ID);
+    if (
+      ["production", "preview"].includes(
+        process.env.NEXT_PUBLIC_RELEASE_STAGE!
+      ) &&
+      process.env.NEXT_PUBLIC_LOGROCKET_APP_ID
+    ) {
+      LogRocket.init(process.env.NEXT_PUBLIC_LOGROCKET_APP_ID, {
+        release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
+      });
     }
   }, []);
 
