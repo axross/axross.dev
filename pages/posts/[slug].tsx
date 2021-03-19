@@ -63,7 +63,9 @@ const Page: React.VFC<PageProps> = (props) => {
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>
+          {title} - {WEBSITE_NAME}
+        </title>
         <meta name="description" content={description} />
         <meta name="keywords" content={tags.join(",")} />
         <meta name="author" content={author.name} />
@@ -73,7 +75,7 @@ const Page: React.VFC<PageProps> = (props) => {
           content={`${origin}/posts/${slug}?hl=${intl.locale}`}
         />
         <meta property="og:site_name" content={WEBSITE_NAME} />
-        <meta property="og:title" content={title} />
+        <meta property="og:title" content={`${title} - ${WEBSITE_NAME}`} />
         <meta property="og:description" content={description} />
         <meta
           property="og:author:first_name"
@@ -386,7 +388,9 @@ export async function getServerSideProps({
   const locale = getLocaleFromQuery(query);
 
   if (!locale) {
-    return { redirect: { destination: `/posts/${slug}?hl=en-US` } };
+    return {
+      redirect: { destination: `/posts/${slug}?hl=en-US`, permanent: true },
+    };
   }
 
   const origin = getOriginFromRequest(req);

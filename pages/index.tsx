@@ -50,13 +50,13 @@ const Page: React.VFC<PageProps> = (props) => {
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{WEBSITE_NAME}</title>
         <meta name="description" content={description} />
         <meta name="keywords" content="kohei asai,axross,blog" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${origin}/`} />
+        <meta property="og:url" content={`${origin}/?hl=${intl.locale}`} />
         <meta property="og:site_name" content={WEBSITE_NAME} />
-        <meta property="og:title" content={title} />
+        <meta property="og:title" content={WEBSITE_NAME} />
         <meta property="og:description" content={description} />
         <meta property="og:locale" content={intl.locale} />
         {AVAILABLE_LOCALES.filter((l) => l !== intl.locale).map((l) => (
@@ -279,7 +279,7 @@ export async function getServerSideProps({
   const locale = getLocaleFromQuery(query);
 
   if (!locale) {
-    return { redirect: { destination: `/?hl=en-US` } };
+    return { redirect: { destination: `/?hl=en-US`, permanent: true } };
   }
 
   const origin = getOriginFromRequest(req);
