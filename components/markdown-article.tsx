@@ -1,4 +1,5 @@
 import { css, cx } from "@linaria/core";
+import { FeedbackFish } from "@feedback-fish/react";
 import { styled } from "@linaria/react";
 import GithubSlugger from "github-slugger";
 import mdastToString from "mdast-util-to-string";
@@ -272,6 +273,13 @@ const MdTable = styled.table`
 
 const MdCodeBlock = styled(CodeBlock)``;
 
+const MdAnchorLink = styled(ParrotAnchor)`
+  color: var(--color-fg-strong);
+  font-weight: bold;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+`;
+
 const MdStrong = styled.strong`
   color: var(--color-fg-strong);
   font-weight: bold;
@@ -318,33 +326,6 @@ const MdGooglePlayBadge = styled(GooglePlayBadge)`
 const MdAppStoreBadge = styled(AppStoreBadge)`
   height: 40px;
 `;
-
-export interface MdAnchorLinkProps
-  extends React.HTMLAttributes<HTMLAnchorElement> {
-  href: string;
-}
-
-export function MdAnchorLink({
-  href,
-  className,
-  children,
-  ...props
-}: MdAnchorLinkProps) {
-  return (
-    <ParrotAnchor
-      href={href}
-      className={css`
-        color: var(--color-fg-strong);
-        font-weight: bold;
-        text-decoration-line: underline;
-        text-decoration-style: solid;
-      `}
-      {...props}
-    >
-      {children}
-    </ParrotAnchor>
-  );
-}
 
 export const components = {
   heading: React.memo(
@@ -409,12 +390,25 @@ export const components = {
         return null;
     }
   },
-  textDirective: ({ name, attributes }: any) => {
+  textDirective: ({ name, attributes, children }: any) => {
     switch (name) {
       case "google-play":
         return <MdGooglePlayBadge {...attributes} />;
       case "app-store":
         return <MdAppStoreBadge {...attributes} />;
+      case "feedback":
+        if (process.env.NEXT_PUBLIC_FEEDBACK_FISH_PROJECT_ID) {
+          return (
+            <FeedbackFish
+              projectId={process.env.NEXT_PUBLIC_FEEDBACK_FISH_PROJECT_ID}
+              {...attributes}
+            >
+              <MdAnchorLink>{children}</MdAnchorLink>
+            </FeedbackFish>
+          );
+        }
+
+        return <MdAnchorLink>{children}</MdAnchorLink>;
       default:
         return null;
     }
