@@ -1,5 +1,7 @@
 # kohei.dev
 
+[![Production Deployment](https://github.com/axross/kohei.dev/actions/workflows/production-deployment.yml/badge.svg)](https://github.com/axross/kohei.dev/actions/workflows/production-deployment.yml)
+
 My personal website made of:
 
 - <img alt="TypeScript" src="https://user-images.githubusercontent.com/4289883/72760400-7524e080-3b8d-11ea-9b0c-f6e09280e6d8.png" height="16"> **[TypeScript](https://www.typescriptlang.org/)**
