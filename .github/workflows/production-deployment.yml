@@ -1,0 +1,28 @@
+name: Production Deployment
+on:
+  release:
+    types: [created, published]
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Restore/cache npm packages
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-npm-packages
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Create Vercel Project JSON
+        run: mkdir .vercel && echo ${{ secrets.VERCEL_PROJECT_JSON }} > .vercel/project.json
+      - name: Deploy
+        run: npx --package vercel vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --meta VERSION=${{ github.event.release.tag_name }} --prod --confirm --no-clipboard
