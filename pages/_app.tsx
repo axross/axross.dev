@@ -20,7 +20,7 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
     integrations: [new Integrations.BrowserTracing()],
-    release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
+    release: process.env.NEXT_PUBLIC_VERSION,
     environment: process.env.NEXT_PUBLIC_RELEASE_STAGE,
     tracesSampleRate: 1.0,
     beforeSend(event, _hint) {
@@ -41,7 +41,7 @@ if (
   process.env.NEXT_PUBLIC_LOGROCKET_APP_ID
 ) {
   LogRocket.init(process.env.NEXT_PUBLIC_LOGROCKET_APP_ID!, {
-    release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
+    release: process.env.NEXT_PUBLIC_VERSION,
   });
 }
 
