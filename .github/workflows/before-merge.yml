@@ -1,8 +1,6 @@
 name: Before Merge
 on:
-  pull_request:
-    branches-ignore:
-      - stable
+  - pull_request
 jobs:
   dry-build:
     name: Dry Build
