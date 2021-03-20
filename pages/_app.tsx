@@ -9,26 +9,39 @@ import * as React from "react";
 import { IntlConfig, IntlProvider } from "react-intl";
 import TopLoadingBar from "react-top-loading-bar";
 import { OriginProvider } from "../global-hooks/url";
-
-import "normalize.css/normalize.css";
 import { getIntlMessages } from "../services/translation";
 
+import "normalize.css/normalize.css";
+import { FALLBACK_LOCALE } from "../constants/locale";
+
+// initialize sentry client only when the env var is set
+// you can comment out the env var in .env.local when you want to debug
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
   Sentry.init({
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
     integrations: [new Integrations.BrowserTracing()],
     release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
-    environment: "local",
+    environment: process.env.NEXT_PUBLIC_RELEASE_STAGE,
     tracesSampleRate: 1.0,
     beforeSend(event, _hint) {
-      console.log("beforeSend", event, _hint);
-
       if (globalThis === globalThis.window && event.exception) {
         Sentry.showReportDialog({ eventId: event.event_id });
       }
 
       return event;
     },
+  });
+}
+
+// initialize logrocket client only when the env var is set
+// you can comment out the env var in .env.local when you want to debug
+// logrocket is available only on browser
+if (
+  globalThis === globalThis.window &&
+  process.env.NEXT_PUBLIC_LOGROCKET_APP_ID
+) {
+  LogRocket.init(process.env.NEXT_PUBLIC_LOGROCKET_APP_ID!, {
+    release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
   });
 }
 
@@ -46,19 +59,6 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const [intlMessages, setIntlMessages] = React.useState<
     IntlConfig["messages"]
   >(pageProps.intlMessages);
-
-  React.useEffect(() => {
-    if (
-      ["production", "preview"].includes(
-        process.env.NEXT_PUBLIC_RELEASE_STAGE!
-      ) &&
-      process.env.NEXT_PUBLIC_LOGROCKET_APP_ID
-    ) {
-      LogRocket.init(process.env.NEXT_PUBLIC_LOGROCKET_APP_ID, {
-        release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
-      });
-    }
-  }, []);
 
   React.useEffect(() => {
     const onRouteChangeStart = () => {
@@ -80,7 +80,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
 
   React.useEffect(() => {
     getIntlMessages({
-      locale: pageProps.locale ?? "en-US",
+      locale: pageProps.locale ?? FALLBACK_LOCALE,
     }).then((intlMessages) => setIntlMessages(intlMessages));
   }, [pageProps.locale]);
 
@@ -90,7 +90,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
         <IntlProvider
           messages={intlMessages}
           locale={pageProps.locale!}
-          defaultLocale="en-US"
+          defaultLocale={FALLBACK_LOCALE}
         >
           <TopLoadingBar color="#ff6b6b" ref={topLoadingBarRef} />
 
