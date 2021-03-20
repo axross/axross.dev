@@ -289,8 +289,11 @@ export async function getServerSideProps({
 
   const origin = getOriginFromRequest(req);
   const intlMessages = await getIntlMessages({ locale });
-  const posts = await getPostEntryListJson({ locale });
-  const indexPage = await getIndexPageJson({ locale });
+  const previewToken = query!.preview_token
+    ? `${query!.preview_token}`
+    : undefined;
+  const posts = await getPostEntryListJson({ locale, previewToken });
+  const indexPage = await getIndexPageJson({ locale, previewToken });
 
   return {
     props: { origin, locale, intlMessages, indexPage, posts },

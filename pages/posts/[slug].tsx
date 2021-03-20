@@ -400,8 +400,11 @@ export async function getServerSideProps({
 
   const origin = getOriginFromRequest(req);
   const intlMessages = await getIntlMessages({ locale });
-  const posts = await getPostEntryListJson({ locale });
-  const post = await getPostJson({ slug, locale });
+  const previewToken = query!.preview_token
+    ? `${query!.preview_token}`
+    : undefined;
+  const posts = await getPostEntryListJson({ locale, previewToken });
+  const post = await getPostJson({ slug, locale, previewToken });
 
   if (post === null) {
     return {

@@ -1,6 +1,6 @@
 import cheerio from "cheerio";
 import GithubSlugger from "github-slugger";
-import { gql, request } from "graphql-request";
+import { GraphQLClient, gql } from "graphql-request";
 import { imageSize } from "image-size";
 import * as directiveExtension from "mdast-util-directive";
 import directiveSyntax from "micromark-extension-directive";
@@ -12,8 +12,10 @@ import visit from "unist-util-visit";
 
 export async function getIndexPageJson({
   locale,
+  previewToken,
 }: {
   locale: string;
+  previewToken?: string;
 }): Promise<{
   title: string;
   description: string;
@@ -21,8 +23,7 @@ export async function getIndexPageJson({
   tableOfContents: { id: string; level: number; text: string }[];
   body: string;
 } | null> {
-  const data = await request(
-    process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!,
+  const data = await getGraphQLClient({ previewToken }).request(
     gql`
       query($locale: Locale!) {
         indexPages(locales: [$locale, en_US]) {
@@ -82,9 +83,11 @@ export async function getIndexPageJson({
 export async function getPostJson({
   slug,
   locale,
+  previewToken,
 }: {
   slug: string;
   locale: string;
+  previewToken?: string;
 }): Promise<{
   slug: string;
   title: string;
@@ -97,8 +100,7 @@ export async function getPostJson({
   tableOfContents: { id: string; level: number; text: string }[];
   body: string;
 } | null> {
-  const data = await request(
-    process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!,
+  const data = await getGraphQLClient({ previewToken }).request(
     gql`
       query($slug: String, $locale: Locale!) {
         posts(
@@ -179,8 +181,10 @@ export async function getPostJson({
 
 export async function getPostEntryListJson({
   locale,
+  previewToken,
 }: {
   locale: string;
+  previewToken?: string;
 }): Promise<
   {
     slug: string;
@@ -193,8 +197,7 @@ export async function getPostEntryListJson({
     author: { name: string; avatarUrl: string };
   }[]
 > {
-  const data = await request(
-    process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!,
+  const data = await getGraphQLClient({ previewToken }).request(
     gql`
       query($locale: Locale!) {
         posts(
@@ -439,4 +442,18 @@ function resolveWebpageEmbed() {
   };
 
   return transformer;
+}
+
+function getGraphQLClient({
+  previewToken,
+}: {
+  previewToken?: string;
+}): GraphQLClient {
+  return new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!, {
+    headers: previewToken
+      ? {
+          authorization: `Bearer ${previewToken}`,
+        }
+      : undefined,
+  });
 }
