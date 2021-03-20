@@ -272,7 +272,6 @@ const Page: NextPage<
 
 export async function getServerSideProps({
   req,
-  res,
   query,
 }: GetServerSidePropsContext) {
   const locale = getLocaleFromQuery(query);
@@ -285,11 +284,6 @@ export async function getServerSideProps({
   const intlMessages = await getIntlMessages({ locale });
   const posts = await getPostEntryListJson({ locale });
   const indexPage = await getIndexPageJson({ locale });
-
-  res.setHeader(
-    "cache-control",
-    "max-age=60, stale-while-revalidate=3600, public"
-  );
 
   return {
     props: { origin, locale, intlMessages, indexPage, posts },
