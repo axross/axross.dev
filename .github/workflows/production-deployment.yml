@@ -1,7 +1,7 @@
 name: Production Deployment
 on:
   release:
-    types: [created, published]
+    types: [created]
 jobs:
   deploy:
     name: Deploy
@@ -23,6 +23,6 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Create Vercel Project JSON
-        run: mkdir .vercel && echo ${{ secrets.VERCEL_PROJECT_JSON }} > .vercel/project.json
+        run: mkdir .vercel && echo '${{ secrets.VERCEL_PROJECT_JSON }}' > .vercel/project.json
       - name: Deploy
         run: npx --package vercel vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --meta VERSION=${{ github.event.release.tag_name }} --prod --confirm --no-clipboard
