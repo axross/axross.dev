@@ -241,26 +241,6 @@ export async function getPostEntryListJson({
   }));
 }
 
-// function appendHeadingId() {
-//   const transformer: Transformer = (tree) => {
-//     const githubSlugger = new GithubSlugger();
-
-//     visit(tree, "heading", (node) => {
-//       const id = githubSlugger.slug(mdastToString(node));
-
-//       node.data = {
-//         ...node.data,
-//         hProperties: {
-//           id,
-//           ...(node.data?.hProperties as any),
-//         },
-//       };
-//     });
-//   };
-
-//   return transformer;
-// }
-
 function convertImageFigure() {
   const transformer: Transformer = async (tree) => {
     const targetParagraphs: Parameters<visit.Visitor<Parent>>[] = [];
