@@ -10,7 +10,7 @@ import { LocalizedLink } from "./localized-link";
 
 export interface PostCardProps extends React.Attributes {
   title: string;
-  coverImageUrl?: string;
+  coverImageUrl: string;
   tags: string[];
   href: string;
   asHref: string;
@@ -61,7 +61,7 @@ export const PostCard: React.VFC<PostCardProps> = ({
         {...props}
       >
         <Image
-          src={coverImageUrl ?? "https://picsum.photos/2048/1170"}
+          src={coverImageUrl}
           width={2048}
           height={1170}
           className={cx(
