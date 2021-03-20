@@ -8,7 +8,6 @@ module.exports = (phase) => {
       rootPath: __dirname,
     },
     publicRuntimeConfig: {},
-
     rewrites: async () => [
       {
         source: "/index.json",
@@ -21,26 +20,6 @@ module.exports = (phase) => {
       {
         source: "/posts/:slug.json",
         destination: "/api/posts/[slug].json?slug=:slug",
-      },
-    ],
-    headers: async () => [
-      {
-        source: "/",
-        headers: [
-          {
-            key: "cache-control",
-            value: `max-age=${MAX_AGE}, stale-while-revalidate=${STALE_WHILE_REVALIDATE}, public`,
-          },
-        ],
-      },
-      {
-        source: "/posts/:slug",
-        headers: [
-          {
-            key: "cache-control",
-            value: `max-age=${MAX_AGE}, stale-while-revalidate=${STALE_WHILE_REVALIDATE}, public`,
-          },
-        ],
       },
     ],
     images: {
