@@ -104,13 +104,14 @@ const Page: NextPage<
           >
             <article className="post">
               <img
+                src={coverImageUrl}
+                alt={title}
                 className={css`
                   width: 100%;
                   height: 320px;
                   object-fit: cover;
                   object-position: top right;
                 `}
-                src={coverImageUrl}
               />
 
               <h1
