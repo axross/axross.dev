@@ -1,40 +1,42 @@
 import { css } from "@linaria/core";
-import Bugsnag from "@bugsnag/js";
-import BugsnagPluginReact from "@bugsnag/plugin-react";
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 import LogRocket from "logrocket";
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { mix, shade, tint } from "polished";
 import * as React from "react";
-import TopLoadingBar from "react-top-loading-bar";
 import { IntlConfig, IntlProvider } from "react-intl";
+import TopLoadingBar from "react-top-loading-bar";
 import { OriginProvider } from "../global-hooks/url";
 
 import "normalize.css/normalize.css";
 import { getIntlMessages } from "../services/translation";
 
+if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
+  Sentry.init({
+    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+    integrations: [new Integrations.BrowserTracing()],
+    release: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
+    environment: "local",
+    tracesSampleRate: 1.0,
+    beforeSend(event, _hint) {
+      console.log("beforeSend", event, _hint);
+
+      if (globalThis === globalThis.window && event.exception) {
+        Sentry.showReportDialog({ eventId: event.event_id });
+      }
+
+      return event;
+    },
+  });
+}
+
 const AppEntrypoint: React.FC<AppProps> = (props) => {
-  const ErrorBoundary = React.useMemo(() => {
-    if (process.env.NEXT_PUBLIC_BUGSNAG_API_KEY) {
-      Bugsnag.start({
-        apiKey: process.env.NEXT_PUBLIC_BUGSNAG_API_KEY,
-        appVersion: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
-        releaseStage: process.env.NEXT_PUBLIC_RELEASE_STAGE,
-        appType: typeof window !== "undefined" ? "client" : "server",
-        enabledReleaseStages: ["production", "preview", "test", "local"],
-        plugins: [new BugsnagPluginReact()],
-      });
-
-      return Bugsnag.getPlugin("react")!.createErrorBoundary(React);
-    }
-
-    return ({ children }: React.PropsWithChildren<any>) => children;
-  }, []);
-
   return (
-    <ErrorBoundary>
+    <Sentry.ErrorBoundary>
       <App {...props} />
-    </ErrorBoundary>
+    </Sentry.ErrorBoundary>
   );
 };
 
