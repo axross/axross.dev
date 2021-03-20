@@ -37,15 +37,11 @@ export const HorizontalList: React.VFC<HorizontalListProps> = ({
       >
         {React.Children.map(children, (child, index) => (
           <li
-            className={css`
-              /* flex-grow: 1;
-              flex-shrink: 1; */
-            `}
             style={{
               marginBlockStart: rowGap,
               marginInlineStart: columnGap,
             }}
-            key={child.props.key ?? index}
+            key={child.key ?? child.props.key ?? index}
           >
             {child}
           </li>
@@ -104,7 +100,7 @@ export const HorizontalGrid: React.VFC<HorizontalGridProps> = ({
       {...props}
     >
       {React.Children.map(children, (child, index) => (
-        <li key={child.props.key ?? index}>{child}</li>
+        <li key={child.key ?? child.props.key ?? index}>{child}</li>
       ))}
     </ul>
   );
