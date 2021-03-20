@@ -399,12 +399,10 @@ export const components = {
         return null;
     }
   },
-  leafDirective: ({ name, attributes, children }: any) => {
+  leafDirective: ({ name, attributes }: any) => {
     switch (name) {
       case "image-figure":
         return <MdImageFigure {...attributes} />;
-      case "callout":
-        return <MdCallout {...attributes} children={children} />;
       case "webpage-embed":
         return <MdWebpageEmbed {...attributes} />;
       default:
