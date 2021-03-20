@@ -25,4 +25,4 @@ jobs:
       - name: Create Vercel Project JSON
         run: mkdir .vercel && echo ${{ secrets.VERCEL_PROJECT_JSON }} > .vercel/project.json
       - name: Deploy
-        run: npx --package vercel vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --meta VERSION=${{ github.event.release.tag_name }} --prod --confirm --no-clipboard
+        run: npx --package vercel vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --meta VERSION=${{ github.event.release.tag_name }} --env NEXT_PUBLIC_VERSION=${{ github.event.release.tag_name }} --build-env NEXT_PUBLIC_VERSION=${{ github.event.release.tag_name }} --prod --confirm --no-clipboard
