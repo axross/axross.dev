@@ -14,10 +14,6 @@ const handler: NextApiHandler = async (req, res) => {
   }
 
   res.statusCode = 200;
-  res.setHeader(
-    "cache-control",
-    "max-age=60, stale-while-revalidate=3600, public"
-  );
   res.json(json);
 };
 

@@ -1,6 +1,3 @@
-const MAX_AGE = 60 * 60;
-const STALE_WHILE_REVALIDATE = 60 * 60 * 24;
-
 module.exports = (phase) => {
   return {
     reactStrictMode: true,
