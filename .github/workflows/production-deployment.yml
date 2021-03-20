@@ -1,7 +1,7 @@
 name: Production Deployment
 on:
   release:
-    types: [published]
+    types: published
 jobs:
   deploy:
     name: Deploy
