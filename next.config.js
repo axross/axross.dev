@@ -34,25 +34,7 @@ module.exports = (phase) => {
         ],
       },
       {
-        source: "/index.json",
-        headers: [
-          {
-            key: "cache-control",
-            value: `max-age=${MAX_AGE}, stale-while-revalidate=${STALE_WHILE_REVALIDATE}, public`,
-          },
-        ],
-      },
-      {
         source: "/posts/:slug",
-        headers: [
-          {
-            key: "cache-control",
-            value: `max-age=${MAX_AGE}, stale-while-revalidate=${STALE_WHILE_REVALIDATE}, public`,
-          },
-        ],
-      },
-      {
-        source: "/posts/:slug.json",
         headers: [
           {
             key: "cache-control",
