@@ -79,6 +79,36 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   }, []);
 
   React.useEffect(() => {
+    if (typeof (globalThis as any).gtag === "function") {
+      (globalThis as any).gtag("event", "page_view", {
+        page_title: globalThis.document.title,
+        page_location: globalThis.location.href,
+        page_path: `${globalThis.location.pathname}?hl=${new URLSearchParams(
+          globalThis.location.search
+        ).get("hl")}`,
+      });
+
+      const onRouteChangeComplete = () => {
+        (globalThis as any).gtag("event", "page_view", {
+          page_title: globalThis.document.title,
+          page_location: globalThis.location.href,
+          page_path: `${globalThis.location.pathname}?hl=${new URLSearchParams(
+            globalThis.location.search
+          ).get("hl")}`,
+        });
+      };
+
+      router.events.on("routeChangeComplete", onRouteChangeComplete);
+
+      return () => {
+        router.events.off("routeChangeComplete", onRouteChangeComplete);
+      };
+    }
+
+    return () => {};
+  }, []);
+
+  React.useEffect(() => {
     getIntlMessages({
       locale: pageProps.locale ?? FALLBACK_LOCALE,
     }).then((intlMessages) => setIntlMessages(intlMessages));
