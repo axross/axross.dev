@@ -15,6 +15,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@feedback-fish/react": "^1.2.1",
     "@linaria/babel-preset": "^3.0.0-beta.1",
     "@linaria/core": "^3.0.0-beta.1",
     "@linaria/react": "^3.0.0-beta.1",
