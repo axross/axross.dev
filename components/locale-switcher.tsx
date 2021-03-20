@@ -41,6 +41,7 @@ export const LocaleSwitcher: React.VFC<LocaleSwitcherProps> = ({
           <li key={locale}>
             <LocalizedLink href={pathname} as={asPath} locale={locale} passHref>
               <a
+                title={locale}
                 className={css`
                   display: block;
                   padding: 3px;
