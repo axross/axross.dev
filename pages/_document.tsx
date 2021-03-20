@@ -5,6 +5,10 @@ class Document extends NextDocument {
     return (
       <Html lang={this.props.__NEXT_DATA__.props.pageProps.locale}>
         <Head>
+          <meta name="theme-color" content="#000000" />
+          <link rel="icon" type="image/png" href="/favicon.png" />
+          <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
           {/*
            * initialize google analytics only when the env var is set
            * you can comment out the env var in .env.local when you want to debug
