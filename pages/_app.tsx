@@ -77,9 +77,9 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   }, []);
 
   React.useEffect(() => {
-    getIntlMessages({ locale: pageProps.locale }).then((intlMessages) =>
-      setIntlMessages(intlMessages)
-    );
+    getIntlMessages({
+      locale: pageProps.locale ?? "en-US",
+    }).then((intlMessages) => setIntlMessages(intlMessages));
   }, [pageProps.locale]);
 
   return (
