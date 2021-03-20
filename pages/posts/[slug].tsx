@@ -14,6 +14,7 @@ import {
   TableOfContentsItem,
 } from "../../components/table-of-contents";
 import { WEBSITE_NAME } from "../../constants/app";
+import { CACHE_HEADER_VALUE } from "../../constants/cache";
 import { AVAILABLE_LOCALES } from "../../constants/locale";
 import { CommonServerSideProps } from "../../core/ssr-props";
 import { useOrigin } from "../../global-hooks/url";
@@ -379,9 +380,15 @@ const Page: NextPage<
 
 export async function getServerSideProps({
   req,
+  res,
   query,
   params,
 }: GetServerSidePropsContext) {
+  // WORKAROUND:
+  // it needs to manually set this here
+  // since vercel doesn't use cache-control header specified in any of next.config.js or vercel.json
+  res.setHeader("cache-control", CACHE_HEADER_VALUE);
+
   const slug = `${params!.slug}`;
   const locale = getLocaleFromQuery(query);
 
