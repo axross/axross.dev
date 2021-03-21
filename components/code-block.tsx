@@ -1,4 +1,5 @@
 import { css, cx } from "@linaria/core";
+import Highlight, { defaultProps } from "prism-react-renderer";
 import * as React from "react";
 import { useIntl } from "react-intl";
 
@@ -59,58 +60,95 @@ export const CodeBlock: React.VFC<CodeBlockProps> = ({
           }
         `}
       >
-        <code
-          className={css`
-            color: #cfcfcf;
+        <Highlight {...defaultProps} code={value} language={language as any}>
+          {({ className, tokens, getTokenProps }) => {
+            const elements: React.ReactElement[] = [];
 
-            & .selector,
-            & .keyword,
-            & .operator {
-              color: #ff6b6b;
-            }
+            for (const [i, line] of tokens.entries()) {
+              console.log(i, line);
 
-            & .property {
-              color: #54a0ff;
-            }
+              for (const [j, token] of line.entries()) {
+                const { className, children } = getTokenProps({ token, j });
 
-            & .parameter {
-              color: #abb2bf;
-            }
+                // prism outputs single new-line character node for empty line
+                // remove this since we manually add new-line character element for each line
+                if (children === "\n") {
+                  continue;
+                }
 
-            & .attr-name,
-            & .function {
-              color: #ff9ff3;
-            }
-            & .punctuation {
-              color: #abb2bf;
-            }
-            & .class-name,
-            & .maybe-class-name {
-              color: #feca57;
-            }
-            & .constant,
-            & .number,
-            & .unit,
-            & .interpolation,
-            & .pseudo-element {
-              color: #ff9f43;
-            }
-            & .string,
-            & .attr-value {
-              color: #1dd1a1;
-            }
-            & .hexcode {
-              color: #00d2d3;
+                elements.push(
+                  <span className={className} key={`${i}-${j}`}>
+                    {children}
+                  </span>
+                );
+              }
+
+              elements.push(
+                <span className="token plain" key={`${i}-nl`}>
+                  {"\n"}
+                </span>
+              );
             }
 
-            & .comment {
-              color: #576574;
-            }
-          `}
-          ref={codeRef}
-        >
-          {value}
-        </code>
+            return (
+              <code
+                className={cx(
+                  css`
+                    color: #cfcfcf;
+
+                    & .selector,
+                    & .keyword,
+                    & .operator {
+                      color: #ff6b6b;
+                    }
+
+                    & .property {
+                      color: #54a0ff;
+                    }
+
+                    & .parameter {
+                      color: #abb2bf;
+                    }
+
+                    & .attr-name,
+                    & .function {
+                      color: #ff9ff3;
+                    }
+                    & .punctuation {
+                      color: #abb2bf;
+                    }
+                    & .class-name,
+                    & .maybe-class-name {
+                      color: #feca57;
+                    }
+                    & .constant,
+                    & .number,
+                    & .unit,
+                    & .interpolation,
+                    & .pseudo-element {
+                      color: #ff9f43;
+                    }
+                    & .string,
+                    & .attr-value {
+                      color: #1dd1a1;
+                    }
+                    & .hexcode {
+                      color: #00d2d3;
+                    }
+
+                    & .comment {
+                      color: #576574;
+                    }
+                  `,
+                  className
+                )}
+                ref={codeRef}
+              >
+                {elements}
+              </code>
+            );
+          }}
+        </Highlight>
       </div>
 
       <button
