@@ -57,6 +57,7 @@ export const TableOfContentsItem: React.VFC<TableOfContentsItemProps> = ({
   level,
   targetId,
   children,
+  ...props
 }) => {
   const { pathname, asPath } = useRouter();
 
@@ -66,7 +67,7 @@ export const TableOfContentsItem: React.VFC<TableOfContentsItemProps> = ({
         display: block;
         margin-block-end: 0;
       `}
-      key={targetId}
+      {...props}
     >
       <LocalizedLink
         href={pathname}

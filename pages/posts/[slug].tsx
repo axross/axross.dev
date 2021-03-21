@@ -326,11 +326,12 @@ const Page: NextPage<
                   as={`/posts/${p.slug}`}
                   tableOfContents={
                     p.slug === slug ? (
-                      <TableOfContents>
+                      <TableOfContents data-testid="table-of-contents">
                         {tableOfContents.map(({ id, level, text }) => (
                           <TableOfContentsItem
                             targetId={id}
                             level={level}
+                            data-testid="item"
                             key={id}
                           >
                             {text}
