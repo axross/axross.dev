@@ -217,12 +217,15 @@ const Page: NextPage<
                         font-size: var(--font-size-xs);
                       `}
                     >
-                      {"Last modified at "}
-                      <span>
-                        {new Intl.DateTimeFormat("en-US", {
-                          dateStyle: "long",
-                        }).format(lastPublishedAt)}
-                      </span>
+                      {intl.formatMessage(
+                        {
+                          defaultMessage:
+                            "Last modified at {lastModifiedAt, date, long}",
+                        },
+                        {
+                          lastModifiedAt: lastPublishedAt,
+                        }
+                      )}
                     </div>
                   </div>
                 </div>
