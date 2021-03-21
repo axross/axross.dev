@@ -1,12 +1,13 @@
 import cheerio from "cheerio";
-import GithubSlugger from "github-slugger";
+import hash from "hasha";
 import { GraphQLClient, gql } from "graphql-request";
 import { imageSize } from "image-size";
 import * as directiveExtension from "mdast-util-directive";
+import mdastToString from "mdast-util-to-string";
 import directiveSyntax from "micromark-extension-directive";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
-import unified, { Transformer } from "unified";
+import unified, { CompilerFunction, Processor, Transformer } from "unified";
 import type { Node, Parent } from "unist";
 import visit from "unist-util-visit";
 
@@ -43,40 +44,14 @@ export async function getIndexPageJson({
     return null;
   }
 
-  const processor = unified()
-    .data("micromarkExtensions", [directiveSyntax()])
-    .data("fromMarkdownExtensions", [directiveExtension.fromMarkdown])
-    .data("toMarkdownExtensions", [directiveExtension.toMarkdown])
-    .use(remarkParse)
-    .use(convertImageFigure)
-    .use(completeImageFigureDimension)
-    .use(convertEmbed)
-    .use(resolveEmbed)
-    .use(resolveWebpageEmbed)
-    .use(remarkStringify);
-  const body = (await processor.process(data.indexPages[0].body)).toString();
-
-  const githubSlugger = new GithubSlugger();
-  const tableOfContents = [];
-
-  for (const line of body.split("\n")) {
-    const match = line.match(/^(#{1,6}) (.+)$/);
-
-    if (match && match[1] && match[2]) {
-      const level = match[1]!.length;
-      const text = match[2]!;
-      const id = githubSlugger.slug(text);
-
-      tableOfContents.push({ id, level, text });
-    }
-  }
+  const ast = await parseMarkdown(data.indexPages[0].body);
 
   return {
     title: data.indexPages[0].title,
     description: data.indexPages[0].description,
     coverImageUrl: data.indexPages[0].coverImage.url,
-    tableOfContents,
-    body,
+    tableOfContents: await generateTableOfContents(ast),
+    body: await generateMarkdown(ast),
   };
 }
 
@@ -134,33 +109,7 @@ export async function getPostJson({
     return null;
   }
 
-  const processor = unified()
-    .data("micromarkExtensions", [directiveSyntax()])
-    .data("fromMarkdownExtensions", [directiveExtension.fromMarkdown])
-    .data("toMarkdownExtensions", [directiveExtension.toMarkdown])
-    .use(remarkParse)
-    .use(convertImageFigure)
-    .use(completeImageFigureDimension)
-    .use(convertEmbed)
-    .use(resolveEmbed)
-    .use(resolveWebpageEmbed)
-    .use(remarkStringify);
-  const body = (await processor.process(data.posts[0].body)).toString();
-
-  const githubSlugger = new GithubSlugger();
-  const tableOfContents = [];
-
-  for (const line of body.split("\n")) {
-    const match = line.match(/^(#{1,6}) (.+)$/);
-
-    if (match && match[1] && match[2]) {
-      const level = match[1]!.length;
-      const text = match[2]!;
-      const id = githubSlugger.slug(text);
-
-      tableOfContents.push({ id, level, text });
-    }
-  }
+  const ast = await parseMarkdown(data.posts[0].body);
 
   return {
     slug: data.posts[0].slug,
@@ -174,8 +123,8 @@ export async function getPostJson({
       name: data.posts[0].author.name,
       avatarUrl: data.posts[0].author.avatar.url,
     },
-    tableOfContents,
-    body,
+    tableOfContents: await generateTableOfContents(ast),
+    body: await generateMarkdown(ast),
   };
 }
 
@@ -239,6 +188,71 @@ export async function getPostEntryListJson({
       avatarUrl: item.author.avatar.url,
     },
   }));
+}
+
+function getGraphQLClient({
+  previewToken,
+}: {
+  previewToken?: string;
+}): GraphQLClient {
+  return new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!, {
+    headers: previewToken
+      ? {
+          authorization: `Bearer ${previewToken}`,
+        }
+      : undefined,
+  });
+}
+
+async function parseMarkdown(markdown: string): Promise<Node> {
+  const processor = unified()
+    .data("micromarkExtensions", [directiveSyntax()])
+    .data("fromMarkdownExtensions", [directiveExtension.fromMarkdown])
+    .use(remarkParse)
+    .use(convertHeading)
+    .use(convertImageFigure)
+    .use(completeImageFigureDimension)
+    .use(convertEmbed)
+    .use(resolveEmbed)
+    .use(resolveWebpageEmbed);
+
+  return await processor.run(processor.parse(markdown));
+}
+
+async function generateMarkdown(node: Node): Promise<string> {
+  const processor = unified()
+    .data("toMarkdownExtensions", [directiveExtension.toMarkdown])
+    .use(remarkStringify);
+
+  return processor.stringify(node);
+}
+
+async function generateTableOfContents(
+  node: Node
+): Promise<{ id: string; level: number; text: string }[]> {
+  const processor = unified().use(remarkTocify);
+
+  return processor.stringify(node) as any;
+}
+
+function convertHeading() {
+  const transformer: Transformer = (tree) => {
+    visit(tree, "heading", (node, index, parent) => {
+      const id = hash(mdastToString(node)).substring(0, 8);
+
+      parent!.children.splice(index, 1, {
+        type: "leafDirective",
+        name: `rich-heading-${node.depth}`,
+        attributes: {
+          id,
+        },
+        children: node.children,
+        position: node.position,
+      });
+    });
+  };
+
+  return transformer;
 }
 
 function convertImageFigure() {
@@ -424,16 +438,31 @@ function resolveWebpageEmbed() {
   return transformer;
 }
 
-function getGraphQLClient({
-  previewToken,
-}: {
-  previewToken?: string;
-}): GraphQLClient {
-  return new GraphQLClient(process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT!, {
-    headers: previewToken
-      ? {
-          authorization: `Bearer ${previewToken}`,
-        }
-      : undefined,
-  });
+function remarkTocify(this: Processor) {
+  const compile: CompilerFunction = (tree) => {
+    const tableOfContents: { id: string; level: number; text: string }[] = [];
+
+    visit(
+      tree,
+      [
+        { type: "leafDirective", name: "rich-heading-1" },
+        { type: "leafDirective", name: "rich-heading-2" },
+        { type: "leafDirective", name: "rich-heading-3" },
+        { type: "leafDirective", name: "rich-heading-4" },
+        { type: "leafDirective", name: "rich-heading-5" },
+        { type: "leafDirective", name: "rich-heading-6" },
+      ],
+      (node) => {
+        tableOfContents.push({
+          id: (node.attributes as any).id,
+          level: parseInt((node.name as any).replace("rich-heading-", "")),
+          text: mdastToString(node),
+        });
+      }
+    );
+
+    return tableOfContents as any;
+  };
+
+  this.Compiler = compile;
 }

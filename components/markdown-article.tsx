@@ -1,13 +1,9 @@
 import { css, cx } from "@linaria/core";
 import { FeedbackFish } from "@feedback-fish/react";
 import { styled } from "@linaria/react";
-import GithubSlugger from "github-slugger";
-import mdastToString from "mdast-util-to-string";
 import * as React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkDirective from "remark-directive";
-import { Transformer } from "unified";
-import visit from "unist-util-visit";
 import { ParrotAnchor } from "./anchor";
 import { Blockquote } from "./blockquote";
 import { Callout } from "./callout";
@@ -30,7 +26,7 @@ export const Markdown: React.VFC<MarkdownProps> = ({
   return (
     <ReactMarkdown
       renderers={components}
-      plugins={[remarkDirective, appendHeadingId]}
+      plugins={[remarkDirective]}
       children={markdown}
       className={cx(
         css`
@@ -380,12 +376,24 @@ export const components = {
         return null;
     }
   },
-  leafDirective: ({ name, attributes }: any) => {
+  leafDirective: ({ name, attributes, children }: any) => {
     switch (name) {
       case "image-figure":
         return <MdImageFigure {...attributes} />;
       case "webpage-embed":
         return <MdWebpageEmbed {...attributes} />;
+      case "rich-heading-1":
+        return <MdHeading1 {...attributes}>{children}</MdHeading1>;
+      case "rich-heading-2":
+        return <MdHeading2 {...attributes}>{children}</MdHeading2>;
+      case "rich-heading-3":
+        return <MdHeading3 {...attributes}>{children}</MdHeading3>;
+      case "rich-heading-4":
+        return <MdHeading4 {...attributes}>{children}</MdHeading4>;
+      case "rich-heading-5":
+        return <MdHeading5 {...attributes}>{children}</MdHeading5>;
+      case "rich-heading-6":
+        return <MdHeading6 {...attributes}>{children}</MdHeading6>;
       default:
         return null;
     }
@@ -414,25 +422,3 @@ export const components = {
     }
   },
 };
-
-function appendHeadingId() {
-  const transformer: Transformer = (tree) => {
-    const githubSlugger = new GithubSlugger();
-
-    visit(tree, "heading", (node) => {
-      const id = githubSlugger.slug(mdastToString(node));
-
-      node.id = id;
-      node.data = {
-        id,
-        ...node.data,
-        hProperties: {
-          id,
-          ...(node.data?.hProperties as any),
-        },
-      };
-    });
-  };
-
-  return transformer;
-}
