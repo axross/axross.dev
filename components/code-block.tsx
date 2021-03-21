@@ -65,8 +65,6 @@ export const CodeBlock: React.VFC<CodeBlockProps> = ({
             const elements: React.ReactElement[] = [];
 
             for (const [i, line] of tokens.entries()) {
-              console.log(i, line);
-
               for (const [j, token] of line.entries()) {
                 const { className, children } = getTokenProps({ token, j });
 
