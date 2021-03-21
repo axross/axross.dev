@@ -192,7 +192,7 @@ const MdUnorderedList = styled.ul`
     margin-block-end: 0.5em;
 
     &::marker {
-      color: #ffffff5f;
+      color: var(--color-fg-gray);
     }
 
     > p {
