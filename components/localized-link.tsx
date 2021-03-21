@@ -35,7 +35,11 @@ export const LocalizedLink: React.FC<LocalizedLinkProps> = ({
 
   return (
     <Link
-      href={{ pathname: hrefUrl.pathname, search: hrefUrl.search }}
+      href={{
+        pathname: hrefUrl.pathname,
+        search: hrefUrl.search,
+        hash: hrefUrl.hash,
+      }}
       as={{ pathname: asUrl.pathname, search: asUrl.search, hash: asUrl.hash }}
       {...props}
     />

@@ -38,6 +38,7 @@
     "next": "^10.0.8",
     "normalize.css": "^8.0.1",
     "polished": "^4.1.1",
+    "prism-react-renderer": "^1.2.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-intl": "^5.13.2",
