@@ -385,13 +385,18 @@ export async function getServerSideProps({
   query,
   params,
 }: GetServerSidePropsContext) {
-  // WORKAROUND:
-  // it needs to manually set this here
-  // since vercel doesn't use cache-control header specified in any of next.config.js or vercel.json
-  res.setHeader("cache-control", CACHE_HEADER_VALUE);
-
   const slug = `${params!.slug}`;
+  const previewToken = query!.preview_token
+    ? `${query!.preview_token}`
+    : undefined;
   const locale = getLocaleFromQuery(query);
+
+  if (!previewToken) {
+    // WORKAROUND:
+    // it needs to manually set this here
+    // since vercel doesn't use cache-control header specified in any of next.config.js or vercel.json
+    res.setHeader("cache-control", CACHE_HEADER_VALUE);
+  }
 
   if (!locale) {
     return {
@@ -401,9 +406,7 @@ export async function getServerSideProps({
 
   const origin = getOriginFromRequest(req);
   const intlMessages = await getIntlMessages({ locale });
-  const previewToken = query!.preview_token
-    ? `${query!.preview_token}`
-    : undefined;
+
   const posts = await getPostEntryListJson({ locale, previewToken });
   const post = await getPostJson({ slug, locale, previewToken });
 
