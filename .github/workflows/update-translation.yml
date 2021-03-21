@@ -15,13 +15,6 @@ jobs:
       - name: Install SimpleLocalize CLI
         run: curl -s https://get.simplelocalize.io/install | bash
       - name: Extract Translation File
-        run: npx --package @formatjs/cli \
-              formatjs extract "(components|pages)/**/*.ts*" \
-              --out-file translations.json \
-              --id-interpolation-pattern '[sha512:contenthash:base64:6]'
+        run: npx --package @formatjs/cli formatjs extract "(components|pages)/**/*.ts*" --out-file translations.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'
       - name: Upload the Translation File to SimpleLocalize
-        run: simplelocalize upload \
-              --apiKey ${{ secrets.SIMPLE_LOCALIZE_API_KEY }} \
-              --uploadFormat simplelocalize-json \
-              --uploadPath ./translations.json \
-              --languageKey en-US
+        run: simplelocalize upload --apiKey ${{ secrets.SIMPLE_LOCALIZE_API_KEY }} --uploadFormat simplelocalize-json --uploadPath ./translations.json --languageKey en-US
