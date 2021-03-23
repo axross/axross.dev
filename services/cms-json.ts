@@ -23,7 +23,7 @@ export async function getIndexPageJson({
   coverImageUrl: string;
   tableOfContents: { id: string; level: number; text: string }[];
   body: string;
-} | null> {
+}> {
   const data = await getGraphQLClient({ previewToken }).request(
     gql`
       query($locale: Locale!) {
@@ -41,7 +41,7 @@ export async function getIndexPageJson({
   );
 
   if (data.indexPages.length !== 1) {
-    return null;
+    throw new Error("Index page was not found.");
   }
 
   const ast = await parseMarkdown(data.indexPages[0].body);
@@ -50,8 +50,8 @@ export async function getIndexPageJson({
     title: data.indexPages[0].title,
     description: data.indexPages[0].description,
     coverImageUrl: data.indexPages[0].coverImage.url,
-    tableOfContents: await generateTableOfContents(ast),
-    body: await generateMarkdown(ast),
+    tableOfContents: generateTableOfContents(ast),
+    body: generateMarkdown(ast),
   };
 }
 
@@ -123,8 +123,8 @@ export async function getPostJson({
       name: data.posts[0].author.name,
       avatarUrl: data.posts[0].author.avatar.url,
     },
-    tableOfContents: await generateTableOfContents(ast),
-    body: await generateMarkdown(ast),
+    tableOfContents: generateTableOfContents(ast),
+    body: generateMarkdown(ast),
   };
 }
 
@@ -219,7 +219,7 @@ async function parseMarkdown(markdown: string): Promise<Node> {
   return await processor.run(processor.parse(markdown));
 }
 
-async function generateMarkdown(node: Node): Promise<string> {
+function generateMarkdown(node: Node): string {
   const processor = unified()
     .data("toMarkdownExtensions", [directiveExtension.toMarkdown])
     .use(remarkStringify);
@@ -227,9 +227,9 @@ async function generateMarkdown(node: Node): Promise<string> {
   return processor.stringify(node);
 }
 
-async function generateTableOfContents(
+function generateTableOfContents(
   node: Node
-): Promise<{ id: string; level: number; text: string }[]> {
+): { id: string; level: number; text: string }[] {
   const processor = unified().use(remarkTocify);
 
   return processor.stringify(node) as any;
