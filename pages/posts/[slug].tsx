@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { GetServerSidePropsContext, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import * as React from "react";
 import { useIntl } from "react-intl";
@@ -23,12 +23,12 @@ import { getOriginFromRequest } from "../../helpers/next";
 import { getPostEntryListJson, getPostJson } from "../../services/cms-json";
 import { getIntlMessages } from "../../services/translation";
 
-const Page: NextPage<
-  CommonServerSideProps & {
-    post: NonNullable<PromiseValue<ReturnType<typeof getPostJson>>>;
-    posts: PromiseValue<ReturnType<typeof getPostEntryListJson>>;
-  }
-> = (props) => {
+interface ServerSideProps extends CommonServerSideProps {
+  post: NonNullable<PromiseValue<ReturnType<typeof getPostJson>>>;
+  posts: PromiseValue<ReturnType<typeof getPostEntryListJson>>;
+}
+
+const Page: NextPage<ServerSideProps> = (props) => {
   const origin = useOrigin();
   const intl = useIntl();
   const {
@@ -383,12 +383,12 @@ const Page: NextPage<
   );
 };
 
-export async function getServerSideProps({
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
   req,
   res,
   query,
   params,
-}: GetServerSidePropsContext) {
+}) => {
   const slug = `${params!.slug}`;
   const previewToken = query!.preview_token
     ? `${query!.preview_token}`
@@ -409,10 +409,11 @@ export async function getServerSideProps({
   }
 
   const origin = getOriginFromRequest(req);
-  const intlMessages = await getIntlMessages({ locale });
-
-  const posts = await getPostEntryListJson({ locale, previewToken });
-  const post = await getPostJson({ slug, locale, previewToken });
+  const [intlMessages, posts, post] = await Promise.all([
+    getIntlMessages({ locale }),
+    getPostEntryListJson({ locale, previewToken }),
+    getPostJson({ slug, locale, previewToken }),
+  ]);
 
   if (post === null) {
     return {
@@ -423,6 +424,6 @@ export async function getServerSideProps({
   return {
     props: { origin, locale, intlMessages, post, posts },
   };
-}
+};
 
 export default Page;

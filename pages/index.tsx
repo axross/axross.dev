@@ -1,5 +1,5 @@
 import { css } from "@linaria/core";
-import { GetServerSidePropsContext, NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import * as React from "react";
 import { useIntl } from "react-intl";
@@ -21,12 +21,12 @@ import { getOriginFromRequest } from "../helpers/next";
 import { getIndexPageJson, getPostEntryListJson } from "../services/cms-json";
 import { getIntlMessages } from "../services/translation";
 
-const Page: NextPage<
-  CommonServerSideProps & {
-    indexPage: NonNullable<PromiseValue<ReturnType<typeof getIndexPageJson>>>;
-    posts: PromiseValue<ReturnType<typeof getPostEntryListJson>>;
-  }
-> = (props) => {
+interface ServerSideProps extends CommonServerSideProps {
+  indexPage: NonNullable<PromiseValue<ReturnType<typeof getIndexPageJson>>>;
+  posts: PromiseValue<ReturnType<typeof getPostEntryListJson>>;
+}
+
+const Page: NextPage<ServerSideProps> = (props) => {
   const intl = useIntl();
   const origin = useOrigin();
   const {
@@ -272,11 +272,11 @@ const Page: NextPage<
   );
 };
 
-export async function getServerSideProps({
+export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
   req,
   res,
   query,
-}: GetServerSidePropsContext) {
+}) => {
   const locale = getLocaleFromQuery(query);
   const previewToken = query!.preview_token
     ? `${query!.preview_token}`
@@ -294,13 +294,15 @@ export async function getServerSideProps({
   }
 
   const origin = getOriginFromRequest(req);
-  const intlMessages = await getIntlMessages({ locale });
-  const posts = await getPostEntryListJson({ locale, previewToken });
-  const indexPage = await getIndexPageJson({ locale, previewToken });
+  const [intlMessages, posts, indexPage] = await Promise.all([
+    getIntlMessages({ locale }),
+    getPostEntryListJson({ locale, previewToken }),
+    getIndexPageJson({ locale, previewToken }),
+  ]);
 
   return {
     props: { origin, locale, intlMessages, indexPage, posts },
   };
-}
+};
 
 export default Page;
