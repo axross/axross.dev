@@ -54,15 +54,15 @@ export const Markdown: React.VFC<MarkdownProps> = ({
           }
 
           > ${MdParagraph},
-            > ${MdBlockquote},
-            > ${MdHorizontalRule},
-            > ${MdUnorderedList},
-            > ${MdOrderedList},
-            > ${MdTable},
-            > ${MdCodeBlock},
-            > ${MdImageFigure},
-            > ${MdWebpageEmbed},
-            > ${MdCallout} {
+          > ${MdBlockquote},
+          > ${MdHorizontalRule},
+          > ${MdUnorderedList},
+          > ${MdOrderedList},
+          > ${MdTable},
+          > ${MdCodeBlock},
+          > ${MdImageFigure},
+          > ${MdWebpageEmbed},
+          > ${MdCallout} {
             margin-block-start: var(--block-margin);
           }
 
@@ -94,11 +94,9 @@ export const Markdown: React.VFC<MarkdownProps> = ({
             padding-block-start: var(--block-margin);
           }
 
-          
-          ${MdParagraph} + ${MdParagraph} {
+          > ${MdParagraph} + ${MdParagraph} {
             margin-block-start: var(--paragraph-margin);
           }
-        
         `,
         className
       )}
@@ -310,6 +308,50 @@ const MdImageFigure = styled(ImageFigure)``;
 const MdWebpageEmbed = styled(WebpageEmbed)``;
 
 const MdCallout = styled(Callout)`
+  > ${MdParagraph},
+  > ${MdBlockquote},
+  > ${MdHorizontalRule},
+  > ${MdUnorderedList},
+  > ${MdOrderedList},
+  > ${MdTable},
+  > ${MdCodeBlock},
+  > ${MdImageFigure},
+  > ${MdWebpageEmbed} {
+    margin-block-start: var(--block-margin);
+  }
+
+  > ${MdHeading1},
+  > ${MdHeading2},
+  > ${MdHeading3},
+  > ${MdHeading4},
+  > ${MdHeading5},
+  > ${MdHeading6} {
+    margin-block-start: calc(var(--section-margin) - var(--block-margin));
+    padding-block-start: var(--block-margin);
+  }
+
+  > ${MdHeading1} + *,
+  > ${MdHeading2} + *,
+  > ${MdHeading3} + *,
+  > ${MdHeading4} + *,
+  > ${MdHeading5} + *,
+  > ${MdHeading6} + * {
+    margin-block-start: calc(var(--block-margin) * 0.5);
+  }
+
+  > ${MdHeading1} + ${MdHeading2},
+  > ${MdHeading2} + ${MdHeading3},
+  > ${MdHeading3} + ${MdHeading4},
+  > ${MdHeading4} + ${MdHeading5},
+  > ${MdHeading5} + ${MdHeading6} {
+    margin-block-start: 0;
+    padding-block-start: var(--block-margin);
+  }
+
+  > ${MdParagraph} + ${MdParagraph} {
+    margin-block-start: var(--paragraph-margin);
+  }
+
   > *:nth-child(2) {
     margin-block-start: 0;
   }

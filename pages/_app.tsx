@@ -157,6 +157,9 @@ css`
       --color-fg-red: #ff6b6b;
       --color-fg-blue: #54a0ff;
       --color-fg-yellow: #feca57;
+      --color-fg-red-weak: ${tint(0.5, "#ff6b6b")};
+      --color-fg-blue-weak: ${tint(0.5, "#54a0ff")};
+      --color-fg-yellow-weak: ${tint(0.5, "#feca57")};
       --color-fg-gray: ${tint(0.5, "#8395a7")};
       --color-fg-gray-weak: ${tint(0.65, "#8395a7")};
       --color-bg: #ffffff;
@@ -191,6 +194,9 @@ css`
         --color-bg-input-active: ${shade(0.8, "#8395a7")};
         --color-fg: ${mix(0.666, "#fff", "#8395a7")};
         --color-fg-strong: #fff;
+        --color-fg-red-weak: ${shade(0.5, "#ff6b6b")};
+        --color-fg-blue-weak: ${shade(0.5, "#54a0ff")};
+        --color-fg-yellow-weak: ${shade(0.5, "#feca57")};
         --color-fg-gray: ${shade(0.5, "#8395a7")};
         --color-fg-gray-weak: ${shade(0.65, "#8395a7")};
         --color-bg-red-weak: ${shade(0.75, "#ff6b6b")};
