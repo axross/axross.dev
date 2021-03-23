@@ -24,15 +24,16 @@ export const Callout: React.FC<CalloutProps> = ({
         css`
           position: relative;
           padding-block-start: calc(
-            var(--space-md) + var(--font-size-md) * 2 + var(--space-sm)
+            var(--space-lg) + var(--font-size-md) * 2 + var(--space-sm)
           );
-          padding-block-end: var(--space-md);
+          padding-block-end: var(--space-lg);
           padding-inline-start: var(--space-lg);
           padding-inline-end: var(--space-lg);
           line-height: 1.75;
           border-radius: 8px;
         `,
         BACKGROUND_COLORS[variant],
+        QUOTE_COLORS[variant],
         className
       )}
       {...props}
@@ -96,5 +97,14 @@ const BACKGROUND_COLORS: Record<CalloutVariant, string> = {
   `,
   [CalloutVariant.warning]: css`
     background-color: var(--color-bg-yellow-weak);
+  `,
+};
+
+const QUOTE_COLORS: Record<CalloutVariant, string> = {
+  [CalloutVariant.info]: css`
+    --quote-color: var(--color-fg-blue-weak);
+  `,
+  [CalloutVariant.warning]: css`
+    --quote-color: var(--color-fg-yellow-weak);
   `,
 };
