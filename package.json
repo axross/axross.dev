@@ -30,7 +30,6 @@
     "hasha": "^5.2.2",
     "i18next-http-backend": "^1.1.1",
     "image-size": "^0.9.5",
-    "logrocket": "^1.0.14",
     "mdast-util-directive": "^1.0.1",
     "mdast-util-to-string": "^2.0.0",
     "micromark-extension-directive": "^1.2.0",
