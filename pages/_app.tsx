@@ -1,7 +1,6 @@
 import { css } from "@linaria/core";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import LogRocket from "logrocket";
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { mix, shade, tint } from "polished";
@@ -30,18 +29,6 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
 
       return event;
     },
-  });
-}
-
-// initialize logrocket client only when the env var is set
-// you can comment out the env var in .env.local when you want to debug
-// logrocket is available only on browser
-if (
-  globalThis === globalThis.window &&
-  process.env.NEXT_PUBLIC_LOGROCKET_APP_ID
-) {
-  LogRocket.init(process.env.NEXT_PUBLIC_LOGROCKET_APP_ID!, {
-    release: process.env.NEXT_PUBLIC_VERSION,
   });
 }
 
