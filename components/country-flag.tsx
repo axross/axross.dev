@@ -1,3 +1,5 @@
+import * as React from "react";
+
 export interface CountryFlagProps extends React.Attributes {
   className?: string;
   style?: React.CSSProperties;

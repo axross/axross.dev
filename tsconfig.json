@@ -22,7 +22,7 @@
     "noEmit": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "jsx": "preserve",
+    "jsx": "preserve"
   },
   "include": [
     "next-env.d.ts",

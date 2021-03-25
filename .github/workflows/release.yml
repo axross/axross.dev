@@ -31,6 +31,29 @@ jobs:
         run: npm ci
       - name: Dry Build
         run: npm run build
+  unit-test:
+    name: Unit Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Restore/cache npm packages
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-npm-packages
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install npm packages
+        run: npm ci
+      - name: Run Unit tests
+        run: npm run test:unit -- --ci --verbose --coverage
   e2e-test:
     name: E2E Test
     runs-on: ubuntu-latest
@@ -58,7 +81,7 @@ jobs:
       - name: Install npm packages
         run: npm ci
       - name: Run E2E tests
-        run: npx start-server-and-test "npm run build && npx next start" "http://localhost:3000" "npm run e2e-test -- --ci --verbose"
+        run: npx start-server-and-test "npm run build && npx next start" "http://localhost:3000" "npm run test:e2e -- --ci --verbose"
   release:
     name: Release
     runs-on: ubuntu-latest
