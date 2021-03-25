@@ -1,0 +1,945 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button> matches the snapshot: variant: default, size: lg, icon: false, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b1l9461r"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 bo94lri"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: lg, icon: false, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b1l9461r"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 bo94lri"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b1l9461r"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b4190x9"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 bo94lri"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b1l9461r"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b4190x9 c75i3tf"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 bo94lri"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: md, icon: false, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 bq44b7t"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 br7adeq"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: md, icon: false, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 bq44b7t"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 br7adeq"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 bq44b7t"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b1ig5l0y"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 br7adeq"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 bq44b7t"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b1ig5l0y c75i3tf"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 br7adeq"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: sm, icon: false, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b14eo67x"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 bj3h2v"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: sm, icon: false, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b14eo67x"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 bj3h2v"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b14eo67x"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b106izpi"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 bj3h2v"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b14eo67x"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b106izpi c75i3tf"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 bj3h2v"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: xl, icon: false, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b1vby7g1"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 b276tsp"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: xl, icon: false, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b1vby7g1"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 b276tsp"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b1vby7g1"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp bkz0lf"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 b276tsp"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 b1gnzyb2 b1vby7g1"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp bkz0lf c75i3tf"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 b276tsp"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: false, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b1l9461r"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 bo94lri"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: false, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b1l9461r"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 bo94lri"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b1l9461r"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b4190x9"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 bo94lri"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b1l9461r"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b4190x9 c75i3tf"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 bo94lri"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: false, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx bq44b7t"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 br7adeq"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: false, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx bq44b7t"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 br7adeq"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx bq44b7t"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b1ig5l0y"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 br7adeq"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx bq44b7t"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b1ig5l0y c75i3tf"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 br7adeq"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: false, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b14eo67x"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 bj3h2v"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: false, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b14eo67x"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 bj3h2v"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b14eo67x"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b106izpi"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 bj3h2v"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b14eo67x"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp b106izpi c75i3tf"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 bj3h2v"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: false, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b1vby7g1"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 b276tsp"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: false, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b1vby7g1"
+    data-testid="button"
+  >
+    <span
+      class="clvi054 b276tsp"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: true, children: false 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b1vby7g1"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp bkz0lf"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 b276tsp"
+    />
+  </button>
+</div>
+`;
+
+exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: true, children: true 1`] = `
+<div>
+  <button
+    class="c11jtqo5 bdi40cx b1vby7g1"
+    data-testid="button"
+  >
+    <svg
+      class="c108jgnp bkz0lf c75i3tf"
+      fill="none"
+      height="24"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+      width="24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+      />
+      <path
+        d="M19 10v2a7 7 0 0 1-14 0v-2"
+      />
+      <line
+        x1="12"
+        x2="12"
+        y1="19"
+        y2="23"
+      />
+      <line
+        x1="8"
+        x2="16"
+        y1="23"
+        y2="23"
+      />
+    </svg>
+    <span
+      class="clvi054 b276tsp"
+    >
+      Lorem Ipsum
+    </span>
+  </button>
+</div>
+`;
