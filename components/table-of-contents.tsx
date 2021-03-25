@@ -1,5 +1,6 @@
 import { css, cx } from "@linaria/core";
 import { useRouter } from "next/router";
+import * as React from "react";
 import {
   RAINBOW_ANCHOR_CSS,
   RAINBOW_HOVER_ANCHOR_CSS,

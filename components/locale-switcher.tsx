@@ -34,7 +34,7 @@ export const LocaleSwitcher: React.VFC<LocaleSwitcherProps> = ({
       )}
       {...props}
     >
-      {(AVAILABLE_LOCALES ?? []).map((locale) => {
+      {AVAILABLE_LOCALES.map((locale) => {
         const FlagComponent = locale === "ja-JP" ? JapanFlag : UnitedStatesFlag;
 
         return (
@@ -79,6 +79,7 @@ export const LocaleSwitcher: React.VFC<LocaleSwitcherProps> = ({
                     }
                   }
                 `}
+                data-testid="link"
               >
                 <FlagComponent
                   className={css`
