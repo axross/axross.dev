@@ -52,6 +52,9 @@ jobs:
         run: npm ci
       - name: Run Unit tests
         run: npm run test:unit -- --ci --verbose --coverage
+      - uses: codecov/codecov-action@v1
+        with:
+          verbose: true
   e2e-test:
     name: E2E Test
     runs-on: ubuntu-latest
