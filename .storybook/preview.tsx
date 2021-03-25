@@ -1,6 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import { IntlProvider } from "react-intl";
-import { MockRouterProvider } from "../core/mock-router-provider";
+import { TestApp } from "../core/test-app";
 
 import "./patch-next-image";
 
@@ -21,9 +20,9 @@ export const globalTypes = {
       icon: "globe",
       items: [
         { value: "en-US", right: "🇺🇸", title: "English" },
-        { value: "fr_FR", right: "🇫🇷", title: "Français" },
+        { value: "fr-FR", right: "🇫🇷", title: "Français" },
         { value: "ja-JP", right: "🇯🇵", title: "Japanese" },
-        { value: "du_My", right: "⚙️", title: "Dummy" },
+        { value: "du-My", right: "⚙️", title: "Dummy" },
       ],
     },
   },
@@ -35,56 +34,31 @@ export const decorators = [
     {
       parameters: {
         initialRoute: { pathname = "", query = {}, asPath = "" } = {},
+        i18nMessages = {},
       },
       globals: { locale },
     }
   ) => {
     return (
-      <MockRouterProvider
-        basePath=""
-        route=""
-        isFallback={false}
-        isReady={true}
-        isPreview={false}
-        pathname={pathname}
-        query={query}
-        asPath={asPath}
-        push={(...args: any[]) => {
-          action("useRouter().push()")(...args);
-          return Promise.resolve(false);
+      <TestApp
+        router={{
+          pathname,
+          query,
+          asPath,
+          push: action("useRouter().push()"),
+          replace: action("useRouter().replace()"),
+          prefetch: action("useRouter().prefetch()"),
+          beforePopState: action("useRouter().beforePopState()"),
+          back: action("useRouter().back()"),
+          reload: action("useRouter().reload()"),
         }}
-        replace={(...args: any[]) => {
-          action("useRouter().replace()")(...args);
-          return Promise.resolve(false);
+        intl={{
+          locale,
+          messages: i18nMessages,
         }}
-        prefetch={(...args: any[]) => {
-          action("useRouter().prefetch()")(...args);
-          return Promise.resolve(undefined);
-        }}
-        beforePopState={action("useRouter().beforePopState()")}
-        back={action("useRouter().back()")}
-        reload={action("useRouter().reload()")}
-        locale={locale}
-        isLocaleDomain={false}
-        events={
-          {
-            on: action("useRouter().events.on()"),
-            off: action("useRouter().events.off()"),
-          } as any
-        }
       >
         <Story />
-      </MockRouterProvider>
-    );
-  },
-  (
-    Story: React.ComponentType,
-    { parameters: { i18nMessages = {} }, globals: { locale } }
-  ) => {
-    return (
-      <IntlProvider locale={locale} messages={i18nMessages}>
-        <Story />
-      </IntlProvider>
+      </TestApp>
     );
   },
 ];
