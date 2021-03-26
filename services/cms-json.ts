@@ -1,15 +1,15 @@
-import cheerio from "cheerio";
 import hash from "hasha";
 import { GraphQLClient, gql } from "graphql-request";
 import { imageSize } from "image-size";
 import * as directiveExtension from "mdast-util-directive";
-import mdastToString from "mdast-util-to-string";
+import extractString from "mdast-util-to-string";
 import directiveSyntax from "micromark-extension-directive";
 import remarkParse from "remark-parse";
 import remarkStringify from "remark-stringify";
 import unified, { CompilerFunction, Processor, Transformer } from "unified";
 import type { Node, Parent } from "unist";
 import visit from "unist-util-visit";
+import { scrapeWebpage } from "../helpers/scrape";
 
 export async function getIndexPageJson({
   locale,
@@ -238,7 +238,7 @@ function generateTableOfContents(
 function convertHeading() {
   const transformer: Transformer = (tree) => {
     visit(tree, "heading", (node, index, parent) => {
-      const id = hash(mdastToString(node)).substring(0, 8);
+      const id = hash(extractString(node)).substring(0, 8);
 
       parent!.children.splice(index, 1, {
         type: "leafDirective",
@@ -346,7 +346,7 @@ function convertEmbed() {
           name: "embed",
           attributes: {
             href: linkNode.url,
-            title: linkNode.title,
+            title: extractString(linkNode),
           },
         });
       })
@@ -379,58 +379,15 @@ function resolveWebpageEmbed() {
         const attributes = node.attributes as any;
         const url = attributes.href as string;
 
-        if (
-          (attributes as any).width !== undefined &&
-          (attributes as any).height !== undefined
-        ) {
-          return;
-        }
+        const { href, title, description, imageSrc } = await scrapeWebpage(
+          url,
+          { titleFallback: attributes.title }
+        );
 
-        try {
-          const response = await fetch(url, {
-            headers: { "user-agent": "facebookexternalhit/1.1" },
-          });
-
-          if (response.status < 200 || response.status >= 300) {
-            throw new Error(`${url} responded ${response.status}.`);
-          }
-
-          if (!response.headers.get("content-type")?.includes("text/html")) {
-            throw new Error(
-              `${url} responded ${response.headers.get("content-type")}.`
-            );
-          }
-
-          const $ = cheerio.load(await response.text());
-
-          let ogpUrl = $("meta[property='og:url']").attr("content");
-          const ogpTitle = $("meta[property='og:title']").attr("content");
-          const ogpDescription = $("meta[property='og:description']").attr(
-            "content"
-          );
-          const ogpImageUrl = $("meta[property='og:image']").attr("content");
-          const documentTitle = $("title").text();
-          const documentDescription = $("meta[name='description']").attr(
-            "content"
-          );
-
-          const title = ogpTitle ?? documentTitle ?? null;
-          const description = ogpDescription ?? documentDescription ?? null;
-
-          if (title === null) {
-            throw new Error(
-              `${url} responded a HTML that doesn't have the document title.`
-            );
-          }
-
-          attributes.href = ogpUrl;
-          attributes.title = title;
-          attributes.description = description;
-          attributes.imageSrc = ogpImageUrl;
-        } catch (err) {
-          attributes.title = "Unknown Webpage";
-          attributes.description = "";
-        }
+        attributes.href = href;
+        attributes.title = title;
+        attributes.description = description;
+        attributes.imageSrc = imageSrc;
       })
     );
   };
@@ -456,7 +413,7 @@ function remarkTocify(this: Processor) {
         tableOfContents.push({
           id: (node.attributes as any).id,
           level: parseInt((node.name as any).replace("rich-heading-", "")),
-          text: mdastToString(node),
+          text: extractString(node),
         });
       }
     );
