@@ -18,7 +18,7 @@ import { CommonServerSideProps } from "../core/ssr-props";
 import { useOrigin } from "../global-hooks/url";
 import { getLocaleFromQuery } from "../helpers/i18n";
 import { getOriginFromRequest } from "../helpers/next";
-import { getIndexPageJson, getPostEntryListJson } from "../services/cms-json";
+import { getIndexPageJson, getPostEntryListJson } from "../services/cms";
 import { getIntlMessages } from "../services/translation";
 
 interface ServerSideProps extends CommonServerSideProps {
