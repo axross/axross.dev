@@ -9,4 +9,5 @@ module.exports = {
     "!**/*.stories.ts?(x)",
     "!**/node_modules/**",
   ],
+  setupFilesAfterEnv: ["<rootDir>/test-setup/unit-setup-after-env.js"],
 };
