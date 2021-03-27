@@ -1,4 +1,8 @@
 import cheerio from "cheerio";
+import * as dateFns from "date-fns";
+import imageSize from "image-size";
+import Redis from "ioredis";
+import { v5 } from "uuid";
 
 export async function scrapeWebpage(
   url: string,
@@ -17,6 +21,20 @@ export async function scrapeWebpage(
   description: string;
   imageSrc: string;
 }> {
+  const redis = new Redis(process.env.CACHE_REDIS_URL);
+  const key = `webpage-embed#${v5(url, v5.URL)}`;
+  const record = await redis.hgetall(key);
+
+  if (record) {
+    const { href, title, description, imageSrc, lastUpdatedAt } = record as any;
+
+    if (
+      dateFns.isAfter(new Date(lastUpdatedAt), dateFns.subHours(new Date(), 24))
+    ) {
+      return { href, title, description, imageSrc };
+    }
+  }
+
   let html!: string;
 
   try {
@@ -69,15 +87,22 @@ export async function scrapeWebpage(
     imageSrc?.startsWith("/") ? new URL(imageSrc, baseUrl).href : imageSrc
   );
 
-  return {
+  const title = chooseBestCandidate(titleCandidates, titleFallback);
+  const description = chooseBestCandidate(
+    descriptionCandidates,
+    descriptionFallback
+  );
+  const imageSrc = chooseBestCandidate(imageSrcCandidates, imageSrcFallback);
+
+  await redis.hset(key, {
     href,
-    title: chooseBestCandidate(titleCandidates, titleFallback),
-    description: chooseBestCandidate(
-      descriptionCandidates,
-      descriptionFallback
-    ),
-    imageSrc: chooseBestCandidate(imageSrcCandidates, imageSrcFallback),
-  };
+    title,
+    description,
+    imageSrc,
+    lastUpdatedAt: new Date().toISOString(),
+  });
+
+  return { href, title, description, imageSrc };
 }
 
 function chooseBestCandidate(
@@ -98,4 +123,46 @@ function chooseBestCandidate(
   }
 
   return fallback;
+}
+
+export async function resolveImageDimension(
+  url: string
+): Promise<[number, number] | null> {
+  const redis = new Redis(process.env.CACHE_REDIS_URL);
+  const key = `image-dimension#${v5(url, v5.URL)}`;
+  const record = await redis.hgetall(key);
+
+  if (record) {
+    const { width, height, lastUpdatedAt } = record as any;
+
+    if (
+      dateFns.isAfter(
+        new Date(lastUpdatedAt),
+        dateFns.subHours(new Date(), 24)
+      ) &&
+      width !== undefined &&
+      height !== undefined
+    ) {
+      return [width, height];
+    }
+  }
+
+  const response = await fetch(url);
+  const { width, height } = imageSize(await (response as any).buffer());
+
+  if (width !== undefined && height !== undefined) {
+    await redis.hset(key, {
+      width,
+      height,
+      lastUpdatedAt: new Date().toISOString(),
+    });
+
+    return [width, height];
+  }
+
+  await redis.hset(url, {
+    lastUpdatedAt: new Date().toISOString(),
+  });
+
+  return null;
 }

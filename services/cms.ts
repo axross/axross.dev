@@ -1,6 +1,5 @@
 import hash from "hasha";
 import { GraphQLClient, gql } from "graphql-request";
-import { imageSize } from "image-size";
 import * as directiveExtension from "mdast-util-directive";
 import extractString from "mdast-util-to-string";
 import directiveSyntax from "micromark-extension-directive";
@@ -9,7 +8,7 @@ import remarkStringify from "remark-stringify";
 import unified, { CompilerFunction, Processor, Transformer } from "unified";
 import type { Node, Parent } from "unist";
 import visit from "unist-util-visit";
-import { scrapeWebpage } from "../helpers/scrape";
+import { resolveImageDimension, scrapeWebpage } from "./resource-resolver";
 
 export async function getIndexPageJson({
   locale,
@@ -309,11 +308,14 @@ function completeImageFigureDimension() {
           return;
         }
 
-        const response = await fetch(attributes.src as string);
-        const { width, height } = imageSize(await (response as any).buffer());
+        const imageDimension = await resolveImageDimension(attributes.src);
 
-        (attributes as any).width = width;
-        (attributes as any).height = height;
+        if (imageDimension) {
+          const [width, height] = imageDimension;
+
+          (attributes as any).width = width;
+          (attributes as any).height = height;
+        }
       })
     );
   };
