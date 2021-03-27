@@ -3,11 +3,11 @@
 exports[`<Button> matches the snapshot: variant: default, size: lg, icon: false, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b1l9461r"
+    class="b11jtqo5 b1gnzyb2 b1l9461r"
     data-testid="button"
   >
     <span
-      class="clvi054 bo94lri"
+      class="slvi054 bo94lri"
     />
   </button>
 </div>
@@ -16,11 +16,11 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: lg, icon: false, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b1l9461r"
+    class="b11jtqo5 b1gnzyb2 b1l9461r"
     data-testid="button"
   >
     <span
-      class="clvi054 bo94lri"
+      class="slvi054 bo94lri"
     >
       Lorem Ipsum
     </span>
@@ -31,7 +31,7 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b1l9461r"
+    class="b11jtqo5 b1gnzyb2 b1l9461r"
     data-testid="button"
   >
     <svg
@@ -66,7 +66,7 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, 
       />
     </svg>
     <span
-      class="clvi054 bo94lri"
+      class="slvi054 bo94lri"
     />
   </button>
 </div>
@@ -75,7 +75,7 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, 
 exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b1l9461r"
+    class="b11jtqo5 b1gnzyb2 b1l9461r"
     data-testid="button"
   >
     <svg
@@ -110,7 +110,7 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, 
       />
     </svg>
     <span
-      class="clvi054 bo94lri"
+      class="slvi054 bo94lri"
     >
       Lorem Ipsum
     </span>
@@ -121,11 +121,11 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, 
 exports[`<Button> matches the snapshot: variant: default, size: md, icon: false, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 bq44b7t"
+    class="b11jtqo5 b1gnzyb2 bq44b7t"
     data-testid="button"
   >
     <span
-      class="clvi054 br7adeq"
+      class="slvi054 br7adeq"
     />
   </button>
 </div>
@@ -134,11 +134,11 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: md, icon: false, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 bq44b7t"
+    class="b11jtqo5 b1gnzyb2 bq44b7t"
     data-testid="button"
   >
     <span
-      class="clvi054 br7adeq"
+      class="slvi054 br7adeq"
     >
       Lorem Ipsum
     </span>
@@ -149,7 +149,7 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 bq44b7t"
+    class="b11jtqo5 b1gnzyb2 bq44b7t"
     data-testid="button"
   >
     <svg
@@ -184,7 +184,7 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, 
       />
     </svg>
     <span
-      class="clvi054 br7adeq"
+      class="slvi054 br7adeq"
     />
   </button>
 </div>
@@ -193,7 +193,7 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, 
 exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 bq44b7t"
+    class="b11jtqo5 b1gnzyb2 bq44b7t"
     data-testid="button"
   >
     <svg
@@ -228,7 +228,7 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, 
       />
     </svg>
     <span
-      class="clvi054 br7adeq"
+      class="slvi054 br7adeq"
     >
       Lorem Ipsum
     </span>
@@ -239,11 +239,11 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, 
 exports[`<Button> matches the snapshot: variant: default, size: sm, icon: false, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b14eo67x"
+    class="b11jtqo5 b1gnzyb2 b14eo67x"
     data-testid="button"
   >
     <span
-      class="clvi054 bj3h2v"
+      class="slvi054 bj3h2v"
     />
   </button>
 </div>
@@ -252,11 +252,11 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: sm, icon: false, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b14eo67x"
+    class="b11jtqo5 b1gnzyb2 b14eo67x"
     data-testid="button"
   >
     <span
-      class="clvi054 bj3h2v"
+      class="slvi054 bj3h2v"
     >
       Lorem Ipsum
     </span>
@@ -267,7 +267,7 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b14eo67x"
+    class="b11jtqo5 b1gnzyb2 b14eo67x"
     data-testid="button"
   >
     <svg
@@ -302,7 +302,7 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, 
       />
     </svg>
     <span
-      class="clvi054 bj3h2v"
+      class="slvi054 bj3h2v"
     />
   </button>
 </div>
@@ -311,7 +311,7 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, 
 exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b14eo67x"
+    class="b11jtqo5 b1gnzyb2 b14eo67x"
     data-testid="button"
   >
     <svg
@@ -346,7 +346,7 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, 
       />
     </svg>
     <span
-      class="clvi054 bj3h2v"
+      class="slvi054 bj3h2v"
     >
       Lorem Ipsum
     </span>
@@ -357,11 +357,11 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, 
 exports[`<Button> matches the snapshot: variant: default, size: xl, icon: false, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b1vby7g1"
+    class="b11jtqo5 b1gnzyb2 b1vby7g1"
     data-testid="button"
   >
     <span
-      class="clvi054 b276tsp"
+      class="slvi054 b276tsp"
     />
   </button>
 </div>
@@ -370,11 +370,11 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: xl, icon: false, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b1vby7g1"
+    class="b11jtqo5 b1gnzyb2 b1vby7g1"
     data-testid="button"
   >
     <span
-      class="clvi054 b276tsp"
+      class="slvi054 b276tsp"
     >
       Lorem Ipsum
     </span>
@@ -385,7 +385,7 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b1vby7g1"
+    class="b11jtqo5 b1gnzyb2 b1vby7g1"
     data-testid="button"
   >
     <svg
@@ -420,7 +420,7 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, 
       />
     </svg>
     <span
-      class="clvi054 b276tsp"
+      class="slvi054 b276tsp"
     />
   </button>
 </div>
@@ -429,7 +429,7 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, 
 exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 b1gnzyb2 b1vby7g1"
+    class="b11jtqo5 b1gnzyb2 b1vby7g1"
     data-testid="button"
   >
     <svg
@@ -464,7 +464,7 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, 
       />
     </svg>
     <span
-      class="clvi054 b276tsp"
+      class="slvi054 b276tsp"
     >
       Lorem Ipsum
     </span>
@@ -475,11 +475,11 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, 
 exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: false, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b1l9461r"
+    class="b11jtqo5 bdi40cx b1l9461r"
     data-testid="button"
   >
     <span
-      class="clvi054 bo94lri"
+      class="slvi054 bo94lri"
     />
   </button>
 </div>
@@ -488,11 +488,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: false, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b1l9461r"
+    class="b11jtqo5 bdi40cx b1l9461r"
     data-testid="button"
   >
     <span
-      class="clvi054 bo94lri"
+      class="slvi054 bo94lri"
     >
       Lorem Ipsum
     </span>
@@ -503,7 +503,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b1l9461r"
+    class="b11jtqo5 bdi40cx b1l9461r"
     data-testid="button"
   >
     <svg
@@ -538,7 +538,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true,
       />
     </svg>
     <span
-      class="clvi054 bo94lri"
+      class="slvi054 bo94lri"
     />
   </button>
 </div>
@@ -547,7 +547,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true,
 exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b1l9461r"
+    class="b11jtqo5 bdi40cx b1l9461r"
     data-testid="button"
   >
     <svg
@@ -582,7 +582,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true,
       />
     </svg>
     <span
-      class="clvi054 bo94lri"
+      class="slvi054 bo94lri"
     >
       Lorem Ipsum
     </span>
@@ -593,11 +593,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true,
 exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: false, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx bq44b7t"
+    class="b11jtqo5 bdi40cx bq44b7t"
     data-testid="button"
   >
     <span
-      class="clvi054 br7adeq"
+      class="slvi054 br7adeq"
     />
   </button>
 </div>
@@ -606,11 +606,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: false, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx bq44b7t"
+    class="b11jtqo5 bdi40cx bq44b7t"
     data-testid="button"
   >
     <span
-      class="clvi054 br7adeq"
+      class="slvi054 br7adeq"
     >
       Lorem Ipsum
     </span>
@@ -621,7 +621,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx bq44b7t"
+    class="b11jtqo5 bdi40cx bq44b7t"
     data-testid="button"
   >
     <svg
@@ -656,7 +656,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true,
       />
     </svg>
     <span
-      class="clvi054 br7adeq"
+      class="slvi054 br7adeq"
     />
   </button>
 </div>
@@ -665,7 +665,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true,
 exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx bq44b7t"
+    class="b11jtqo5 bdi40cx bq44b7t"
     data-testid="button"
   >
     <svg
@@ -700,7 +700,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true,
       />
     </svg>
     <span
-      class="clvi054 br7adeq"
+      class="slvi054 br7adeq"
     >
       Lorem Ipsum
     </span>
@@ -711,11 +711,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true,
 exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: false, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b14eo67x"
+    class="b11jtqo5 bdi40cx b14eo67x"
     data-testid="button"
   >
     <span
-      class="clvi054 bj3h2v"
+      class="slvi054 bj3h2v"
     />
   </button>
 </div>
@@ -724,11 +724,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: false, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b14eo67x"
+    class="b11jtqo5 bdi40cx b14eo67x"
     data-testid="button"
   >
     <span
-      class="clvi054 bj3h2v"
+      class="slvi054 bj3h2v"
     >
       Lorem Ipsum
     </span>
@@ -739,7 +739,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b14eo67x"
+    class="b11jtqo5 bdi40cx b14eo67x"
     data-testid="button"
   >
     <svg
@@ -774,7 +774,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true,
       />
     </svg>
     <span
-      class="clvi054 bj3h2v"
+      class="slvi054 bj3h2v"
     />
   </button>
 </div>
@@ -783,7 +783,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true,
 exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b14eo67x"
+    class="b11jtqo5 bdi40cx b14eo67x"
     data-testid="button"
   >
     <svg
@@ -818,7 +818,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true,
       />
     </svg>
     <span
-      class="clvi054 bj3h2v"
+      class="slvi054 bj3h2v"
     >
       Lorem Ipsum
     </span>
@@ -829,11 +829,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true,
 exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: false, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b1vby7g1"
+    class="b11jtqo5 bdi40cx b1vby7g1"
     data-testid="button"
   >
     <span
-      class="clvi054 b276tsp"
+      class="slvi054 b276tsp"
     />
   </button>
 </div>
@@ -842,11 +842,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: false, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b1vby7g1"
+    class="b11jtqo5 bdi40cx b1vby7g1"
     data-testid="button"
   >
     <span
-      class="clvi054 b276tsp"
+      class="slvi054 b276tsp"
     >
       Lorem Ipsum
     </span>
@@ -857,7 +857,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: true, children: false 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b1vby7g1"
+    class="b11jtqo5 bdi40cx b1vby7g1"
     data-testid="button"
   >
     <svg
@@ -892,7 +892,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: true,
       />
     </svg>
     <span
-      class="clvi054 b276tsp"
+      class="slvi054 b276tsp"
     />
   </button>
 </div>
@@ -901,7 +901,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: true,
 exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: true, children: true 1`] = `
 <div>
   <button
-    class="c11jtqo5 bdi40cx b1vby7g1"
+    class="b11jtqo5 bdi40cx b1vby7g1"
     data-testid="button"
   >
     <svg
@@ -936,7 +936,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: true,
       />
     </svg>
     <span
-      class="clvi054 b276tsp"
+      class="slvi054 b276tsp"
     >
       Lorem Ipsum
     </span>
