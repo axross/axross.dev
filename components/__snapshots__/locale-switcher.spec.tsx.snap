@@ -3,17 +3,17 @@
 exports[`<LocaleSwitcher> renders switcher buttons for each supported locale 1`] = `
 <div>
   <ul
-    class="c16duzwh"
+    class="u16duzwh"
   >
     <li>
       <a
-        class="c1v4h6uj"
+        class="a1v4h6uj"
         data-testid="link"
         href="/?hl=en-US"
         title="en-US"
       >
         <svg
-          class="c1mxy9mn"
+          class="f1mxy9mn"
           viewBox="0 0 512 512"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -39,13 +39,13 @@ exports[`<LocaleSwitcher> renders switcher buttons for each supported locale 1`]
     </li>
     <li>
       <a
-        class="c1v4h6uj"
+        class="a1v4h6uj"
         data-testid="link"
         href="/?hl=ja-JP"
         title="ja-JP"
       >
         <svg
-          class="c1mxy9mn"
+          class="f1mxy9mn"
           viewBox="0 0 512 512"
           xmlns="http://www.w3.org/2000/svg"
         >

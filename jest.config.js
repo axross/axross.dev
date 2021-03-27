@@ -1,16 +1,7 @@
-const { compilerOptions } = require("./tsconfig.json");
-const babelConfig = require("./.babelrc.json");
-
 module.exports = {
-  preset: "ts-jest",
   testEnvironment: "node",
-  globals: {
-    "ts-jest": {
-      tsconfig: {
-        ...compilerOptions,
-        jsx: "react",
-      },
-      babelConfig: babelConfig,
-    },
+  transform: {
+    // use babel-jest over ts-jest since next.js uses babel for transpilation
+    "^.+\\.tsx?$": "babel-jest",
   },
 };
