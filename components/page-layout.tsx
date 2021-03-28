@@ -29,7 +29,7 @@ export const TwoColumnPageLayout: React.VFC<TwoColumnPageLayoutProps> = ({
         padding-block-end: calc(var(--space-xxl) * 2);
 
         @media screen and (max-width: 1200px) {
-          grid-template-columns: 1fr;
+          grid-template-columns: 100%;
           grid-template-areas: "main" "hr" "footer";
           margin-inline-start: 0;
           margin-inline-end: 0;
