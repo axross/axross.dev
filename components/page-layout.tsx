@@ -2,7 +2,10 @@ import { css, cx } from "@linaria/core";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
 import { ParrotAnchor } from "./anchor";
-import { FloatingSidebarButton } from "./floating-sidebar-button";
+import {
+  FloatingSidebarButton,
+  FloatingSidebarButtonProps,
+} from "./floating-sidebar-button";
 
 export interface TwoColumnPageLayoutProps extends React.Attributes {
   className?: string;
@@ -88,11 +91,13 @@ export const TwoColumnPageLayoutMain: React.FC<TwoColumnPageLayoutMainProps> = (
 };
 
 export interface TwoColumnPageLayoutAsideProps extends React.Attributes {
+  onFloatingSidebarButtonClick?: FloatingSidebarButtonProps["onButtonClick"];
   className?: string;
   style?: React.CSSProperties;
 }
 
 export const TwoColumnPageLayoutAside: React.FC<TwoColumnPageLayoutAsideProps> = ({
+  onFloatingSidebarButtonClick,
   className,
   children,
   ...props
@@ -126,6 +131,7 @@ export const TwoColumnPageLayoutAside: React.FC<TwoColumnPageLayoutAsideProps> =
       </aside>
 
       <FloatingSidebarButton
+        onButtonClick={onFloatingSidebarButtonClick}
         content={children}
         className={css`
           display: none;
