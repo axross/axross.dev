@@ -3,7 +3,7 @@ import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import { mix, shade, tint } from "polished";
+import { mix, shade, tint, transparentize } from "polished";
 import * as React from "react";
 import { IntlConfig, IntlProvider } from "react-intl";
 import TopLoadingBar from "react-top-loading-bar";
@@ -149,7 +149,8 @@ css`
       --color-fg-yellow-weak: ${tint(0.5, "#feca57")};
       --color-fg-gray: ${tint(0.5, "#8395a7")};
       --color-fg-gray-weak: ${tint(0.65, "#8395a7")};
-      --color-bg: #ffffff;
+      --color-bg: #fff;
+      --color-bg-frosted: ${transparentize(0.15, "#fff")};
       --color-bg-input: ${tint(0.85, "#8395a7")};
       --color-bg-input-active: ${tint(0.8, "#8395a7")};
       --color-bg-red-weak: ${tint(0.75, "#ff6b6b")};
@@ -176,9 +177,6 @@ css`
 
     @media screen and (prefers-color-scheme: dark) {
       html {
-        --color-bg: #000;
-        --color-bg-input: ${shade(0.85, "#8395a7")};
-        --color-bg-input-active: ${shade(0.8, "#8395a7")};
         --color-fg: ${mix(0.666, "#fff", "#8395a7")};
         --color-fg-strong: #fff;
         --color-fg-red-weak: ${shade(0.5, "#ff6b6b")};
@@ -186,6 +184,10 @@ css`
         --color-fg-yellow-weak: ${shade(0.5, "#feca57")};
         --color-fg-gray: ${shade(0.5, "#8395a7")};
         --color-fg-gray-weak: ${shade(0.65, "#8395a7")};
+        --color-bg: #000;
+        --color-bg-frosted: ${transparentize(0.15, "#000")};
+        --color-bg-input: ${shade(0.85, "#8395a7")};
+        --color-bg-input-active: ${shade(0.8, "#8395a7")};
         --color-bg-red-weak: ${shade(0.75, "#ff6b6b")};
         --color-bg-blue-weak: ${shade(0.75, "#54a0ff")};
         --color-bg-yellow-weak: ${shade(0.75, "#feca57")};
