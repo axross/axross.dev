@@ -40,10 +40,9 @@ export interface PostListItemProps extends React.Attributes {
   tableOfContents?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
-  children?: string;
 }
 
-export const PostListItem: React.VFC<PostListItemProps> = ({
+export const PostListItem: React.FC<PostListItemProps> = ({
   href,
   as,
   tableOfContents,
