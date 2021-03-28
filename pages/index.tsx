@@ -17,7 +17,10 @@ import { CACHE_HEADER_VALUE } from "../constants/cache";
 import { AVAILABLE_LOCALES } from "../constants/locale";
 import { CommonServerSideProps } from "../core/ssr-props";
 import { useOrigin } from "../global-hooks/url";
-import { getLocaleFromQuery } from "../helpers/i18n";
+import {
+  getBestMatchedLocaleOrFallbackFromLanguageRange,
+  getLocaleFromQuery,
+} from "../helpers/i18n";
 import { getOriginFromRequest } from "../helpers/next";
 import { getIndexPageJson, getPostEntryListJson } from "../services/cms-json";
 import { getIntlMessages } from "../services/translation";
@@ -108,7 +111,16 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
   }
 
   if (!locale) {
-    return { redirect: { destination: `/?hl=en-US`, permanent: true } };
+    const redirectLocale = getBestMatchedLocaleOrFallbackFromLanguageRange(
+      req.headers["accept-language"] ?? ""
+    );
+
+    return {
+      redirect: {
+        destination: `/?hl=${redirectLocale}`,
+        permanent: true,
+      },
+    };
   }
 
   const origin = getOriginFromRequest(req);
