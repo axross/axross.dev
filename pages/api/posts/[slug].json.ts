@@ -1,6 +1,6 @@
 import type { NextApiHandler } from "next";
 import { getLocaleFromQueryWithFallback } from "../../../helpers/i18n";
-import { getPostJson } from "../../../services/cms-json";
+import { getPostJson } from "../../../services/cms";
 
 const handler: NextApiHandler = async (req, res) => {
   const locale = getLocaleFromQueryWithFallback(req.query);

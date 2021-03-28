@@ -1,6 +1,5 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import "next";
 import { scrapeWebpage } from "./scrape";
 
 describe("scrapeWebpage()", () => {
