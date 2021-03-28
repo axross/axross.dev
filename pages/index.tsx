@@ -4,13 +4,14 @@ import Head from "next/head";
 import * as React from "react";
 import { useIntl } from "react-intl";
 import { PromiseValue } from "type-fest";
-import { LocaleSwitcher } from "../components/locale-switcher";
-import { Markdown } from "../components/markdown-article";
-import { PostList, PostListItem } from "../components/post-list";
+import { Article } from "../components/article";
+import { AsideNavigation } from "../components/aside-navigation";
 import {
-  TableOfContents,
-  TableOfContentsItem,
-} from "../components/table-of-contents";
+  TwoColumnPageLayout,
+  TwoColumnPageLayoutAside,
+  TwoColumnPageLayoutFooter,
+  TwoColumnPageLayoutMain,
+} from "../components/page-layout";
 import { WEBSITE_NAME } from "../constants/app";
 import { CACHE_HEADER_VALUE } from "../constants/cache";
 import { AVAILABLE_LOCALES } from "../constants/locale";
@@ -65,209 +66,26 @@ const Page: NextPage<ServerSideProps> = (props) => {
         <meta property="og:image:secure_url" content={coverImageUrl} />
       </Head>
 
-      <div
-        className={css`
-          padding-block-end: calc(var(--space-xxl) * 2);
-
-          @media screen and (max-width: 1248px) {
-            margin-inline-start: 0;
-            margin-inline-end: 0;
-            padding-inline-start: 0;
-            padding-inline-end: 0;
-          }
-        `}
-      >
-        <div
-          className={css`
-            position: relative;
-            display: grid;
-            grid-template-columns: 768px calc(320px + var(--space-md) * 2);
-            grid-template-areas: "main nav";
-            column-gap: calc(var(--space-xxl) - var(--space-md));
-            justify-content: center;
-            padding-inline-start: calc(var(--space-xl) - var(--space-md));
-            padding-inline-end: calc(var(--space-xl) - var(--space-md));
-
-            @media screen and (max-width: 1248px) {
-              grid-template-columns: 100%;
-              grid-template-areas: "main" "nav-hr" "nav";
-              justify-content: stretch;
-              padding-inline-start: 0;
-              padding-inline-end: 0;
-            }
-          `}
-        >
-          <main
+      <TwoColumnPageLayout>
+        <TwoColumnPageLayoutMain>
+          <Article
+            title={title}
+            coverImageUrl={coverImageUrl}
+            body={body}
             className={css`
-              grid-area: main;
-            `}
-          >
-            <article className="post">
-              <img
-                src={coverImageUrl}
-                alt={title}
-                className={css`
-                  width: 100%;
-                  height: 320px;
-                  object-fit: cover;
-                  object-position: top right;
-                `}
-              />
-
-              <h1
-                className={css`
-                  margin-block-end: 0.5rem;
-                  line-height: 1.5;
-                  display: block;
-                  margin-block-start: var(--space-xl);
-                  margin-block-end: 0;
-                  color: var(--color-fg-strong);
-                  font-size: var(--font-size-xxl);
-                  font-weight: bold;
-
-                  @media screen and (max-width: 1248px) {
-                    padding-inline-start: var(--space-md);
-                    padding-inline-end: var(--space-md);
-                  }
-                `}
-                data-testid="article-title"
-              >
-                {title}
-              </h1>
-
-              <Markdown
-                markdown={body}
-                className={css`
-                  margin-block-start: var(--space-xl);
-
-                  @media screen and (max-width: 1248px) {
-                    padding-inline-start: var(--space-md);
-                    padding-inline-end: var(--space-md);
-                  }
-                `}
-              />
-            </article>
-          </main>
-
-          <hr
-            className={css`
-              grid-area: nav-hr;
-              display: none;
-              width: 100%;
-              height: 0;
-              margin-block-start: var(--space-xl);
-              margin-block-end: 0;
-              background: linear-gradient(
-                to right,
-                transparent,
-                #8180787f,
-                transparent
-              );
-              border: none;
-              outline: none;
-
-              @media screen and (max-width: 1248px) {
-                display: block;
-                height: 1px;
+              > img {
+                object-position: top right;
               }
             `}
           />
+        </TwoColumnPageLayoutMain>
 
-          <aside
-            className={css`
-              grid-area: nav;
-              align-self: flex-start;
-              position: sticky;
-              top: 0;
-              padding-block-start: var(--space-lg);
-              padding-block-end: var(--space-lg);
-              padding-inline-start: var(--space-md);
-              padding-inline-end: var(--space-md);
-              overflow-y: scroll;
+        <TwoColumnPageLayoutAside>
+          <AsideNavigation posts={posts} tableOfContents={tableOfContents} />
+        </TwoColumnPageLayoutAside>
 
-              @media screen and (max-width: 1248px) {
-                position: static;
-                width: 100%;
-                height: auto;
-                margin-block-start: var(--space-xl);
-                padding-block-start: 0;
-                padding-block-end: 0;
-                padding-inline-start: var(--space-md);
-                padding-inline-end: var(--space-md);
-                overflow-y: auto;
-              }
-            `}
-          >
-            <LocaleSwitcher
-              className={css`
-                justify-content: flex-end;
-              `}
-            />
-
-            <PostList
-              className={css`
-                margin-block-start: var(--space-xl);
-              `}
-            >
-              <PostListItem
-                href="/"
-                as="/"
-                tableOfContents={
-                  <TableOfContents>
-                    {tableOfContents.map(({ id, level, text }) => (
-                      <TableOfContentsItem targetId={id} level={level} key={id}>
-                        {text}
-                      </TableOfContentsItem>
-                    ))}
-                  </TableOfContents>
-                }
-              >
-                {title}
-              </PostListItem>
-
-              {posts.map((p) => (
-                <PostListItem
-                  href="/posts/[slug]"
-                  as={`/posts/${p.slug}`}
-                  key={p.slug}
-                >
-                  {p.title}
-                </PostListItem>
-              ))}
-            </PostList>
-          </aside>
-        </div>
-
-        <hr
-          className={css`
-            grid-area: footer-hr;
-            width: 100%;
-            height: 1px;
-            margin-block-start: var(--space-xl);
-            margin-block-end: 0;
-            background: linear-gradient(
-              to right,
-              transparent,
-              #8180787f,
-              transparent
-            );
-            border: none;
-            outline: none;
-          `}
-        />
-
-        <footer
-          className={css`
-            margin-block-start: var(--space-xl);
-            font-size: var(--font-size-sm);
-            text-align: center;
-          `}
-        >
-          {intl.formatMessage({
-            defaultMessage: "kohei.dev is open source project.",
-          })}
-        </footer>
-      </div>
+        <TwoColumnPageLayoutFooter />
+      </TwoColumnPageLayout>
     </>
   );
 };
