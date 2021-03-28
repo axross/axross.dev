@@ -21,7 +21,7 @@ import {
   getLocaleFromQuery,
 } from "../../helpers/i18n";
 import { getOriginFromRequest } from "../../helpers/next";
-import { getPostEntryListJson, getPostJson } from "../../services/cms-json";
+import { getPostEntryListJson, getPostJson } from "../../services/cms";
 import { getIntlMessages } from "../../services/translation";
 
 interface ServerSideProps extends CommonServerSideProps {
