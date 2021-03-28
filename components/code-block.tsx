@@ -1,7 +1,7 @@
 import { css, cx } from "@linaria/core";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import * as React from "react";
-import { useIntl } from "react-intl";
+import { FormattedMessage } from "react-intl";
 
 export interface CodeBlockProps extends React.Attributes {
   value: string;
@@ -21,7 +21,6 @@ export const CodeBlock: React.VFC<CodeBlockProps> = ({
   className,
   ...props
 }) => {
-  const intl = useIntl();
   const codeRef = React.useRef<HTMLElement>(null);
   const [isCopied, setCopied] = React.useState(false);
 
@@ -195,9 +194,11 @@ export const CodeBlock: React.VFC<CodeBlockProps> = ({
           copyButtonRefCss
         )}
       >
-        {isCopied
-          ? intl.formatMessage({ defaultMessage: "Copied!" })
-          : intl.formatMessage({ defaultMessage: "Copy" })}
+        {isCopied ? (
+          <FormattedMessage defaultMessage="Copied!" />
+        ) : (
+          <FormattedMessage defaultMessage="Copy" />
+        )}
       </button>
     </div>
   );
