@@ -1,4 +1,18 @@
 import cheerio from "cheerio";
+import imageSize from "image-size";
+
+export async function resolveImageDimension(
+  url: string
+): Promise<[number, number] | null> {
+  const response = await fetch(url);
+  const { width, height } = imageSize(await (response as any).buffer());
+
+  if (width !== undefined && height !== undefined) {
+    return [width, height];
+  }
+
+  return null;
+}
 
 export async function scrapeWebpage(
   url: string,

@@ -1,6 +1,6 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import { scrapeWebpage } from "./scrape";
+import { scrapeWebpage } from "./external-resource";
 
 describe("scrapeWebpage()", () => {
   const server = setupServer();
