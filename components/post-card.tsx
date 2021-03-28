@@ -90,6 +90,7 @@ export const PostCard: React.VFC<PostCardProps> = ({
           <h1
             className={cx(
               css`
+                display: -webkit-box;
                 margin-block-start: 0;
                 margin-block-end: 0;
                 line-height: 1.5;
@@ -97,7 +98,9 @@ export const PostCard: React.VFC<PostCardProps> = ({
                 font-size: var(--font-size-md);
                 font-weight: bold;
                 line-height: 1.5;
-                ${someCss(2)}
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 2;
+                overflow: hidden;
                 ${RAINBOW_ANCHOR_CSS}
               `,
               titleRefCss
@@ -126,12 +129,3 @@ export const PostCard: React.VFC<PostCardProps> = ({
 const imageRefCss = css``;
 
 const titleRefCss = css``;
-
-function someCss(lines: number) {
-  return `
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: ${lines};
-    overflow: hidden;
-  `;
-}
