@@ -173,8 +173,8 @@ function resolveExternalResource() {
               await (response as any).buffer()
             );
 
-            (attributes as any).width = width;
-            (attributes as any).height = height;
+            (attributes as any).width = `${width}`;
+            (attributes as any).height = `${height}`;
 
             break;
           case "webpage-embed":
