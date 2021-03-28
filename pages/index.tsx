@@ -12,6 +12,7 @@ import {
   TwoColumnPageLayoutFooter,
   TwoColumnPageLayoutMain,
 } from "../components/page-layout";
+import { useService } from "../components/service";
 import { WEBSITE_NAME } from "../constants/app";
 import { CACHE_HEADER_VALUE } from "../constants/cache";
 import { AVAILABLE_LOCALES } from "../constants/locale";
@@ -31,6 +32,7 @@ interface ServerSideProps extends CommonServerSideProps {
 }
 
 const Page: NextPage<ServerSideProps> = (props) => {
+  const { userMonitoring } = useService();
   const intl = useIntl();
   const origin = useOrigin();
   const {
@@ -83,7 +85,14 @@ const Page: NextPage<ServerSideProps> = (props) => {
           />
         </TwoColumnPageLayoutMain>
 
-        <TwoColumnPageLayoutAside>
+        <TwoColumnPageLayoutAside
+          onFloatingSidebarButtonClick={(_, isMenuOpen) =>
+            userMonitoring.trackUiEvent(
+              isMenuOpen ? "open_aside" : "close_aside",
+              1
+            )
+          }
+        >
           <AsideNavigation posts={posts} tableOfContents={tableOfContents} />
         </TwoColumnPageLayoutAside>
 

@@ -65,6 +65,34 @@ describe("<FloatingSidebarButton>", () => {
     expect(getByTestId("floating-sidebar")).not.toBeVisible();
   });
 
+  it("calls props.onButtonClick() whenever the button is clicked", () => {
+    const onButtonClick = jest.fn();
+    const { getByTestId } = render(
+      <TestApp>
+        <FloatingSidebarButton
+          content={<div data-testid="content" />}
+          onButtonClick={onButtonClick}
+          data-testid="floating-sidebar-button"
+        />
+      </TestApp>
+    );
+
+    act(() => {
+      fireEvent.click(getByTestId("floating-sidebar-button"));
+    });
+    act(() => {
+      fireEvent.click(getByTestId("floating-sidebar-button"));
+    });
+    act(() => {
+      fireEvent.click(getByTestId("floating-sidebar-button"));
+    });
+
+    expect(onButtonClick).toHaveBeenCalledTimes(3);
+    expect(onButtonClick).toHaveBeenNthCalledWith(1, expect.anything(), true);
+    expect(onButtonClick).toHaveBeenNthCalledWith(2, expect.anything(), false);
+    expect(onButtonClick).toHaveBeenNthCalledWith(3, expect.anything(), true);
+  });
+
   describe("props.closeOnHashChange = true", () => {
     it("hides the floating sidebar when a route change caused", () => {
       let testAppElement!: TestAppElement;

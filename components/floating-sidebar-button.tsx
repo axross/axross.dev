@@ -8,6 +8,7 @@ import { Button, ButtonSize, ButtonVariant } from "./button";
 export interface FloatingSidebarButtonProps extends React.Attributes {
   closeOnRouteChange?: boolean;
   content: React.ReactNode;
+  onButtonClick?: (e: React.MouseEvent, isMenuOpen: boolean) => void;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -15,6 +16,7 @@ export interface FloatingSidebarButtonProps extends React.Attributes {
 export const FloatingSidebarButton: React.VFC<FloatingSidebarButtonProps> = ({
   closeOnRouteChange = true,
   content,
+  onButtonClick = () => {},
   className,
   ...props
 }) => {
@@ -50,7 +52,10 @@ export const FloatingSidebarButton: React.VFC<FloatingSidebarButtonProps> = ({
               variant={ButtonVariant.inverted}
               size={ButtonSize.xl}
               icon={isMenuOpen ? <XIcon /> : <ListIcon />}
-              onClick={() => setMenuOpen((isMenuOpen) => !isMenuOpen)}
+              onClick={(e) => {
+                onButtonClick(e, !isMenuOpen);
+                setMenuOpen(!isMenuOpen);
+              }}
               className={cx(
                 css`
                   position: fixed;
