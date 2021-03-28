@@ -1,5 +1,4 @@
 import hash from "hasha";
-import { imageSize } from "image-size";
 import * as directiveExtension from "mdast-util-directive";
 import extractString from "mdast-util-to-string";
 import directiveSyntax from "micromark-extension-directive";
@@ -8,7 +7,7 @@ import remarkStringify from "remark-stringify";
 import unified, { CompilerFunction, Processor, Transformer } from "unified";
 import type { Node, Parent } from "unist";
 import visit from "unist-util-visit";
-import { scrapeWebpage } from "../helpers/scrape";
+import { resolveImageDimension, scrapeWebpage } from "./external-resource";
 
 export async function parseMarkdown(markdown: string): Promise<Node> {
   const processor = unified()
@@ -61,9 +60,7 @@ function convertHeading() {
 }
 
 function convertImageFigure() {
-  const transformer: Transformer = async (tree) => {
-    const targetParagraphs: Parameters<visit.Visitor<Parent>>[] = [];
-
+  const transformer: Transformer = (tree) => {
     visit(tree, "paragraph", (node: Parent, index, parent) => {
       if (node.children.length !== 1) {
         return;
@@ -73,32 +70,22 @@ function convertImageFigure() {
         return;
       }
 
-      targetParagraphs.push([node, index, parent]);
+      parent!.children.splice(index, 1, {
+        type: "leafDirective",
+        name: "image-figure",
+        attributes: {
+          src: node.children[0]!.url,
+          caption: node.children[0]!.alt,
+        },
+      });
     });
-
-    await Promise.all(
-      targetParagraphs.map(async ([node, index, parent]) => {
-        const imageNode = node.children[0]!;
-
-        parent!.children.splice(index, 1, {
-          type: "leafDirective",
-          name: "image-figure",
-          attributes: {
-            src: imageNode.url,
-            caption: imageNode.alt,
-          },
-        });
-      })
-    );
   };
 
   return transformer;
 }
 
 function convertEmbed() {
-  const transformer: Transformer = async (tree) => {
-    const targetParagraphs: Parameters<visit.Visitor<Parent>>[] = [];
-
+  const transformer: Transformer = (tree) => {
     visit(tree, "paragraph", (node: Parent, index, parent) => {
       if (node.children.length !== 1) {
         return;
@@ -108,30 +95,22 @@ function convertEmbed() {
         return;
       }
 
-      targetParagraphs.push([node, index, parent]);
+      parent!.children.splice(index, 1, {
+        type: "leafDirective",
+        name: "embed",
+        attributes: {
+          href: node.children[0]!.url,
+          title: extractString(node.children[0]!),
+        },
+      });
     });
-
-    await Promise.all(
-      targetParagraphs.map(async ([node, index, parent]) => {
-        const linkNode = node.children[0]!;
-
-        parent!.children.splice(index, 1, {
-          type: "leafDirective",
-          name: "embed",
-          attributes: {
-            href: linkNode.url,
-            title: extractString(linkNode),
-          },
-        });
-      })
-    );
   };
 
   return transformer;
 }
 
 function resolveEmbedType() {
-  const transformer: Transformer = async (tree) => {
+  const transformer: Transformer = (tree) => {
     visit(tree, { type: "leafDirective", name: "embed" }, (node) => {
       node.name = "webpage-embed";
     });
@@ -168,25 +147,37 @@ function resolveExternalResource() {
               return;
             }
 
-            const response = await fetch(attributes.src as string);
-            const { width, height } = imageSize(
-              await (response as any).buffer()
-            );
+            try {
+              const dimension = await resolveImageDimension(attributes.src);
 
-            (attributes as any).width = `${width}`;
-            (attributes as any).height = `${height}`;
+              if (dimension) {
+                const [width, height] = dimension;
+
+                (attributes as any).width = `${width}`;
+                (attributes as any).height = `${height}`;
+              }
+            } catch (error) {}
 
             break;
           case "webpage-embed":
             const url = attributes.href as string;
-            const webpage = await scrapeWebpage(url, {
-              titleFallback: attributes.title,
-            });
 
-            attributes.href = webpage.href;
-            attributes.title = webpage.title;
-            attributes.description = webpage.description;
-            attributes.imageSrc = webpage.imageSrc;
+            try {
+              const webpage = await scrapeWebpage(url, {
+                titleFallback: attributes.title,
+              });
+
+              attributes.href = webpage.href;
+              attributes.title = webpage.title;
+              attributes.description = webpage.description;
+              attributes.imageSrc = webpage.imageSrc;
+            } catch (error) {
+              attributes.href = url;
+              attributes.title = attributes.title || "Unknown website";
+              attributes.description =
+                "Failed to resolve the web page information.";
+              attributes.imageSrc = "/favicon.png";
+            }
 
             break;
         }
