@@ -22,7 +22,7 @@ import {
 } from "../../helpers/i18n";
 import { getOriginFromRequest } from "../../helpers/next";
 import { getPostEntryListJson, getPostJson } from "../../services/cms";
-import { getIntlMessages } from "../../services/translation";
+import { IsomorphicI18nDictionaryService } from "../../services/i18n-dictionary";
 
 interface ServerSideProps extends CommonServerSideProps {
   post: NonNullable<PromiseValue<ReturnType<typeof getPostJson>>>;
@@ -163,7 +163,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
 
   const origin = getOriginFromRequest(req);
   const [intlMessages, posts, post] = await Promise.all([
-    getIntlMessages({ locale }),
+    new IsomorphicI18nDictionaryService().fetch(locale),
     getPostEntryListJson({ locale, previewToken }),
     getPostJson({ slug, locale, previewToken }),
   ]);

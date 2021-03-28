@@ -7,11 +7,14 @@ import { mix, shade, tint, transparentize } from "polished";
 import * as React from "react";
 import { IntlConfig, IntlProvider } from "react-intl";
 import TopLoadingBar from "react-top-loading-bar";
+import { FALLBACK_LOCALE } from "../constants/locale";
 import { OriginProvider } from "../global-hooks/url";
-import { getIntlMessages } from "../services/translation";
+import { ServiceProvider } from "../components/service";
+import { ServiceContainer } from "../core/service-container";
+import { IsomorphicI18nDictionaryService } from "../services/i18n-dictionary";
+import { BrowserUserMonitoringService } from "../services/user-monitoring";
 
 import "normalize.css/normalize.css";
-import { FALLBACK_LOCALE } from "../constants/locale";
 
 // initialize sentry client only when the env var is set
 // you can comment out the env var in .env.local when you want to debug
@@ -47,6 +50,14 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     IntlConfig["messages"]
   >(pageProps.intlMessages);
 
+  const serviceContainer = React.useMemo<ServiceContainer>(
+    () => ({
+      i18nDictionary: new IsomorphicI18nDictionaryService(),
+      userMonitoring: new BrowserUserMonitoringService(),
+    }),
+    []
+  );
+
   React.useEffect(() => {
     const onRouteChangeStart = () => {
       topLoadingBarRef.current.staticStart();
@@ -66,54 +77,40 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   }, []);
 
   React.useEffect(() => {
-    if (typeof (globalThis as any).gtag === "function") {
-      (globalThis as any).gtag("event", "page_view", {
-        page_title: globalThis.document.title,
-        page_location: globalThis.location.href,
-        page_path: `${globalThis.location.pathname}?hl=${new URLSearchParams(
-          globalThis.location.search
-        ).get("hl")}`,
-      });
+    serviceContainer.userMonitoring.trackPageView();
 
-      const onRouteChangeComplete = () => {
-        (globalThis as any).gtag("event", "page_view", {
-          page_title: globalThis.document.title,
-          page_location: globalThis.location.href,
-          page_path: `${globalThis.location.pathname}?hl=${new URLSearchParams(
-            globalThis.location.search
-          ).get("hl")}`,
-        });
-      };
+    const onRouteChangeComplete = () => {
+      serviceContainer.userMonitoring.trackPageView();
+    };
 
-      router.events.on("routeChangeComplete", onRouteChangeComplete);
+    router.events.on("routeChangeComplete", onRouteChangeComplete);
 
-      return () => {
-        router.events.off("routeChangeComplete", onRouteChangeComplete);
-      };
-    }
-
-    return () => {};
-  }, []);
+    return () => {
+      router.events.off("routeChangeComplete", onRouteChangeComplete);
+    };
+  }, [serviceContainer.userMonitoring]);
 
   React.useEffect(() => {
-    getIntlMessages({
-      locale: pageProps.locale ?? FALLBACK_LOCALE,
-    }).then((intlMessages) => setIntlMessages(intlMessages));
-  }, [pageProps.locale]);
+    serviceContainer.i18nDictionary
+      .fetch(pageProps.locale ?? FALLBACK_LOCALE)
+      .then((dictionary) => setIntlMessages(dictionary));
+  }, [serviceContainer.i18nDictionary, pageProps.locale]);
 
   return (
     <>
-      <OriginProvider origin={pageProps.origin}>
-        <IntlProvider
-          messages={intlMessages}
-          locale={pageProps.locale!}
-          defaultLocale={FALLBACK_LOCALE}
-        >
-          <TopLoadingBar color="#ff6b6b" ref={topLoadingBarRef} />
+      <ServiceProvider serviceContainer={serviceContainer}>
+        <OriginProvider origin={pageProps.origin}>
+          <IntlProvider
+            messages={intlMessages}
+            locale={pageProps.locale!}
+            defaultLocale={FALLBACK_LOCALE}
+          >
+            <TopLoadingBar color="#ff6b6b" ref={topLoadingBarRef} />
 
-          <Component {...pageProps} />
-        </IntlProvider>
-      </OriginProvider>
+            <Component {...pageProps} />
+          </IntlProvider>
+        </OriginProvider>
+      </ServiceProvider>
     </>
   );
 };
