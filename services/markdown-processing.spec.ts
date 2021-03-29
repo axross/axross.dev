@@ -1,3 +1,4 @@
+import Redis from "ioredis";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 import {
@@ -5,6 +6,8 @@ import {
   generateTableOfContents,
   parseMarkdown,
 } from "./markdown-processing";
+
+jest.mock("ioredis");
 
 const markdown = `
 ## Lorem ipsum dolor sit amet
@@ -1012,8 +1015,20 @@ const mdast = {
 
 describe("parseMarkdown()", () => {
   const server = setupServer();
+  const mockRedisInstance = {
+    hgetall: jest.fn(),
+    hset: jest.fn(),
+  };
 
   beforeAll(() => {
+    server.listen();
+  });
+
+  beforeEach(() => {
+    (Redis as any).mockReturnValue(mockRedisInstance);
+    mockRedisInstance.hgetall.mockResolvedValue(null);
+    mockRedisInstance.hset.mockResolvedValue(undefined);
+
     server.use(
       rest.get("https://dummy.kohei.dev/", (_, res, ctx) =>
         res(
@@ -1089,12 +1104,10 @@ describe("parseMarkdown()", () => {
         )
       )
     );
-
-    server.listen();
   });
 
   afterEach(() => {
-    // server.resetHandlers();
+    server.resetHandlers();
   });
 
   afterAll(() => {

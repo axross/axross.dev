@@ -7,7 +7,7 @@ import remarkStringify from "remark-stringify";
 import unified, { CompilerFunction, Processor, Transformer } from "unified";
 import type { Node, Parent } from "unist";
 import visit from "unist-util-visit";
-import { resolveImageDimension, scrapeWebpage } from "./external-resource";
+import { NodeExternalResourceService } from "./external-resource";
 
 export async function parseMarkdown(markdown: string): Promise<Node> {
   const processor = unified()
@@ -134,6 +134,8 @@ function resolveExternalResource() {
       }
     );
 
+    const externalResourceService = new NodeExternalResourceService();
+
     await Promise.all(
       targetNodes.map(async (node) => {
         const attributes = node.attributes as any;
@@ -148,7 +150,9 @@ function resolveExternalResource() {
             }
 
             try {
-              const dimension = await resolveImageDimension(attributes.src);
+              const dimension = await externalResourceService.resolveImageDimension(
+                attributes.src
+              );
 
               if (dimension) {
                 const [width, height] = dimension;
@@ -163,7 +167,7 @@ function resolveExternalResource() {
             const url = attributes.href as string;
 
             try {
-              const webpage = await scrapeWebpage(url, {
+              const webpage = await externalResourceService.scrapeWebpage(url, {
                 titleFallback: attributes.title,
               });
 
