@@ -22,7 +22,7 @@ export const TwoColumnPageLayout: React.VFC<TwoColumnPageLayoutProps> = ({
       className={css`
         position: relative;
         display: grid;
-        grid-template-columns: 1fr 320px;
+        grid-template-columns: calc(1152px - var(--space-xl) - 320px) 320px;
         grid-template-areas: "main aside" "hr hr" "footer footer";
         column-gap: var(--space-xl);
         justify-content: center;
