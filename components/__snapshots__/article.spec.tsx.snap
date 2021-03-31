@@ -93,7 +93,7 @@ exports[`<Article> renders content by the given props 1`] = `
     >
       :::callout{variant="info"}\\n2021年3月に最初に書きました。同じURLで随時このページを更新していく予定です。\\n\\n何か質問などがあればTwitterか、
       <a
-        class="amy9aj mghlun3"
+        class="amy9aj m8s3hfn"
         tabindex="0"
       >
         こちらのフォームから送って
@@ -215,7 +215,7 @@ exports[`<Article> renders content by the given props 1`] = `
       みたいな人がたまにいます\\n    *   特定的に「DDDに明るい」みたいな人は珍しいですが (そもそもDDD自体がが古すぎて認知されていないのかもしれません) 、Technical Design Document作りの一環・基本として似たような知識を持っている人が多いです\\n    *   ただ、マイクロサービスとかオニオンアーキテクチャみたいな構成系の方法論は認知度が高いです\\n*   僕が渡航してきた2018年の夏時点ですでにReact Nativeを教えている専門学校がちらほらありました\\n\\n::image-figure{src="https://media.graphcms.com/output=format
       /LwZcSQ7tSeOVl8pH0BbU" caption="React Vancouverというミートアップの時の様子" width="1920" height="1080"}\\n\\n::rich-heading-2[採用]{#d3c0f99a}\\n\\nエンジニア採用にも絡んでいます。この箇所を書いている時点 (2021/03/19) まででだいたい20人くらいの候補者と面接したと思います。北米でのエンジニア採用について興味のある方は以下の記事もよかったら読んでみてください。\\n\\n:::callout{variant="info"}\\nTODO: あとで書く\\n:::\\n\\nまた、通年とはいきませんが弊社は色々なエンジニア職種で積極的に採用しています。基本的に即戦力になるようなレベルの方を探していますが、実力があれば経験年数は問いません。ただ、経験が少なすぎるとテクニカルリクルーターの目に止まらない可能性もあるので、興味のある人はTwitterか
       <a
-        class="amy9aj mghlun3"
+        class="amy9aj m8s3hfn"
         tabindex="0"
       >
         こちらのフォームから連絡
@@ -298,7 +298,7 @@ exports[`<Article> skips rendering author and last published date when either of
     >
       :::callout{variant="info"}\\n2021年3月に最初に書きました。同じURLで随時このページを更新していく予定です。\\n\\n何か質問などがあればTwitterか、
       <a
-        class="amy9aj mghlun3"
+        class="amy9aj m8s3hfn"
         tabindex="0"
       >
         こちらのフォームから送って
@@ -420,7 +420,7 @@ exports[`<Article> skips rendering author and last published date when either of
       みたいな人がたまにいます\\n    *   特定的に「DDDに明るい」みたいな人は珍しいですが (そもそもDDD自体がが古すぎて認知されていないのかもしれません) 、Technical Design Document作りの一環・基本として似たような知識を持っている人が多いです\\n    *   ただ、マイクロサービスとかオニオンアーキテクチャみたいな構成系の方法論は認知度が高いです\\n*   僕が渡航してきた2018年の夏時点ですでにReact Nativeを教えている専門学校がちらほらありました\\n\\n::image-figure{src="https://media.graphcms.com/output=format
       /LwZcSQ7tSeOVl8pH0BbU" caption="React Vancouverというミートアップの時の様子" width="1920" height="1080"}\\n\\n::rich-heading-2[採用]{#d3c0f99a}\\n\\nエンジニア採用にも絡んでいます。この箇所を書いている時点 (2021/03/19) まででだいたい20人くらいの候補者と面接したと思います。北米でのエンジニア採用について興味のある方は以下の記事もよかったら読んでみてください。\\n\\n:::callout{variant="info"}\\nTODO: あとで書く\\n:::\\n\\nまた、通年とはいきませんが弊社は色々なエンジニア職種で積極的に採用しています。基本的に即戦力になるようなレベルの方を探していますが、実力があれば経験年数は問いません。ただ、経験が少なすぎるとテクニカルリクルーターの目に止まらない可能性もあるので、興味のある人はTwitterか
       <a
-        class="amy9aj mghlun3"
+        class="amy9aj m8s3hfn"
         tabindex="0"
       >
         こちらのフォームから連絡
@@ -479,7 +479,7 @@ exports[`<Article> skips rendering tags when they are omitted 1`] = `
     >
       :::callout{variant="info"}\\n2021年3月に最初に書きました。同じURLで随時このページを更新していく予定です。\\n\\n何か質問などがあればTwitterか、
       <a
-        class="amy9aj mghlun3"
+        class="amy9aj m8s3hfn"
         tabindex="0"
       >
         こちらのフォームから送って
@@ -601,7 +601,7 @@ exports[`<Article> skips rendering tags when they are omitted 1`] = `
       みたいな人がたまにいます\\n    *   特定的に「DDDに明るい」みたいな人は珍しいですが (そもそもDDD自体がが古すぎて認知されていないのかもしれません) 、Technical Design Document作りの一環・基本として似たような知識を持っている人が多いです\\n    *   ただ、マイクロサービスとかオニオンアーキテクチャみたいな構成系の方法論は認知度が高いです\\n*   僕が渡航してきた2018年の夏時点ですでにReact Nativeを教えている専門学校がちらほらありました\\n\\n::image-figure{src="https://media.graphcms.com/output=format
       /LwZcSQ7tSeOVl8pH0BbU" caption="React Vancouverというミートアップの時の様子" width="1920" height="1080"}\\n\\n::rich-heading-2[採用]{#d3c0f99a}\\n\\nエンジニア採用にも絡んでいます。この箇所を書いている時点 (2021/03/19) まででだいたい20人くらいの候補者と面接したと思います。北米でのエンジニア採用について興味のある方は以下の記事もよかったら読んでみてください。\\n\\n:::callout{variant="info"}\\nTODO: あとで書く\\n:::\\n\\nまた、通年とはいきませんが弊社は色々なエンジニア職種で積極的に採用しています。基本的に即戦力になるようなレベルの方を探していますが、実力があれば経験年数は問いません。ただ、経験が少なすぎるとテクニカルリクルーターの目に止まらない可能性もあるので、興味のある人はTwitterか
       <a
-        class="amy9aj mghlun3"
+        class="amy9aj m8s3hfn"
         tabindex="0"
       >
         こちらのフォームから連絡

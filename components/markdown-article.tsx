@@ -1,5 +1,4 @@
 import { css, cx } from "@linaria/core";
-import { FeedbackFish } from "@feedback-fish/react";
 import { styled } from "@linaria/react";
 import * as React from "react";
 import ReactMarkdown from "react-markdown";
@@ -8,6 +7,7 @@ import { ParrotAnchor } from "./anchor";
 import { Blockquote } from "./blockquote";
 import { Callout } from "./callout";
 import { CodeBlock } from "./code-block";
+import { FeedbackLink } from "./feedback-link";
 import { ImageFigure } from "./image-figure";
 import { AppStoreBadge, GooglePlayBadge } from "./mobile-app-store-link";
 import { WebpageEmbed } from "./webpage-embed";
@@ -365,6 +365,13 @@ const MdAppStoreBadge = styled(AppStoreBadge)`
   height: 40px;
 `;
 
+const MdFeedbackFish = styled(FeedbackLink)`
+  color: var(--color-fg-strong);
+  font-weight: bold;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+`;
+
 export const components = {
   heading: React.memo(
     ({
@@ -447,18 +454,7 @@ export const components = {
       case "app-store":
         return <MdAppStoreBadge {...attributes} />;
       case "feedback":
-        if (process.env.NEXT_PUBLIC_FEEDBACK_FISH_PROJECT_ID) {
-          return (
-            <FeedbackFish
-              projectId={process.env.NEXT_PUBLIC_FEEDBACK_FISH_PROJECT_ID}
-              {...attributes}
-            >
-              <MdAnchorLink>{children}</MdAnchorLink>
-            </FeedbackFish>
-          );
-        }
-
-        return <MdAnchorLink>{children}</MdAnchorLink>;
+        return <MdFeedbackFish {...attributes}>{children}</MdFeedbackFish>;
       default:
         return null;
     }
