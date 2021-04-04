@@ -38,9 +38,8 @@ WithIcon.args = {
   icon: <Mic />,
 };
 
-export const HugeIcon = Basic.bind({});
-HugeIcon.args = {
-  size: ButtonSize.xl,
+export const OnlyIcon = Basic.bind({});
+OnlyIcon.args = {
   icon: <Mic />,
-  children: null,
+  children: undefined,
 };

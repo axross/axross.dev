@@ -3,11 +3,11 @@
 exports[`<Button> matches the snapshot: variant: default, size: lg, icon: false, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 b1gnzyb2 b1l9461r"
+    class="b11jtqo5 b1gnzyb2 b4190x9"
     data-testid="button"
   >
     <span
-      class="slvi054 bo94lri"
+      class="slvi054 b16symwr"
     />
   </button>
 </div>
@@ -20,7 +20,7 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: false,
     data-testid="button"
   >
     <span
-      class="slvi054 bo94lri"
+      class="slvi054 b16symwr"
     >
       Lorem Ipsum
     </span>
@@ -31,11 +31,11 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 b1gnzyb2 b1l9461r"
+    class="b11jtqo5 b1gnzyb2 b4190x9"
     data-testid="button"
   >
     <svg
-      class="c108jgnp b4190x9"
+      class="c108jgnp bo94lri"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -66,7 +66,7 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, 
       />
     </svg>
     <span
-      class="slvi054 bo94lri"
+      class="slvi054 b16symwr"
     />
   </button>
 </div>
@@ -79,7 +79,7 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, 
     data-testid="button"
   >
     <svg
-      class="c108jgnp b4190x9 c75i3tf"
+      class="c108jgnp bo94lri c75i3tf"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -110,7 +110,7 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, 
       />
     </svg>
     <span
-      class="slvi054 bo94lri"
+      class="slvi054 b16symwr"
     >
       Lorem Ipsum
     </span>
@@ -121,11 +121,11 @@ exports[`<Button> matches the snapshot: variant: default, size: lg, icon: true, 
 exports[`<Button> matches the snapshot: variant: default, size: md, icon: false, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 b1gnzyb2 bq44b7t"
+    class="b11jtqo5 b1gnzyb2 b1ig5l0y"
     data-testid="button"
   >
     <span
-      class="slvi054 br7adeq"
+      class="slvi054 b13xm4po"
     />
   </button>
 </div>
@@ -138,7 +138,7 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: false,
     data-testid="button"
   >
     <span
-      class="slvi054 br7adeq"
+      class="slvi054 b13xm4po"
     >
       Lorem Ipsum
     </span>
@@ -149,11 +149,11 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 b1gnzyb2 bq44b7t"
+    class="b11jtqo5 b1gnzyb2 b1ig5l0y"
     data-testid="button"
   >
     <svg
-      class="c108jgnp b1ig5l0y"
+      class="c108jgnp br7adeq"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -184,7 +184,7 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, 
       />
     </svg>
     <span
-      class="slvi054 br7adeq"
+      class="slvi054 b13xm4po"
     />
   </button>
 </div>
@@ -197,7 +197,7 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, 
     data-testid="button"
   >
     <svg
-      class="c108jgnp b1ig5l0y c75i3tf"
+      class="c108jgnp br7adeq c75i3tf"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -228,7 +228,7 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, 
       />
     </svg>
     <span
-      class="slvi054 br7adeq"
+      class="slvi054 b13xm4po"
     >
       Lorem Ipsum
     </span>
@@ -239,11 +239,11 @@ exports[`<Button> matches the snapshot: variant: default, size: md, icon: true, 
 exports[`<Button> matches the snapshot: variant: default, size: sm, icon: false, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 b1gnzyb2 b14eo67x"
+    class="b11jtqo5 b1gnzyb2 b106izpi"
     data-testid="button"
   >
     <span
-      class="slvi054 bj3h2v"
+      class="slvi054 b19d1o3t"
     />
   </button>
 </div>
@@ -256,7 +256,7 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: false,
     data-testid="button"
   >
     <span
-      class="slvi054 bj3h2v"
+      class="slvi054 b19d1o3t"
     >
       Lorem Ipsum
     </span>
@@ -267,11 +267,11 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 b1gnzyb2 b14eo67x"
+    class="b11jtqo5 b1gnzyb2 b106izpi"
     data-testid="button"
   >
     <svg
-      class="c108jgnp b106izpi"
+      class="c108jgnp bj3h2v"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -302,7 +302,7 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, 
       />
     </svg>
     <span
-      class="slvi054 bj3h2v"
+      class="slvi054 b19d1o3t"
     />
   </button>
 </div>
@@ -315,7 +315,7 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, 
     data-testid="button"
   >
     <svg
-      class="c108jgnp b106izpi c75i3tf"
+      class="c108jgnp bj3h2v c75i3tf"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -346,7 +346,7 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, 
       />
     </svg>
     <span
-      class="slvi054 bj3h2v"
+      class="slvi054 b19d1o3t"
     >
       Lorem Ipsum
     </span>
@@ -357,11 +357,11 @@ exports[`<Button> matches the snapshot: variant: default, size: sm, icon: true, 
 exports[`<Button> matches the snapshot: variant: default, size: xl, icon: false, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 b1gnzyb2 b1vby7g1"
+    class="b11jtqo5 b1gnzyb2 bkz0lf"
     data-testid="button"
   >
     <span
-      class="slvi054 b276tsp"
+      class="slvi054 b1flgtne"
     />
   </button>
 </div>
@@ -374,7 +374,7 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: false,
     data-testid="button"
   >
     <span
-      class="slvi054 b276tsp"
+      class="slvi054 b1flgtne"
     >
       Lorem Ipsum
     </span>
@@ -385,11 +385,11 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: false,
 exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 b1gnzyb2 b1vby7g1"
+    class="b11jtqo5 b1gnzyb2 bkz0lf"
     data-testid="button"
   >
     <svg
-      class="c108jgnp bkz0lf"
+      class="c108jgnp b276tsp"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -420,7 +420,7 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, 
       />
     </svg>
     <span
-      class="slvi054 b276tsp"
+      class="slvi054 b1flgtne"
     />
   </button>
 </div>
@@ -433,7 +433,7 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, 
     data-testid="button"
   >
     <svg
-      class="c108jgnp bkz0lf c75i3tf"
+      class="c108jgnp b276tsp c75i3tf"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -464,7 +464,7 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, 
       />
     </svg>
     <span
-      class="slvi054 b276tsp"
+      class="slvi054 b1flgtne"
     >
       Lorem Ipsum
     </span>
@@ -475,11 +475,11 @@ exports[`<Button> matches the snapshot: variant: default, size: xl, icon: true, 
 exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: false, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 bdi40cx b1l9461r"
+    class="b11jtqo5 bdi40cx b4190x9"
     data-testid="button"
   >
     <span
-      class="slvi054 bo94lri"
+      class="slvi054 b16symwr"
     />
   </button>
 </div>
@@ -492,7 +492,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: false
     data-testid="button"
   >
     <span
-      class="slvi054 bo94lri"
+      class="slvi054 b16symwr"
     >
       Lorem Ipsum
     </span>
@@ -503,11 +503,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 bdi40cx b1l9461r"
+    class="b11jtqo5 bdi40cx b4190x9"
     data-testid="button"
   >
     <svg
-      class="c108jgnp b4190x9"
+      class="c108jgnp bo94lri"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -538,7 +538,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true,
       />
     </svg>
     <span
-      class="slvi054 bo94lri"
+      class="slvi054 b16symwr"
     />
   </button>
 </div>
@@ -551,7 +551,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true,
     data-testid="button"
   >
     <svg
-      class="c108jgnp b4190x9 c75i3tf"
+      class="c108jgnp bo94lri c75i3tf"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -582,7 +582,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true,
       />
     </svg>
     <span
-      class="slvi054 bo94lri"
+      class="slvi054 b16symwr"
     >
       Lorem Ipsum
     </span>
@@ -593,11 +593,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: lg, icon: true,
 exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: false, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 bdi40cx bq44b7t"
+    class="b11jtqo5 bdi40cx b1ig5l0y"
     data-testid="button"
   >
     <span
-      class="slvi054 br7adeq"
+      class="slvi054 b13xm4po"
     />
   </button>
 </div>
@@ -610,7 +610,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: false
     data-testid="button"
   >
     <span
-      class="slvi054 br7adeq"
+      class="slvi054 b13xm4po"
     >
       Lorem Ipsum
     </span>
@@ -621,11 +621,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 bdi40cx bq44b7t"
+    class="b11jtqo5 bdi40cx b1ig5l0y"
     data-testid="button"
   >
     <svg
-      class="c108jgnp b1ig5l0y"
+      class="c108jgnp br7adeq"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -656,7 +656,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true,
       />
     </svg>
     <span
-      class="slvi054 br7adeq"
+      class="slvi054 b13xm4po"
     />
   </button>
 </div>
@@ -669,7 +669,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true,
     data-testid="button"
   >
     <svg
-      class="c108jgnp b1ig5l0y c75i3tf"
+      class="c108jgnp br7adeq c75i3tf"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -700,7 +700,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true,
       />
     </svg>
     <span
-      class="slvi054 br7adeq"
+      class="slvi054 b13xm4po"
     >
       Lorem Ipsum
     </span>
@@ -711,11 +711,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: md, icon: true,
 exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: false, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 bdi40cx b14eo67x"
+    class="b11jtqo5 bdi40cx b106izpi"
     data-testid="button"
   >
     <span
-      class="slvi054 bj3h2v"
+      class="slvi054 b19d1o3t"
     />
   </button>
 </div>
@@ -728,7 +728,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: false
     data-testid="button"
   >
     <span
-      class="slvi054 bj3h2v"
+      class="slvi054 b19d1o3t"
     >
       Lorem Ipsum
     </span>
@@ -739,11 +739,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 bdi40cx b14eo67x"
+    class="b11jtqo5 bdi40cx b106izpi"
     data-testid="button"
   >
     <svg
-      class="c108jgnp b106izpi"
+      class="c108jgnp bj3h2v"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -774,7 +774,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true,
       />
     </svg>
     <span
-      class="slvi054 bj3h2v"
+      class="slvi054 b19d1o3t"
     />
   </button>
 </div>
@@ -787,7 +787,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true,
     data-testid="button"
   >
     <svg
-      class="c108jgnp b106izpi c75i3tf"
+      class="c108jgnp bj3h2v c75i3tf"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -818,7 +818,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true,
       />
     </svg>
     <span
-      class="slvi054 bj3h2v"
+      class="slvi054 b19d1o3t"
     >
       Lorem Ipsum
     </span>
@@ -829,11 +829,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: sm, icon: true,
 exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: false, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 bdi40cx b1vby7g1"
+    class="b11jtqo5 bdi40cx bkz0lf"
     data-testid="button"
   >
     <span
-      class="slvi054 b276tsp"
+      class="slvi054 b1flgtne"
     />
   </button>
 </div>
@@ -846,7 +846,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: false
     data-testid="button"
   >
     <span
-      class="slvi054 b276tsp"
+      class="slvi054 b1flgtne"
     >
       Lorem Ipsum
     </span>
@@ -857,11 +857,11 @@ exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: false
 exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: true, children: false 1`] = `
 <div>
   <button
-    class="b11jtqo5 bdi40cx b1vby7g1"
+    class="b11jtqo5 bdi40cx bkz0lf"
     data-testid="button"
   >
     <svg
-      class="c108jgnp bkz0lf"
+      class="c108jgnp b276tsp"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -892,7 +892,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: true,
       />
     </svg>
     <span
-      class="slvi054 b276tsp"
+      class="slvi054 b1flgtne"
     />
   </button>
 </div>
@@ -905,7 +905,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: true,
     data-testid="button"
   >
     <svg
-      class="c108jgnp bkz0lf c75i3tf"
+      class="c108jgnp b276tsp c75i3tf"
       fill="none"
       height="24"
       stroke="currentColor"
@@ -936,7 +936,7 @@ exports[`<Button> matches the snapshot: variant: inverted, size: xl, icon: true,
       />
     </svg>
     <span
-      class="slvi054 b276tsp"
+      class="slvi054 b1flgtne"
     >
       Lorem Ipsum
     </span>
