@@ -52,7 +52,7 @@ export const Button: React.FC<ButtonProps> = ({
           }
         `,
         COLORS[variant],
-        SIZES[size],
+        children ? SIZES[size] : ONLY_ICON_SIZES[size],
         className
       )}
       {...props}
@@ -136,6 +136,29 @@ const SIZES: Record<ButtonSize, string> = {
     height: 64px;
     padding-inline-start: var(--space-md);
     padding-inline-end: var(--space-md);
+    border-radius: 16px;
+  `,
+};
+
+const ONLY_ICON_SIZES: Record<ButtonSize, string> = {
+  [ButtonSize.sm]: css`
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  `,
+  [ButtonSize.md]: css`
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+  `,
+  [ButtonSize.lg]: css`
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  `,
+  [ButtonSize.xl]: css`
+    width: 64px;
+    height: 64px;
     border-radius: 16px;
   `,
 };
