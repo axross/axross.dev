@@ -118,6 +118,10 @@ const Page: NextPage<ServerSideProps> = (props) => {
             lastPublishedAt={lastPublishedAt}
             author={author}
             body={body}
+            shareUrl={`${origin}/posts/${slug}?hl=${intl.locale}`}
+            onShareBalloonButtonClick={(_, { type }) =>
+              userMonitoring.trackUiEvent(`click_balloon_${type}_share_button`)
+            }
           />
         </TwoColumnPageLayoutMain>
 
