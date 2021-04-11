@@ -4,17 +4,48 @@ import { FormattedMessage } from "react-intl";
 import { Badge } from "./badge";
 import { HorizontalList } from "./layout";
 import { Markdown } from "./markdown-article";
+import {
+  TextSelectionShareBalloon,
+  TextSelectionShareBalloonProps,
+} from "./text-selection-share-balloon";
 
+// TODO: too big. need to be splitted into small components
 export interface ArticleProps extends React.Attributes {
+  /**
+   * The title of article.
+   */
   title: string;
+  /**
+   * The image that shows in the top.
+   */
   coverImageUrl: string;
+  /**
+   * The tags related to the article.
+   */
   tags?: string[];
+  /**
+   * The article's last published date.
+   */
   lastPublishedAt?: Date;
+  /**
+   * The author information who wrote the article.
+   */
   author?: {
     name: string;
     avatarUrl: string;
   };
+  /**
+   * A markdown string as the body of article.
+   */
   body: string;
+  /**
+   * The url to share.
+   */
+  shareUrl?: string;
+  /**
+   * An event listener that gets called whenever you click buttons on `<TextSelectionShareBalloon>`.
+   */
+  onShareBalloonButtonClick?: TextSelectionShareBalloonProps["onButtonClick"];
   className?: string;
   style?: React.CSSProperties;
 }
@@ -26,8 +57,12 @@ export const Article: React.VFC<ArticleProps> = ({
   lastPublishedAt,
   author,
   body,
+  shareUrl,
+  onShareBalloonButtonClick,
   ...props
 }) => {
+  const bodyRef = React.useRef<HTMLDivElement>(null);
+
   return (
     <article {...props}>
       <img
@@ -129,8 +164,7 @@ export const Article: React.VFC<ArticleProps> = ({
         </aside>
       ) : null}
 
-      <Markdown
-        markdown={body}
+      <div
         className={css`
           margin-block-start: var(--space-xl);
 
@@ -139,7 +173,21 @@ export const Article: React.VFC<ArticleProps> = ({
             padding-inline-end: var(--space-md);
           }
         `}
-      />
+        ref={bodyRef}
+      >
+        <Markdown markdown={body} />
+      </div>
+
+      {shareUrl ? (
+        <TextSelectionShareBalloon
+          shareUrl={shareUrl}
+          disableWhen={(anchorNode, focusNode) =>
+            !bodyRef.current!.contains(anchorNode) ||
+            !bodyRef.current!.contains(focusNode)
+          }
+          onButtonClick={onShareBalloonButtonClick}
+        />
+      ) : null}
     </article>
   );
 };
