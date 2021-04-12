@@ -25,7 +25,6 @@ describe("Locale Navigation", () => {
 
       beforeAll(async () => {
         context = await browser.newContext({ locale: preferredLocale });
-        page = await context.newPage();
       });
 
       beforeEach(async () => {
@@ -40,7 +39,7 @@ describe("Locale Navigation", () => {
         await context.close();
       });
 
-      it("redirects with locale search params when it was missing", async () => {
+      it("redirects with a locale search param when it was missing", async () => {
         let initialResponse!: Response;
 
         page.on("response", (response) => {
@@ -55,7 +54,7 @@ describe("Locale Navigation", () => {
         expect(page.url()).toBe(`http://localhost:3000/?hl=${expectedLocale}`);
       });
 
-      it("doesn't redirect when the valid locale search params is given", async () => {
+      it("doesn't redirect when the valid locale search param is given", async () => {
         let initialResponse!: Response;
 
         page.on("response", (response) => {

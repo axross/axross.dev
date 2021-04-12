@@ -13,16 +13,14 @@ import {
   TwoColumnPageLayoutFooter,
   TwoColumnPageLayoutMain,
 } from "../../components/page-layout";
-import { WEBSITE_NAME } from "../../constants/app";
+import { WEBSITE_NAME, WEBSITE_ORIGIN } from "../../constants/app";
 import { CACHE_HEADER_VALUE } from "../../constants/cache";
 import { AVAILABLE_LOCALES } from "../../constants/locale";
 import { CommonServerSideProps } from "../../core/ssr-props";
-import { useOrigin } from "../../global-hooks/url";
 import {
   getBestMatchedLocaleOrFallbackFromLanguageRange,
   getLocaleFromQuery,
 } from "../../helpers/i18n";
-import { getOriginFromRequest } from "../../helpers/next";
 import { useUserMonitoring } from "../../hooks/user-monitoring";
 
 interface ServerSideProps extends CommonServerSideProps {
@@ -31,7 +29,6 @@ interface ServerSideProps extends CommonServerSideProps {
 }
 
 const Page: NextPage<ServerSideProps> = (props) => {
-  const origin = useOrigin();
   const { trackUiEvent } = useUserMonitoring();
   const intl = useIntl();
   const {
@@ -74,7 +71,7 @@ const Page: NextPage<ServerSideProps> = (props) => {
         <meta property="og:type" content="article" />
         <meta
           property="og:url"
-          content={`${origin}/posts/${slug}?hl=${intl.locale}`}
+          content={`${WEBSITE_ORIGIN}/posts/${slug}?hl=${intl.locale}`}
         />
         <meta property="og:site_name" content={WEBSITE_NAME} />
         <meta property="og:title" content={`${title} - ${WEBSITE_NAME}`} />
@@ -118,7 +115,7 @@ const Page: NextPage<ServerSideProps> = (props) => {
             lastPublishedAt={lastPublishedAt}
             author={author}
             body={body}
-            shareUrl={`${origin}/posts/${slug}?hl=${intl.locale}`}
+            shareUrl={`${WEBSITE_ORIGIN}/posts/${slug}?hl=${intl.locale}`}
             onShareBalloonButtonClick={(_, { type }) =>
               trackUiEvent(`click_balloon_${type}_share_button`)
             }
@@ -171,7 +168,6 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
     };
   }
 
-  const origin = getOriginFromRequest(req);
   const [intlMessages, posts, post] = await Promise.all([
     fetchTranslationDictionary(locale),
     getPostEntryListJson({ locale, previewToken }),
@@ -185,7 +181,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
   }
 
   return {
-    props: { origin, locale, intlMessages, post, posts },
+    props: { locale, intlMessages, post, posts },
   };
 };
 

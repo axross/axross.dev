@@ -3,10 +3,8 @@ import mitt from "next/dist/next-server/lib/mitt";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import * as React from "react";
 import { IntlProvider } from "react-intl";
-import { OriginProvider } from "../global-hooks/url";
 
 interface TestAppProps extends React.Attributes {
-  origin?: string;
   router?: {
     pathname?: string;
     query?: Record<string, string | string[]>;
@@ -44,7 +42,6 @@ export const TestApp = React.forwardRef<
 >(
   (
     {
-      origin = "https://dummy.kohei.dev",
       router: {
         pathname = "/",
         query = {},
@@ -149,15 +146,13 @@ export const TestApp = React.forwardRef<
 
     return (
       <RouterContext.Provider value={nextRouterMock}>
-        <OriginProvider origin={origin}>
-          <IntlProvider
-            messages={messages}
-            locale={locale}
-            defaultLocale={defaultLocale}
-          >
-            {children}
-          </IntlProvider>
-        </OriginProvider>
+        <IntlProvider
+          messages={messages}
+          locale={locale}
+          defaultLocale={defaultLocale}
+        >
+          {children}
+        </IntlProvider>
       </RouterContext.Provider>
     );
   }

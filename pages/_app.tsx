@@ -9,7 +9,6 @@ import { IntlProvider } from "react-intl";
 import TopLoadingBar from "react-top-loading-bar";
 import { RecoilRoot } from "recoil";
 import { FALLBACK_LOCALE } from "../constants/locale";
-import { OriginProvider } from "../global-hooks/url";
 import { useUserMonitoring } from "../hooks/user-monitoring";
 import { useTranslationDictionary } from "../hooks/translation";
 
@@ -83,17 +82,15 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   }, [trackPageView]);
 
   return (
-    <OriginProvider origin={pageProps.origin}>
-      <IntlProvider
-        messages={dictionary ?? pageProps.intlMessages}
-        locale={pageProps.locale!}
-        defaultLocale={FALLBACK_LOCALE}
-      >
-        <TopLoadingBar color="#ff6b6b" ref={topLoadingBarRef} />
+    <IntlProvider
+      messages={dictionary ?? pageProps.intlMessages}
+      locale={pageProps.locale!}
+      defaultLocale={FALLBACK_LOCALE}
+    >
+      <TopLoadingBar color="#ff6b6b" ref={topLoadingBarRef} />
 
-        <Component {...pageProps} />
-      </IntlProvider>
-    </OriginProvider>
+      <Component {...pageProps} />
+    </IntlProvider>
   );
 };
 

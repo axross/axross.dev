@@ -14,16 +14,14 @@ import {
   TwoColumnPageLayoutFooter,
   TwoColumnPageLayoutMain,
 } from "../components/page-layout";
-import { WEBSITE_NAME } from "../constants/app";
+import { WEBSITE_NAME, WEBSITE_ORIGIN } from "../constants/app";
 import { CACHE_HEADER_VALUE } from "../constants/cache";
 import { AVAILABLE_LOCALES } from "../constants/locale";
 import { CommonServerSideProps } from "../core/ssr-props";
-import { useOrigin } from "../global-hooks/url";
 import {
   getBestMatchedLocaleOrFallbackFromLanguageRange,
   getLocaleFromQuery,
 } from "../helpers/i18n";
-import { getOriginFromRequest } from "../helpers/next";
 import { useUserMonitoring } from "../hooks/user-monitoring";
 
 interface ServerSideProps extends CommonServerSideProps {
@@ -34,7 +32,6 @@ interface ServerSideProps extends CommonServerSideProps {
 const Page: NextPage<ServerSideProps> = (props) => {
   const { trackUiEvent } = useUserMonitoring();
   const intl = useIntl();
-  const origin = useOrigin();
   const {
     title,
     description,
@@ -59,7 +56,10 @@ const Page: NextPage<ServerSideProps> = (props) => {
         <meta name="description" content={description} />
         <meta name="keywords" content="kohei asai,axross,blog" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${origin}/?hl=${intl.locale}`} />
+        <meta
+          property="og:url"
+          content={`${WEBSITE_ORIGIN}/?hl=${intl.locale}`}
+        />
         <meta property="og:site_name" content={WEBSITE_NAME} />
         <meta property="og:title" content={WEBSITE_NAME} />
         <meta property="og:description" content={description} />
@@ -129,7 +129,6 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
     };
   }
 
-  const origin = getOriginFromRequest(req);
   const [intlMessages, posts, indexPage] = await Promise.all([
     fetchTranslationDictionary(locale),
     getPostEntryListJson({ locale, previewToken }),
@@ -137,7 +136,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
   ]);
 
   return {
-    props: { origin, locale, intlMessages, indexPage, posts },
+    props: { locale, intlMessages, indexPage, posts },
   };
 };
 

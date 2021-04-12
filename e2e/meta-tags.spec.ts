@@ -68,7 +68,7 @@ describe("Meta Tags", () => {
 
         expect(
           await page.getAttribute('meta[property="og:url"]', "content")
-        ).toBe(`http://localhost:3000/?hl=${locale}`);
+        ).toBe(`https://www.kohei.dev/?hl=${locale}`);
         expect(
           await page.getAttribute('meta[property="og:site_name"]', "content")
         ).toBe(WEBSITE_NAME);
@@ -162,7 +162,7 @@ describe("Meta Tags", () => {
 
         expect(
           await page.getAttribute('meta[property="og:url"]', "content")
-        ).toBe(`http://localhost:3000/posts/${post.slug}?hl=${locale}`);
+        ).toBe(`https://www.kohei.dev/posts/${post.slug}?hl=${locale}`);
         expect(
           await page.getAttribute('meta[property="og:site_name"]', "content")
         ).toBe(WEBSITE_NAME);
