@@ -5,7 +5,7 @@ import {
   useFacebookShare,
   useLinkedinShare,
   useTwitterShare,
-} from "../services/social-share";
+} from "../hooks/social-share";
 import { ButtonListBalloon, ButtonListBaloonItem } from "./button-list-balloon";
 
 export interface TextSelectionShareBalloonProps extends React.Attributes {

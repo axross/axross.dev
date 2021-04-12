@@ -3,14 +3,8 @@ import mitt from "next/dist/next-server/lib/mitt";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import * as React from "react";
 import { IntlProvider } from "react-intl";
-import { ServiceProvider } from "../components/service";
-import { OriginProvider } from "../global-hooks/url";
-import { EmptyI18nDictionaryService } from "../services/i18n-dictionary";
-import { EmptyUserMonitoringService } from "../services/user-monitoring";
-import { ServiceContainer } from "./service-container";
 
 interface TestAppProps extends React.Attributes {
-  origin?: string;
   router?: {
     pathname?: string;
     query?: Record<string, string | string[]>;
@@ -29,7 +23,6 @@ interface TestAppProps extends React.Attributes {
     locale?: string;
     defaultLocale?: string;
   };
-  serviceContainer?: Partial<ServiceContainer>;
 }
 
 export interface TestAppImperativeHandle {
@@ -49,7 +42,6 @@ export const TestApp = React.forwardRef<
 >(
   (
     {
-      origin = "https://dummy.kohei.dev",
       router: {
         pathname = "/",
         query = {},
@@ -62,10 +54,6 @@ export const TestApp = React.forwardRef<
         reload = () => {},
       } = {},
       intl: { messages = {}, locale = "en-US", defaultLocale = "en-US" } = {},
-      serviceContainer: {
-        i18nDictionary = new EmptyI18nDictionaryService(),
-        userMonitoring = new EmptyUserMonitoringService(),
-      } = {},
       children,
     },
     ref
@@ -158,17 +146,13 @@ export const TestApp = React.forwardRef<
 
     return (
       <RouterContext.Provider value={nextRouterMock}>
-        <ServiceProvider serviceContainer={{ i18nDictionary, userMonitoring }}>
-          <OriginProvider origin={origin}>
-            <IntlProvider
-              messages={messages}
-              locale={locale}
-              defaultLocale={defaultLocale}
-            >
-              {children}
-            </IntlProvider>
-          </OriginProvider>
-        </ServiceProvider>
+        <IntlProvider
+          messages={messages}
+          locale={locale}
+          defaultLocale={defaultLocale}
+        >
+          {children}
+        </IntlProvider>
       </RouterContext.Provider>
     );
   }

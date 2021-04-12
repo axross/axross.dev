@@ -1,13 +1,12 @@
 import { max } from "date-fns";
 import Mustache from "mustache";
 import type { NextApiHandler } from "next";
+import { getPostEntryListJson } from "../../../adapters/cms";
+import { WEBSITE_ORIGIN } from "../../../constants/app";
 import { AVAILABLE_LOCALES } from "../../../constants/locale";
 import { getLocaleFromQueryWithFallback } from "../../../helpers/i18n";
-import { getOriginFromRequest } from "../../../helpers/next";
-import { getPostEntryListJson } from "../../../services/cms";
 
 const handler: NextApiHandler = async (req, res) => {
-  const origin = getOriginFromRequest(req);
   const locale = getLocaleFromQueryWithFallback(req.query);
   const alternativeLocales = AVAILABLE_LOCALES.filter((l) => l !== locale);
 
@@ -17,7 +16,7 @@ const handler: NextApiHandler = async (req, res) => {
   res.setHeader("content-type", "application/xml");
   res.end(
     Mustache.render(TEMPLATE, {
-      origin,
+      origin: WEBSITE_ORIGIN,
       mostLastPublishedAt: max(
         posts.map((post) => new Date(post.lastPublishedAt))
       ).toISOString(),

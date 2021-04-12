@@ -4,6 +4,8 @@ import Head from "next/head";
 import * as React from "react";
 import { useIntl } from "react-intl";
 import { PromiseValue } from "type-fest";
+import { getIndexPageJson, getPostEntryListJson } from "../adapters/cms";
+import { fetchTranslationDictionary } from "../adapters/translation";
 import { Article } from "../components/article";
 import { AsideNavigation } from "../components/aside-navigation";
 import {
@@ -12,19 +14,15 @@ import {
   TwoColumnPageLayoutFooter,
   TwoColumnPageLayoutMain,
 } from "../components/page-layout";
-import { useService } from "../components/service";
-import { WEBSITE_NAME } from "../constants/app";
+import { WEBSITE_NAME, WEBSITE_ORIGIN } from "../constants/app";
 import { CACHE_HEADER_VALUE } from "../constants/cache";
 import { AVAILABLE_LOCALES } from "../constants/locale";
 import { CommonServerSideProps } from "../core/ssr-props";
-import { useOrigin } from "../global-hooks/url";
 import {
   getBestMatchedLocaleOrFallbackFromLanguageRange,
   getLocaleFromQuery,
 } from "../helpers/i18n";
-import { getOriginFromRequest } from "../helpers/next";
-import { getIndexPageJson, getPostEntryListJson } from "../services/cms";
-import { IsomorphicI18nDictionaryService } from "../services/i18n-dictionary";
+import { useUserMonitoring } from "../hooks/user-monitoring";
 
 interface ServerSideProps extends CommonServerSideProps {
   indexPage: NonNullable<PromiseValue<ReturnType<typeof getIndexPageJson>>>;
@@ -32,9 +30,8 @@ interface ServerSideProps extends CommonServerSideProps {
 }
 
 const Page: NextPage<ServerSideProps> = (props) => {
-  const { userMonitoring } = useService();
+  const { trackUiEvent } = useUserMonitoring();
   const intl = useIntl();
-  const origin = useOrigin();
   const {
     title,
     description,
@@ -59,7 +56,10 @@ const Page: NextPage<ServerSideProps> = (props) => {
         <meta name="description" content={description} />
         <meta name="keywords" content="kohei asai,axross,blog" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`${origin}/?hl=${intl.locale}`} />
+        <meta
+          property="og:url"
+          content={`${WEBSITE_ORIGIN}/?hl=${intl.locale}`}
+        />
         <meta property="og:site_name" content={WEBSITE_NAME} />
         <meta property="og:title" content={WEBSITE_NAME} />
         <meta property="og:description" content={description} />
@@ -87,10 +87,7 @@ const Page: NextPage<ServerSideProps> = (props) => {
 
         <TwoColumnPageLayoutAside
           onFloatingSidebarButtonClick={(_, isMenuOpen) =>
-            userMonitoring.trackUiEvent(
-              isMenuOpen ? "open_aside" : "close_aside",
-              1
-            )
+            trackUiEvent(isMenuOpen ? "open_aside" : "close_aside", 1)
           }
         >
           <AsideNavigation posts={posts} tableOfContents={tableOfContents} />
@@ -132,15 +129,14 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
     };
   }
 
-  const origin = getOriginFromRequest(req);
   const [intlMessages, posts, indexPage] = await Promise.all([
-    new IsomorphicI18nDictionaryService().fetch(locale),
+    fetchTranslationDictionary(locale),
     getPostEntryListJson({ locale, previewToken }),
     getIndexPageJson({ locale, previewToken }),
   ]);
 
   return {
-    props: { origin, locale, intlMessages, indexPage, posts },
+    props: { locale, intlMessages, indexPage, posts },
   };
 };
 
