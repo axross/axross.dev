@@ -1,10 +1,10 @@
 import { max } from "date-fns";
 import Mustache from "mustache";
 import type { NextApiHandler } from "next";
+import { getPostEntryListJson } from "../../../adapters/cms";
 import { AVAILABLE_LOCALES } from "../../../constants/locale";
 import { getLocaleFromQueryWithFallback } from "../../../helpers/i18n";
 import { getOriginFromRequest } from "../../../helpers/next";
-import { getPostEntryListJson } from "../../../services/cms";
 
 const handler: NextApiHandler = async (req, res) => {
   const origin = getOriginFromRequest(req);

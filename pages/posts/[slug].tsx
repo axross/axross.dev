@@ -3,6 +3,8 @@ import Head from "next/head";
 import * as React from "react";
 import { useIntl } from "react-intl";
 import { PromiseValue } from "type-fest";
+import { getPostEntryListJson, getPostJson } from "../../adapters/cms";
+import { fetchTranslationDictionary } from "../../adapters/translation";
 import { Article } from "../../components/article";
 import { AsideNavigation } from "../../components/aside-navigation";
 import {
@@ -11,7 +13,6 @@ import {
   TwoColumnPageLayoutFooter,
   TwoColumnPageLayoutMain,
 } from "../../components/page-layout";
-import { useService } from "../../components/service";
 import { WEBSITE_NAME } from "../../constants/app";
 import { CACHE_HEADER_VALUE } from "../../constants/cache";
 import { AVAILABLE_LOCALES } from "../../constants/locale";
@@ -22,8 +23,7 @@ import {
   getLocaleFromQuery,
 } from "../../helpers/i18n";
 import { getOriginFromRequest } from "../../helpers/next";
-import { getPostEntryListJson, getPostJson } from "../../services/cms";
-import { IsomorphicI18nDictionaryService } from "../../services/i18n-dictionary";
+import { useUserMonitoring } from "../../hooks/user-monitoring";
 
 interface ServerSideProps extends CommonServerSideProps {
   post: NonNullable<PromiseValue<ReturnType<typeof getPostJson>>>;
@@ -31,8 +31,8 @@ interface ServerSideProps extends CommonServerSideProps {
 }
 
 const Page: NextPage<ServerSideProps> = (props) => {
-  const { userMonitoring } = useService();
   const origin = useOrigin();
+  const { trackUiEvent } = useUserMonitoring();
   const intl = useIntl();
   const {
     slug,
@@ -120,17 +120,14 @@ const Page: NextPage<ServerSideProps> = (props) => {
             body={body}
             shareUrl={`${origin}/posts/${slug}?hl=${intl.locale}`}
             onShareBalloonButtonClick={(_, { type }) =>
-              userMonitoring.trackUiEvent(`click_balloon_${type}_share_button`)
+              trackUiEvent(`click_balloon_${type}_share_button`)
             }
           />
         </TwoColumnPageLayoutMain>
 
         <TwoColumnPageLayoutAside
           onFloatingSidebarButtonClick={(_, isMenuOpen) =>
-            userMonitoring.trackUiEvent(
-              isMenuOpen ? "open_aside" : "close_aside",
-              1
-            )
+            trackUiEvent(isMenuOpen ? "open_aside" : "close_aside", 1)
           }
         >
           <AsideNavigation posts={posts} tableOfContents={tableOfContents} />
@@ -176,7 +173,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
 
   const origin = getOriginFromRequest(req);
   const [intlMessages, posts, post] = await Promise.all([
-    new IsomorphicI18nDictionaryService().fetch(locale),
+    fetchTranslationDictionary(locale),
     getPostEntryListJson({ locale, previewToken }),
     getPostJson({ slug, locale, previewToken }),
   ]);

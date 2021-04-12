@@ -5,14 +5,13 @@ import { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { mix, shade, tint, transparentize } from "polished";
 import * as React from "react";
-import { IntlConfig, IntlProvider } from "react-intl";
+import { IntlProvider } from "react-intl";
 import TopLoadingBar from "react-top-loading-bar";
+import { RecoilRoot } from "recoil";
 import { FALLBACK_LOCALE } from "../constants/locale";
 import { OriginProvider } from "../global-hooks/url";
-import { ServiceProvider } from "../components/service";
-import { ServiceContainer } from "../core/service-container";
-import { IsomorphicI18nDictionaryService } from "../services/i18n-dictionary";
-import { BrowserUserMonitoringService } from "../services/user-monitoring";
+import { useUserMonitoring } from "../hooks/user-monitoring";
+import { useTranslationDictionary } from "../hooks/translation";
 
 import "normalize.css/normalize.css";
 
@@ -38,25 +37,18 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
 const AppEntrypoint: React.FC<AppProps> = (props) => {
   return (
     <Sentry.ErrorBoundary>
-      <App {...props} />
+      <RecoilRoot>
+        <App {...props} />
+      </RecoilRoot>
     </Sentry.ErrorBoundary>
   );
 };
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
+  const { trackPageView } = useUserMonitoring();
   const topLoadingBarRef = React.useRef<any>(null);
-  const [intlMessages, setIntlMessages] = React.useState<
-    IntlConfig["messages"]
-  >(pageProps.intlMessages);
-
-  const serviceContainer = React.useMemo<ServiceContainer>(
-    () => ({
-      i18nDictionary: new IsomorphicI18nDictionaryService(),
-      userMonitoring: new BrowserUserMonitoringService(),
-    }),
-    []
-  );
+  const { dictionary } = useTranslationDictionary(pageProps.locale!);
 
   React.useEffect(() => {
     const onRouteChangeStart = () => {
@@ -77,10 +69,10 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   }, []);
 
   React.useEffect(() => {
-    serviceContainer.userMonitoring.trackPageView();
+    trackPageView();
 
     const onRouteChangeComplete = () => {
-      serviceContainer.userMonitoring.trackPageView();
+      trackPageView();
     };
 
     router.events.on("routeChangeComplete", onRouteChangeComplete);
@@ -88,30 +80,20 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     return () => {
       router.events.off("routeChangeComplete", onRouteChangeComplete);
     };
-  }, [serviceContainer.userMonitoring]);
-
-  React.useEffect(() => {
-    serviceContainer.i18nDictionary
-      .fetch(pageProps.locale ?? FALLBACK_LOCALE)
-      .then((dictionary) => setIntlMessages(dictionary));
-  }, [serviceContainer.i18nDictionary, pageProps.locale]);
+  }, [trackPageView]);
 
   return (
-    <>
-      <ServiceProvider serviceContainer={serviceContainer}>
-        <OriginProvider origin={pageProps.origin}>
-          <IntlProvider
-            messages={intlMessages}
-            locale={pageProps.locale!}
-            defaultLocale={FALLBACK_LOCALE}
-          >
-            <TopLoadingBar color="#ff6b6b" ref={topLoadingBarRef} />
+    <OriginProvider origin={pageProps.origin}>
+      <IntlProvider
+        messages={dictionary ?? pageProps.intlMessages}
+        locale={pageProps.locale!}
+        defaultLocale={FALLBACK_LOCALE}
+      >
+        <TopLoadingBar color="#ff6b6b" ref={topLoadingBarRef} />
 
-            <Component {...pageProps} />
-          </IntlProvider>
-        </OriginProvider>
-      </ServiceProvider>
-    </>
+        <Component {...pageProps} />
+      </IntlProvider>
+    </OriginProvider>
   );
 };
 
