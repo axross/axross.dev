@@ -2,6 +2,7 @@ import { css } from "@linaria/core";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { AppProps } from "next/app";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { mix, shade, tint, transparentize } from "polished";
 import * as React from "react";
@@ -82,23 +83,30 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   }, [trackPageView]);
 
   return (
-    <IntlProvider
-      messages={dictionary ?? pageProps.intlMessages}
-      locale={pageProps.locale!}
-      defaultLocale={FALLBACK_LOCALE}
-    >
-      <TopLoadingBar color="#ff6b6b" ref={topLoadingBarRef} />
+    <>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700"
+          rel="stylesheet"
+        />
+      </Head>
 
-      <Component {...pageProps} />
-    </IntlProvider>
+      <IntlProvider
+        messages={dictionary ?? pageProps.intlMessages}
+        locale={pageProps.locale!}
+        defaultLocale={FALLBACK_LOCALE}
+      >
+        <TopLoadingBar color="#ff6b6b" ref={topLoadingBarRef} />
+
+        <Component {...pageProps} />
+      </IntlProvider>
+    </>
   );
 };
 
 // this generates global css file in build process
 css`
   :global() {
-    @import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
-
     * {
       outline-offset: 4px;
     }
