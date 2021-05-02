@@ -1,22 +1,17 @@
+const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+
 module.exports = (phase) => {
   return {
     reactStrictMode: true,
-    serverRuntimeConfig: {
-      rootPath: __dirname,
+    serverRuntimeConfig: {},
+    publicRuntimeConfig: {
+      locales: ["en-us", "ja-jp"],
+      defaultLocale: "en-us",
     },
-    publicRuntimeConfig: {},
     rewrites: async () => [
       {
-        source: "/index.json",
-        destination: "/api/index.json",
-      },
-      {
-        source: "/posts/feed.xml",
-        destination: "/api/posts/feed.xml",
-      },
-      {
-        source: "/posts/:slug.json",
-        destination: "/api/posts/[slug].json?slug=:slug",
+        source: "/:locale/posts/feed.xml",
+        destination: "/api/:locale/posts/feed.xml",
       },
     ],
     images: {

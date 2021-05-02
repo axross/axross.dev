@@ -5,10 +5,13 @@ jobs:
   dry-build:
     name: Dry Build
     runs-on: ubuntu-latest
+    environment: GitHub Actions Dry Build
     env:
       NEXT_PUBLIC_VERSION: ${{ github.sha }}
-      NEXT_PUBLIC_GRAPHCMS_ENDPOINT: ${{ secrets.E2E_GRAPHCMS_ENDPOINT }}
-      NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN: ${{ secrets.E2E_SIMPLE_LOCALIZE_TOKEN }}
+      NEXT_PUBLIC_RELEASE_STAGE: ${{ secrets.NEXT_PUBLIC_RELEASE_STAGE }}
+      NEXT_PUBLIC_SELF_ORIGIN: ${{ secrets.NEXT_PUBLIC_SELF_ORIGIN }}
+      NEXT_PUBLIC_GRAPHCMS_ENDPOINT: ${{ secrets.NEXT_PUBLIC_GRAPHCMS_ENDPOINT }}
+      NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN: ${{ secrets.NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -32,6 +35,13 @@ jobs:
   unit-test:
     name: Unit Test
     runs-on: ubuntu-latest
+    environment: GitHub Actions Unit Test
+    env:
+      NEXT_PUBLIC_VERSION: ${{ github.sha }}
+      NEXT_PUBLIC_RELEASE_STAGE: ${{ secrets.NEXT_PUBLIC_RELEASE_STAGE }}
+      NEXT_PUBLIC_SELF_ORIGIN: ${{ secrets.NEXT_PUBLIC_SELF_ORIGIN }}
+      NEXT_PUBLIC_GRAPHCMS_ENDPOINT: ${{ secrets.NEXT_PUBLIC_GRAPHCMS_ENDPOINT }}
+      NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN: ${{ secrets.NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -58,10 +68,14 @@ jobs:
   e2e-test:
     name: E2E Test
     runs-on: ubuntu-latest
+    environment: GitHub Actions E2E Test
     env:
       NEXT_PUBLIC_VERSION: ${{ github.sha }}
-      NEXT_PUBLIC_GRAPHCMS_ENDPOINT: ${{ secrets.E2E_GRAPHCMS_ENDPOINT }}
-      NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN: ${{ secrets.E2E_SIMPLE_LOCALIZE_TOKEN }}
+      NEXT_PUBLIC_RELEASE_STAGE: ${{ secrets.NEXT_PUBLIC_RELEASE_STAGE }}
+      NEXT_PUBLIC_SELF_ORIGIN: ${{ secrets.NEXT_PUBLIC_SELF_ORIGIN }}
+      NEXT_PUBLIC_GRAPHCMS_ENDPOINT: ${{ secrets.NEXT_PUBLIC_GRAPHCMS_ENDPOINT }}
+      NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN: ${{ secrets.NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN }}
+      E2E_TEST_TARGET_ORIGIN: ${{ secrets.E2E_TEST_TARGET_ORIGIN }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1

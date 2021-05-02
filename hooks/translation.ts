@@ -3,6 +3,7 @@ import {
   Dictionary,
   fetchTranslationDictionary,
 } from "../adapters/translation";
+import { useRouter } from "../hooks/router";
 
 const translationAtom = atomFamily<Dictionary | null, string>({
   key: "Translation",
@@ -16,7 +17,13 @@ const translationAtom = atomFamily<Dictionary | null, string>({
   ],
 });
 
-export function useTranslationDictionary(locale: string) {
+export function useTranslationDictionary() {
+  const { locale } = useRouter();
+
+  if (!locale) {
+    throw new Error("No locale identifier found in the router.");
+  }
+
   const dictionaryLoadable = useRecoilValueLoadable(translationAtom(locale));
 
   return {

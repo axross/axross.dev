@@ -3,15 +3,14 @@ import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { mix, shade, tint, transparentize } from "polished";
 import * as React from "react";
 import { IntlProvider } from "react-intl";
 import TopLoadingBar from "react-top-loading-bar";
 import { RecoilRoot } from "recoil";
-import { FALLBACK_LOCALE } from "../constants/locale";
-import { useUserMonitoring } from "../hooks/user-monitoring";
+import { useRouter } from "../hooks/router";
 import { useTranslationDictionary } from "../hooks/translation";
+import { useUserMonitoring } from "../hooks/user-monitoring";
 
 import "normalize.css/normalize.css";
 
@@ -48,7 +47,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
   const { trackPageView } = useUserMonitoring();
   const topLoadingBarRef = React.useRef<any>(null);
-  const { dictionary } = useTranslationDictionary(pageProps.locale!);
+  const { dictionary } = useTranslationDictionary();
 
   React.useEffect(() => {
     const onRouteChangeStart = () => {
@@ -93,8 +92,8 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
 
       <IntlProvider
         messages={dictionary ?? pageProps.intlMessages}
-        locale={pageProps.locale!}
-        defaultLocale={FALLBACK_LOCALE}
+        locale={router.locale}
+        defaultLocale={router.defaultLocale}
       >
         <TopLoadingBar color="#ff6b6b" ref={topLoadingBarRef} />
 

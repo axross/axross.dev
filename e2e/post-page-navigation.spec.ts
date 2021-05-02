@@ -1,6 +1,8 @@
 import { Browser, Page, webkit } from "playwright";
+import { getLocales } from "../helpers/localization";
 
 describe("Post Page Navigation", () => {
+  const locales = getLocales();
   let browser: Browser;
   let page: Page;
 
@@ -20,11 +22,11 @@ describe("Post Page Navigation", () => {
     await browser.close();
   });
 
-  describe("/posts/[slug]", () => {
-    describe.each(["en-US", "ja-JP"])("?hl=%s", (locale) => {
+  describe("/posts/:slug", () => {
+    describe.each(locales)("%s", (locale) => {
       it("scroll to the heading when an item in table of contents is clicked", async () => {
         await page.goto(
-          `http://localhost:3000/posts/applying-dark-mode-on-the-web?hl=${locale}`
+          `${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}/posts/applying-dark-mode-on-the-web`
         );
 
         const viewportHeight = page.viewportSize()!.height;

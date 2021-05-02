@@ -9,6 +9,8 @@ interface TestAppProps extends React.Attributes {
     pathname?: string;
     query?: Record<string, string | string[]>;
     asPath?: string;
+    locale?: string;
+    locales?: string[];
     push?: (...params: Parameters<NextRouter["push"]>) => void;
     replace?: (...params: Parameters<NextRouter["replace"]>) => void;
     prefetch?: (...params: Parameters<NextRouter["prefetch"]>) => void;
@@ -20,7 +22,6 @@ interface TestAppProps extends React.Attributes {
   };
   intl?: {
     messages?: Record<string, any>;
-    locale?: string;
     defaultLocale?: string;
   };
 }
@@ -46,6 +47,8 @@ export const TestApp = React.forwardRef<
         pathname = "/",
         query = {},
         asPath = "/",
+        locale = "en-us",
+        locales = ["en-us", "ja-jp"],
         push = () => {},
         replace = () => {},
         prefetch = () => {},
@@ -53,7 +56,7 @@ export const TestApp = React.forwardRef<
         back = () => {},
         reload = () => {},
       } = {},
-      intl: { messages = {}, locale = "en-US", defaultLocale = "en-US" } = {},
+      intl: { messages = {}, defaultLocale = "en-us" } = {},
       children,
     },
     ref
@@ -86,8 +89,10 @@ export const TestApp = React.forwardRef<
           reload,
           route: "",
           basePath: "",
+          locale,
+          locales,
           events,
-          isLocaleDomain: false,
+          isLocaleDomain: true,
           isFallback: false,
           isReady: true,
           isPreview: false,

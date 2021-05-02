@@ -1,9 +1,10 @@
 import { gql, request } from "graphql-request";
 import { Browser, BrowserContext, Page, webkit } from "playwright";
 import { WEBSITE_NAME } from "../constants/app";
-import { AVAILABLE_LOCALES } from "../constants/locale";
+import { getLocales, toUtsSnakeCaseLocale } from "../helpers/localization";
 
 describe("Meta Tags", () => {
+  const locales = getLocales();
   let browser: Browser;
   let context: BrowserContext;
   let page: Page;
@@ -26,8 +27,8 @@ describe("Meta Tags", () => {
     await browser.close();
   });
 
-  describe("/", () => {
-    describe.each(["en-US", "ja-JP"])("?hl=%s", (locale) => {
+  describe("/:locale", () => {
+    describe.each(locales)("%s", (locale) => {
       let indexPage: any;
 
       beforeAll(async () => {
@@ -45,14 +46,14 @@ describe("Meta Tags", () => {
               }
             }
           `,
-          { locale: locale.replace("-", "_") }
+          { locale: toUtsSnakeCaseLocale(locale) }
         );
 
         indexPage = data.indexPages[0];
       });
 
       it("has valid title, description and keywords", async () => {
-        await page.goto(`http://localhost:3000/?hl=${locale}`);
+        await page.goto(`${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}`);
 
         expect(await page.title()).toBe(WEBSITE_NAME);
         expect(
@@ -64,11 +65,11 @@ describe("Meta Tags", () => {
       });
 
       it("has valid open graph data", async () => {
-        await page.goto(`http://localhost:3000/?hl=${locale}`);
+        await page.goto(`${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}`);
 
         expect(
           await page.getAttribute('meta[property="og:url"]', "content")
-        ).toBe(`https://www.kohei.dev/?hl=${locale}`);
+        ).toBe(`${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}`);
         expect(
           await page.getAttribute('meta[property="og:site_name"]', "content")
         ).toBe(WEBSITE_NAME);
@@ -82,12 +83,10 @@ describe("Meta Tags", () => {
           await page.getAttribute('meta[property="og:locale"]', "content")
         ).toBe(locale);
 
-        for (const alternativeLocale of AVAILABLE_LOCALES.filter(
-          (l) => l !== locale
-        )) {
+        for (const altLocale of locales.filter((l) => l !== locale)) {
           expect(
             await page.$(
-              `meta[property="og:locale:alternate"][content="${alternativeLocale}"]`
+              `meta[property="og:locale:alternate"][content="${altLocale}"]`
             )
           ).not.toBeNull();
         }
@@ -99,10 +98,10 @@ describe("Meta Tags", () => {
     });
   });
 
-  describe("/posts/[slug]", () => {
+  describe("/:locale/posts/:slug", () => {
     beforeAll(async () => {});
 
-    describe.each(["en-US", "ja-JP"])("?hl=%s", (locale) => {
+    describe.each(locales)("%s", (locale) => {
       let post: any;
 
       beforeAll(async () => {
@@ -135,7 +134,7 @@ describe("Meta Tags", () => {
               }
             }
           `,
-          { locale: locale.replace("-", "_") }
+          { locale: toUtsSnakeCaseLocale(locale) }
         );
 
         post = data.posts[0];
@@ -143,7 +142,7 @@ describe("Meta Tags", () => {
 
       it("has valid title, description and keywords", async () => {
         await page.goto(
-          `http://localhost:3000/posts/${post.slug}?hl=${locale}`
+          `${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}/posts/${post.slug}`
         );
 
         expect(await page.title()).toBe(`${post.title} - ${WEBSITE_NAME}`);
@@ -157,12 +156,14 @@ describe("Meta Tags", () => {
 
       it("has valid open graph data", async () => {
         await page.goto(
-          `http://localhost:3000/posts/${post.slug}?hl=${locale}`
+          `${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}/posts/${post.slug}`
         );
 
         expect(
           await page.getAttribute('meta[property="og:url"]', "content")
-        ).toBe(`https://www.kohei.dev/posts/${post.slug}?hl=${locale}`);
+        ).toBe(
+          `${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}/posts/${post.slug}`
+        );
         expect(
           await page.getAttribute('meta[property="og:site_name"]', "content")
         ).toBe(WEBSITE_NAME);
@@ -176,12 +177,10 @@ describe("Meta Tags", () => {
           await page.getAttribute('meta[property="og:locale"]', "content")
         ).toBe(locale);
 
-        for (const alternativeLocale of AVAILABLE_LOCALES.filter(
-          (l) => l !== locale
-        )) {
+        for (const altLocale of locales.filter((l) => l !== locale)) {
           expect(
             await page.$(
-              `meta[property="og:locale:alternate"][content="${alternativeLocale}"]`
+              `meta[property="og:locale:alternate"][content="${altLocale}"]`
             )
           ).not.toBeNull();
         }

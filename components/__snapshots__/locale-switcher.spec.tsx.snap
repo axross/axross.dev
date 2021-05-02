@@ -9,8 +9,8 @@ exports[`<LocaleSwitcher> renders switcher buttons for each supported locale 1`]
       <a
         class="a1v4h6uj"
         data-testid="link"
-        href="/?hl=en-US"
-        title="en-US"
+        href="/en-us"
+        title="en-us"
       >
         <svg
           class="f1mxy9mn"
@@ -41,8 +41,8 @@ exports[`<LocaleSwitcher> renders switcher buttons for each supported locale 1`]
       <a
         class="a1v4h6uj"
         data-testid="link"
-        href="/?hl=ja-JP"
-        title="ja-JP"
+        href="/ja-jp"
+        title="ja-jp"
       >
         <svg
           class="f1mxy9mn"

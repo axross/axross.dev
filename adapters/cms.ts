@@ -1,4 +1,5 @@
 import { GraphQLClient, gql } from "graphql-request";
+import { toUtsSnakeCaseLocale } from "../helpers/localization";
 import {
   generateMarkdown,
   generateTableOfContents,
@@ -31,7 +32,7 @@ export async function getIndexPageJson({
         }
       }
     `,
-    { locale: locale.replace("-", "_") }
+    { locale: toUtsSnakeCaseLocale(locale) }
   );
 
   if (data.indexPages.length !== 1) {
@@ -96,7 +97,10 @@ export async function getPostJson({
         }
       }
     `,
-    { slug, locale: locale.replace("-", "_") }
+    {
+      slug,
+      locale: toUtsSnakeCaseLocale(locale),
+    }
   );
 
   if (data.posts.length !== 1) {
@@ -166,7 +170,7 @@ export async function getPostEntryListJson({
         }
       }
     `,
-    { locale: locale.replace("-", "_") }
+    { locale: toUtsSnakeCaseLocale(locale) }
   );
 
   return data.posts.map((item: any) => ({
