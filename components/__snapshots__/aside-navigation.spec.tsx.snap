@@ -14,8 +14,8 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
         <a
           class="a1v4h6uj"
           data-testid="link"
-          href="/?hl=en-US"
-          title="en-US"
+          href="/en-us"
+          title="en-us"
         >
           <svg
             class="f1mxy9mn"
@@ -46,8 +46,8 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
         <a
           class="a1v4h6uj"
           data-testid="link"
-          href="/?hl=ja-JP"
-          title="ja-JP"
+          href="/ja-jp"
+          title="ja-jp"
         >
           <svg
             class="f1mxy9mn"
@@ -82,7 +82,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/?hl=en-US"
+          href="/en-us"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -90,253 +90,13 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
             About
           </h2>
         </a>
-        <nav
-          class="n1u86223"
-        >
-          <ul
-            class="ujennjy"
-            data-testid="table-of-contents"
-          >
-            <li
-              class="l1mjdv3p"
-              data-testid="item"
-            >
-              <a
-                class="a1wg243b a9zw7kp"
-                href="/?hl=en-US#zg2r6g"
-              >
-                <div
-                  class="d5nv6yd bbrrwrm"
-                />
-                <div
-                  class="d1gbu7qw d1ptuzcs"
-                />
-                <div
-                  class="d8bsu04 d1i88tu3 t17rm1x7"
-                >
-                  in aut natus eius nesciunt
-                </div>
-              </a>
-            </li>
-            <li
-              class="l1mjdv3p"
-              data-testid="item"
-            >
-              <a
-                class="a1wg243b a1p5pgsf"
-                href="/?hl=en-US#2sfiwl"
-              >
-                <div
-                  class="d5nv6yd bbrrwrm"
-                />
-                <div
-                  class="d1gbu7qw dg5kf6y"
-                />
-                <div
-                  class="d8bsu04 dvow5el t17rm1x7"
-                >
-                  et quidem vel labore aut vero eaque
-                </div>
-              </a>
-            </li>
-            <li
-              class="l1mjdv3p"
-              data-testid="item"
-            >
-              <a
-                class="a1wg243b a1p5pgsf"
-                href="/?hl=en-US#blmqmw"
-              >
-                <div
-                  class="d5nv6yd bbrrwrm"
-                />
-                <div
-                  class="d1gbu7qw dg5kf6y"
-                />
-                <div
-                  class="d8bsu04 dvow5el t17rm1x7"
-                >
-                  aut omnis saepe totam aut quasi magni
-                </div>
-              </a>
-            </li>
-            <li
-              class="l1mjdv3p"
-              data-testid="item"
-            >
-              <a
-                class="a1wg243b a1xlspuh"
-                href="/?hl=en-US#gg51id"
-              >
-                <div
-                  class="d5nv6yd bbrrwrm"
-                />
-                <div
-                  class="d1gbu7qw dg5kf6y"
-                />
-                <div
-                  class="d8bsu04 dvow5el t17rm1x7"
-                >
-                  consequatur reprehenderit aut qui voluptatum tempora qui fugiat accusamus
-                </div>
-              </a>
-            </li>
-            <li
-              class="l1mjdv3p"
-              data-testid="item"
-            >
-              <a
-                class="a1wg243b a1p5pgsf"
-                href="/?hl=en-US#jzmtod"
-              >
-                <div
-                  class="d5nv6yd bbrrwrm"
-                />
-                <div
-                  class="d1gbu7qw dg5kf6y"
-                />
-                <div
-                  class="d8bsu04 dvow5el t17rm1x7"
-                >
-                  qui quia quo sunt
-                </div>
-              </a>
-            </li>
-            <li
-              class="l1mjdv3p"
-              data-testid="item"
-            >
-              <a
-                class="a1wg243b a1xlspuh"
-                href="/?hl=en-US#1lpeq1"
-              >
-                <div
-                  class="d5nv6yd bbrrwrm"
-                />
-                <div
-                  class="d1gbu7qw dg5kf6y"
-                />
-                <div
-                  class="d8bsu04 dvow5el t17rm1x7"
-                >
-                  est in inventore rerum
-                </div>
-              </a>
-            </li>
-            <li
-              class="l1mjdv3p"
-              data-testid="item"
-            >
-              <a
-                class="a1wg243b a9zw7kp"
-                href="/?hl=en-US#bf4cdf"
-              >
-                <div
-                  class="d5nv6yd bbrrwrm"
-                />
-                <div
-                  class="d1gbu7qw d1ptuzcs"
-                />
-                <div
-                  class="d8bsu04 d1i88tu3 t17rm1x7"
-                >
-                  voluptatem labore
-                </div>
-              </a>
-            </li>
-            <li
-              class="l1mjdv3p"
-              data-testid="item"
-            >
-              <a
-                class="a1wg243b a9zw7kp"
-                href="/?hl=en-US#gu0a2v"
-              >
-                <div
-                  class="d5nv6yd bbrrwrm"
-                />
-                <div
-                  class="d1gbu7qw d1ptuzcs"
-                />
-                <div
-                  class="d8bsu04 d1i88tu3 t17rm1x7"
-                >
-                  odit voluptatum optio possimus alias aut
-                </div>
-              </a>
-            </li>
-            <li
-              class="l1mjdv3p"
-              data-testid="item"
-            >
-              <a
-                class="a1wg243b a1p5pgsf"
-                href="/?hl=en-US#lcm25k"
-              >
-                <div
-                  class="d5nv6yd bbrrwrm"
-                />
-                <div
-                  class="d1gbu7qw dg5kf6y"
-                />
-                <div
-                  class="d8bsu04 dvow5el t17rm1x7"
-                >
-                  quia facilis tenetur velit aliquam atque
-                </div>
-              </a>
-            </li>
-            <li
-              class="l1mjdv3p"
-              data-testid="item"
-            >
-              <a
-                class="a1wg243b a1xlspuh"
-                href="/?hl=en-US#xw1lzt"
-              >
-                <div
-                  class="d5nv6yd bbrrwrm"
-                />
-                <div
-                  class="d1gbu7qw dg5kf6y"
-                />
-                <div
-                  class="d8bsu04 dvow5el t17rm1x7"
-                >
-                  rerum molestias hic harum at placeat
-                </div>
-              </a>
-            </li>
-            <li
-              class="l1mjdv3p"
-              data-testid="item"
-            >
-              <a
-                class="a1wg243b a16vzwnz"
-                href="/?hl=en-US#lwzd8q"
-              >
-                <div
-                  class="d5nv6yd bbrrwrm"
-                />
-                <div
-                  class="d1gbu7qw dg5kf6y"
-                />
-                <div
-                  class="d8bsu04 dvow5el t17rm1x7"
-                >
-                  accusamus eius aspernatur labore nulla
-                </div>
-              </a>
-            </li>
-          </ul>
-        </nav>
       </li>
       <li
         class="lc47www"
       >
         <a
           class="ahqgba"
-          href="/posts/47qwqp?hl=en-US"
+          href="/en-us/posts/47qwqp"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -350,7 +110,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/lccd43?hl=en-US"
+          href="/en-us/posts/lccd43"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -364,7 +124,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/mrrw0e?hl=en-US"
+          href="/en-us/posts/mrrw0e"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -378,7 +138,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/csvh21?hl=en-US"
+          href="/en-us/posts/csvh21"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -392,7 +152,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/pn04ii?hl=en-US"
+          href="/en-us/posts/pn04ii"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -406,7 +166,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/6qem31?hl=en-US"
+          href="/en-us/posts/6qem31"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -420,7 +180,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/r5ylk0?hl=en-US"
+          href="/en-us/posts/r5ylk0"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -434,7 +194,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/znq279?hl=en-US"
+          href="/en-us/posts/znq279"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -448,7 +208,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/sg4g6o?hl=en-US"
+          href="/en-us/posts/sg4g6o"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -462,7 +222,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/sz3nty?hl=en-US"
+          href="/en-us/posts/sz3nty"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -490,8 +250,8 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
         <a
           class="a1v4h6uj"
           data-testid="link"
-          href="/posts/b4a2a0c1-41d9-4e03-aec1-20b57358617a?hl=en-US"
-          title="en-US"
+          href="/en-us/posts/b4a2a0c1-41d9-4e03-aec1-20b57358617a"
+          title="en-us"
         >
           <svg
             class="f1mxy9mn"
@@ -522,8 +282,8 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
         <a
           class="a1v4h6uj"
           data-testid="link"
-          href="/posts/b4a2a0c1-41d9-4e03-aec1-20b57358617a?hl=ja-JP"
-          title="ja-JP"
+          href="/ja-jp/posts/b4a2a0c1-41d9-4e03-aec1-20b57358617a"
+          title="ja-jp"
         >
           <svg
             class="f1mxy9mn"
@@ -558,7 +318,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/?hl=en-US"
+          href="/en-us"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -572,7 +332,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/47qwqp?hl=en-US"
+          href="/en-us/posts/47qwqp"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -586,7 +346,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/lccd43?hl=en-US"
+          href="/en-us/posts/lccd43"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -600,7 +360,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/mrrw0e?hl=en-US"
+          href="/en-us/posts/mrrw0e"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -614,7 +374,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/csvh21?hl=en-US"
+          href="/en-us/posts/csvh21"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -628,7 +388,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/pn04ii?hl=en-US"
+          href="/en-us/posts/pn04ii"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -642,7 +402,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/6qem31?hl=en-US"
+          href="/en-us/posts/6qem31"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -656,7 +416,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/r5ylk0?hl=en-US"
+          href="/en-us/posts/r5ylk0"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -670,7 +430,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/znq279?hl=en-US"
+          href="/en-us/posts/znq279"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -684,7 +444,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/sg4g6o?hl=en-US"
+          href="/en-us/posts/sg4g6o"
         >
           <h2
             class="hah7idx hk3fxxj"
@@ -698,7 +458,7 @@ exports[`<AsideNavigation> renders the list of all posts and the table of conten
       >
         <a
           class="ahqgba"
-          href="/posts/sz3nty?hl=en-US"
+          href="/en-us/posts/sz3nty"
         >
           <h2
             class="hah7idx hk3fxxj"

@@ -40,8 +40,8 @@ describe("<AsideNavigation>", () => {
     const { getByTestId } = render(
       <TestApp
         router={{
-          pathname: "/?hl=en-US",
-          asPath: "/?hl=en-US",
+          pathname: "/",
+          asPath: "/",
         }}
       >
         <AsideNavigation
@@ -59,8 +59,8 @@ describe("<AsideNavigation>", () => {
     const { getByTestId } = render(
       <TestApp
         router={{
-          pathname: "/posts/[slug]?hl=en-US",
-          asPath: "/posts/b4a2a0c1-41d9-4e03-aec1-20b57358617a?hl=en-US",
+          pathname: "/[locale]/posts/[slug]",
+          asPath: "/en-us/posts/b4a2a0c1-41d9-4e03-aec1-20b57358617a",
         }}
       >
         <AsideNavigation

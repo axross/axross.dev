@@ -11,7 +11,7 @@ export default {
   argTypes: {},
   args: {
     shareUrl:
-      "https://www.kohei.dev/posts/for-engineers-who-have-overseas-ambition?hl=ja-JP",
+      "https://www.kohei.dev/ja-jp/posts/for-engineers-who-have-overseas-ambition",
   },
 } as Meta;
 

@@ -33,7 +33,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 Fermentum leo vel orci porta non pulvinar neque laoreet suspendisse. Sapien faucibus et molestie ac feugiat sed lectus vestibulum mattis. Pellentesque habitant morbi tristique senectus. Facilisi nullam vehicula ipsum a arcu. Ut sem nulla pharetra diam sit amet nisl suscipit adipiscing. Quam nulla porttitor massa id neque aliquam vestibulum morbi. Leo a diam sollicitudin tempor. Sit amet dictum sit amet justo donec. Urna id volutpat lacus laoreet non curabitur gravida arcu ac. Urna nunc id cursus metus aliquam eleifend mi. Condimentum id venenatis a condimentum vitae sapien pellentesque habitant morbi. Gravida rutrum quisque non tellus orci ac auctor augue.
 
-::webpage-embed{description=\\"At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies.\\" href=\\"https://dummy.kohei.dev/?hl=en-US\\" imageSrc=\\"https://dummy.kohei.dev/thumbnail.png\\" title=\\"Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae\\"}
+::webpage-embed{description=\\"At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies.\\" href=\\"https://dummy.kohei.dev/\\" imageSrc=\\"https://dummy.kohei.dev/thumbnail.png\\" title=\\"Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae\\"}
 
 ::rich-heading-4[Nisi lacus sed viverra tellus in hac habitasse]{#5e22679a}
 
@@ -57,7 +57,7 @@ Mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget. Veli
 
 Id venenatis a condimentum vitae sapien pellentesque habitant morbi tristique. In hendrerit gravida rutrum quisque non. Amet consectetur adipiscing elit duis tristique sollicitudin. Faucibus ornare suspendisse sed nisi lacus sed viverra. Est placerat in egestas erat imperdiet. Non enim praesent elementum facilisis leo vel. Pellentesque diam volutpat commodo sed egestas. Vitae tortor condimentum lacinia quis vel eros donec ac odio. Sit amet commodo nulla facilisi nullam vehicula. Varius duis at consectetur lorem donec massa sapien faucibus et. Accumsan lacus vel facilisis volutpat est velit egestas dui. Cursus eget nunc scelerisque viverra mauris in. Integer eget aliquet nibh praesent tristique magna sit amet purus. Consequat nisl vel pretium lectus quam id leo. Nunc eget lorem dolor sed viverra ipsum.
 
-::webpage-embed{description=\\"Euismod elementum nisi quis eleifend quam adipiscing vitae\\" href=\\"https://dummy.kohei.dev/path/to/page?hl=en-US\\" imageSrc=\\"https://dummy.kohei.dev/thumbnail.png\\" title=\\"Id semper risus in hendrerit gravida rutrum quisque\\"}
+::webpage-embed{description=\\"Euismod elementum nisi quis eleifend quam adipiscing vitae\\" href=\\"https://dummy.kohei.dev/path/to/page\\" imageSrc=\\"https://dummy.kohei.dev/thumbnail.png\\" title=\\"Id semper risus in hendrerit gravida rutrum quisque\\"}
 "
 `;
 
@@ -630,7 +630,7 @@ Object {
     Object {
       "attributes": Object {
         "description": "At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies.",
-        "href": "https://dummy.kohei.dev/?hl=en-US",
+        "href": "https://dummy.kohei.dev/",
         "imageSrc": "https://dummy.kohei.dev/thumbnail.png",
         "title": "Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae",
       },
@@ -999,7 +999,7 @@ Object {
     Object {
       "attributes": Object {
         "description": "Euismod elementum nisi quis eleifend quam adipiscing vitae",
-        "href": "https://dummy.kohei.dev/path/to/page?hl=en-US",
+        "href": "https://dummy.kohei.dev/path/to/page",
         "imageSrc": "https://dummy.kohei.dev/thumbnail.png",
         "title": "Id semper risus in hendrerit gravida rutrum quisque",
       },

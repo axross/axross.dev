@@ -596,7 +596,7 @@ const mdast = {
       attributes: {
         description:
           "At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies.",
-        href: "https://dummy.kohei.dev/?hl=en-US",
+        href: "https://dummy.kohei.dev/",
         imageSrc: "https://dummy.kohei.dev/thumbnail.png",
         title:
           "Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae",
@@ -974,7 +974,7 @@ const mdast = {
       attributes: {
         description:
           "Euismod elementum nisi quis eleifend quam adipiscing vitae",
-        href: "https://dummy.kohei.dev/path/to/page?hl=en-US",
+        href: "https://dummy.kohei.dev/path/to/page",
         imageSrc: "https://dummy.kohei.dev/thumbnail.png",
         title: "Id semper risus in hendrerit gravida rutrum quisque",
       },
@@ -1023,7 +1023,7 @@ describe("parseMarkdown()", () => {
             <html lang="en-US">
             <head>
               <meta charSet="utf-8"/>
-              <meta property="og:url" content="https://dummy.kohei.dev/?hl=en-US"/>
+              <meta property="og:url" content="https://dummy.kohei.dev/"/>
               <meta property="og:title" content="Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae"/>
               <meta property="og:description" content="At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."/>
               <meta property="og:image" content="https://dummy.kohei.dev/thumbnail.png"/>
@@ -1043,7 +1043,7 @@ describe("parseMarkdown()", () => {
             <html lang="en-US">
             <head>
               <meta charSet="utf-8"/>
-              <meta property="og:url" content="https://dummy.kohei.dev/path/to/page?hl=en-US"/>
+              <meta property="og:url" content="https://dummy.kohei.dev/path/to/page"/>
               <meta property="og:title" content="Id semper risus in hendrerit gravida rutrum quisque"/>
               <meta property="og:description" content="Euismod elementum nisi quis eleifend quam adipiscing vitae"/>
               <meta property="og:image" content="https://dummy.kohei.dev/thumbnail.png"/>

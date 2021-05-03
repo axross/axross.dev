@@ -32,7 +32,7 @@ describe("scrapeWebpage()", () => {
               <title>Nunc scelerisque viverra mauris in aliquam sem fringilla</title>
               <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
               <meta property="og:type" content="article"/>
-              <meta property="og:url" content="https://dummy.kohei.dev/?hl=en-US"/>
+              <meta property="og:url" content="https://dummy.kohei.dev/"/>
               <meta property="og:site_name" content="kohei.dev"/>
               <meta property="og:title" content="Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae"/>
               <meta property="og:description" content="At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."/>
@@ -42,7 +42,8 @@ describe("scrapeWebpage()", () => {
               <meta property="og:tag" content="react"/>
               <meta property="og:published_time" content="2020-01-05T08:00:00.000Z"/>
               <meta property="og:modified_time" content="2020-01-16T08:00:00.000Z"/>
-              <meta property="og:locale" content="en-US"/><meta property="og:locale:alternate" content="ja-JP"/>
+              <meta property="og:locale" content="en-US"/>
+              <meta property="og:locale:alternate" content="ja-JP"/>
               <meta property="og:image" content="https://dummy.kohei.dev/thumbnail.png"/>
             </head>
             <body>
@@ -65,7 +66,7 @@ describe("scrapeWebpage()", () => {
       "At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."
     );
     expect(imageSrc).toBe("https://dummy.kohei.dev/thumbnail.png");
-    expect(href).toBe("https://dummy.kohei.dev/?hl=en-US");
+    expect(href).toBe("https://dummy.kohei.dev/");
   });
 
   describe("extracts title in the best effort", () => {
@@ -84,7 +85,7 @@ describe("scrapeWebpage()", () => {
                 <title>Nunc scelerisque viverra mauris in aliquam sem fringilla</title>
                 <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
                 <meta property="og:type" content="article"/>
-                <meta property="og:url" content="https://dummy.kohei.dev/?hl=en-US"/>
+                <meta property="og:url" content="https://dummy.kohei.dev/"/>
                 <meta property="og:site_name" content="kohei.dev"/>
                 <meta property="og:description" content="At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."/>
                 <meta property="og:author:first_name" content="Kohei"/>
@@ -93,7 +94,8 @@ describe("scrapeWebpage()", () => {
                 <meta property="og:tag" content="react"/>
                 <meta property="og:published_time" content="2020-01-05T08:00:00.000Z"/>
                 <meta property="og:modified_time" content="2020-01-16T08:00:00.000Z"/>
-                <meta property="og:locale" content="en-US"/><meta property="og:locale:alternate" content="ja-JP"/>
+                <meta property="og:locale" content="en-US"/>
+                <meta property="og:locale:alternate" content="ja-JP"/>
                 <meta property="og:image" content="https://dummy.kohei.dev/thumbnail.png"/>
               </head>
               <body>
@@ -126,7 +128,7 @@ describe("scrapeWebpage()", () => {
                 <meta charSet="utf-8"/>
                 <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
                 <meta property="og:type" content="article"/>
-                <meta property="og:url" content="https://dummy.kohei.dev/?hl=en-US"/>
+                <meta property="og:url" content="https://dummy.kohei.dev/"/>
                 <meta property="og:site_name" content="kohei.dev"/>
                 <meta property="og:description" content="At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."/>
                 <meta property="og:author:first_name" content="Kohei"/>
@@ -135,7 +137,8 @@ describe("scrapeWebpage()", () => {
                 <meta property="og:tag" content="react"/>
                 <meta property="og:published_time" content="2020-01-05T08:00:00.000Z"/>
                 <meta property="og:modified_time" content="2020-01-16T08:00:00.000Z"/>
-                <meta property="og:locale" content="en-US"/><meta property="og:locale:alternate" content="ja-JP"/>
+                <meta property="og:locale" content="en-US"/>
+                <meta property="og:locale:alternate" content="ja-JP"/>
                 <meta property="og:image" content="https://dummy.kohei.dev/thumbnail.png"/>
               </head>
               <body>
@@ -171,7 +174,7 @@ describe("scrapeWebpage()", () => {
               <title>Nunc scelerisque viverra mauris in aliquam sem fringilla</title>
               <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
               <meta property="og:type" content="article"/>
-              <meta property="og:url" content="https://dummy.kohei.dev/?hl=en-US"/>
+              <meta property="og:url" content="https://dummy.kohei.dev/"/>
               <meta property="og:site_name" content="kohei.dev"/>
               <meta property="og:title" content="Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae"/>
               <meta property="og:description" content="At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."/>
@@ -215,7 +218,7 @@ describe("scrapeWebpage()", () => {
               <title>Nunc scelerisque viverra mauris in aliquam sem fringilla</title>
               <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
               <meta property="og:type" content="article"/>
-              <meta property="og:url" content="https://dummy.kohei.dev/?hl=en-US"/>
+              <meta property="og:url" content="https://dummy.kohei.dev/"/>
               <meta property="og:site_name" content="kohei.dev"/>
               <meta property="og:title" content="Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae"/>
               <meta property="og:description" content="At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."/>
@@ -260,7 +263,7 @@ describe("scrapeWebpage()", () => {
               <title>Nunc scelerisque viverra mauris in aliquam sem fringilla</title>
               <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
               <meta property="og:type" content="article"/>
-              <meta property="og:url" content="https://dummy.kohei.dev/?hl=en-US"/>
+              <meta property="og:url" content="https://dummy.kohei.dev/"/>
               <meta property="og:site_name" content="kohei.dev"/>
               <meta property="og:title" content="Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae"/>
               <meta property="og:description" content="At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."/>
@@ -300,7 +303,7 @@ describe("scrapeWebpage()", () => {
               <title>Nunc scelerisque viverra mauris in aliquam sem fringilla</title>
               <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
               <meta property="og:type" content="article"/>
-              <meta property="og:url" content="https://dummy.kohei.dev/?hl=en-US"/>
+              <meta property="og:url" content="https://dummy.kohei.dev/"/>
               <meta property="og:site_name" content="kohei.dev"/>
               <meta property="og:title" content="Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae"/>
               <meta property="og:description" content="At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."/>
@@ -344,7 +347,7 @@ describe("scrapeWebpage()", () => {
               <title>Nunc scelerisque viverra mauris in aliquam sem fringilla</title>
               <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
               <meta property="og:type" content="article"/>
-              <meta property="og:url" content="https://dummy.kohei.dev/?hl=en-US"/>
+              <meta property="og:url" content="https://dummy.kohei.dev/"/>
               <meta property="og:site_name" content="kohei.dev"/>
               <meta property="og:title" content="Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae"/>
               <meta property="og:description" content="At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."/>
@@ -354,7 +357,8 @@ describe("scrapeWebpage()", () => {
               <meta property="og:tag" content="react"/>
               <meta property="og:published_time" content="2020-01-05T08:00:00.000Z"/>
               <meta property="og:modified_time" content="2020-01-16T08:00:00.000Z"/>
-              <meta property="og:locale" content="en-US"/><meta property="og:locale:alternate" content="ja-JP"/>
+              <meta property="og:locale" content="en-US"/>
+              <meta property="og:locale:alternate" content="ja-JP"/>
               <meta property="og:image" content="https://dummy.kohei.dev/thumbnail.png"/>
             </head>
             <body>
@@ -387,7 +391,7 @@ describe("scrapeWebpage()", () => {
               <title>Nunc scelerisque viverra mauris in aliquam sem fringilla</title>
               <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
               <meta property="og:type" content="article"/>
-              <meta property="og:url" content="https://dummy.kohei.dev/?hl=en-US"/>
+              <meta property="og:url" content="https://dummy.kohei.dev/"/>
               <meta property="og:site_name" content="kohei.dev"/>
               <meta property="og:title" content="Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae"/>
               <meta property="og:description" content="At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."/>
@@ -397,7 +401,8 @@ describe("scrapeWebpage()", () => {
               <meta property="og:tag" content="react"/>
               <meta property="og:published_time" content="2020-01-05T08:00:00.000Z"/>
               <meta property="og:modified_time" content="2020-01-16T08:00:00.000Z"/>
-              <meta property="og:locale" content="en-US"/><meta property="og:locale:alternate" content="ja-JP"/>
+              <meta property="og:locale" content="en-US"/>
+              <meta property="og:locale:alternate" content="ja-JP"/>
               <meta property="og:image" content="https://dummy.kohei.dev/thumbnail.png"/>
             </head>
             <body>
@@ -430,7 +435,7 @@ describe("scrapeWebpage()", () => {
               <title>Nunc scelerisque viverra mauris in aliquam sem fringilla</title>
               <meta name="description" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
               <meta property="og:type" content="article"/>
-              <meta property="og:url" content="https://dummy.kohei.dev/?hl=en-US"/>
+              <meta property="og:url" content="https://dummy.kohei.dev/"/>
               <meta property="og:site_name" content="kohei.dev"/>
               <meta property="og:title" content="Leo a diam sollicitudin tempor id. Sit amet volutpat consequat mauris nunc congue nisi vitae"/>
               <meta property="og:description" content="At auctor urna nunc id cursus metus aliquam eleifend. Nisi lacus sed viverra tellus in. Vel pharetra vel turpis nunc eget lorem dolor. Tempus urna et pharetra pharetra massa massa ultricies. Odio morbi quis commodo odio. Sed elementum tempus egestas sed sed risus pretium quam. Non nisi est sit amet facilisis magna etiam tempor. Leo vel orci porta non. Vehicula ipsum a arcu cursus vitae congue mauris. Amet commodo nulla facilisi nullam vehicula. In arcu cursus euismod quis viverra nibh. Mi proin sed libero enim. Diam in arcu cursus euismod. Iaculis eu non diam phasellus vestibulum lorem sed risus ultricies."/>
@@ -440,7 +445,8 @@ describe("scrapeWebpage()", () => {
               <meta property="og:tag" content="react"/>
               <meta property="og:published_time" content="2020-01-05T08:00:00.000Z"/>
               <meta property="og:modified_time" content="2020-01-16T08:00:00.000Z"/>
-              <meta property="og:locale" content="en-US"/><meta property="og:locale:alternate" content="ja-JP"/>
+              <meta property="og:locale" content="en-US"/>
+              <meta property="og:locale:alternate" content="ja-JP"/>
               <meta property="og:image" content="https://dummy.kohei.dev/thumbnail.png"/>
             </head>
             <body>

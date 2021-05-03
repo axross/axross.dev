@@ -29,9 +29,9 @@ describe("<LocaleSwitcher>", () => {
     expect(onPush).toHaveBeenCalledTimes(1);
     expect(onPush).toHaveBeenNthCalledWith(
       1,
-      expect.stringContaining(`hl=${buttons[1]!.title}`),
-      expect.stringContaining(`hl=${buttons[1]!.title}`),
-      expect.anything()
+      expect.stringContaining("/[locale]"),
+      expect.stringContaining("/ja-jp"),
+      expect.any(Object)
     );
   });
 });

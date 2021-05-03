@@ -1,16 +1,19 @@
 import cheerio from "cheerio";
 import { gql, request } from "graphql-request";
 import fetch from "node-fetch";
-import { AVAILABLE_LOCALES } from "../constants/locale";
+import { getLocales } from "../helpers/localization";
+import { toUtsSnakeCaseLocale } from "../helpers/localization";
 
 describe("Atom Feed", () => {
+  const locales = getLocales();
+
   describe("/posts/feed.xml", () => {
-    describe.each(["en-US", "ja-JP"])("?hl=%s", (locale) => {
+    describe.each(locales)("%s", (locale) => {
       let $: ReturnType<typeof cheerio.load>;
 
       beforeAll(async () => {
         const response = await fetch(
-          `http://localhost:3000/posts/feed.xml?hl=${locale}`
+          `${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}/posts/feed.xml`
         );
         const xml = await response.text();
 
@@ -19,28 +22,26 @@ describe("Atom Feed", () => {
 
       it("has valid id, updated and author URI", async () => {
         expect($("feed > id").text()).toBe(
-          `https://www.kohei.dev/posts/feed.xml?hl=${locale}`
+          `${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}/posts/feed.xml`
         );
         expect(() => new Date($("feed > updated").text())).not.toThrow();
         expect($("feed > author > uri").text()).toBe(
-          `https://www.kohei.dev/?hl=${locale}`
+          `${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}`
         );
       });
 
       it("has valid self and alternative locale links", async () => {
         expect($('feed > link[rel="self"]').attr("href")).toBe(
-          `https://www.kohei.dev/posts/feed.xml?hl=${locale}`
+          `${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}/posts/feed.xml`
         );
 
-        for (const alternativeLocale of AVAILABLE_LOCALES.filter(
-          (l) => l !== locale
-        )) {
+        for (const altLocale of locales.filter((l) => l !== locale)) {
           expect(
-            $(
-              `feed > link[rel="alternate"][hreflang="${alternativeLocale}"]`
-            ).attr("href")
+            $(`feed > link[rel="alternate"][hreflang="${altLocale}"]`).attr(
+              "href"
+            )
           ).toBe(
-            `https://www.kohei.dev/posts/feed.xml?hl=${alternativeLocale}`
+            `${process.env.E2E_TEST_TARGET_ORIGIN}/${altLocale}/posts/feed.xml`
           );
         }
       });
@@ -75,13 +76,13 @@ describe("Atom Feed", () => {
               }
             }
           `,
-          { locale: locale.replace("-", "_") }
+          { locale: toUtsSnakeCaseLocale(locale) }
         );
         const posts = data.posts;
 
         for (const [index, post] of posts.entries()) {
           expect($(`feed > entry`).eq(index).find("id").text()).toBe(
-            `https://www.kohei.dev/posts/${post.slug}?hl=${locale}`
+            `${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}/posts/${post.slug}`
           );
           expect($(`feed > entry`).eq(index).find("title").text()).toBe(
             post.title
@@ -90,7 +91,7 @@ describe("Atom Feed", () => {
             post.excerpt
           );
           expect($(`feed > entry`).eq(index).find("author > uri").text()).toBe(
-            `https://www.kohei.dev/?hl=${locale}`
+            `${process.env.E2E_TEST_TARGET_ORIGIN}/${locale}`
           );
         }
       });

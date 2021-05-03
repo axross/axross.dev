@@ -1,6 +1,6 @@
 import Link, { LinkProps } from "next/link";
 import * as React from "react";
-import { useIntl } from "react-intl";
+import { useRouter } from "../hooks/router";
 
 interface LocalizedLinkProps extends LinkProps {
   href: string;
@@ -13,25 +13,21 @@ export const LocalizedLink: React.FC<LocalizedLinkProps> = ({
   locale,
   ...props
 }) => {
-  const intl = useIntl();
+  const { url: currentUrl, locale: currentLocale } = useRouter();
   const hrefUrl = React.useMemo(() => {
-    const url = new URL(as, "https://dummy.kohei.dev");
-    url.searchParams.set(
-      "hl",
-      typeof locale === "string" ? locale : intl.locale
-    );
+    const pathname = href.startsWith("/[locale]") ? href : `/[locale]${href}`;
+    const url = new URL(pathname, currentUrl.origin);
 
     return url;
-  }, [href, intl.locale]);
+  }, [currentUrl.origin, href]);
   const asUrl = React.useMemo(() => {
-    const url = new URL(as, "https://dummy.kohei.dev");
-    url.searchParams.set(
-      "hl",
-      typeof locale === "string" ? locale : intl.locale
-    );
+    const pathname = /^\/[a-z]{2}-[a-z]{2}/.test(as)
+      ? `/${locale ?? currentLocale}${as.substring(6)}`
+      : `/${locale ?? currentLocale}${as}`;
+    const url = new URL(pathname, currentUrl.origin);
 
     return url;
-  }, [as, intl.locale]);
+  }, [currentUrl.origin, as, currentLocale, locale]);
 
   return (
     <Link
@@ -40,7 +36,11 @@ export const LocalizedLink: React.FC<LocalizedLinkProps> = ({
         search: hrefUrl.search,
         hash: hrefUrl.hash,
       }}
-      as={{ pathname: asUrl.pathname, search: asUrl.search, hash: asUrl.hash }}
+      as={{
+        pathname: asUrl.pathname,
+        search: asUrl.search,
+        hash: asUrl.hash,
+      }}
       {...props}
     />
   );

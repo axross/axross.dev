@@ -1,7 +1,6 @@
 import { css, cx } from "@linaria/core";
-import { useRouter } from "next/router";
 import * as React from "react";
-import { AVAILABLE_LOCALES } from "../constants/locale";
+import { useRouter } from "../hooks/router";
 import { JapanFlag, UnitedStatesFlag } from "./country-flag";
 import { LocalizedLink } from "./localized-link";
 
@@ -14,7 +13,7 @@ export const LocaleSwitcher: React.VFC<LocaleSwitcherProps> = ({
   className,
   ...props
 }) => {
-  const { pathname, asPath } = useRouter();
+  const { pathname, asPath, locales } = useRouter();
 
   return (
     <ul
@@ -34,8 +33,8 @@ export const LocaleSwitcher: React.VFC<LocaleSwitcherProps> = ({
       )}
       {...props}
     >
-      {AVAILABLE_LOCALES.map((locale) => {
-        const FlagComponent = locale === "ja-JP" ? JapanFlag : UnitedStatesFlag;
+      {locales.map((locale) => {
+        const FlagComponent = locale === "ja-jp" ? JapanFlag : UnitedStatesFlag;
 
         return (
           <li key={locale}>

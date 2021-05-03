@@ -1,8 +1,11 @@
 import * as React from "react";
+import { useRouter } from "./router";
 
 const gtag = (globalThis as any).gtag ? (globalThis as any).gtag : () => {};
 
 export function useUserMonitoring() {
+  const { url } = useRouter();
+
   const trackPageView = React.useCallback(() => {
     if (!globalThis.document) {
       console.warn(
@@ -12,17 +15,13 @@ export function useUserMonitoring() {
       return;
     }
 
-    const url = new URL(globalThis.location.href);
     const title = globalThis.document.title;
     const href = url.href;
-    const search = url.searchParams.has("hl")
-      ? `?hl=${url.searchParams.get("hl")}`
-      : "";
 
     gtag("event", "page_view", {
       page_title: title,
       page_location: href,
-      page_path: url.pathname + search,
+      page_path: url.pathname,
     });
   }, []);
 

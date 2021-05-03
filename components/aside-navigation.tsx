@@ -1,7 +1,7 @@
 import { css } from "@linaria/core";
-import { useRouter } from "next/router";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
+import { useRouter } from "../hooks/router";
 import { LocaleSwitcher } from "./locale-switcher";
 import { PostList, PostListItem } from "./post-list";
 import { TableOfContents, TableOfContentsItem } from "./table-of-contents";
@@ -23,7 +23,7 @@ export const AsideNavigation: React.VFC<AsideNavigationProps> = ({
   tableOfContents,
   ...props
 }) => {
-  const router = useRouter();
+  const { url, locale } = useRouter();
 
   return (
     <div {...props}>
@@ -49,7 +49,7 @@ export const AsideNavigation: React.VFC<AsideNavigationProps> = ({
           href="/"
           as="/"
           tableOfContents={
-            router.asPath.split("?")[0] === "/" ? (
+            url.pathname === `/${locale}` ? (
               <TableOfContents data-testid="table-of-contents">
                 {tableOfContents.map(({ id, level, text }) => (
                   <TableOfContentsItem
@@ -73,7 +73,7 @@ export const AsideNavigation: React.VFC<AsideNavigationProps> = ({
             href="/posts/[slug]"
             as={`/posts/${p.slug}`}
             tableOfContents={
-              router.asPath.split("?")[0] === `/posts/${p.slug}` ? (
+              url.pathname === `/${locale}/posts/${p.slug}` ? (
                 <TableOfContents data-testid="table-of-contents">
                   {tableOfContents.map(({ id, level, text }) => (
                     <TableOfContentsItem
