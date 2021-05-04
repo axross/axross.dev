@@ -11,13 +11,8 @@ module.exports = {
     [
       "@semantic-release/exec",
       {
-        [
-          "@semantic-release/exec",
-          {
-            successCmd:
-              "echo ::set-output name=RELEASE_VERSION::${nextRelease.version}",
-          },
-        ],
+        successCmd:
+          "echo ::set-output name=RELEASE_VERSION::${nextRelease.version}",
       },
     ],
   ],
