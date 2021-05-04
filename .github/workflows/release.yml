@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - stable
 jobs:
   dry-build:
     name: Dry Build
@@ -116,6 +116,7 @@ jobs:
       - name: Install Semantic Release
         run: npm i semantic-release @semantic-release/exec conventional-changelog-conventionalcommits
       - name: Semantic Release
+        id: semantic-release
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: npx --no-install semantic-release
