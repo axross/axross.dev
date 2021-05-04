@@ -114,9 +114,18 @@ jobs:
       - name: Create Vercel Project JSON
         run: mkdir .vercel && echo '${{ secrets.VERCEL_PROJECT_JSON }}' > .vercel/project.json
       - name: Install Semantic Release
-        run: npm i semantic-release @semantic-release/exec
+        run: npm i semantic-release @semantic-release/exec conventional-changelog-conventionalcommits
       - name: Semantic Release
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: npx --no-install semantic-release
+      - name: Install Vercel CLI
+        run: npm i vercel
+      - name: Deploy to Vercel
+        run: |
+          npx --no-install vercel deploy \
+            --token=${{ secrets.VERCEL_TOKEN }} \
+            --build-env NEXT_PUBLIC_VERSION=${{ steps.semantic-release.outputs.RELEASE_VERSION }} \
+            --prod \
+            --confirm \
+            --no-clipboard
