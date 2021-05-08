@@ -9,7 +9,6 @@ import { IntlProvider } from "react-intl";
 import TopLoadingBar from "react-top-loading-bar";
 import { RecoilRoot } from "recoil";
 import { useRouter } from "../hooks/router";
-import { useTranslationDictionary } from "../hooks/translation";
 import { useUserMonitoring } from "../hooks/user-monitoring";
 
 import "normalize.css/normalize.css";
@@ -47,7 +46,6 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
   const { trackPageView } = useUserMonitoring();
   const topLoadingBarRef = React.useRef<any>(null);
-  const { dictionary } = useTranslationDictionary();
 
   React.useEffect(() => {
     const onRouteChangeStart = () => {
@@ -91,7 +89,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
       </Head>
 
       <IntlProvider
-        messages={dictionary ?? pageProps.intlMessages}
+        messages={pageProps.intlMessages}
         locale={router.locale}
         defaultLocale={router.defaultLocale}
       >
