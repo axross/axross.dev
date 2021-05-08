@@ -2,7 +2,7 @@ import { NextRouter, useRouter as useOriginalRouter } from "next/router";
 import * as React from "react";
 import { getDefaultLocale, getLocales } from "../helpers/localization";
 
-interface ExtendedRouter
+export interface ExtendedRouter
   extends Omit<NextRouter, "defaultLocale" | "locale" | "locales"> {
   // override
   defaultLocale: NonNullable<NextRouter["defaultLocale"]>;
