@@ -17,7 +17,11 @@ import {
   TwoColumnPageLayoutFooter,
   TwoColumnPageLayoutMain,
 } from "../components/page-layout";
-import { WEBSITE_DESCRIPTION_EN_US, WEBSITE_NAME } from "../constants/app";
+import {
+  WEBSITE_DESCRIPTION_EN_US,
+  WEBSITE_DESCRIPTION_JA_JP,
+  WEBSITE_NAME,
+} from "../constants/app";
 import { AUTHOR_NAME } from "../constants/author";
 import {
   INDEX_MARKDOWN_BODY_EN_US,
@@ -38,18 +42,20 @@ interface ServerSideProps extends CommonServerSideProps {
 const Page: NextPage<ServerSideProps> = ({ body, tableOfContents, posts }) => {
   const { trackUiEvent } = useUserMonitoring();
   const { url, locale, alternativeLocales } = useRouter();
+  const description =
+    locale === "ja-jp" ? WEBSITE_DESCRIPTION_JA_JP : WEBSITE_DESCRIPTION_EN_US;
 
   return (
     <>
       <Head>
         <title>{WEBSITE_NAME}</title>
-        <meta name="description" content={WEBSITE_DESCRIPTION_EN_US} />
+        <meta name="description" content={description} />
         <meta name="keywords" content="kohei asai,axross,blog" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${url.origin}${url.pathname}`} />
         <meta property="og:site_name" content={WEBSITE_NAME} />
         <meta property="og:title" content={WEBSITE_NAME} />
-        <meta property="og:description" content={WEBSITE_DESCRIPTION_EN_US} />
+        <meta property="og:description" content={description} />
         <meta property="og:locale" content={locale} />
         {alternativeLocales.map((l) => (
           <meta property="og:locale:alternate" content={l} key={l} />
