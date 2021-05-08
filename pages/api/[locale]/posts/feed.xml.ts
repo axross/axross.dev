@@ -1,13 +1,14 @@
 import { max } from "date-fns";
 import Mustache from "mustache";
 import type { NextApiHandler } from "next";
-import { getPostEntryListJson } from "../../../../adapters/cms";
+import { getAllPosts } from "../../../../adapters/post-repository";
+import { AUTHOR_NAME } from "../../../../constants/author";
 import { getLocales } from "../../../../helpers/localization";
 
 const handler: NextApiHandler = async (req, res) => {
   const locale = req.query.locale as string;
   const alternativeLocales: string[] = getLocales().filter((l) => l !== locale);
-  const posts = await getPostEntryListJson({ locale });
+  const posts = await getAllPosts({ locale });
 
   res.statusCode = 200;
   res.setHeader("content-type", "application/xml");
@@ -17,10 +18,10 @@ const handler: NextApiHandler = async (req, res) => {
       mostLastPublishedAt: max(
         posts.map((post) => new Date(post.lastPublishedAt))
       ).toISOString(),
-      authorName: posts[0]!.author.name,
+      authorName: AUTHOR_NAME,
       locale,
       alternativeLocales,
-      posts: posts.map((post) => ({ ...post, authorName: post.author.name })),
+      posts: posts.map((post) => ({ ...post, authorName: AUTHOR_NAME })),
     })
   );
 };

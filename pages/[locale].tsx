@@ -2,8 +2,12 @@ import { css } from "@linaria/core";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import * as React from "react";
-import { PromiseValue } from "type-fest";
-import { getIndexPageJson, getPostEntryListJson } from "../adapters/cms";
+import {
+  generateMarkdown,
+  generateTableOfContents,
+  parseMarkdown,
+} from "../adapters/markdown-processing";
+import { getAllPosts } from "../adapters/post-repository";
 import { fetchTranslationDictionary } from "../adapters/translation";
 import { Article } from "../components/article";
 import { AsideNavigation } from "../components/aside-navigation";
@@ -13,7 +17,12 @@ import {
   TwoColumnPageLayoutFooter,
   TwoColumnPageLayoutMain,
 } from "../components/page-layout";
-import { WEBSITE_NAME } from "../constants/app";
+import { WEBSITE_DESCRIPTION_EN_US, WEBSITE_NAME } from "../constants/app";
+import { AUTHOR_NAME } from "../constants/author";
+import {
+  INDEX_MARKDOWN_BODY_EN_US,
+  INDEX_MARKDOWN_BODY_JA_JP,
+} from "../constants/index-page";
 import { CommonServerSideProps } from "../core/ssr-props";
 import { isDevelopment } from "../helpers/app";
 import { getLocales } from "../helpers/localization";
@@ -21,54 +30,39 @@ import { useRouter } from "../hooks/router";
 import { useUserMonitoring } from "../hooks/user-monitoring";
 
 interface ServerSideProps extends CommonServerSideProps {
-  indexPage: NonNullable<PromiseValue<ReturnType<typeof getIndexPageJson>>>;
-  posts: PromiseValue<ReturnType<typeof getPostEntryListJson>>;
+  body: string;
+  tableOfContents: { id: string; level: number; text: string }[];
+  posts: { slug: string; title: string }[];
 }
 
-const Page: NextPage<ServerSideProps> = (props) => {
+const Page: NextPage<ServerSideProps> = ({ body, tableOfContents, posts }) => {
   const { trackUiEvent } = useUserMonitoring();
   const { url, locale, alternativeLocales } = useRouter();
-  const {
-    title,
-    description,
-    coverImageUrl,
-    tableOfContents,
-    body,
-  } = props.indexPage;
-  const posts = React.useMemo(
-    () =>
-      props.posts.map((post) => ({
-        ...post,
-        firstPublishedAt: new Date(post.firstPublishedAt),
-        lastPublishedAt: new Date(post.lastPublishedAt),
-      })),
-    [props.posts]
-  );
 
   return (
     <>
       <Head>
         <title>{WEBSITE_NAME}</title>
-        <meta name="description" content={description} />
+        <meta name="description" content={WEBSITE_DESCRIPTION_EN_US} />
         <meta name="keywords" content="kohei asai,axross,blog" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`${url.origin}${url.pathname}`} />
         <meta property="og:site_name" content={WEBSITE_NAME} />
         <meta property="og:title" content={WEBSITE_NAME} />
-        <meta property="og:description" content={description} />
+        <meta property="og:description" content={WEBSITE_DESCRIPTION_EN_US} />
         <meta property="og:locale" content={locale} />
         {alternativeLocales.map((l) => (
           <meta property="og:locale:alternate" content={l} key={l} />
         ))}
-        <meta property="og:image" content={coverImageUrl} />
-        <meta property="og:image:secure_url" content={coverImageUrl} />
+        <meta property="og:image" content="/profile.jpg" />
+        <meta property="og:image:secure_url" content="/profile.jpg" />
       </Head>
 
       <TwoColumnPageLayout>
         <TwoColumnPageLayoutMain>
           <Article
-            title={title}
-            coverImageUrl={coverImageUrl}
+            title={AUTHOR_NAME}
+            coverImageUrl="/profile.jpg"
             body={body}
             className={css`
               > img {
@@ -113,14 +107,24 @@ export const getStaticProps: GetStaticProps<
     };
   }
 
-  const [intlMessages, posts, indexPage] = await Promise.all([
+  const [intlMessages, posts] = await Promise.all([
     fetchTranslationDictionary(params!.locale),
-    getPostEntryListJson({ locale: params!.locale }),
-    getIndexPageJson({ locale: params!.locale }),
+    getAllPosts({ locale: params!.locale }),
   ]);
 
+  const markdown =
+    params!.locale === "ja-jp"
+      ? INDEX_MARKDOWN_BODY_JA_JP
+      : INDEX_MARKDOWN_BODY_EN_US;
+  const ast = await parseMarkdown(markdown);
+
   return {
-    props: { intlMessages, indexPage, posts },
+    props: {
+      intlMessages,
+      body: generateMarkdown(ast),
+      tableOfContents: generateTableOfContents(ast),
+      posts: posts.map((p) => ({ slug: p.slug, title: p.title })),
+    },
     revalidate: isDevelopment() ? 1 : 60 * 60,
   };
 };

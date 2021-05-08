@@ -12,8 +12,9 @@ jobs:
       NEXT_PUBLIC_VERSION: ${{ github.sha }}
       NEXT_PUBLIC_RELEASE_STAGE: ${{ secrets.NEXT_PUBLIC_RELEASE_STAGE }}
       NEXT_PUBLIC_SELF_ORIGIN: ${{ secrets.NEXT_PUBLIC_SELF_ORIGIN }}
-      NEXT_PUBLIC_GRAPHCMS_ENDPOINT: ${{ secrets.NEXT_PUBLIC_GRAPHCMS_ENDPOINT }}
       NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN: ${{ secrets.NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN }}
+      GITHUB_CONTENT_REPO: ${{ secrets._GITHUB_CONTENT_REPO }}
+      GITHUB_ACCESS_TOKEN: ${{ secrets._GITHUB_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -42,8 +43,9 @@ jobs:
       NEXT_PUBLIC_VERSION: ${{ github.sha }}
       NEXT_PUBLIC_RELEASE_STAGE: ${{ secrets.NEXT_PUBLIC_RELEASE_STAGE }}
       NEXT_PUBLIC_SELF_ORIGIN: ${{ secrets.NEXT_PUBLIC_SELF_ORIGIN }}
-      NEXT_PUBLIC_GRAPHCMS_ENDPOINT: ${{ secrets.NEXT_PUBLIC_GRAPHCMS_ENDPOINT }}
       NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN: ${{ secrets.NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN }}
+      GITHUB_CONTENT_REPO: ${{ secrets._GITHUB_CONTENT_REPO }}
+      GITHUB_ACCESS_TOKEN: ${{ secrets._GITHUB_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -75,8 +77,9 @@ jobs:
       NEXT_PUBLIC_VERSION: ${{ github.sha }}
       NEXT_PUBLIC_RELEASE_STAGE: ${{ secrets.NEXT_PUBLIC_RELEASE_STAGE }}
       NEXT_PUBLIC_SELF_ORIGIN: ${{ secrets.NEXT_PUBLIC_SELF_ORIGIN }}
-      NEXT_PUBLIC_GRAPHCMS_ENDPOINT: ${{ secrets.NEXT_PUBLIC_GRAPHCMS_ENDPOINT }}
       NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN: ${{ secrets.NEXT_PUBLIC_SIMPLE_LOCALIZE_TOKEN }}
+      GITHUB_CONTENT_REPO: ${{ secrets._GITHUB_CONTENT_REPO }}
+      GITHUB_ACCESS_TOKEN: ${{ secrets._GITHUB_ACCESS_TOKEN }}
       E2E_TEST_TARGET_ORIGIN: ${{ secrets.E2E_TEST_TARGET_ORIGIN }}
     steps:
       - uses: actions/checkout@v2
