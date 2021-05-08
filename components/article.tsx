@@ -1,6 +1,7 @@
 import { css } from "@linaria/core";
 import * as React from "react";
 import { FormattedMessage } from "react-intl";
+import { AUTHOR_AVATAR_URL, AUTHOR_NAME } from "../constants/author";
 import { Badge } from "./badge";
 import { HorizontalList } from "./layout";
 import { Markdown } from "./markdown-article";
@@ -28,13 +29,6 @@ export interface ArticleProps extends React.Attributes {
    */
   lastPublishedAt?: Date;
   /**
-   * The author information who wrote the article.
-   */
-  author?: {
-    name: string;
-    avatarUrl: string;
-  };
-  /**
    * A markdown string as the body of article.
    */
   body: string;
@@ -55,7 +49,6 @@ export const Article: React.VFC<ArticleProps> = ({
   coverImageUrl,
   tags,
   lastPublishedAt,
-  author,
   body,
   shareUrl,
   onShareBalloonButtonClick,
@@ -97,7 +90,7 @@ export const Article: React.VFC<ArticleProps> = ({
         {title}
       </h1>
 
-      {(author && lastPublishedAt) || tags ? (
+      {lastPublishedAt || tags ? (
         <aside
           className={css`
             margin-block-start: var(--space-xl);
@@ -108,7 +101,7 @@ export const Article: React.VFC<ArticleProps> = ({
             }
           `}
         >
-          {author && lastPublishedAt ? (
+          {lastPublishedAt ? (
             <div
               className={css`
                 display: flex;
@@ -116,7 +109,7 @@ export const Article: React.VFC<ArticleProps> = ({
               `}
             >
               <img
-                src={author.avatarUrl}
+                src={AUTHOR_AVATAR_URL}
                 className={css`
                   width: 64px;
                   height: 64px;
@@ -130,7 +123,7 @@ export const Article: React.VFC<ArticleProps> = ({
                   margin-inline-start: var(--space-md);
                 `}
               >
-                <div>{author.name}</div>
+                <div>{AUTHOR_NAME}</div>
 
                 <time
                   dateTime={lastPublishedAt.toISOString()}

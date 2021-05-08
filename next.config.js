@@ -15,11 +15,7 @@ module.exports = (phase) => {
       },
     ],
     images: {
-      domains: [
-        "images.ctfassets.net",
-        "octodex.github.com",
-        "media.graphcms.com",
-      ],
+      domains: ["user-images.githubusercontent.com"],
     },
     webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
       traverse(config.module.rules);

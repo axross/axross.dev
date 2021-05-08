@@ -23,13 +23,13 @@ exports[`<Article> renders content by the given props 1`] = `
     >
       <img
         class="i1ny6w9f"
-        src="https://i.picsum.photos/id/1011/256/256.jpg?hmac=Zu92sdcdhGjlD7pgy52JKhO_7kTORVxeI67oCdVePx0"
+        src="/avatar.jpg"
       />
       <div
         class="d8vhikh"
       >
         <div>
-          John Due
+          Kohei Asai
         </div>
         <time
           class="t19239vu"
@@ -230,7 +230,7 @@ exports[`<Article> renders content by the given props 1`] = `
 </article>
 `;
 
-exports[`<Article> skips rendering author and last published date when either of them are omitted 1`] = `
+exports[`<Article> skips rendering last published date when it is omitted 1`] = `
 <article
   data-testid="article"
 >
@@ -462,13 +462,13 @@ exports[`<Article> skips rendering tags when they are omitted 1`] = `
     >
       <img
         class="i1ny6w9f"
-        src="https://i.picsum.photos/id/1011/256/256.jpg?hmac=Zu92sdcdhGjlD7pgy52JKhO_7kTORVxeI67oCdVePx0"
+        src="/avatar.jpg"
       />
       <div
         class="d8vhikh"
       >
         <div>
-          John Due
+          Kohei Asai
         </div>
         <time
           class="t19239vu"
