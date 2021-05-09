@@ -47,7 +47,7 @@ export function useFacebookShare({
 export function useLinkedinShare({ url }: { url: string }): Share {
   const share = React.useCallback(() => {
     const windowUrl = new URL(
-      `https://www.linkedin.com/sharing/share-offsite/`
+      "https://www.linkedin.com/sharing/share-offsite/"
     );
     windowUrl.searchParams.set("mini", "true");
     windowUrl.searchParams.set("url", url);
