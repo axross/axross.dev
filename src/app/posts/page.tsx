@@ -1,21 +1,19 @@
-import Image from 'next/image'
-import Link from 'next/link';
-import { queryPosts } from '~/queries/query-posts'
+import Link from "next/link";
+import { type JSX } from "react";
+import { queryPosts } from "~/queries/query-posts";
 
-export default async function Page() {
+async function Page(): Promise<JSX.Element> {
   const posts = await queryPosts();
 
   return (
     <main>
-      <h1>Posts</h1>
+      <h1>{"Posts"}</h1>
 
       <ul>
-        {posts.map(post => {
+        {posts.map((post) => {
           return (
             <li key={post.id}>
-              <Link href={`/posts/${post.slug}`}>
-                {post.title}
-              </Link>
+              <Link href={`/posts/${post.slug}`}>{post.title}</Link>
             </li>
           );
         })}
@@ -23,3 +21,5 @@ export default async function Page() {
     </main>
   );
 }
+
+export default Page;

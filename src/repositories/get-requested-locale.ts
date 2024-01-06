@@ -3,9 +3,9 @@ import "server-only";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { cookies, headers } from "next/headers";
-import { Locale } from "~/models/locale";
-import { availableLocales, fallbackLocale } from "~/helpers/locale";
 import { localeCookieName } from "~/helpers/cookie";
+import { availableLocales, fallbackLocale } from "~/helpers/locale";
+import { type Locale } from "~/models/locale";
 
 export function getRequestedLocale(): Locale {
   const cookieStore = cookies();

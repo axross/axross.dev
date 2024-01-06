@@ -1,15 +1,16 @@
 import "server-only";
 
-import { Locale } from "~/models/locale";
-import { Post } from "~/models/post";
-import { getPost } from "~/repositories/get-post";
+import { type Post } from "~/models/post";
+import { findPost } from "~/repositories/find-post";
 import { getRequestedLocale } from "~/repositories/get-requested-locale";
 
-export type GetPost = (params: { slug: Post["slug"], locale: Locale, includeDrafts: boolean }) => Promise<Post>
-
-export async function queryPost({ slug }: { slug: Post["slug"]; }): Promise<Post> {
+export async function queryPost({
+  slug,
+}: {
+  slug: Post["slug"];
+}): Promise<Post | null> {
   const locale = getRequestedLocale();
-  const post = await getPost({ slug, locale, includeDrafts: false });
+  const post = await findPost({ slug, locale, includeDrafts: false });
 
   return post;
 }

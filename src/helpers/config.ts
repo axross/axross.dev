@@ -5,7 +5,8 @@ interface Config {
   };
 }
 
-function resolveEnvVar(key: string): string {
+function resolveEnvironmentVariable(key: string): string {
+  // eslint-disable-next-line no-undef
   const value = process.env[key];
 
   if (value === undefined || value.trim().length === 0) {
@@ -18,8 +19,10 @@ function resolveEnvVar(key: string): string {
 export function getConfig(): Config {
   return {
     notion: {
-      integrationSecret: resolveEnvVar("NOTION_INTEGRATION_SECRET"),
-      databaseId: resolveEnvVar("NOTION_DATABASE_ID"),
+      integrationSecret: resolveEnvironmentVariable(
+        "NOTION_INTEGRATION_SECRET"
+      ),
+      databaseId: resolveEnvironmentVariable("NOTION_DATABASE_ID"),
     },
   };
 }

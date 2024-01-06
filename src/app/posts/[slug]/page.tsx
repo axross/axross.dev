@@ -1,22 +1,38 @@
-import { queryPost } from '~/queries/query-post';
-import { queryPostContent } from '~/queries/query-post-content';
-import { Markdown } from './(components)/markdown';
+import { notFound } from "next/navigation";
+import { type JSX } from "react";
+import { Article } from "~/components/article";
+import { queryPost } from "~/queries/query-post";
+import { queryPostMarkdown } from "~/queries/query-post-markdown";
+import { Markdown } from "./(components)/markdown";
+import { Outline } from "./(components)/outline";
 
-interface PageParams {
+interface PageParameters {
   slug: string;
 }
 
-export default async function Page({ params: { slug } }: { params: PageParams }) {
+async function Page({
+  params: { slug },
+}: {
+  params: PageParameters;
+}): Promise<JSX.Element> {
   const post = await queryPost({ slug });
-  const postContent = await queryPostContent({ slug });
+  const markdown = await queryPostMarkdown({ slug });
+
+  if (post === null || markdown === null) {
+    notFound();
+  }
 
   return (
     <main>
       <h1>{post.title}</h1>
 
-      <div className="prose">
-        <Markdown markdown={postContent} />
-      </div>
+      <Article>
+        <Markdown markdown={markdown} />
+      </Article>
+
+      <Outline markdown={markdown} />
     </main>
   );
 }
+
+export default Page;
