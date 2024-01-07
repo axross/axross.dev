@@ -17,8 +17,8 @@ export function getRequestedLocale(): Locale {
     const acceptLanguage = headerStore.get("accept-language");
 
     const requestedLocales = new Negotiator({
-      headers:
-        acceptLanguage === null ? {} : { "accept-language": acceptLanguage },
+      // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/no-non-null-assertion
+      headers: { "accept-language": acceptLanguage! },
     }).languages();
     locale = matchLocale(requestedLocales, availableLocales, fallbackLocale);
   }
