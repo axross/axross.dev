@@ -1,10 +1,14 @@
 import { type ComponentPropsWithoutRef, type JSX } from "react";
+import { twMerge } from "tailwind-merge";
 
 export function Article({
+  className,
   children,
 }: ComponentPropsWithoutRef<"article">): JSX.Element {
   return (
-    <article className="group/article prose dark:prose-invert">
+    <article
+      className={twMerge("group/article prose dark:prose-invert", className)}
+    >
       {children}
     </article>
   );

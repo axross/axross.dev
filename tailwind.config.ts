@@ -1,11 +1,14 @@
+import containerQueryPlugin from "@tailwindcss/container-queries";
 import typographyPlugin from "@tailwindcss/typography";
 import { type Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: ["class", '[data-theme="dark"]'],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{ts,tsx}",
+    "./src/components/**/*.{ts,tsx}",
+    "./src/app/globals.css",
+    "./.storybook/preview.tsx",
   ],
   theme: {
     extend: {
@@ -18,7 +21,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [typographyPlugin],
+  plugins: [typographyPlugin, containerQueryPlugin],
 };
 
 export default config;

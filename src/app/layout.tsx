@@ -1,7 +1,8 @@
 import { type Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import { type JSX, type ReactNode } from "react";
+import { twMerge } from "tailwind-merge";
+import "./globals.css";
 
 // eslint-disable-next-line new-cap
 const inter = Inter({ subsets: ["latin"] });
@@ -14,7 +15,14 @@ export const metadata: Metadata = {
 function Layout({ children }: { readonly children: ReactNode }): JSX.Element {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={twMerge(
+          "min-w-[375px] min-h-screen bg-white dark:bg-dark text-gray-700 dark:text-gray-300 scroll-smooth",
+          inter.className
+        )}
+      >
+        {children}
+      </body>
     </html>
   );
 }

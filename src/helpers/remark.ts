@@ -1,11 +1,11 @@
 import { hashSync } from "hasha";
-// eslint-disable-next-line import/no-unresolved
+/* eslint-disable import/namespace, import/no-deprecated, import/no-unresolved */
 import { type Root as HastRoot } from "hast";
-/* eslint-disable import/namespace, import/no-deprecated */
+import { type Root as MdastRoot } from "mdast";
 import { toString as mdastToString } from "mdast-util-to-string";
 import { type Processor } from "unified";
 import { visit } from "unist-util-visit";
-/* eslint-enable import/namespace, import/no-deprecated */
+/* eslint-enable import/namespace, import/no-deprecated, import/no-unresolved */
 
 export interface OutlineNode {
   id: string;
@@ -13,7 +13,29 @@ export interface OutlineNode {
   label: string;
 }
 
-export function rehypeOutline(this: Processor): void {
+/**
+ * a remark plugin that automatically assign hashed id to each heading.
+ */
+function remarkHeadingId(): (tree: MdastRoot) => void {
+  return (tree) => {
+    visit(tree, "heading", (node) => {
+      const label = mdastToString(node);
+      const { depth } = node;
+      const id = hashSync(`${label}@${depth}`).slice(-16);
+
+      node.data ??= {};
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, unicorn/consistent-destructuring
+      (node.data as any).hProperties ??= {};
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, unicorn/consistent-destructuring
+      (node.data as any).hProperties.id = id;
+    });
+  };
+}
+
+/**
+ * a rehype plugin that generates the list of heading nodes.
+ */
+function rehypeOutline(this: Processor): void {
   // eslint-disable-next-line unicorn/consistent-function-scoping
   function compile(tree: HastRoot): OutlineNode[] {
     const outline: OutlineNode[] = [];
@@ -31,7 +53,7 @@ export function rehypeOutline(this: Processor): void {
       (node) => {
         const label = mdastToString(node);
         const depth = Number.parseInt(node.tagName.slice(1));
-        const id = hashSync(`${label}@${depth}`);
+        const id = hashSync(`${label}@${depth}`).slice(-16);
 
         outline.push({ id, depth, label });
       }
@@ -42,3 +64,5 @@ export function rehypeOutline(this: Processor): void {
 
   this.compiler = compile as never;
 }
+
+export { remarkHeadingId, rehypeOutline };

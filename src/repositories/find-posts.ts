@@ -42,7 +42,11 @@ export async function findPosts({
     database_id: config.notion.databaseId,
     sorts: [
       {
-        property: "Created at",
+        property: "Last edited at (override)",
+        direction: "descending",
+      },
+      {
+        property: "Last edited at",
         direction: "descending",
       },
     ],

@@ -1,12 +1,35 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
 import { z } from "zod";
-import { type Post } from "~/models/post";
+import { type Author, type Post } from "~/models/post";
 
 const zNotionPage = z.object({
   id: z.string().uuid(),
   object: z.literal("page"),
   properties: z.object({}),
+});
+
+const zNotionFile = z.discriminatedUnion("type", [
+  z.object({
+    type: z.literal("file"),
+    file: z.object({
+      url: z.string().url(),
+    }),
+  }),
+  z.object({
+    type: z.literal("external"),
+    external: z.object({
+      url: z.string().url(),
+    }),
+  }),
+]);
+
+const zNotionFileDeserialized = zNotionFile.transform((value) => {
+  if (value.type === "file") {
+    return value.file.url;
+  }
+
+  return value.external.url;
 });
 
 const zNotionRichTextProperty = z.object({
@@ -97,6 +120,45 @@ const zNotionMultiSelectPropertyDeserialized =
     });
   });
 
+const zNotionDateProperty = z.object({
+  id: z.string().min(1),
+  type: z.literal("date"),
+  date: z
+    .object({
+      start: z.string().min(1),
+    })
+    .nullable(),
+});
+
+const zNotionDatePropertyDeserialized = zNotionDateProperty.transform(
+  ({ date }) => {
+    if (date === null) {
+      return null;
+    }
+
+    return new Date(date.start);
+  }
+);
+
+const zNotionCreatedByProperty = z.object({
+  id: z.string().min(1),
+  type: z.literal("created_by"),
+  created_by: z.object({
+    object: z.literal("user"),
+    id: z.string().min(1),
+    name: z.string(),
+    avatar_url: z.string().url(),
+  }),
+});
+
+const zNotionCreatedByPropertyDeserializable =
+  zNotionCreatedByProperty.transform<Author>((value) => {
+    return {
+      name: value.created_by.name,
+      avatarImageUrl: new URL(value.created_by.avatar_url),
+    };
+  });
+
 const zNotionCreatedTimeProperty = z.object({
   id: z.string().min(1),
   type: z.literal("created_time"),
@@ -121,6 +183,20 @@ const zNotionLastEditedTimePropertyDeserialized =
   });
 
 const zPostNotionPage = zNotionPage.omit({ properties: true }).extend({
+  cover: z.discriminatedUnion("type", [
+    z.object({
+      type: z.literal("file"),
+      file: z.object({
+        url: z.string().url(),
+      }),
+    }),
+    z.object({
+      type: z.literal("external"),
+      external: z.object({
+        url: z.string().url(),
+      }),
+    }),
+  ]),
   properties: z.object({
     Title: zNotionTitleProperty,
     Slug: zNotionRichTextProperty,
@@ -128,12 +204,15 @@ const zPostNotionPage = zNotionPage.omit({ properties: true }).extend({
     Locale: zNotionSelectProperty,
     Tags: zNotionMultiSelectPropertyDeserialized,
     "Created at": zNotionCreatedTimeProperty,
+    "Created by": zNotionCreatedByProperty,
     "Last edited at": zNotionLastEditedTimeProperty,
+    "Last edited at (override)": zNotionDateProperty,
   }),
 });
 
 const zPostNotionPageDeserialized = zPostNotionPage
   .extend({
+    cover: zNotionFileDeserialized,
     properties: z.object({
       Title: zNotionTitlePropertyDeserialized,
       Slug: zNotionRichTextPropertyDeserialized,
@@ -141,7 +220,9 @@ const zPostNotionPageDeserialized = zPostNotionPage
       Locale: zNotionSelectPropertyDeserialized,
       Tags: zNotionMultiSelectPropertyDeserialized,
       "Created at": zNotionCreatedTimePropertyDeserialized,
+      "Created by": zNotionCreatedByPropertyDeserializable,
       "Last edited at": zNotionLastEditedTimePropertyDeserialized,
+      "Last edited at (override)": zNotionDatePropertyDeserialized,
     }),
   })
   .transform<Post>((value) => {
@@ -151,8 +232,12 @@ const zPostNotionPageDeserialized = zPostNotionPage
       locale: value.properties.Locale,
       title: value.properties.Title,
       tags: value.properties.Tags,
+      coverImageUrl: new URL(value.cover),
       createdAt: value.properties["Created at"],
-      lastEditedAt: value.properties["Last edited at"],
+      createdBy: value.properties["Created by"],
+      lastEditedAt:
+        value.properties["Last edited at (override)"] ??
+        value.properties["Last edited at"],
     };
   });
 
