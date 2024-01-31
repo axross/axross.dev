@@ -1,0 +1,9 @@
+@layer components {
+  .root {
+    inline-size: 100%;
+    margin-block: 0;
+    margin-inline-start: 0;
+    padding: 0;
+    list-style: none;
+  }
+}

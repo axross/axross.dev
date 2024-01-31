@@ -1,16 +1,23 @@
 import "server-only";
 
+import { resolveRequestedLocale } from "~/helpers/header";
+import { getMarkdownFromNotionPage } from "~/helpers/notion";
 import { type Post } from "~/models/post";
-import { findPostMarkdown } from "~/repositories/find-post-markdown";
-import { getRequestedLocale } from "~/repositories/get-requested-locale";
+import { findPost } from "~/repositories/find-post";
 
 export async function queryPostMarkdown({
   slug,
+  fallback,
 }: {
   slug: Post["slug"];
+  fallback?: boolean;
 }): Promise<string | null> {
-  const locale = getRequestedLocale();
-  const markdown = await findPostMarkdown({ slug, locale });
+  const locale = resolveRequestedLocale();
+  const post = await findPost({ slug, locale, fallback });
 
-  return markdown;
+  if (post === null) {
+    return null;
+  }
+
+  return getMarkdownFromNotionPage({ pageId: post.id });
 }

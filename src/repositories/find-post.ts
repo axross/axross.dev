@@ -9,11 +9,13 @@ import { type Post } from "~/models/post";
 export async function findPost({
   slug,
   locale,
-  includeDrafts,
+  fallback = false,
+  includeDrafts = false,
 }: {
   slug: Post["slug"];
   locale: Locale;
-  includeDrafts: boolean;
+  fallback?: boolean;
+  includeDrafts?: boolean;
 }): Promise<Post | null> {
   const config = getConfig();
   const notion = new Client({ auth: config.notion.integrationSecret });
@@ -26,12 +28,15 @@ export async function findPost({
         // eslint-disable-next-line @typescript-eslint/naming-convention
         rich_text: { equals: slug },
       },
-      {
-        property: "Locale",
-        select: { equals: locale },
-      },
     ],
   };
+
+  if (!fallback) {
+    filter.and.unshift({
+      property: "Locale",
+      select: { equals: locale },
+    });
+  }
 
   if (!includeDrafts) {
     filter.and.unshift({
@@ -44,7 +49,7 @@ export async function findPost({
 
   const response = await notion.databases.query({
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    database_id: config.notion.databaseId,
+    database_id: config.notion.postDatabaseId,
     sorts: [
       {
         property: "Created at",
@@ -54,11 +59,29 @@ export async function findPost({
     filter,
   });
 
+  let exactMatch: Post | null = null;
+  let fallbackMatch: Post | null = null;
+
   for (const result of response.results) {
     if (isFullPage(result)) {
-      return parsePostNotionPage(result);
+      // eslint-disable-next-line @typescript-eslint/init-declarations
+      let post: Post;
+
+      try {
+        post = parsePostNotionPage(result);
+      } catch {
+        continue;
+      }
+
+      if (post.locale === locale) {
+        exactMatch ??= post;
+      }
+
+      if (fallback) {
+        fallbackMatch ??= post;
+      }
     }
   }
 
-  return null;
+  return exactMatch ?? fallbackMatch;
 }

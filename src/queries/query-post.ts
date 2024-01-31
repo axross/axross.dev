@@ -1,16 +1,18 @@
 import "server-only";
 
+import { resolveRequestedLocale } from "~/helpers/header";
 import { type Post } from "~/models/post";
 import { findPost } from "~/repositories/find-post";
-import { getRequestedLocale } from "~/repositories/get-requested-locale";
 
 export async function queryPost({
   slug,
+  fallback,
 }: {
   slug: Post["slug"];
+  fallback?: boolean;
 }): Promise<Post | null> {
-  const locale = getRequestedLocale();
-  const post = await findPost({ slug, locale, includeDrafts: false });
+  const locale = resolveRequestedLocale();
+  const post = await findPost({ slug, locale, fallback });
 
   return post;
 }

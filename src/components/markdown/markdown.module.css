@@ -1,0 +1,5 @@
+@layer component-overrides {
+  .root .bookmark {
+    margin-block: var(--size-20);
+  }
+}

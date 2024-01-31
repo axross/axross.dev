@@ -22,7 +22,7 @@ interface RouteParameters {
 
 async function GET(
   request: NextRequest,
-  { params: { url } }: { params: RouteParameters }
+  { params: { url } }: { params: RouteParameters },
 ): Promise<Response> {
   const response = await fetch(url);
 
@@ -35,7 +35,9 @@ async function GET(
 
     return new Response(converted, {
       headers: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         "content-type": "image/webp",
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         "content-size": `${converted.byteLength}`,
       },
     });

@@ -1,11 +1,10 @@
-import type { StorybookConfig } from "@storybook/nextjs";
+import { type StorybookConfig } from "@storybook/nextjs";
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  stories: ["../src/**/*.stories.?(m|c)@(j|t)s?(x)"],
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
-    "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
     "@storybook/addon-themes",
   ],
@@ -15,6 +14,9 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: "tag",
+  },
+  features: {
+    experimentalNextRSC: true,
   },
 };
 export default config;

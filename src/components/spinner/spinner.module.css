@@ -1,0 +1,39 @@
+@layer components {
+  .root {
+    color: var(--neutral-a9);
+  }
+
+  .group {
+    stroke: currentColor;
+    transform-origin: center;
+    animation: spinner-rotate var(--duration-3xl) linear infinite;
+  }
+
+  .circle {
+    stroke-linecap: round;
+    stroke: currentColor;
+    animation: spinner-circle-track var(--duration-2xl) ease-in-out infinite;
+  }
+}
+
+@keyframes spinner-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner-circle-track {
+  0% {
+    stroke-dasharray: 0 150;
+    stroke-dashoffset: 0;
+  }
+  47.5% {
+    stroke-dasharray: 42 150;
+    stroke-dashoffset: -16;
+  }
+  95%,
+  100% {
+    stroke-dasharray: 42 150;
+    stroke-dashoffset: -59;
+  }
+}

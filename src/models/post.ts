@@ -1,3 +1,5 @@
+import { type Locale } from "~/models/locale";
+
 interface Author {
   name: string;
   avatarImageUrl: URL;
@@ -6,7 +8,7 @@ interface Author {
 interface Post {
   id: string;
   slug: string;
-  locale: string;
+  locale: Locale;
   title: string;
   tags: string[];
   coverImageUrl: URL;

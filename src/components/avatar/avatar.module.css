@@ -1,0 +1,10 @@
+@layer components {
+  .root {
+    position: relative;
+    display: flex;
+    block-size: var(--size-40);
+    inline-size: var(--size-40);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+}

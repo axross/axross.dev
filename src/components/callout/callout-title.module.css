@@ -1,0 +1,9 @@
+@layer components {
+  .root {
+    margin-block-start: 0;
+    margin-block-end: var(--size-8);
+    color: var(--__callout-hc-color);
+    font: var(--font-md);
+    font-weight: 500;
+  }
+}

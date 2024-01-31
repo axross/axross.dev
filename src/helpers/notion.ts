@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 
+import { Client as NotionClient } from "@notionhq/client";
+import { NotionToMarkdown } from "notion-to-md";
 import { z } from "zod";
+import { getConfig } from "~/helpers/config";
+import { type Bio } from "~/models/bio";
+import { type Locale } from "~/models/locale";
 import { type Author, type Post } from "~/models/post";
 
 const zNotionPage = z.object({
@@ -24,7 +29,7 @@ const zNotionFile = z.discriminatedUnion("type", [
   }),
 ]);
 
-const zNotionFileDeserialized = zNotionFile.transform((value) => {
+const zNotionFileDeserialized = zNotionFile.transform<string>((value) => {
   if (value.type === "file") {
     return value.file.url;
   }
@@ -35,12 +40,14 @@ const zNotionFileDeserialized = zNotionFile.transform((value) => {
 const zNotionRichTextProperty = z.object({
   id: z.string().min(1),
   type: z.literal("rich_text"),
-  rich_text: z.array(
-    z.object({
-      type: z.enum(["text", "mention", "equation"]),
-      plain_text: z.string(),
-    })
-  ),
+  rich_text: z
+    .array(
+      z.object({
+        type: z.enum(["text", "mention", "equation"]),
+        plain_text: z.string(),
+      }),
+    )
+    .min(1),
 });
 
 const zNotionRichTextPropertyDeserialized = zNotionRichTextProperty.transform(
@@ -52,7 +59,7 @@ const zNotionRichTextPropertyDeserialized = zNotionRichTextProperty.transform(
     }
 
     return value;
-  }
+  },
 );
 
 const zNotionTitleProperty = zNotionRichTextProperty
@@ -63,15 +70,15 @@ const zNotionTitleProperty = zNotionRichTextProperty
   });
 
 const zNotionTitlePropertyDeserialized = zNotionTitleProperty.transform(
-  ({ title }) => {
-    let value = "";
+  (value) => {
+    let title = "";
 
-    for (const node of title) {
-      value += node.plain_text;
+    for (const node of value.title) {
+      title += node.plain_text;
     }
 
-    return value;
-  }
+    return title;
+  },
 );
 
 const zNotionSelectProperty = z.object({
@@ -83,11 +90,10 @@ const zNotionSelectProperty = z.object({
   }),
 });
 
-const zNotionSelectPropertyDeserialized = zNotionSelectProperty.transform(
-  ({ select }) => {
+const zNotionSelectPropertyDeserialized =
+  zNotionSelectProperty.transform<string>(({ select }) => {
     return select.name;
-  }
-);
+  });
 
 const zNotionStatusProperty = zNotionSelectProperty
   .omit({ select: true })
@@ -96,11 +102,10 @@ const zNotionStatusProperty = zNotionSelectProperty
     status: zNotionSelectProperty.shape.select,
   });
 
-const zNotionStatusPropertyDeserialized = zNotionStatusProperty.transform(
-  ({ status }) => {
+const zNotionStatusPropertyDeserialized =
+  zNotionStatusProperty.transform<string>(({ status }) => {
     return status.name;
-  }
-);
+  });
 
 const zNotionMultiSelectProperty = z.object({
   id: z.string().min(1),
@@ -109,7 +114,7 @@ const zNotionMultiSelectProperty = z.object({
     z.object({
       id: z.string().min(1),
       name: z.string(),
-    })
+    }),
   ),
 });
 
@@ -137,7 +142,7 @@ const zNotionDatePropertyDeserialized = zNotionDateProperty.transform(
     }
 
     return new Date(date.start);
-  }
+  },
 );
 
 const zNotionCreatedByProperty = z.object({
@@ -182,21 +187,33 @@ const zNotionLastEditedTimePropertyDeserialized =
     return new Date(last_edited_time);
   });
 
+const zBioNotionPage = zNotionPage.omit({ properties: true }).extend({
+  cover: zNotionFile,
+  properties: z.object({
+    Title: zNotionTitleProperty,
+    Locale: zNotionSelectProperty,
+  }),
+});
+
+const zBioNotionPageDeserialized = zBioNotionPage
+  .extend({
+    cover: zNotionFileDeserialized,
+    properties: z.object({
+      Title: zNotionTitlePropertyDeserialized,
+      Locale: zNotionSelectPropertyDeserialized,
+    }),
+  })
+  .transform<Bio>((value) => {
+    return {
+      id: value.id,
+      locale: value.properties.Locale as Locale,
+      title: value.properties.Title,
+      coverImageUrl: new URL(value.cover),
+    };
+  });
+
 const zPostNotionPage = zNotionPage.omit({ properties: true }).extend({
-  cover: z.discriminatedUnion("type", [
-    z.object({
-      type: z.literal("file"),
-      file: z.object({
-        url: z.string().url(),
-      }),
-    }),
-    z.object({
-      type: z.literal("external"),
-      external: z.object({
-        url: z.string().url(),
-      }),
-    }),
-  ]),
+  cover: zNotionFile,
   properties: z.object({
     Title: zNotionTitleProperty,
     Slug: zNotionRichTextProperty,
@@ -229,7 +246,7 @@ const zPostNotionPageDeserialized = zPostNotionPage
     return {
       id: value.id,
       slug: value.properties.Slug,
-      locale: value.properties.Locale,
+      locale: value.properties.Locale as Locale,
       title: value.properties.Title,
       tags: value.properties.Tags,
       coverImageUrl: new URL(value.cover),
@@ -241,6 +258,26 @@ const zPostNotionPageDeserialized = zPostNotionPage
     };
   });
 
-export function parsePostNotionPage(page: z.infer<typeof zNotionPage>): Post {
+function parseBioNotionPage(page: z.infer<typeof zNotionPage>): Bio {
+  return zBioNotionPageDeserialized.parse(page);
+}
+
+function parsePostNotionPage(page: z.infer<typeof zNotionPage>): Post {
   return zPostNotionPageDeserialized.parse(page);
 }
+
+async function getMarkdownFromNotionPage({
+  pageId,
+}: {
+  pageId: string;
+}): Promise<string> {
+  const config = getConfig();
+  const notion = new NotionClient({ auth: config.notion.integrationSecret });
+  const n2m = new NotionToMarkdown({ notionClient: notion });
+  const blocks = await n2m.pageToMarkdown(pageId);
+  const parsedResult = n2m.toMarkdownString(blocks);
+
+  return parsedResult.parent;
+}
+
+export { parseBioNotionPage, parsePostNotionPage, getMarkdownFromNotionPage };

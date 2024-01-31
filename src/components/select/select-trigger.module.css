@@ -1,0 +1,45 @@
+@layer components {
+  .root {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: var(--size-8);
+    block-size: var(--size-40);
+    inline-size: max-content;
+    padding-block: var(--size-8);
+    padding-inline: var(--size-16);
+    background-color: var(--neutral-2);
+    border: var(--size-1) var(--neutral-6) solid;
+    border-radius: var(--radius-md);
+    outline-style: solid;
+    outline-color: var(--action-7);
+    outline-width: 0;
+    outline-offset: 0;
+    color: var(--neutral-12);
+    font-size: var(--text-sm);
+    font-family: inherit;
+  }
+
+  .root::placeholder {
+    color: var(--neutral-9);
+  }
+
+  .root:focus-visible {
+    outline-width: var(--size-3);
+    outline-offset: var(--size-3);
+  }
+
+  .root:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+@layer component-overrides {
+  .root > span {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+}

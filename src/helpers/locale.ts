@@ -1,5 +1,3 @@
-import "server-only";
-
 import { type Locale } from "~/models/locale";
 
 const availableLocales: Locale[] = ["en-US", "ja-JP"];

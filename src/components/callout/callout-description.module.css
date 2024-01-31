@@ -1,0 +1,6 @@
+@layer components {
+  .root {
+    color: var(--__callout-lc-color);
+    font: var(--font-sm);
+  }
+}

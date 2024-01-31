@@ -1,9 +1,15 @@
-import { revalidatePath } from "next/cache";
-import { type Locale } from "~/models/locale";
-import { setLocaleCookie } from "~/repositories/set-locale-cookie";
+"use server";
 
-export function overrideLocale({ locale }: { locale: Locale }): void {
+import { revalidatePath } from "next/cache";
+import { setLocaleCookie } from "~/helpers/header";
+import { type Locale } from "~/models/locale";
+
+function overrideLocale({ locale }: { locale: Locale }): Promise<void> {
   setLocaleCookie({ locale });
 
   revalidatePath("/");
+
+  return Promise.resolve();
 }
+
+export { overrideLocale };

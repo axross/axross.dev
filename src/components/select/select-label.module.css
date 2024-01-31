@@ -1,0 +1,10 @@
+@layer components {
+  .root {
+    box-sizing: border-box;
+    padding-block: var(--size-6);
+    padding-inline-start: var(--size-32);
+    padding-inline-end: var(--size-8);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+}

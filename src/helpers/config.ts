@@ -1,7 +1,8 @@
 interface Config {
   notion: {
     integrationSecret: string;
-    databaseId: string;
+    bioDatabaseId: string;
+    postDatabaseId: string;
   };
 }
 
@@ -20,9 +21,10 @@ export function getConfig(): Config {
   return {
     notion: {
       integrationSecret: resolveEnvironmentVariable(
-        "NOTION_INTEGRATION_SECRET"
+        "NOTION_INTEGRATION_SECRET",
       ),
-      databaseId: resolveEnvironmentVariable("NOTION_DATABASE_ID"),
+      bioDatabaseId: resolveEnvironmentVariable("NOTION_BIO_DATABASE_ID"),
+      postDatabaseId: resolveEnvironmentVariable("NOTION_POST_DATABASE_ID"),
     },
   };
 }

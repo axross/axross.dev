@@ -1,0 +1,12 @@
+@layer components {
+  .text {
+    display: flex;
+    align-items: center;
+    column-gap: var(--size-6);
+  }
+
+  .flag {
+    block-size: var(--size-16);
+    inline-size: var(--size-16);
+  }
+}

@@ -1,0 +1,18 @@
+@layer components {
+  .root {
+    display: grid;
+    grid-template-columns: 50rem 20rem;
+    grid-template-areas: "main aside";
+    justify-content: center;
+    column-gap: var(--size-32);
+  }
+
+  @media (width < 1200px) {
+    .root {
+      grid-template-columns: 100%;
+      grid-template-areas: "main" "aside";
+      justify-items: center;
+      padding-inline: var(--size-16);
+    }
+  }
+}

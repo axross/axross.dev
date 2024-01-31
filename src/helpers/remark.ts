@@ -13,15 +13,26 @@ export interface OutlineNode {
   label: string;
 }
 
+function getHeadingId({
+  depth,
+  textContent,
+}: {
+  depth: number;
+  textContent: string;
+}): string {
+  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+  return hashSync(`${textContent}@${depth}`).slice(-16);
+}
+
 /**
  * a remark plugin that automatically assign hashed id to each heading.
  */
 function remarkHeadingId(): (tree: MdastRoot) => void {
   return (tree) => {
     visit(tree, "heading", (node) => {
-      const label = mdastToString(node);
+      const textContent = mdastToString(node);
       const { depth } = node;
-      const id = hashSync(`${label}@${depth}`).slice(-16);
+      const id = getHeadingId({ textContent, depth });
 
       node.data ??= {};
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, unicorn/consistent-destructuring
@@ -51,12 +62,12 @@ function rehypeOutline(this: Processor): void {
         { type: "element", tagName: "h6" },
       ] as never,
       (node) => {
-        const label = mdastToString(node);
+        const textContent = mdastToString(node);
         const depth = Number.parseInt(node.tagName.slice(1));
-        const id = hashSync(`${label}@${depth}`).slice(-16);
+        const id = getHeadingId({ textContent, depth });
 
-        outline.push({ id, depth, label });
-      }
+        outline.push({ id, depth, label: textContent });
+      },
     );
 
     return outline;

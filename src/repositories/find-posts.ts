@@ -19,14 +19,14 @@ export async function findPosts({
   // eslint-disable-next-line @typescript-eslint/no-magic-numbers
   let filter: Parameters<typeof notion.databases.query>[0]["filter"] = {
     and: [
-      {
-        property: "Status",
-        status: { equals: "Published" },
-      },
-      {
-        property: "Locale",
-        select: { equals: locale },
-      },
+      // {
+      //   property: "Status",
+      //   status: { equals: "Published" },
+      // },
+      // {
+      //   property: "Locale",
+      //   select: { equals: locale },
+      // },
     ],
   };
 
@@ -39,7 +39,7 @@ export async function findPosts({
 
   const response = await notion.databases.query({
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    database_id: config.notion.databaseId,
+    database_id: config.notion.postDatabaseId,
     sorts: [
       {
         property: "Last edited at (override)",
@@ -57,7 +57,11 @@ export async function findPosts({
 
   for (const result of response.results) {
     if (isFullPage(result)) {
-      posts.push(parsePostNotionPage(result));
+      try {
+        posts.push(parsePostNotionPage(result));
+      } catch {
+        // do nothing;
+      }
     }
   }
 

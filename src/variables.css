@@ -1,0 +1,279 @@
+@layer variables {
+  :where(:root) {
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-md: 16px;
+    --text-lg: 18px;
+    --text-xl: 20px;
+    --text-2xl: 24px;
+    --text-3xl: 28px;
+    --text-4xl: 35px;
+
+    --leading-xs: 16px;
+    --leading-sm: 20px;
+    --leading-md: 24px;
+    --leading-lg: 26px;
+    --leading-xl: 28px;
+    --leading-2xl: 30px;
+    --leading-3xl: 36px;
+    --leading-4xl: 40px;
+
+    --font-xs: var(--text-xs) / var(--leading-xs) inherit;
+    --font-sm: var(--text-sm) / var(--leading-sm) inherit;
+    --font-md: var(--text-md) / var(--leading-md) inherit;
+    --font-lg: var(--text-lg) / var(--leading-lg) inherit;
+    --font-xl: var(--text-xl) / var(--leading-xl) inherit;
+    --font-2xl: var(--text-2xl) / var(--leading-2xl) inherit;
+    --font-3xl: var(--text-3xl) / var(--leading-3xl) inherit;
+    --font-4xl: var(--text-4xl) / var(--leading-4xl) inherit;
+
+    --size-1: 1px;
+    --size-2: 2px;
+    --size-3: calc(var(--text-md) * 3 / 16);
+    --size-4: calc(var(--text-md) * 4 / 16);
+    --size-6: calc(var(--text-md) * 6 / 16);
+    --size-8: calc(var(--text-md) * 8 / 16);
+    --size-12: calc(var(--text-md) * 12 / 16);
+    --size-14: calc(var(--text-md) * 14 / 16);
+    --size-16: calc(var(--text-md));
+    --size-18: calc(var(--text-md) * 18 / 16);
+    --size-20: calc(var(--text-md) * 20 / 16);
+    --size-24: calc(var(--text-md) * 24 / 16);
+    --size-32: calc(var(--text-md) * 32 / 16);
+    --size-40: calc(var(--text-md) * 40 / 16);
+    --size-48: calc(var(--text-md) * 48 / 16);
+    --size-64: calc(var(--text-md) * 64 / 16);
+    --size-80: calc(var(--text-md) * 80 / 16);
+    --size-96: calc(var(--text-md) * 96 / 16);
+    --size-160: calc(var(--text-md) * 160 / 16);
+    --size-256: calc(var(--text-md) * 256 / 16);
+    --size-480: calc(var(--text-md) * 480 / 16);
+    --size-960: calc(var(--text-md) * 960 / 16);
+
+    --radius-xs: calc(var(--text-md) * 3 / 16);
+    --radius-sm: calc(var(--text-md) * 6 / 16);
+    --radius-md: calc(var(--text-md) * 10 / 16);
+    --radius-lg: calc(var(--text-md) * 16 / 16);
+    --radius-full: 100vw;
+
+    --duration-sm: 150ms;
+    --duration-md: 200ms;
+    --duration-lg: 300ms;
+    --duration-xl: 450ms;
+    --duration-2xl: 1100ms;
+    --duration-3xl: 1950ms;
+
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@media (1440px <= width < 1920px) {
+  :where(:root) {
+    --text-xs: 13px;
+    --text-sm: 16px;
+    --text-md: 18px;
+    --text-lg: 20px;
+    --text-xl: 23px;
+    --text-2xl: 27px;
+    --text-3xl: 32px;
+    --text-4xl: 40px;
+
+    --leading-xs: 18px;
+    --leading-sm: 22px;
+    --leading-md: 27px;
+    --leading-lg: 29px;
+    --leading-xl: 32px;
+    --leading-2xl: 34px;
+    --leading-3xl: 41px;
+    --leading-4xl: 45px;
+  }
+}
+
+@media (1920px <= width) {
+  :where(:root) {
+    --text-xs: 15px;
+    --text-sm: 17px;
+    --text-md: 20px;
+    --text-lg: 22px;
+    --text-xl: 25px;
+    --text-2xl: 30px;
+    --text-3xl: 35px;
+    --text-4xl: 44px;
+
+    --leading-xs: 20px;
+    --leading-sm: 25px;
+    --leading-md: 30px;
+    --leading-lg: 33px;
+    --leading-xl: 35px;
+    --leading-2xl: 38px;
+    --leading-3xl: 45px;
+    --leading-4xl: 50px;
+  }
+}
+
+@layer variables {
+  :where(body) {
+    /* backgrounds */
+    --neutral-1: #fdfcfd;
+    --neutral-2: #faf9fb;
+    /* interactive components */
+    --neutral-3: #f2eff3;
+    --neutral-4: #eae7ec;
+    --neutral-5: #e3dfe6;
+    /* borders and separators */
+    --neutral-6: #dbd8e0;
+    --neutral-7: #d0cdd7;
+    --neutral-8: #bcbac7;
+    /* solid colors */
+    --neutral-9: #8e8c99;
+    --neutral-10: #84828e;
+    /* accessible text */
+    --neutral-11: #65636d;
+    --neutral-12: #211f26;
+
+    --neutral-a1: #55005503;
+    --neutral-a2: #2b005506;
+    --neutral-a3: #30004010;
+    --neutral-a4: #20003618;
+    --neutral-a5: #20003820;
+    --neutral-a6: #14003527;
+    --neutral-a7: #10003332;
+    --neutral-a8: #08003145;
+    --neutral-a9: #05001d73;
+    --neutral-a10: #0500197d;
+    --neutral-a11: #0400119c;
+    --neutral-a12: #020008e0;
+
+    --action-1: #fdfdfe;
+    --action-2: #f7f9ff;
+    --action-3: #edf2fe;
+    --action-4: #e1e9ff;
+    --action-5: #d2deff;
+    --action-6: #c1d0ff;
+    --action-7: #abbdf9;
+    --action-8: #8da4ef;
+    --action-9: #3e63dd;
+    --action-10: #3358d4;
+    --action-11: #3a5bc7;
+    --action-12: #1f2d5c;
+
+    --action-a1: #00008002;
+    --action-a2: #0040ff08;
+    --action-a3: #0047f112;
+    --action-a4: #0044ff1e;
+    --action-a5: #0044ff2d;
+    --action-a6: #003eff3e;
+    --action-a7: #0037ed54;
+    --action-a8: #0034dc72;
+    --action-a9: #0031d2c1;
+    --action-a10: #002ec9cc;
+    --action-a11: #002bb7c5;
+    --action-a12: #001046e0;
+
+    --danger-1: #fffcfd;
+    --danger-2: #fff7f8;
+    --danger-3: #feeaed;
+    --danger-4: #ffdce1;
+    --danger-5: #ffced6;
+    --danger-6: #f8bfc8;
+    --danger-7: #efacb8;
+    --danger-8: #e592a3;
+    --danger-9: #e54666;
+    --danger-10: #dc3b5d;
+    --danger-11: #ca244d;
+    --danger-12: #64172b;
+
+    --danger-a1: #ff005503;
+    --danger-a2: #ff002008;
+    --danger-a3: #f3002515;
+    --danger-a4: #ff002523;
+    --danger-a5: #ff002a31;
+    --danger-a6: #e4002440;
+    --danger-a7: #ce002553;
+    --danger-a8: #c300286d;
+    --danger-a9: #db002cb9;
+    --danger-a10: #d2002cc4;
+    --danger-a11: #c10030db;
+    --danger-a12: #550016e8;
+
+    @container style(--theme: dark) {
+      --neutral-1: #121113;
+      --neutral-2: #1a191b;
+      --neutral-3: #232225;
+      --neutral-4: #2b292d;
+      --neutral-5: #323035;
+      --neutral-6: #3c393f;
+      --neutral-7: #49474e;
+      --neutral-8: #625f69;
+      --neutral-9: #6f6d78;
+      --neutral-10: #7c7a85;
+      --neutral-11: #b5b2bc;
+      --neutral-12: #eeeef0;
+
+      --neutral-a1: #00000000;
+      --neutral-a2: #f5f4f609;
+      --neutral-a3: #ebeaf814;
+      --neutral-a4: #eee5f81d;
+      --neutral-a5: #efe6fe25;
+      --neutral-a6: #f1e6fd30;
+      --neutral-a7: #eee9ff40;
+      --neutral-a8: #eee7ff5d;
+      --neutral-a9: #eae6fd6e;
+      --neutral-a10: #ece9fd7c;
+      --neutral-a11: #f5f1ffb7;
+      --neutral-a12: #fdfdffef;
+
+      --action-1: #11131f;
+      --action-2: #141726;
+      --action-3: #182449;
+      --action-4: #1d2e62;
+      --action-5: #253974;
+      --action-6: #304384;
+      --action-7: #3a4f97;
+      --action-8: #435db1;
+      --action-9: #3e63dd;
+      --action-10: #5472e4;
+      --action-11: #9eb1ff;
+      --action-12: #d6e1ff;
+
+      --action-a1: #1133ff0f;
+      --action-a2: #3354fa17;
+      --action-a3: #2f62ff3c;
+      --action-a4: #3566ff57;
+      --action-a5: #4171fd6b;
+      --action-a6: #5178fd7c;
+      --action-a7: #5a7fff90;
+      --action-a8: #5b81feac;
+      --action-a9: #4671ffdb;
+      --action-a10: #5c7efee3;
+      --action-a11: #9eb1ff;
+      --action-a12: #d6e1ff;
+
+      --danger-1: #191113;
+      --danger-2: #1e1517;
+      --danger-3: #3a141e;
+      --danger-4: #4e1325;
+      --danger-5: #5e1a2e;
+      --danger-6: #6f2539;
+      --danger-7: #883447;
+      --danger-8: #b3445a;
+      --danger-9: #e54666;
+      --danger-10: #ec5a72;
+      --danger-11: #ff949d;
+      --danger-12: #fed2e1;
+
+      --danger-a1: #f4124a09;
+      --danger-a2: #fe5a7f0e;
+      --danger-a3: #ff235d2c;
+      --danger-a4: #fd195e42;
+      --danger-a5: #fe2d6b53;
+      --danger-a6: #ff447665;
+      --danger-a7: #ff577d80;
+      --danger-a8: #ff5c7cae;
+      --danger-a9: #fe4c70e4;
+      --danger-a10: #ff617beb;
+      --danger-a11: #ff949d;
+      --danger-a12: #ffd3e2fe;
+    }
+  }
+}

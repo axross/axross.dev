@@ -1,0 +1,14 @@
+@layer components {
+  .root {
+    box-sizing: border-box;
+    padding: var(--size-4);
+  }
+
+  @container style(--__select-popper: enabled) {
+    .root {
+      block-size: var(--radix-select-trigger-height);
+      inline-size: 100%;
+      min-inline-size: var(--radix-select-trigger-width);
+    }
+  }
+}

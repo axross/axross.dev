@@ -1,0 +1,92 @@
+@layer components {
+  .root {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--__button-min-width);
+    height: var(--__button-height);
+    padding-inline: var(--__button-padding-inline);
+    border-radius: var(--radius-sm);
+    outline: none;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background-color var(--ease-in-out) var(--duration-md),
+      border var(--ease-in-out) var(--duration-md);
+
+    /* invalid data-variant will fallback to data-variant="solid" */
+    background-color: var(--__button-solid-bg-color);
+    border: none;
+    color: var(--__button-solid-fg-color);
+    font-size: var(--__button-font-size);
+
+    /* invalid data-intent will fallback to data-intent="neutral" */
+    --__button-fg-color: var(--neutral-12);
+    --__button-solid-bg-color: var(--neutral-12);
+    --__button-solid-fg-color: var(--neutral-1);
+    --__button-ghost-bg-color: var(--neutral-a3);
+    --__button-border-color: var(--neutral-6);
+    --__button-outline-color: var(--action-8);
+
+    /* invalid data-size will fallback to data-size="md" */
+    --__button-min-width: var(--size-80);
+    --__button-height: var(--size-40);
+    --__button-padding-inline: var(--size-16);
+    --__button-radius: var(--radius-md);
+    --__button-font-size: var(--text-md);
+  }
+
+  .root:focus-visible {
+    outline-width: var(--size-3);
+    outline-offset: var(--size-3);
+  }
+
+  .root:active {
+    transform: scale3d(95%, 95%, 95%);
+  }
+
+  .root[aria-disabled="true"],
+  .root[aria-busy="true"] {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 50%;
+  }
+
+  .root[data-variant="outline"] {
+    background-color: transparent;
+    border: var(--size-1) solid var(--__button-border-color);
+    color: var(--__button-fg-color);
+  }
+
+  .root[data-variant="ghost"] {
+    background-color: transparent;
+    color: var(--__button-fg-color);
+  }
+
+  .root[data-variant="ghost"]:hover {
+    background-color: var(--__button-ghost-bg-color);
+  }
+
+  .root[data-intent="danger"] {
+    --__button-fg-color: var(--danger-10);
+    --__button-solid-bg-color: var(--danger-10);
+    --__button-solid-fg-color: var(--danger-1);
+    --__button-ghost-bg-color: var(--danger-3);
+    --__button-border-color: var(--danger-6);
+    --__button-outline-color: var(--danger-7);
+
+    @container style(--theme: dark) {
+      --__button-solid-fg-color: var(--neutral-12);
+    }
+  }
+
+  .root[data-size="sm"] {
+    --__button-min-width: var(--size-48);
+    --__button-height: var(--size-32);
+    --__button-padding-inline: var(--size-12);
+    --__button-radius: var(--radius-sm);
+    --__button-font-size: var(--text-sm);
+  }
+}
