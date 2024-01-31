@@ -1,3 +1,4 @@
+import { hashSync } from "hasha";
 import { type NextRequest } from "next/server";
 import sharp from "sharp";
 
@@ -16,14 +17,20 @@ function isImageResponse(response: Response): boolean {
   );
 }
 
-interface RouteParameters {
+interface RouteParams {
   url: string;
 }
 
 async function GET(
   request: NextRequest,
-  { params: { url } }: { params: RouteParameters },
+  { params: { url } }: { params: RouteParams }
 ): Promise<Response> {
+  const token = request.nextUrl.searchParams.get("token");
+
+  if (token !== hashSync(`${url}@asdf1234`)) {
+    return new Response("Token is malformed.", { status: 400 });
+  }
+
   const response = await fetch(url);
 
   if (isImageResponse(response)) {
