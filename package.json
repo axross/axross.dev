@@ -3,17 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev:app": "next dev",
+    "dev:sb": "storybook dev -p 6006",
     "format": "prettier . --write",
-    "lint": "eslint .",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.2",
     "@heroicons/react": "^2.1.1",
+    "@next/third-parties": "^14.1.0",
     "@notionhq/client": "^2.2.14",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-select": "^2.0.0",
@@ -25,7 +23,7 @@
     "hasha": "^6.0.0",
     "mdast-util-to-string": "^4.0.0",
     "negotiator": "^0.6.3",
-    "next": "14.0.4",
+    "next": "^14.1.0",
     "notion-to-md": "^3.1.1",
     "react": "^18",
     "react-dom": "^18",

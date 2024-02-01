@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { type JSX } from "react";
+import { Image } from "~/components/image";
 import { LocaleNotFoundCallout } from "~/components/locale-not-found-callout";
 import { Markdown } from "~/components/markdown";
 import { SideNavigation } from "~/components/side-navigation";
@@ -27,8 +27,8 @@ async function Page(): Promise<JSX.Element> {
         <Image
           src={bio.coverImageUrl.toString()}
           alt={bio.title}
-          width={1280}
-          height={800}
+          width={2048}
+          height={1170}
           className={css.thumbnail}
         />
 

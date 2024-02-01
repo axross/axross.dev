@@ -2,6 +2,7 @@
   .thumbnail {
     block-size: 20rem;
     inline-size: 100%;
+    object-fit: cover;
   }
 
   @media (width < calc(800px + 32px)) {

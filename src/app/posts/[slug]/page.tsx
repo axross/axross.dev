@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { type JSX } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/avatar";
+import { Image } from "~/components/image";
 import { LocaleNotFoundCallout } from "~/components/locale-not-found-callout";
 import { Markdown } from "~/components/markdown";
 import { SideNavigation } from "~/components/side-navigation";
@@ -55,7 +55,7 @@ async function Page({
 
             <div className={css.date}>
               {`Last edited on ${new Intl.DateTimeFormat().format(
-                post.lastEditedAt,
+                post.lastEditedAt
               )}`}
             </div>
           </div>

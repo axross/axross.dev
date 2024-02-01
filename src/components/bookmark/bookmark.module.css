@@ -68,7 +68,7 @@
     margin-block-start: var(--size-16);
     padding-inline: var(--size-16);
     color: var(--neutral-11);
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     line-height: 1.5;
 
     display: -webkit-box;
@@ -105,7 +105,7 @@
 
   .url-text {
     color: var(--neutral-11);
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     font-family: monospace;
     line-height: 1.5;
 

@@ -45,7 +45,7 @@ const zNotionRichTextProperty = z.object({
       z.object({
         type: z.enum(["text", "mention", "equation"]),
         plain_text: z.string(),
-      }),
+      })
     )
     .min(1),
 });
@@ -59,7 +59,7 @@ const zNotionRichTextPropertyDeserialized = zNotionRichTextProperty.transform(
     }
 
     return value;
-  },
+  }
 );
 
 const zNotionTitleProperty = zNotionRichTextProperty
@@ -78,7 +78,7 @@ const zNotionTitlePropertyDeserialized = zNotionTitleProperty.transform(
     }
 
     return title;
-  },
+  }
 );
 
 const zNotionSelectProperty = z.object({
@@ -114,7 +114,7 @@ const zNotionMultiSelectProperty = z.object({
     z.object({
       id: z.string().min(1),
       name: z.string(),
-    }),
+    })
   ),
 });
 
@@ -142,7 +142,7 @@ const zNotionDatePropertyDeserialized = zNotionDateProperty.transform(
     }
 
     return new Date(date.start);
-  },
+  }
 );
 
 const zNotionCreatedByProperty = z.object({

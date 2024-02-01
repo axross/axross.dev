@@ -43,11 +43,24 @@
     margin-block-end: 0;
   }
 
-  .prose .ol {
+  .prose .ol,
+  .prose .ul {
     margin-block: var(--size-20);
     padding-inline-start: var(--size-24);
-    list-style: decimal;
     line-height: 1.75;
+  }
+
+  .prose .li > .ol,
+  .prose .li > .ul {
+    margin-block: var(--size-8);
+  }
+
+  .prose .ol {
+    list-style: decimal;
+  }
+
+  .prose .ul {
+    list-style: disc;
   }
 
   .prose .ol[type="A"],
@@ -74,15 +87,10 @@
     list-style: decimal;
   }
 
-  .prose .ul {
-    margin-block: var(--size-20);
-    padding-inline-start: var(--size-24);
-    list-style: disc;
-  }
-
   .prose .li {
     margin-block: var(--size-8);
     padding-inline-start: var(--size-6);
+    font-size: var(--text-md);
     line-height: 1.75;
   }
 

@@ -1,7 +1,6 @@
 import "server-only";
 
 import { type CheerioAPI, load as loadAsCheerio } from "cheerio";
-import { hashSync } from "hasha";
 import { type ComponentPropsWithoutRef, type JSX } from "react";
 import { fallbackLocale } from "~/helpers/locale";
 import { Bookmark } from "./bookmark";
@@ -69,7 +68,6 @@ async function getWebpageMetadata(url: string): Promise<{
   imageUrl: string | null;
   iconImageUrl: string | null;
 }> {
-  // const locale = getServerLocale();
   const locale = "en-US";
   const response = await fetch(url, {
     headers: {
@@ -90,29 +88,12 @@ async function getWebpageMetadata(url: string): Promise<{
   const imageUrl = getImageUrl(cheerio, resolvedUrl);
   const iconImageUrl = getIconImageUrl(cheerio, resolvedUrl);
 
-  let proxyImageUrl: string | null = null;
-  let proxyIconImageUrl: string | null = null;
-
-  if (imageUrl !== null) {
-    const encodedUrl = encodeURIComponent(imageUrl);
-    const token = hashSync(`${imageUrl}@asdf1234`);
-
-    proxyImageUrl = `/images/${encodedUrl}?token=${token}`;
-  }
-
-  if (iconImageUrl !== null) {
-    const encodedUrl = encodeURIComponent(iconImageUrl);
-    const token = hashSync(`${iconImageUrl}@asdf1234`);
-
-    proxyIconImageUrl = `/images/${encodedUrl}?token=${token}`;
-  }
-
   return {
     url: resolvedUrl,
     title,
     description,
-    imageUrl: proxyImageUrl,
-    iconImageUrl: proxyIconImageUrl,
+    imageUrl,
+    iconImageUrl,
   };
 }
 

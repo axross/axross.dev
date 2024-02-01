@@ -1,11 +1,11 @@
 import { GlobeAltIcon } from "@heroicons/react/24/outline";
 import { clsx } from "clsx";
-import Image from "next/image";
 import {
   type ComponentPropsWithoutRef,
   type ElementRef,
   forwardRef,
 } from "react";
+import { Image } from "~/components/image";
 import css from "./bookmark.module.css";
 
 const Bookmark = forwardRef<
@@ -19,7 +19,7 @@ const Bookmark = forwardRef<
 >(
   (
     { href, title, description, imageSrc, iconImageSrc, className, ...props },
-    ref,
+    ref
   ) => {
     return (
       <a href={href} className={clsx(css.root, className)} ref={ref} {...props}>
@@ -73,7 +73,7 @@ const Bookmark = forwardRef<
         </div>
       </a>
     );
-  },
+  }
 );
 
 Bookmark.displayName = "Bookmark";
