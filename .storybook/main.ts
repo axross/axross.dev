@@ -16,7 +16,7 @@ const config: StorybookConfig = {
     autodocs: "tag",
   },
   features: {
-    experimentalNextRSC: true,
+    experimentalRSC: true,
   },
 };
 export default config;
