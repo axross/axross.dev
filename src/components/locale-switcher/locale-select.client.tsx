@@ -20,7 +20,7 @@ function LocaleSelect({
 
       void overrideLocale({ locale: value as Locale });
     },
-    [onValueChange]
+    [onValueChange],
   );
 
   return (

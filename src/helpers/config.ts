@@ -27,14 +27,14 @@ export function getConfig(): Config {
   return {
     notion: {
       integrationSecret: resolveEnvironmentVariable(
-        "NOTION_INTEGRATION_SECRET"
+        "NOTION_INTEGRATION_SECRET",
       ),
       bioDatabaseId: resolveEnvironmentVariable("NOTION_BIO_DATABASE_ID"),
       postDatabaseId: resolveEnvironmentVariable("NOTION_POST_DATABASE_ID"),
     },
     googleAnalytics: {
       measurementId: resolveEnvironmentVariable(
-        "GOOGLE_ANALYTICS_MEASUREMENT_ID"
+        "GOOGLE_ANALYTICS_MEASUREMENT_ID",
       ),
     },
     image: {

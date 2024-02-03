@@ -55,7 +55,7 @@ async function Page({
 
             <div className={css.date}>
               {`Last edited on ${new Intl.DateTimeFormat().format(
-                post.lastEditedAt
+                post.lastEditedAt,
               )}`}
             </div>
           </div>

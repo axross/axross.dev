@@ -19,7 +19,7 @@ const Bookmark = forwardRef<
 >(
   (
     { href, title, description, imageSrc, iconImageSrc, className, ...props },
-    ref
+    ref,
   ) => {
     return (
       <a href={href} className={clsx(css.root, className)} ref={ref} {...props}>
@@ -73,7 +73,7 @@ const Bookmark = forwardRef<
         </div>
       </a>
     );
-  }
+  },
 );
 
 Bookmark.displayName = "Bookmark";

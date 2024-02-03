@@ -24,7 +24,7 @@ interface RouteParams {
 
 async function GET(
   request: NextRequest,
-  { params: { url } }: { params: RouteParams }
+  { params: { url } }: { params: RouteParams },
 ): Promise<Response> {
   const config = getConfig();
   const token = request.nextUrl.searchParams.get("token");

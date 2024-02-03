@@ -9,6 +9,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@axross/eslint-config": "^2.13.0",
     "@formatjs/intl-localematcher": "^0.5.2",
     "@heroicons/react": "^2.1.1",
     "@next/third-parties": "^14.1.0",
@@ -39,7 +40,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@axross/eslint-config": "file:../eslint-config",
     "@eslint/js": "^8.56.0",
     "@storybook/addon-essentials": "8.0.0-alpha.11",
     "@storybook/addon-interactions": "8.0.0-alpha.11",
