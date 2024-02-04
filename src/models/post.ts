@@ -2,6 +2,7 @@ import { type Locale } from "~/models/locale";
 
 interface Author {
   name: string;
+  email: string;
   avatarImageUrl: URL;
 }
 
@@ -10,7 +11,8 @@ interface Post {
   slug: string;
   locale: Locale;
   title: string;
-  tags: string[];
+  summary: string;
+  keywords: string[];
   coverImageUrl: URL;
   createdAt: Date;
   createdBy: Author;

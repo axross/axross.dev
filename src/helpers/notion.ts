@@ -153,6 +153,9 @@ const zNotionCreatedByProperty = z.object({
     id: z.string().min(1),
     name: z.string(),
     avatar_url: z.string().url(),
+    person: z.object({
+      email: z.string().email(),
+    }),
   }),
 });
 
@@ -160,6 +163,7 @@ const zNotionCreatedByPropertyDeserializable =
   zNotionCreatedByProperty.transform<Author>((value) => {
     return {
       name: value.created_by.name,
+      email: value.created_by.person.email,
       avatarImageUrl: new URL(value.created_by.avatar_url),
     };
   });
@@ -216,10 +220,11 @@ const zPostNotionPage = zNotionPage.omit({ properties: true }).extend({
   cover: zNotionFile,
   properties: z.object({
     Title: zNotionTitleProperty,
+    Summary: zNotionRichTextProperty,
     Slug: zNotionRichTextProperty,
     Status: zNotionStatusProperty,
     Locale: zNotionSelectProperty,
-    Tags: zNotionMultiSelectPropertyDeserialized,
+    Keywords: zNotionMultiSelectPropertyDeserialized,
     "Created at": zNotionCreatedTimeProperty,
     "Created by": zNotionCreatedByProperty,
     "Last edited at": zNotionLastEditedTimeProperty,
@@ -232,10 +237,11 @@ const zPostNotionPageDeserialized = zPostNotionPage
     cover: zNotionFileDeserialized,
     properties: z.object({
       Title: zNotionTitlePropertyDeserialized,
+      Summary: zNotionRichTextPropertyDeserialized,
       Slug: zNotionRichTextPropertyDeserialized,
       Status: zNotionStatusPropertyDeserialized,
       Locale: zNotionSelectPropertyDeserialized,
-      Tags: zNotionMultiSelectPropertyDeserialized,
+      Keywords: zNotionMultiSelectPropertyDeserialized,
       "Created at": zNotionCreatedTimePropertyDeserialized,
       "Created by": zNotionCreatedByPropertyDeserializable,
       "Last edited at": zNotionLastEditedTimePropertyDeserialized,
@@ -248,7 +254,8 @@ const zPostNotionPageDeserialized = zPostNotionPage
       slug: value.properties.Slug,
       locale: value.properties.Locale as Locale,
       title: value.properties.Title,
-      tags: value.properties.Tags,
+      summary: value.properties.Summary,
+      keywords: value.properties.Keywords,
       coverImageUrl: new URL(value.cover),
       createdAt: value.properties["Created at"],
       createdBy: value.properties["Created by"],
