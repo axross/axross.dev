@@ -18,5 +18,5 @@ module.exports = withSentryConfig(
     tunnelRoute: "/monitoring",
     hideSourceMaps: true,
     disableLogger: true,
-  }
+  },
 );
