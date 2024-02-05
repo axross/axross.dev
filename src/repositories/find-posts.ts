@@ -19,14 +19,14 @@ export async function findPosts({
   // eslint-disable-next-line @typescript-eslint/no-magic-numbers
   let filter: Parameters<typeof notion.databases.query>[0]["filter"] = {
     and: [
-      // {
-      //   property: "Status",
-      //   status: { equals: "Published" },
-      // },
-      // {
-      //   property: "Locale",
-      //   select: { equals: locale },
-      // },
+      {
+        property: "Status",
+        status: { equals: "Published" },
+      },
+      {
+        property: "Locale",
+        select: { equals: locale },
+      },
     ],
   };
 

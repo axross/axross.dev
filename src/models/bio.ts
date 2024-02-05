@@ -4,6 +4,7 @@ interface Bio {
   id: string;
   locale: Locale;
   title: string;
+  summary: string;
   coverImageUrl: URL;
 }
 

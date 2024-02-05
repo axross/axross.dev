@@ -8,7 +8,7 @@ export async function queryBio({
   fallback,
 }: {
   fallback?: boolean;
-}): Promise<Bio | null> {
+} = {}): Promise<Bio | null> {
   const locale = resolveRequestedLocale();
   const bio = await findBio({ locale, fallback });
 

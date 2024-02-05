@@ -8,7 +8,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const entries: MetadataRoute.Sitemap = [
     {
-      url: `${config.urlOrigin}/`,
+      url: `${config.website.urlOrigin}/`,
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 1,
@@ -17,7 +17,7 @@ async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   for (const post of posts) {
     entries.push({
-      url: `${config.urlOrigin}/posts/${post.slug}`,
+      url: `${config.website.urlOrigin}/posts/${post.slug}`,
       lastModified: post.lastEditedAt,
       changeFrequency: "weekly",
       priority: 0.9,

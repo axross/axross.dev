@@ -195,6 +195,7 @@ const zBioNotionPage = zNotionPage.omit({ properties: true }).extend({
   cover: zNotionFile,
   properties: z.object({
     Title: zNotionTitleProperty,
+    Summary: zNotionRichTextProperty,
     Locale: zNotionSelectProperty,
   }),
 });
@@ -204,6 +205,7 @@ const zBioNotionPageDeserialized = zBioNotionPage
     cover: zNotionFileDeserialized,
     properties: z.object({
       Title: zNotionTitlePropertyDeserialized,
+      Summary: zNotionRichTextPropertyDeserialized,
       Locale: zNotionSelectPropertyDeserialized,
     }),
   })
@@ -212,6 +214,7 @@ const zBioNotionPageDeserialized = zBioNotionPage
       id: value.id,
       locale: value.properties.Locale as Locale,
       title: value.properties.Title,
+      summary: value.properties.Summary,
       coverImageUrl: new URL(value.cover),
     };
   });

@@ -9,7 +9,6 @@ init({
   tracesSampleRate: 1,
   replaysOnErrorSampleRate: 1,
   replaysSessionSampleRate: 0.1,
-  debug: process.env.NODE_ENV !== "production",
   integrations: [
     replayIntegration({
       maskAllText: true,
