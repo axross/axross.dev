@@ -6,6 +6,8 @@ import { getConfig } from "~/helpers/config";
 import { baseFont } from "~/helpers/fonts";
 import "../variables.css";
 import "./globals.css";
+import { resolveRequestedLocale } from "~/helpers/header";
+import { TranslationProvider } from "~/helpers/translation.client";
 import { queryBio } from "~/queries/query-bio";
 
 async function generateMetadata(): Promise<Metadata> {
@@ -36,17 +38,20 @@ async function generateMetadata(): Promise<Metadata> {
 
 function Layout({ children }: { readonly children: ReactNode }): JSX.Element {
   const config = getConfig();
+  const locale = resolveRequestedLocale();
 
   return (
-    <html lang="en">
-      <body className={baseFont.className}>
-        {children}
+    <TranslationProvider locale={locale}>
+      <html lang="en">
+        <body className={baseFont.className}>
+          {children}
 
-        <NavigationProgressBar />
-      </body>
+          <NavigationProgressBar />
+        </body>
 
-      <GoogleAnalytics gaId={config.googleAnalytics.measurementId} />
-    </html>
+        <GoogleAnalytics gaId={config.googleAnalytics.measurementId} />
+      </html>
+    </TranslationProvider>
   );
 }
 

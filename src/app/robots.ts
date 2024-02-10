@@ -9,7 +9,7 @@ function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${config.urlOrigin}/sitemap.xml`,
+    sitemap: `${config.website.urlOrigin}/sitemap.xml`,
   };
 }
 

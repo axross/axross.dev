@@ -9,12 +9,14 @@ import {
   useState,
 } from "react";
 import { Button } from "~/components/button";
+import { useTranslation } from "~/helpers/translation.client";
 import css from "./two-column-layout-aside.module.css";
 
 const TwoColumnLayoutAside = forwardRef<
   ElementRef<"aside">,
   ComponentPropsWithoutRef<"aside">
 >(({ className, children, ...props }, ref) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   const onToggleButtonClick = useCallback(() => {
@@ -41,7 +43,7 @@ const TwoColumnLayoutAside = forwardRef<
         className={css["toggle-button"]}
         onClick={onToggleButtonClick}
       >
-        {open ? "Close" : "Open"}
+        {open ? t("Close") : t("Open")}
       </Button>
     </>
   );

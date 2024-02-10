@@ -65,5 +65,5 @@ jobs:
           body: |
             <!-- deployment \#${{ github.event.number }} -->
             🚀 Deployed a preview:
-            
+
             ${{ steps.deployment.outputs.url }}

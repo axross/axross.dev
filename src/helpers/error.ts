@@ -17,4 +17,5 @@ class KnownError extends Error {
   }
 }
 
+export { captureException } from "@sentry/nextjs";
 export { KnownError };

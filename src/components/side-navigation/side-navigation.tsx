@@ -4,6 +4,7 @@ import { type ComponentPropsWithoutRef, type JSX } from "react";
 import { LocaleSwitcher } from "~/components/locale-switcher";
 import { OutlineList } from "~/components/side-navigation/outline-list";
 import { OutlineListItem } from "~/components/side-navigation/outline-list-item";
+import { getConfig } from "~/helpers/config";
 import { queryPosts } from "~/queries/query-posts";
 import { buildOutline } from "./build-outline";
 import css from "./side-navigation.module.css";
@@ -19,8 +20,11 @@ async function SideNavigation({
   readonly postSlug?: string;
   readonly markdown: string;
 }): Promise<JSX.Element> {
-  const posts = await queryPosts();
-  const outline = await buildOutline({ markdown });
+  const config = getConfig();
+  const [posts, outline] = await Promise.all([
+    queryPosts(),
+    buildOutline({ markdown }),
+  ]);
 
   return (
     <nav className={clsx(css.root, className)} {...props}>
@@ -31,7 +35,7 @@ async function SideNavigation({
       <ul className={css["link-list"]}>
         <li>
           <Link href="/" className={css["page-title"]}>
-            {"kohei.dev"}
+            {config.website.title}
           </Link>
 
           {bio ? (

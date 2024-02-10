@@ -4,6 +4,7 @@ import { CheckCircleIcon, ClipboardIcon } from "@heroicons/react/24/outline";
 import { clsx } from "clsx";
 import { type ComponentPropsWithoutRef, type JSX } from "react";
 import { ActionButton } from "~/components/action-button";
+import { useTranslation } from "~/helpers/translation.client";
 
 function CopyButton({
   value,
@@ -21,24 +22,23 @@ function CopyButton({
 > & {
   readonly value: string;
 }): JSX.Element {
+  const { t } = useTranslation();
+
   return (
     <ActionButton
       variant="ghost"
       intent="neutral"
       icon={ClipboardIcon}
-      loadingChildren="Copying..."
+      loadingChildren={t("Copying...")}
       doneIcon={CheckCircleIcon}
-      doneChildren="Copied!"
+      doneChildren={t("Copied!")}
       action={() => {
         return globalThis.navigator.clipboard.writeText(value);
       }}
-      className={clsx(
-        "data-[variant=ghost]:data-[intent=neutral]:text-white data-[variant=ghost]:data-[intent=neutral]:hover:bg-gray-200/10",
-        className,
-      )}
+      className={className}
       {...props}
     >
-      {"Copy"}
+      {t("Copy")}
     </ActionButton>
   );
 }

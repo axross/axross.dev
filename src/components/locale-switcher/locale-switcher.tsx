@@ -10,14 +10,17 @@ import {
   SelectViewport,
 } from "~/components/select";
 import { availableLocales } from "~/helpers/locale";
+import { getTranslation } from "~/helpers/translation.server";
 import { LocaleSelectItem } from "./locale-select-item";
 import { LocaleSelect } from "./locale-select.server";
 
-function LocaleSwitcher(): JSX.Element {
+async function LocaleSwitcher(): Promise<JSX.Element> {
+  const { t } = await getTranslation();
+
   return (
     <LocaleSelect>
       <SelectTrigger>
-        <SelectValue placeholder="Locale" />
+        <SelectValue placeholder={t("Language")} />
 
         <SelectIcon />
       </SelectTrigger>

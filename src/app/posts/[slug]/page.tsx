@@ -11,6 +11,7 @@ import {
   TwoColumnLayoutAside,
   TwoColumnLayoutMain,
 } from "~/components/two-column-layout";
+import { getTranslation } from "~/helpers/translation.server";
 import { queryPost } from "~/queries/query-post";
 import { queryPostMarkdown } from "~/queries/query-post-markdown";
 import { JsonLd } from "./json-ld";
@@ -50,8 +51,11 @@ async function Page({
 }: {
   params: PageParameters;
 }): Promise<JSX.Element> {
-  const post = await queryPost({ slug, fallback: true });
-  const markdown = await queryPostMarkdown({ slug, fallback: true });
+  const [post, markdown, { t }] = await Promise.all([
+    queryPost({ slug, fallback: true }),
+    queryPostMarkdown({ slug, fallback: true }),
+    getTranslation("posts"),
+  ]);
 
   if (post === null || markdown === null) {
     notFound();
@@ -82,9 +86,9 @@ async function Page({
               <div>{post.createdBy.name}</div>
 
               <div className={css.date}>
-                {`Last edited on ${new Intl.DateTimeFormat().format(
-                  post.lastEditedAt,
-                )}`}
+                {t("Last edited on {{date}}", {
+                  date: new Intl.DateTimeFormat().format(post.lastEditedAt),
+                })}
               </div>
             </div>
           </div>

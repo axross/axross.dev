@@ -9,7 +9,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@axross/eslint-config": "^2.13.0",
     "@formatjs/intl-localematcher": "^0.5.2",
     "@heroicons/react": "^2.1.1",
     "@next/third-parties": "^14.1.0",
@@ -24,12 +23,16 @@
     "clsx": "^2.1.0",
     "date-fns": "^3.3.1",
     "hasha": "^6.0.0",
+    "i18next": "^23.8.2",
+    "i18next-http-backend": "^2.4.3",
+    "i18next-resources-to-backend": "^1.2.0",
     "mdast-util-to-string": "^4.0.0",
     "negotiator": "^0.6.3",
     "next": "^14.1.0",
     "notion-to-md": "^3.1.1",
     "react": "^18",
     "react-dom": "^18",
+    "react-i18next": "^14.0.3",
     "react-top-loading-bar": "github:klendi/react-top-loading-bar",
     "rehype-react": "^8.0.0",
     "remark-gfm": "^4.0.0",
@@ -42,6 +45,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@axross/eslint-config": "^2.14.0",
     "@eslint/js": "^8.56.0",
     "@sentry/types": "^7.99.0",
     "@storybook/addon-essentials": "8.0.0-alpha.11",
