@@ -29,7 +29,7 @@ function Icon(): Response {
         />
       </svg>
     ),
-    { ...size }
+    { ...size },
   );
 }
 

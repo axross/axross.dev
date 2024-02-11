@@ -59,7 +59,7 @@ async function LocaleNotFoundCallout({
             {
               requested: localeToLanguage({ locale: requestedLocale, t }),
               available: localeToLanguage({ locale, t }),
-            }
+            },
           )}
         </div>
       </CalloutDescription>

@@ -14,7 +14,7 @@ import { type Locale } from "~/models/locale";
 
 function importDictionary(
   locale: string,
-  namespace: string
+  namespace: string,
 ): Promise<I18nResource> {
   return import(`../locales/${locale}/${namespace}.json`) as never;
 }
@@ -44,7 +44,7 @@ async function createI18next({
 }
 
 async function getTranslation(
-  namespace = fallbackNamespace
+  namespace = fallbackNamespace,
 ): Promise<Translation> {
   const locale = resolveRequestedLocale();
   const i18next = await createI18next({ locale, namespace });

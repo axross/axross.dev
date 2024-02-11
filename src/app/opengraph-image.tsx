@@ -58,7 +58,7 @@ function Image(): Response {
           weight: 400,
         },
       ],
-    }
+    },
   );
 }
 

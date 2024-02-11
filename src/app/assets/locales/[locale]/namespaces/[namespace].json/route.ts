@@ -21,7 +21,7 @@ interface RouteParams {
 
 async function GET(
   request: NextRequest,
-  { params: { locale, namespace } }: { params: RouteParams }
+  { params: { locale, namespace } }: { params: RouteParams },
 ): Promise<Response> {
   const dictionary = await getDictionary({ locale, namespace });
 

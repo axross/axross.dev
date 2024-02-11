@@ -112,7 +112,7 @@ async function Image({
           weight: 400,
         },
       ],
-    }
+    },
   );
 }
 

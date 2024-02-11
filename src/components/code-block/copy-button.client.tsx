@@ -1,7 +1,6 @@
 "use client";
 
 import { CheckCircleIcon, ClipboardIcon } from "@heroicons/react/24/outline";
-import { clsx } from "clsx";
 import { type ComponentPropsWithoutRef, type JSX } from "react";
 import { ActionButton } from "~/components/action-button";
 import { useTranslation } from "~/helpers/translation.client";

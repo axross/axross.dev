@@ -40,8 +40,8 @@ function TranslationProvider({
         new KnownError(
           "789db4ca",
           `Failed to load i18n dictionary (locale: ${lng}, namespace: ${ns}).`,
-          new Error(message)
-        )
+          new Error(message),
+        ),
       );
     });
 
@@ -60,7 +60,7 @@ function TranslationProvider({
           options: never,
           url: string,
           payload: never,
-          callback: (error: unknown, response: unknown) => void
+          callback: (error: unknown, response: unknown) => void,
         ) => {
           fetch(url, {})
             .then(async (response) => {
@@ -102,7 +102,7 @@ function useTranslation(namespace: string = fallbackNamespace): Translation {
 
   if (translationContextValue === null) {
     throw new Error(
-      "useTranslation() has been called outside <TranslationProvider>. Do not forget to wrap the components with the provider."
+      "useTranslation() has been called outside <TranslationProvider>. Do not forget to wrap the components with the provider.",
     );
   }
 
