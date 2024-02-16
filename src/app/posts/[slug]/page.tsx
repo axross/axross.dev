@@ -11,6 +11,7 @@ import {
   TwoColumnLayoutAside,
   TwoColumnLayoutMain,
 } from "~/components/two-column-layout";
+import { getConfig } from "~/helpers/config";
 import { getTranslation } from "~/helpers/translation.server";
 import { queryPost } from "~/queries/query-post";
 import { queryPostMarkdown } from "~/queries/query-post-markdown";
@@ -26,6 +27,7 @@ async function generateMetadata({
 }: {
   params: PageParameters;
 }): Promise<Metadata> {
+  const config = getConfig();
   const post = await queryPost({ slug, fallback: true });
 
   return {
@@ -36,7 +38,12 @@ async function generateMetadata({
     applicationName: "Next.js",
     referrer: "origin-when-cross-origin",
     keywords: post?.keywords,
-    authors: [{ name: post?.createdBy.name, url: "" }],
+    authors: [
+      {
+        name: post?.createdBy.name,
+        url: `${config.website.urlOrigin}/`,
+      },
+    ],
     creator: "Kohei Asai",
     formatDetection: {
       email: false,

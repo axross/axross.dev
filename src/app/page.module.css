@@ -1,4 +1,4 @@
-@layer page {
+@layer screens {
   .thumbnail {
     block-size: 20rem;
     inline-size: 100%;

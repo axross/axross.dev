@@ -8,12 +8,6 @@ import { HandleKnownError } from "~/helpers/sentry";
 init({
   tracesSampleRate: 1,
   replaysOnErrorSampleRate: 1,
-  replaysSessionSampleRate: 0.1,
-  integrations: [
-    replayIntegration({
-      maskAllText: true,
-      blockAllMedia: true,
-    }),
-    new HandleKnownError(),
-  ],
+  replaysSessionSampleRate: 1,
+  integrations: [replayIntegration(), new HandleKnownError()],
 });
