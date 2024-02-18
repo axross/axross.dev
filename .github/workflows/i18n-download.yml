@@ -7,6 +7,9 @@ jobs:
   download-and-apply:
     name: Dictionary Download
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,3 +36,5 @@ jobs:
             --assignee @me \
             --title "feat(i18n): apply i18n dictionary update(s)"
             --reviewer @axross
+        env:
+          GH_TOKEN: ${{ github.token }}
