@@ -1,6 +1,10 @@
 import { ImageResponse } from "next/og";
-import { backgroundPattern, dotGothic16 } from "~/assets/image-response";
 import { getConfig } from "~/helpers/config";
+
+// `export cons runtime = "edge"` is mandatory because this is statically detected
+// `export { runtime }` won't work
+// eslint-disable-next-line import/group-exports
+export const runtime = "edge";
 
 const size = {
   width: 800,
@@ -9,7 +13,23 @@ const size = {
 
 const contentType = "image/png";
 
-function Image(): Response {
+async function getCardCharacters(): Promise<ArrayBuffer> {
+  const response = await fetch(
+    new URL("~/assets/card-characters.ttf", import.meta.url)
+  );
+  const buffer = await response.arrayBuffer();
+
+  return buffer;
+}
+
+async function getBoxesDataUri(): Promise<string> {
+  const response = await fetch(new URL("~/assets/chaos.svg", import.meta.url));
+  const svg = await response.text();
+
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
+async function Image(): Promise<Response> {
   const config = getConfig();
 
   return new ImageResponse(
@@ -20,28 +40,21 @@ function Image(): Response {
           width: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-end",
+          alignItems: "center",
           justifyContent: "center",
           padding: 40,
-          backgroundColor: "#1d4ed8",
-          backgroundImage: `url(${backgroundPattern})`,
+          backgroundColor: "#121113",
+          backgroundImage: `url(${await getBoxesDataUri()})`,
+          backgroundPosition: "3%",
+          backgroundSize: "738px 415px",
         }}
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            height: "100%",
-            padding: 40,
-            paddingTop: 10,
-            backgroundColor: "#fff",
-            borderRadius: 16,
-            fontSize: 80,
+            color: "#fff",
+            fontSize: 64,
             fontWeight: 600,
-            fontFamily: "Dot Gothic 16",
+            fontFamily: "Card Characters",
           }}
         >
           {config.website.title}
@@ -52,16 +65,17 @@ function Image(): Response {
       ...size,
       fonts: [
         {
-          name: "Dot Gothic 16",
-          data: dotGothic16,
+          name: "Card Characters",
+          data: await getCardCharacters(),
           style: "normal",
           weight: 400,
         },
       ],
-    },
+    }
   );
 }
 
+// eslint-disable-next-line import/group-exports
 export { size, contentType };
 
 export default Image;
