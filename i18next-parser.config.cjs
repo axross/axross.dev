@@ -1,6 +1,5 @@
-// i18next-parser.config.js
-
 module.exports = {
+  input: ["./src/**/*.{js,jsx,ts,tsx}"],
   contextSeparator: false,
   createOldCatalogs: false,
   defaultNamespace: "common",
@@ -33,9 +32,7 @@ module.exports = {
   lineEnding: "auto",
   locales: ["en-US"],
   namespaceSeparator: false,
-  output: "./tmp/locales/$LOCALE/$NAMESPACE.json",
   pluralSeparator: false,
-  input: undefined,
   sort: true,
   verbose: false,
   failOnWarnings: false,
