@@ -10,13 +10,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install SimpleLocalize CLI
-        run: curl -s https://get.simplelocalize.io/2.5/install | bash
-      - name: Download the dictionary files from artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: i18n-dictionaries
-          path: ${{ runner.temp }}/i18next
       - name: Download dictionary files from SimpleLocalize
         uses: simplelocalize/github-action-cli@v2
         with:
