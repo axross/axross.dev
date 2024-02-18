@@ -4,7 +4,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-block-size: var(--__button-min-block-size);
+    min-inline-size: var(--__button-min-inline-size);
     block-size: var(--__button-block-size);
     padding-inline: var(--__button-padding-inline);
     border-radius: var(--radius-sm);
@@ -31,7 +31,7 @@
     --__button-outline-color: var(--action-8);
 
     /* invalid data-size will fallback to data-size="md" */
-    --__button-min-block-size: var(--size-80);
+    --__button-min-inline-size: var(--size-80);
     --__button-block-size: var(--size-40);
     --__button-padding-inline: var(--size-16);
     --__button-radius: var(--radius-md);
@@ -83,7 +83,7 @@
   }
 
   .root[data-size="sm"] {
-    --__button-min-block-size: var(--size-48);
+    --__button-min-inline-size: var(--size-48);
     --__button-block-size: var(--size-32);
     --__button-padding-inline: var(--size-12);
     --__button-radius: var(--radius-sm);
