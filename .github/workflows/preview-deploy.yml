@@ -30,6 +30,9 @@ jobs:
     needs:
       - prebuild
     runs-on: ubuntu-latest
+    environment:
+      name: Latest Preview
+      url: ${{ steps.deployment.outputs.url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,8 +49,6 @@ jobs:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-      - name: Test
-        run: cat ${{ steps.deployment.outputs.url }}
       - name: Find the Previous Comment
         uses: peter-evans/find-comment@v3
         id: previous-comment
