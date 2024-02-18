@@ -1,10 +1,9 @@
+import { readFile } from "node:fs";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+import { promisify } from "node:util";
 import { ImageResponse } from "next/og";
 import { getConfig } from "~/helpers/config";
-
-// `export cons runtime = "edge"` is mandatory because this is statically detected
-// `export { runtime }` won't work
-// eslint-disable-next-line import/group-exports
-export const runtime = "edge";
 
 const size = {
   width: 800,
@@ -13,18 +12,19 @@ const size = {
 
 const contentType = "image/png";
 
-async function getCardCharacters(): Promise<ArrayBuffer> {
-  const response = await fetch(
-    new URL("~/assets/card-characters.ttf", import.meta.url),
+async function getCardCharacters(): Promise<Buffer> {
+  const buffer = await promisify(readFile)(
+    resolve(fileURLToPath(import.meta.url), "../../assets/card-characters.ttf"),
   );
-  const buffer = await response.arrayBuffer();
 
-  return buffer;
+  return buffer as never;
 }
 
-async function getBoxesDataUri(): Promise<string> {
-  const response = await fetch(new URL("~/assets/chaos.svg", import.meta.url));
-  const svg = await response.text();
+async function getChaosDataUri(): Promise<string> {
+  const svg = await promisify(readFile)(
+    resolve(fileURLToPath(import.meta.url), "../../assets/chaos.svg"),
+    "utf8",
+  );
 
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }
@@ -44,7 +44,7 @@ async function Image(): Promise<Response> {
           justifyContent: "center",
           padding: 40,
           backgroundColor: "#121113",
-          backgroundImage: `url(${await getBoxesDataUri()})`,
+          backgroundImage: `url(${await getChaosDataUri()})`,
           backgroundPosition: "3%",
           backgroundSize: "738px 415px",
         }}
