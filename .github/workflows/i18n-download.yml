@@ -19,6 +19,8 @@ jobs:
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
       - name: Upload the parsed dictionary files as artifacts
         run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
           git switch -c i18n-update-${{ github.run_id }}
           git add .
           git commit -m "feat(i18n): apply i18n dictionary update(s)"
