@@ -64,7 +64,7 @@ jobs:
           comment-id: ${{ steps.previous-comment.outputs.comment-id }}
           edit-mode: replace
           body: |
-            <!-- deployment \#${{ github.event.number }} -->
-            🚀 Deployed a preview:
+            <!-- deployment #${{ github.event.number }} -->
+            🚀 Deployed a preview for `${{ github.sha }}`:
 
             ${{ steps.deployment.outputs.url }}
