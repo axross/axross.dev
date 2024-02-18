@@ -17,12 +17,13 @@ jobs:
         with:
           name: i18n-dictionaries
           path: ${{ runner.temp }}/i18next
-      - name: Upload the dictionary files to SimpleLocalize
-        run: |
-          simplelocalize download \
-            --apiKey ${{ secrets.SIMPLELOCALIZE_API_KEY }} \
-            --downloadFormat=single-language-json \
-            --downloadPath=./src/locales/{lang}/{ns}.json
+      - name: Download dictionary files from SimpleLocalize
+        uses: simplelocalize/github-action-cli@v2
+        with:
+          cli-version: 2.5.1
+          command: download
+          args: --downloadFormat=single-language-json --downloadPath=./src/locales/{lang}/{ns}.json
+          api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
       - name: Upload the parsed dictionary files as artifacts
         run: |
           git switch -c i18n-update-${{ github.run_id }}
