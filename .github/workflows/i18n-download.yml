@@ -35,7 +35,7 @@ jobs:
             --head i18n-update-${{ github.run_id }} \
             --assignee @me \
             --title "feat(i18n): apply i18n dictionary update(s)"
-            --body ""
+            --body "This pull request is created by SimpleLocalize integration."
             --reviewer @axross
         env:
           GH_TOKEN: ${{ github.token }}
