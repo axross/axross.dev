@@ -14,7 +14,7 @@ const contentType = "image/png";
 
 async function getCardCharacters(): Promise<Buffer> {
   const buffer = await promisify(readFile)(
-    resolve(fileURLToPath(import.meta.url), "../../assets/card-characters.ttf")
+    resolve(fileURLToPath(import.meta.url), "../../assets/card-characters.ttf"),
   );
 
   return buffer as never;
@@ -23,7 +23,7 @@ async function getCardCharacters(): Promise<Buffer> {
 async function getChaosDataUri(): Promise<string> {
   const svg = await promisify(readFile)(
     resolve(fileURLToPath(import.meta.url), "../../assets/chaos.svg"),
-    "utf8"
+    "utf8",
   );
 
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
