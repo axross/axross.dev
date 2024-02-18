@@ -23,7 +23,7 @@ async function overrideLocale({ locale }: { locale: Locale }): Promise<void> {
       revalidatePath("/");
 
       return Promise.resolve();
-    }
+    },
   );
 }
 

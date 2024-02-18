@@ -1,0 +1,39 @@
+name: I18n Dictionary Download
+on:
+  repository_dispatch:
+    types:
+      - simplelocalize_publication
+jobs:
+  download-and-apply:
+    name: Dictionary Download
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install SimpleLocalize CLI
+        run: curl -s https://get.simplelocalize.io/2.5/install | bash
+      - name: Download the dictionary files from artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: i18n-dictionaries
+          path: ${{ runner.temp }}/i18next
+      - name: Upload the dictionary files to SimpleLocalize
+        run: |
+          simplelocalize download \
+            --apiKey ${{ secrets.SIMPLELOCALIZE_API_KEY }} \
+            --downloadFormat=single-language-json \
+            --downloadPath=./src/locales/{lang}/{ns}.json
+      - name: Upload the parsed dictionary files as artifacts
+        run: |
+          git switch -c i18n-update-${{ github.run_id }}
+          git add .
+          git commit -m "feat(i18n): apply i18n dictionary update(s)"
+          git push origin i18n-update-${{ github.run_id }}
+      - name: Create a pull request
+        run: |
+          gh pr create \
+            --base main \
+            --head i18n-update-${{ github.run_id }} \
+            --assignee @me \
+            --title "feat(i18n): apply i18n dictionary update(s)"
+            --reviewer @axross

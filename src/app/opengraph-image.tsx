@@ -71,7 +71,7 @@ async function Image(): Promise<Response> {
           weight: 400,
         },
       ],
-    }
+    },
   );
 }
 
