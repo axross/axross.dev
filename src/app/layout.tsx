@@ -20,6 +20,9 @@ async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${config.website.title}`,
       default: config.website.title,
     },
+    icons: {
+      icon: "/assets/icon.webp",
+    },
     description: bio?.summary,
     alternates: {
       canonical: `${config.website.urlOrigin}/`,
