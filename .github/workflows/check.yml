@@ -16,8 +16,8 @@ jobs:
         run: npm ci
       - name: Run Prettier Check
         run: npx prettier --check .
-  lint:
-    name: Lint
+  eslint:
+    name: ESLint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
