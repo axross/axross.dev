@@ -1,4 +1,4 @@
-name: Preview Deploy
+name: Preview
 on:
   - pull_request
 permissions:
@@ -15,9 +15,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 21
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm ci
-      - name: Vercel Prebuild
+      - name: Run vercel build
         uses: ./.github/actions/vercel-prebuild
         with:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
@@ -40,16 +40,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 21
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm ci
-      - name: Vercel Deploy
+      - name: Run vercel deploy
         id: deployment
         uses: ./.github/actions/vercel-deploy
         with:
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-      - name: Find the Previous Comment
+      - name: Find the previous comment
         uses: peter-evans/find-comment@v3
         id: previous-comment
         with:
@@ -57,7 +57,7 @@ jobs:
           comment-author: "github-actions[bot]"
           body-includes: <!-- deployment \#${{ github.event.number }} -->
           direction: last
-      - name: Create comment
+      - name: Create/update comments
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.number }}
