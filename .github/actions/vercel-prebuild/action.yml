@@ -1,0 +1,62 @@
+name: Vercel Prebuild
+description: Prebuild the project with Vercel CLI
+inputs:
+  vercel-org-id:
+    description: The organization id at Vercel
+    required: true
+  vercel-project-id:
+    description: The project id at Vercel
+    required: true
+  vercel-token:
+    description: The auth token for Vercel
+    required: true
+  build-command:
+    description: The shell command to build the application
+    default: npm run build
+  branch:
+    description: The Git branch. Keep empty for production deployments
+runs:
+  using: "composite"
+  steps:
+    - name: Create a Placeholder for project.json
+      run: |
+        mkdir .vercel
+        jq -n -c '.projectId="${{ inputs.vercel-project-id }}"|.orgId|="${{ inputs.vercel-org-id }}"' \
+          > .vercel/project.json
+      shell: bash
+    - name: Pull the Vercel Project (Production)
+      if: ${{ inputs.branch == null }}
+      run: |
+        npx vercel pull \
+          --token=${{ inputs.vercel-token }} \
+          --environment=production
+      shell: bash
+    - name: Pull the Vercel Project (Preview)
+      if: ${{ inputs.branch != null }}
+      run: |
+        npx vercel pull \
+          --token=${{ inputs.vercel-token }} \
+          --environment=preview \
+          --git-branch=${{ inputs.branch }}
+      shell: bash
+    - name: Update the Build Command
+      run: |
+        cp .vercel/project.json ${{ runner.temp }}/vercel-project.json
+        cat ${{ runner.temp }}/vercel-project.json \
+          | jq -c '.settings.buildCommand="${{ inputs.build-command }}"' \
+          > .vercel/project.json
+      shell: bash
+    - name: Check project.json
+      run: cat .vercel/project.json
+      shell: bash
+    - name: Build
+      run: npx vercel build --token=${{ inputs.vercel-token }}
+      shell: bash
+    - name: Store the Build as Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: vercel-build-${{ github.sha }}
+        path: |
+          .vercel/output
+          .next
+        if-no-files-found: error

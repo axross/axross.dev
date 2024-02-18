@@ -1,0 +1,14 @@
+@layer components {
+  .root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--size-4);
+    cursor: default;
+  }
+
+  .icon {
+    block-size: var(--size-16);
+    inline-size: var(--size-16);
+  }
+}

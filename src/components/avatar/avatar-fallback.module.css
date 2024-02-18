@@ -1,0 +1,11 @@
+@layer components {
+  .root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: 100%;
+    inline-size: 100%;
+    background-color: var(--neutral-3);
+    border-radius: var(--radius-full);
+  }
+}

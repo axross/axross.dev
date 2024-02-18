@@ -1,0 +1,185 @@
+@layer components {
+  .root {
+    position: relative;
+  }
+
+  .viewer {
+    display: block;
+    padding: var(--size-16);
+    background-color: var(--neutral-12);
+    border-radius: var(--radius-md);
+    color: var(--neutral-5);
+    font-size: var(--text-sm);
+    font-family: monospace;
+    line-height: 1.5;
+    hyphens: none;
+    white-space: pre;
+    overflow-x: scroll;
+
+    @container style(--theme: dark) {
+      background-color: var(--neutral-2);
+      color: var(--neutral-11);
+    }
+
+    --pl-comment: #8b949e;
+    --pl-constant: #79c0ff;
+    --pl-entity: #d2a8ff;
+    --pl-storage-modifier-import: #c9d1d9;
+    --pl-entity-tag: #7ee787;
+    --pl-keyword: #ff7b72;
+    --pl-string: #a5d6ff;
+    --pl-variable: #ffa657;
+    --pl-brackethighlighter-unmatched: #f85149;
+    --pl-invalid-illegal-text: #f0f6fc;
+    --pl-invalid-illegal-bg: #8e1519;
+    --pl-carriage-return-text: #f0f6fc;
+    --pl-carriage-return-bg: #b62324;
+    --pl-string-regexp: #7ee787;
+    --pl-markup-list: #f2cc60;
+    --pl-markup-heading: #1f6feb;
+    --pl-markup-italic: #c9d1d9;
+    --pl-markup-bold: #c9d1d9;
+    --pl-markup-deleted-text: #ffdcd7;
+    --pl-markup-deleted-bg: #67060c;
+    --pl-markup-inserted-text: #aff5b4;
+    --pl-markup-inserted-bg: #033a16;
+    --pl-markup-changed-text: #ffdfb6;
+    --pl-markup-changed-bg: #5a1e02;
+    --pl-markup-ignored-text: #c9d1d9;
+    --pl-markup-ignored-bg: #1158c7;
+    --pl-meta-diff-range: #d2a8ff;
+    --pl-brackethighlighter-angle: #8b949e;
+    --pl-sublimelinter-gutter-mark: #484f58;
+    --pl-constant-other-reference-link: #a5d6ff;
+  }
+
+  .viewer [data-token-c] {
+    color: var(--pl-comment);
+  }
+
+  .viewer :is([data-token-c1], [data-token-s] [data-token-v]) {
+    color: var(--pl-constant);
+  }
+
+  .viewer :is([data-token-e], [data-token-en]) {
+    color: var(--pl-entity);
+  }
+
+  .viewer :is([data-token-smi], [data-token-s] [data-token-s1]) {
+    color: var(--pl-storage-modifier-import);
+  }
+
+  .viewer [data-token-ent] {
+    color: var(--pl-entity-tag);
+  }
+
+  .viewer [data-token-k] {
+    color: var(--pl-keyword);
+  }
+
+  .viewer
+    :is(
+      [data-token-s],
+      [data-token-pds],
+      [data-token-s] [data-token-pse] [data-token-s1],
+      [data-token-sr],
+      [data-token-sr] [data-token-cce],
+      [data-token-sr] [data-token-sre],
+      [data-token-sr] [data-token-sra]
+    ) {
+    color: var(--pl-string);
+  }
+
+  .viewer :is([data-token-v], [data-token-smw]) {
+    color: var(--pl-variable);
+  }
+
+  .viewer [data-token-bu] {
+    color: var(--pl-brackethighlighter-unmatched);
+  }
+
+  .viewer [data-token-ii] {
+    background-color: var(--pl-invalid-illegal-bg);
+    color: var(--pl-invalid-illegal-text);
+  }
+
+  .viewer [data-token-c2] {
+    background-color: var(--pl-carriage-return-bg);
+    color: var(--pl-carriage-return-text);
+  }
+
+  .viewer [data-token-sr] [data-token-cce] {
+    color: var(--pl-string-regexp);
+    font-weight: 600;
+  }
+
+  .viewer [data-token-ml] {
+    color: var(--pl-markup-list);
+  }
+
+  .viewer
+    :is([data-token-mh], [data-token-mh] [data-token-en], [data-token-ms]) {
+    color: var(--pl-markup-heading);
+    font-weight: 600;
+  }
+
+  .viewer [data-token-mi] {
+    font-style: italic;
+    color: var(--pl-markup-italic);
+  }
+
+  .viewer [data-token-mb] {
+    color: var(--pl-markup-bold);
+    font-weight: 600;
+  }
+
+  .viewer [data-token-md] {
+    background-color: var(--pl-markup-deleted-bg);
+    color: var(--pl-markup-deleted-text);
+  }
+
+  .viewer [data-token-mi1] {
+    background-color: var(--pl-markup-inserted-bg);
+    color: var(--pl-markup-inserted-text);
+  }
+
+  .viewer [data-token-mc] {
+    background-color: var(--pl-markup-changed-bg);
+    color: var(--pl-markup-changed-text);
+  }
+
+  .viewer [data-token-mi2] {
+    background-color: var(--pl-markup-ignored-bg);
+    color: var(--pl-markup-ignored-text);
+  }
+
+  .viewer [data-token-mdr] {
+    color: var(--pl-meta-diff-range);
+    font-weight: 600;
+  }
+
+  .viewer [data-token-ba] {
+    color: var(--pl-brackethighlighter-angle);
+  }
+
+  .viewer [data-token-sg] {
+    color: var(--pl-sublimelinter-gutter-mark);
+  }
+
+  .viewer [data-token-corl] {
+    color: var(--pl-constant-other-reference-link);
+    text-decoration: underline;
+  }
+
+  .copy-button {
+    position: absolute;
+    inset-block-start: var(--size-8);
+    inset-inline-end: var(--size-8);
+    opacity: 0;
+    transition: opacity var(--ease-in-out) var(--duration-md);
+  }
+
+  .root:hover .copy-button {
+    opacity: 1;
+  }
+}

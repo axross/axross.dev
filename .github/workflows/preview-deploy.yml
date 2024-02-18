@@ -1,0 +1,69 @@
+name: Preview Deploy
+on:
+  - pull_request
+permissions:
+  issues: write
+  pull-requests: write
+jobs:
+  prebuild:
+    name: Prebuild
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21
+      - name: Install Dependencies
+        run: npm ci
+      - name: Vercel Prebuild
+        uses: ./.github/actions/vercel-prebuild
+        with:
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          branch: ${{ github.ref_name }}
+          build-command: npx next build
+  deploy:
+    name: Deploy
+    needs:
+      - prebuild
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21
+      - name: Install Dependencies
+        run: npm ci
+      - name: Vercel Deploy
+        id: deployment
+        uses: ./.github/actions/vercel-deploy
+        with:
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      - name: Test
+        run: cat ${{ steps.deployment.outputs.url }}
+      - name: Find the Previous Comment
+        uses: peter-evans/find-comment@v3
+        id: previous-comment
+        with:
+          issue-number: ${{ github.event.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: <!-- deployment \#${{ github.event.number }} -->
+          direction: last
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.number }}
+          comment-id: ${{ steps.previous-comment.outputs.comment-id }}
+          edit-mode: replace
+          body: |
+            <!-- deployment \#${{ github.event.number }} -->
+            🚀 Deployed a preview:
+
+            ${{ steps.deployment.outputs.url }}

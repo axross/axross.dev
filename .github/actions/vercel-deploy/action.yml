@@ -1,0 +1,40 @@
+name: Vercel Deploy
+description: Deploy the prebuilt application to Vercel.
+inputs:
+  vercel-org-id:
+    description: The organization id at Vercel
+    required: true
+  vercel-project-id:
+    description: The project id at Vercel
+    required: true
+  vercel-token:
+    description: The auth token for Vercel
+    required: true
+outputs:
+  url:
+    description: The preview deployment URL
+    value: ${{ steps.deployment.outputs.url }}
+runs:
+  using: "composite"
+  steps:
+    - name: Create a Placeholder for project.json
+      run: |
+        mkdir .vercel
+        jq -n -c '.projectId="${{ inputs.vercel-project-id }}"|.orgId|="${{ inputs.vercel-org-id }}"' \
+          > .vercel/project.json
+      shell: bash
+    - name: Restore the Build from Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: vercel-build-${{ github.sha }}
+        path: ./
+    - name: Vercel Deploy
+      id: deployment
+      run: |
+        npx vercel deploy \
+          --prebuilt \
+          --token ${{ inputs.vercel-token }} \
+          --skip-domain \
+          > ${{runner.temp}}/url.txt
+        echo "url=$(cat ${{runner.temp}}/url.txt)" >> $GITHUB_OUTPUT
+      shell: bash

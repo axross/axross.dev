@@ -1,0 +1,31 @@
+@layer components {
+  .root {
+    position: relative;
+    align-items: center;
+    display: flex;
+    box-sizing: border-box;
+    inline-size: 100%;
+    padding-block: var(--size-6);
+    padding-inline-start: var(--size-32);
+    padding-inline-end: var(--size-8);
+    border-radius: var(--radius-sm);
+    outline: none;
+    font-size: var(--text-sm);
+    cursor: default;
+    user-select: none;
+  }
+
+  .root:is(:hover, :focus-visible) {
+    background: var(--action-a9);
+    color: var(--neutral-12);
+
+    @container style(--theme: light) {
+      color: var(--neutral-1);
+    }
+  }
+
+  .root[data-disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,16 @@
+@layer components {
+  .root {
+    position: absolute;
+    inset-inline-start: var(--size-8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    block-size: var(--size-14);
+    inline-size: var(--size-14);
+  }
+
+  .icon {
+    block-size: var(--size-16);
+    inline-size: var(--size-16);
+  }
+}

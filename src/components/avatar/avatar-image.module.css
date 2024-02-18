@@ -1,0 +1,7 @@
+@layer components {
+  .root {
+    block-size: 100%;
+    inline-size: 100%;
+    aspect-ratio: 1;
+  }
+}

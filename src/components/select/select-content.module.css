@@ -1,0 +1,107 @@
+@layer components {
+  .root {
+    position: relative;
+    box-sizing: border-box;
+    max-block-size: var(--radix-popper-available-height);
+    min-inline-size: var(--radix-popper-anchor-width);
+    max-inline-size: var(--radix-popper-available-width);
+    background-color: var(--neutral-2);
+    border: var(--size-1) var(--neutral-6) solid;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    color: var(--neutral-12);
+    overflow: hidden;
+    z-index: 50;
+  }
+
+  .root[data-state="open"] {
+    animation: select-content-open var(--duration-md) var(--ease-in-out);
+  }
+
+  .root[data-state="closed"] {
+    animation: select-content-closed var(--duration-md) var(--ease-in-out);
+  }
+
+  .root[data-side="top"] {
+    animation: select-content-side-top var(--duration-md) var(--ease-in-out);
+  }
+
+  .root[data-side="bottom"] {
+    animation: select-content-side-bottom var(--duration-md) var(--ease-in-out);
+  }
+
+  .root[data-side="left"] {
+    animation: select-content-side-left var(--duration-md) var(--ease-in-out);
+  }
+
+  .root[data-side="right"] {
+    animation: select-content-side-right var(--duration-md) var(--ease-in-out);
+  }
+
+  .root[data-position="popper"] {
+    --__select-popper: enabled;
+  }
+
+  .root[data-position="popper"][data-side="top"] {
+    transform: translateY(calc(var(--size-4) * -1));
+  }
+
+  .root[data-position="popper"][data-side="bottom"] {
+    transform: translateY(var(--size-4));
+  }
+
+  .root[data-position="popper"][data-side="left"] {
+    transform: translateX(calc(var(--size-4) * -1));
+  }
+
+  .root[data-position="popper"][data-side="right"] {
+    transform: translateX(var(--size-4));
+  }
+}
+
+/* @layer component-overrides {
+  .root > * {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+} */
+
+@keyframes select-content-open {
+  from {
+    opacity: 0;
+    transform: scale3d(0.95, 0.95, 0.95);
+  }
+}
+
+@keyframes select-content-closed {
+  to {
+    opacity: 0;
+    transform: scale3d(0.95, 0.95, 0.95);
+  }
+}
+
+@keyframes select-content-side-top {
+  from {
+    transform: translate3d(0, var(--size-8), 0);
+  }
+}
+
+@keyframes select-content-side-bottom {
+  from {
+    transform: translate3d(0, calc(var(--size-8) * -1), 0);
+  }
+}
+
+@keyframes select-content-side-left {
+  from {
+    transform: translate3d(var(--size-8), 0, 0);
+  }
+}
+
+@keyframes select-content-side-right {
+  from {
+    transform: translate3d(calc(var(--size-8) * -1), 0, 0);
+  }
+}

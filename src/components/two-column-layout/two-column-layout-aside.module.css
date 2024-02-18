@@ -1,0 +1,65 @@
+@layer components {
+  .root {
+    position: sticky;
+    inset-block-start: 0;
+    grid-area: aside;
+    block-size: min-content;
+  }
+
+  .content {
+    box-sizing: border-box;
+    padding-block: var(--size-16);
+    padding-inline: var(--size-16);
+  }
+
+  .toggle-button {
+    visibility: collapse;
+    opacity: 0;
+  }
+
+  @media (width < 1200px) {
+    .root {
+      position: fixed;
+      inset-block: 0;
+      inset-inline-end: 0;
+      box-sizing: border-box;
+      block-size: 100dvh;
+      inline-size: 100vw;
+      padding-block-end: calc(var(--size-16) + var(--size-40) + var(--size-16));
+      background-color: color-mix(in srgb, var(--neutral-1), transparent 10%);
+      backdrop-filter: blur(8px);
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      transition: all var(--ease-in-out) var(--duration-xl);
+    }
+
+    .root[aria-hidden="true"] {
+      background-color: transparent;
+      backdrop-filter: none;
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+
+    .content {
+      block-size: 100%;
+      box-sizing: border-box;
+      padding-block-start: var(--size-16);
+      padding-inline: var(--size-16);
+      overflow-y: scroll;
+      overscroll-behavior-block: contain;
+    }
+
+    .toggle-button {
+      position: fixed;
+      inset-block-end: var(--size-16);
+      inset-inline-end: var(--size-16);
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .toggle-button[aria-hidden="true"] {
+      visibility: collapse;
+      opacity: 0;
+    }
+  }
+}

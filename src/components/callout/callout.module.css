@@ -1,0 +1,31 @@
+@layer components {
+  .root {
+    position: relative;
+    box-sizing: border-box;
+    inline-size: 100%;
+    padding-block: var(--size-16);
+    padding-inline-start: var(--size-48);
+    padding-inline-end: var(--size-16);
+    border: var(--neutral-7) var(--size-1) solid;
+    border-radius: var(--radius-md);
+
+    --__callout-hc-color: var(--neutral-12);
+    --__callout-lc-color: var(--neutral-11);
+  }
+
+  .root[data-intent="danger"] {
+    border-color: var(--danger-7);
+
+    --__callout-hc-color: var(--danger-12);
+    --__callout-lc-color: var(--danger-11);
+  }
+
+  .icon {
+    position: absolute;
+    block-size: var(--size-20);
+    inline-size: var(--size-20);
+    inset-block-start: var(--size-16);
+    inset-inline-start: var(--size-16);
+    color: var(--__callout-hc-color);
+  }
+}

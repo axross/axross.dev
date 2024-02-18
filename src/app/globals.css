@@ -1,0 +1,22 @@
+@layer variables, base, components, component-overrides, screens;
+
+@layer base {
+  :root {
+    scroll-padding: var(--size-32);
+    scroll-behavior: smooth;
+
+    --theme: light;
+
+    @media (prefers-color-scheme: dark) {
+      --theme: dark;
+    }
+  }
+
+  body {
+    min-block-size: 100dvh;
+    min-inline-size: 375px;
+    margin: 0;
+    background-color: var(--neutral-1);
+    color: var(--neutral-11);
+  }
+}

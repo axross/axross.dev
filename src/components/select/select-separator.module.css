@@ -1,0 +1,8 @@
+@layer components {
+  .root {
+    block-size: var(--size-1);
+    margin-block: var(--size-4);
+    margin-inline: calc(var(--size-4) * -1);
+    background-color: var(--neutral-6);
+  }
+}

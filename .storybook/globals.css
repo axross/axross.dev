@@ -1,0 +1,18 @@
+@layer variables, base, components, component-overrides, screens;
+
+@layer base {
+  :root {
+    --theme: light;
+  }
+
+  :root[data-theme="dark"] {
+    --theme: dark;
+  }
+
+  body {
+    min-inline-size: 375px;
+    min-block-size: 100lvh;
+    background-color: var(--neutral-1);
+    color: var(--neutral-11);
+  }
+}

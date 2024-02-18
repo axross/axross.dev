@@ -1,0 +1,7 @@
+@layer components {
+  .root {
+    block-size: var(--size-16);
+    inline-size: var(--size-16);
+    opacity: 0.5;
+  }
+}

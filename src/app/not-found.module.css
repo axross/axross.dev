@@ -1,0 +1,31 @@
+@layer screens {
+  .root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    block-size: 100dvh;
+    inline-size: 100dvw;
+  }
+
+  .eyecatch-front {
+    color: var(--neutral-12);
+    font-size: var(--text-4xl);
+  }
+
+  .eyecatch-back {
+    margin-block-start: var(--size-8);
+    color: var(--neutral-12);
+    font-size: var(--text-xl);
+    text-wrap: nowrap;
+  }
+
+  .button {
+    margin-block-start: var(--size-32);
+  }
+
+  .background {
+    position: fixed;
+    z-index: -1;
+  }
+}

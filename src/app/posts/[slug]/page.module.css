@@ -1,0 +1,52 @@
+@layer page {
+  .thumbnail {
+    block-size: 20rem;
+    inline-size: 100%;
+    object-fit: cover;
+  }
+
+  @media (width < calc(800px + 32px)) {
+    .thumbnail {
+      inline-size: 100vw;
+      margin-inline: calc(var(--size-16) * -1);
+    }
+  }
+
+  .title {
+    margin-block-start: var(--size-32);
+    color: var(--neutral-12);
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  .meta {
+    display: flex;
+    column-gap: var(--size-16);
+    margin-block-start: var(--size-32);
+  }
+
+  .avatar {
+    block-size: var(--size-48);
+    inline-size: var(--size-48);
+  }
+
+  .name-and-date {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--size-4);
+  }
+
+  .date {
+    color: var(--neutral-11);
+    font-size: var(--text-xs);
+  }
+
+  .locale-not-found {
+    margin-block-start: var(--size-32);
+  }
+
+  .post_markdown {
+    margin-block-start: var(--size-32);
+  }
+}

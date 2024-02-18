@@ -1,0 +1,50 @@
+@layer components {
+  .root {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--size-24);
+    box-sizing: border-box;
+    overflow-y: scroll;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .link-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--size-8);
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  .page-title {
+    display: block;
+    padding-block: var(--size-8);
+    padding-inline: var(--size-16);
+    border-radius: var(--radius-md);
+    color: var(--neutral-12);
+    font: var(--font-md);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--ease-in-out) var(--duration-md);
+  }
+
+  .page-title:is(:hover, :focus-visible) {
+    background-color: var(--neutral-a2);
+  }
+
+  .outline-list {
+    margin-inline-start: var(--size-16);
+  }
+}
+
+@layer component-overrides {
+  .outline-list {
+    margin-inline-start: var(--size-16);
+  }
+}

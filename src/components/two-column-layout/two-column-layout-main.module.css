@@ -1,0 +1,12 @@
+@layer components {
+  .root {
+    grid-area: main;
+  }
+
+  @media (width < 1200px) {
+    .root {
+      inline-size: 100%;
+      max-inline-size: 800px;
+    }
+  }
+}

@@ -1,0 +1,99 @@
+@layer components {
+  .root {
+    display: block;
+    margin-block-end: 0;
+  }
+
+  .link {
+    position: relative;
+    display: inline-block;
+    border-radius: var(--radius-sm);
+    color: currentColor;
+    vertical-align: top;
+    text-decoration: none;
+    transition: all var(--ease-in-out) var(--duration-md);
+  }
+
+  .root:hover .link {
+    background-color: var(--neutral-a4);
+  }
+
+  .root:focus-visible .link {
+    background-color: var(--neutral-a4);
+  }
+
+  .root:is([data-level="1"], [data-level="2"]) .link {
+    padding-block: var(--size-4);
+    padding-inline-start: var(--size-24);
+    padding-inline-end: var(--size-16);
+  }
+
+  .root[data-level="3"] .link {
+    padding-block: var(--size-4);
+    padding-inline-start: calc(var(--size-24) + var(--size-8) * 2);
+    padding-inline-end: var(--size-16);
+  }
+
+  .root[data-level="4"] .link {
+    padding-block: var(--size-4);
+    padding-inline-start: calc(var(--size-24) + var(--size-8) * 3);
+    padding-inline-end: var(--size-16);
+  }
+
+  .root[data-level="5"] .link {
+    padding-block: var(--size-4);
+    padding-inline-start: calc(var(--size-24) + var(--size-8) * 4);
+    padding-inline-end: var(--size-16);
+  }
+
+  .root[data-level="6"] .link {
+    padding-block: var(--size-4);
+    padding-inline-start: calc(var(--size-24) + var(--size-8) * 5);
+    padding-inline-end: var(--size-16);
+  }
+
+  .line {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: calc(var(--size-4) * 2.75);
+    display: block;
+    inline-size: var(--size-2);
+    background-color: var(--neutral-6);
+  }
+
+  .root:last-of-type .line {
+    inset-block-end: 50%;
+  }
+
+  .disc {
+    position: absolute;
+    display: block;
+    block-size: var(--size-8);
+    inline-size: var(--size-8);
+    inset-block-start: calc(var(--size-4) * 2.25);
+    inset-inline-start: var(--size-8);
+    background-color: var(--neutral-6);
+    border-radius: var(--radius-full);
+    z-index: 10;
+  }
+
+  .root:is([data-level="1"], [data-level="2"]) .disc {
+    inset-block-start: calc(var(--size-4) * 2.5);
+    block-size: var(--size-8);
+    inline-size: var(--size-8);
+  }
+
+  .contents {
+    color: var(--neutral-12);
+    font-size: var(--text-xs);
+    line-height: 1.5;
+  }
+
+  .root[data-level="1"] .contents {
+    font-size: var(--text-md);
+  }
+
+  .root[data-level="2"] .contents {
+    font-size: var(--text-sm);
+  }
+}
