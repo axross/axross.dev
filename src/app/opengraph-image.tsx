@@ -15,7 +15,7 @@ const contentType = "image/png";
 
 async function getCardCharacters(): Promise<ArrayBuffer> {
   const response = await fetch(
-    new URL("~/assets/card-characters.ttf", import.meta.url)
+    new URL("~/assets/card-characters.ttf", import.meta.url),
   );
   const buffer = await response.arrayBuffer();
 
@@ -71,7 +71,7 @@ async function Image(): Promise<Response> {
           weight: 400,
         },
       ],
-    }
+    },
   );
 }
 

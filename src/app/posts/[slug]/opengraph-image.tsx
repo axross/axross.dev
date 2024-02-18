@@ -22,7 +22,7 @@ interface RouteParameters {
 
 async function getNotoSansJpSemiBold(): Promise<ArrayBuffer> {
   const response = await fetch(
-    new URL("~/assets/noto-sans-jp-semibold.ttf", import.meta.url)
+    new URL("~/assets/noto-sans-jp-semibold.ttf", import.meta.url),
   );
   const buffer = await response.arrayBuffer();
 
@@ -31,7 +31,7 @@ async function getNotoSansJpSemiBold(): Promise<ArrayBuffer> {
 
 async function getCardCharacters(): Promise<ArrayBuffer> {
   const response = await fetch(
-    new URL("~/assets/card-characters.ttf", import.meta.url)
+    new URL("~/assets/card-characters.ttf", import.meta.url),
   );
   const buffer = await response.arrayBuffer();
 
@@ -137,7 +137,7 @@ async function Image({
           weight: 400,
         },
       ],
-    }
+    },
   );
 }
 
