@@ -8,7 +8,7 @@ jobs:
     name: Dictionary Download
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
     steps:
       - name: Checkout
@@ -20,7 +20,7 @@ jobs:
           command: download
           args: --downloadFormat=single-language-json --downloadPath=./src/locales/{lang}/{ns}.json
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
-      - name: Upload the parsed dictionary files as artifacts
+      - name: Commit the changes and pushes a feature branch
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
