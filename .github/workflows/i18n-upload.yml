@@ -1,0 +1,32 @@
+name: I18n Dictionary Upload
+on:
+  push:
+    branches:
+      - main
+      - i18n-automation-setup
+jobs:
+  parse-and-upload:
+    name: Dictionary Upload
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21
+      - name: Parse translations
+        run: |
+          npx -p i18next-parser@7 i18next \
+            --config i18next-parser.config.cjs \
+            --output "${{ runner.temp }}/i18next/\$LOCALE/\$NAMESPACE.json"
+      - name: Install SimpleLocalize CLI
+        run: curl -s https://get.simplelocalize.io/2.5/install | bash
+      - name: Upload the dictionary files to SimpleLocalize
+        run: |
+          simplelocalize upload \
+            --apiKey ${{ secrets.SIMPLELOCALIZE_API_KEY }} \
+            --languageKey=en-US \
+            --uploadFormat=single-language-json \
+            --uploadOptions=DELETE_NOT_PRESENT_KEYS,TRIM_LEADING_TRAILING_SPACES \
+            --uploadPath=${{ runner.temp }}/i18next/{lang}/{ns}.json
