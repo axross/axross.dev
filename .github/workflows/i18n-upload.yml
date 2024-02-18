@@ -23,10 +23,9 @@ jobs:
       - name: Install SimpleLocalize CLI
         run: curl -s https://get.simplelocalize.io/2.5/install | bash
       - name: Upload the dictionary files to SimpleLocalize
-        run: |
-          simplelocalize upload \
-            --apiKey ${{ secrets.SIMPLELOCALIZE_API_KEY }} \
-            --languageKey=en-US \
-            --uploadFormat=single-language-json \
-            --uploadOptions=DELETE_NOT_PRESENT_KEYS,TRIM_LEADING_TRAILING_SPACES \
-            --uploadPath=${{ runner.temp }}/i18next/{lang}/{ns}.json
+        uses: simplelocalize/github-action-cli@v2
+        with:
+          cli-version: 2.5.1
+          command: upload
+          args: --languageKey=en-US --uploadFormat=single-language-json --uploadOptions=DELETE_NOT_PRESENT_KEYS,TRIM_LEADING_TRAILING_SPACES --uploadPath=${{ runner.temp }}/i18next/{lang}/{ns}.json
+          api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
