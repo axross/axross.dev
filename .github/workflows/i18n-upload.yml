@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - i18n-automation-setup
 jobs:
   parse-and-upload:
     name: Dictionary Upload
