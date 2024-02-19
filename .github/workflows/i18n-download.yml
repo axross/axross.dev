@@ -22,6 +22,14 @@ jobs:
           command: download
           args: --downloadFormat=single-language-json --downloadPath=./src/locales/{lang}/{ns}.json
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21
+      - name: Install dependencies
+        run: npm ci
+      - name: Format files
+        run: npm run format
       - name: Check the change stats
         id: stats
         run: |
