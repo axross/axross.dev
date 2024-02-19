@@ -26,9 +26,8 @@ jobs:
       - name: Check the change stats
         id: stats
         run: |
-          changes="$(echo "$(git diff --name-only)" | jq --raw-input --slurp 'split("\n") | map(select(length>0))' --compact-output)"
+          changes="$(git diff --name-only | jq --raw-input --slurp 'split("\n") | map(select(length>0))' --compact-output)"
           echo "change-count=$(echo $changes | jq --raw-output 'length')" >> $GITHUB_OUTPUT
-          echo "change-list=$(echo $changes | jq --raw-output 'map("- " +.+ "\n") | join("")')" >> $GITHUB_OUTPUT
       - name: Commit the changes and pushes a feature branch
         if: ${{ steps.stats.outputs.change-count >= 1 }}
         run: |
