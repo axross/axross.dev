@@ -38,6 +38,13 @@ jobs:
           git add .
           git commit -m "feat(i18n): apply i18n dictionary update(s)"
           git push origin i18n-update-${{ github.run_id }}
+      - name: Close the old pull requests
+        if: ${{ steps.stats.outputs.change-count >= 1 }}
+        run: |
+          for number in `gh pr list --author "github-actions[bot]" --search "head:i18n-update-" --json number | jq --raw-output 'map(.number) | join(" ")'`
+          do
+            gh pr close $number --comment "" --delete-branch
+          done
       - name: Create a pull request
         if: ${{ steps.stats.outputs.change-count >= 1 }}
         run: |
