@@ -55,7 +55,7 @@ jobs:
         with:
           issue-number: ${{ github.event.number }}
           comment-author: "github-actions[bot]"
-          body-includes: <!-- deployment \#${{ github.event.number }} -->
+          body-includes: "<!-- deployment #${{ github.event.number }} -->"
           direction: last
       - name: Create/update comments
         uses: peter-evans/create-or-update-comment@v4
