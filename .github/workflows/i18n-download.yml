@@ -3,9 +3,6 @@ on:
   repository_dispatch:
     types:
       - simplelocalize_publication
-  push:
-    branches:
-      - fix-download-workflow
 jobs:
   download-and-apply:
     name: Dictionary Download
