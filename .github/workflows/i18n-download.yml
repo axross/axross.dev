@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Download dictionary files from SimpleLocalize
         uses: simplelocalize/github-action-cli@v2
         with:
@@ -20,7 +22,13 @@ jobs:
           command: download
           args: --downloadFormat=single-language-json --downloadPath=./src/locales/{lang}/{ns}.json
           api-key: ${{ secrets.SIMPLELOCALIZE_API_KEY }}
+      - name: Check the change stats
+        id: stats
+        run: |
+          changes="$(git diff --name-only | jq --raw-input --slurp 'split("\n") | map(select(length>0))' --compact-output)"
+          echo "change-count=$(echo $changes | jq --raw-output 'length')" >> $GITHUB_OUTPUT
       - name: Commit the changes and pushes a feature branch
+        if: ${{ steps.stats.outputs.change-count >= 1 }}
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
@@ -28,7 +36,17 @@ jobs:
           git add .
           git commit -m "feat(i18n): apply i18n dictionary update(s)"
           git push origin i18n-update-${{ github.run_id }}
+      - name: Close the old pull requests
+        if: ${{ steps.stats.outputs.change-count >= 1 }}
+        run: |
+          for number in `gh pr list --author "github-actions[bot]" --search "head:i18n-update-" --json number | jq --raw-output 'map(.number) | join(" ")'`
+          do
+            gh pr close $number --comment "" --delete-branch
+          done
+        env:
+          GH_TOKEN: ${{ github.token }}
       - name: Create a pull request
+        if: ${{ steps.stats.outputs.change-count >= 1 }}
         run: |
           gh pr create \
             --base main \
