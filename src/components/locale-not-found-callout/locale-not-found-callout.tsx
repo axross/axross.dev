@@ -55,7 +55,7 @@ async function LocaleNotFoundCallout({
       <CalloutDescription>
         <div>
           {t(
-            "This article isn't yet translated in English. Now this page is displaying in {{lang}}.",
+            "This article isn't yet translated in {{requested}}. Now this page is displaying in {{available}}.",
             {
               requested: localeToLanguage({ locale: requestedLocale, t }),
               available: localeToLanguage({ locale, t }),

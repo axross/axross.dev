@@ -8,7 +8,9 @@ async function getDictionary({
   namespace: string;
 }): Promise<Record<string, string>> {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const module = await import(`~/locales/${locale}/${namespace}.json`);
+  const module = await import(
+    `../../../../../../locales/${locale}/${namespace}.json`
+  );
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return module.default as never;
