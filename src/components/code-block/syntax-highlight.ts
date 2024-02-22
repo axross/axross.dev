@@ -1,5 +1,9 @@
 // eslint-disable-next-line import/namespace, import/no-deprecated
 import { common, createStarryNight } from "@wooorm/starry-night";
+// eslint-disable-next-line import/namespace, import/no-deprecated, import/default, import/no-named-as-default, import/no-named-as-default-member
+import dartGrammar from "@wooorm/starry-night/source.dart";
+// eslint-disable-next-line import/namespace, import/no-deprecated, import/default, import/no-named-as-default, import/no-named-as-default-member
+import shellGrammar from "@wooorm/starry-night/source.shell";
 // eslint-disable-next-line import/no-unresolved
 import { type Properties as HastProperties, type Root as HastRoot } from "hast";
 import { type JSX } from "react";
@@ -40,6 +44,8 @@ function rehypePrettylightsAttribute(): (tree: HastRoot) => void {
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const { Fragment, jsx, jsxs } = jsxRuntime;
 
+const grammars = [...common, dartGrammar];
+
 async function syntaxHighlight({
   code,
   lang,
@@ -47,10 +53,10 @@ async function syntaxHighlight({
   code: string;
   lang?: string;
 }): Promise<JSX.Element> {
-  const starryNight = await createStarryNight(common);
+  const starryNight = await createStarryNight(grammars);
 
-  const scope = starryNight.flagToScope(lang ?? "xml");
-  const tree = starryNight.highlight(code, scope ?? "source.xml");
+  const scope = starryNight.flagToScope(lang ?? "sh");
+  const tree = starryNight.highlight(code, scope ?? shellGrammar.scopeName);
 
   const transformed = unified()
     .use(rehypePrettylightsAttribute)
