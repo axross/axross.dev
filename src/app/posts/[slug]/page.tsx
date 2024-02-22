@@ -18,6 +18,9 @@ import { queryPostMarkdown } from "~/queries/query-post-markdown";
 import { JsonLd } from "./json-ld";
 import css from "./page.module.css";
 
+// eslint-disable-next-line import/group-exports
+export const runtime = "edge";
+
 interface PageParameters {
   slug: string;
 }

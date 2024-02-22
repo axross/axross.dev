@@ -16,6 +16,9 @@ import { queryBioMarkdown } from "~/queries/query-bio-markdown";
 import { JsonLd } from "./json-ld";
 import css from "./page.module.css";
 
+// eslint-disable-next-line import/group-exports
+export const runtime = "edge";
+
 async function generateMetadata(): Promise<Metadata> {
   const config = getConfig();
   const bio = await queryBio({ fallback: true });
