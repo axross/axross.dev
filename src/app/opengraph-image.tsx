@@ -5,6 +5,9 @@ import { promisify } from "node:util";
 import { ImageResponse } from "next/og";
 import { getConfig } from "~/helpers/config";
 
+// eslint-disable-next-line import/group-exports
+export const runtime = "nodejs";
+
 const size = {
   width: 800,
   height: 415,
@@ -14,7 +17,7 @@ const contentType = "image/png";
 
 async function getCardCharacters(): Promise<Buffer> {
   const buffer = await promisify(readFile)(
-    resolve(fileURLToPath(import.meta.url), "../../assets/card-characters.ttf"),
+    resolve(fileURLToPath(import.meta.url), "../../assets/card-characters.ttf")
   );
 
   return buffer as never;
@@ -23,7 +26,7 @@ async function getCardCharacters(): Promise<Buffer> {
 async function getChaosDataUri(): Promise<string> {
   const svg = await promisify(readFile)(
     resolve(fileURLToPath(import.meta.url), "../../assets/chaos.svg"),
-    "utf8",
+    "utf8"
   );
 
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
@@ -71,7 +74,7 @@ async function Image(): Promise<Response> {
           weight: 400,
         },
       ],
-    },
+    }
   );
 }
 

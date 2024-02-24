@@ -1,7 +1,7 @@
-import { hashSync } from "hasha";
 import { type NextRequest } from "next/server";
 import sharp from "sharp";
 import { getConfig } from "~/helpers/config";
+import { hash } from "~/helpers/hash";
 
 function isImageResponse(response: Response): boolean {
   const contentType = response.headers.get("content-type");
@@ -24,12 +24,12 @@ interface RouteParams {
 
 async function GET(
   request: NextRequest,
-  { params: { url } }: { params: RouteParams },
+  { params: { url } }: { params: RouteParams }
 ): Promise<Response> {
   const config = getConfig();
   const token = request.nextUrl.searchParams.get("token");
 
-  if (token !== hashSync(`${url}@${config.image.secret}`)) {
+  if (token !== (await hash(`${url}@${config.image.secret}`))) {
     return new Response("Token is malformed.", { status: 400 });
   }
 

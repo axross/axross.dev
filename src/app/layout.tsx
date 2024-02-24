@@ -4,11 +4,9 @@ import { type JSX, type ReactNode } from "react";
 import { NavigationProgressBar } from "~/components/navigation-progress-bar";
 import { getConfig } from "~/helpers/config";
 import { baseFont } from "~/helpers/fonts";
+import { queryBio } from "~/queries/query-bio";
 import "../variables.css";
 import "./globals.css";
-import { resolveRequestedLocale } from "~/helpers/header";
-import { TranslationProvider } from "~/helpers/translation.client";
-import { queryBio } from "~/queries/query-bio";
 
 async function generateMetadata(): Promise<Metadata> {
   const config = getConfig();
@@ -41,20 +39,17 @@ async function generateMetadata(): Promise<Metadata> {
 
 function Layout({ children }: { readonly children: ReactNode }): JSX.Element {
   const config = getConfig();
-  const locale = resolveRequestedLocale();
 
   return (
-    <TranslationProvider locale={locale}>
-      <html lang="en">
-        <body className={baseFont.className}>
-          {children}
+    <html lang="en">
+      <body className={baseFont.className}>
+        {children}
 
-          <NavigationProgressBar />
-        </body>
+        <NavigationProgressBar />
+      </body>
 
-        <GoogleAnalytics gaId={config.googleAnalytics.measurementId} />
-      </html>
-    </TranslationProvider>
+      <GoogleAnalytics gaId={config.googleAnalytics.measurementId} />
+    </html>
   );
 }
 

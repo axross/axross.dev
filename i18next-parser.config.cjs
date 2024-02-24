@@ -13,19 +13,19 @@ module.exports = {
     ts: [
       {
         lexer: "JsxLexer",
-        namespaceFunctions: ["useTranslation", "getTranslation"],
+        namespaceFunctions: ["getTranslation"],
       },
     ],
     tsx: [
       {
         lexer: "JsxLexer",
-        namespaceFunctions: ["useTranslation", "getTranslation"],
+        namespaceFunctions: ["getTranslation"],
       },
     ],
     default: [
       {
         lexer: "JsxLexer",
-        namespaceFunctions: ["useTranslation", "getTranslation"],
+        namespaceFunctions: ["getTranslation"],
       },
     ],
   },

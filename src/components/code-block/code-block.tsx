@@ -1,6 +1,6 @@
 import { clsx } from "clsx";
 import { type ComponentPropsWithoutRef, type JSX } from "react";
-import { CopyButton } from "~/components/code-block/copy-button.client";
+import { CopyButton } from "~/components/code-block/copy-button.server";
 import css from "./code-block.module.css";
 
 function CodeBlock({
