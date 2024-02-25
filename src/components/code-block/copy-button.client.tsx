@@ -1,45 +1,50 @@
 "use client";
 
 import { CheckCircleIcon, ClipboardIcon } from "@heroicons/react/24/outline";
-import { type ComponentPropsWithoutRef, type JSX } from "react";
+import {
+  type ComponentPropsWithoutRef,
+  type ElementRef,
+  forwardRef,
+  useCallback,
+} from "react";
 import { ActionButton } from "~/components/action-button";
-import { useTranslation } from "~/helpers/translation.client";
 
-function CopyButton({
-  value,
-  className,
-  ...props
-}: Omit<
-  ComponentPropsWithoutRef<typeof ActionButton>,
-  | "action"
-  | "finishedChildren"
-  | "finishedIcon"
-  | "icon"
-  | "intent"
-  | "loadingChildren"
-  | "variant"
-> & {
-  readonly value: string;
-}): JSX.Element {
-  const { t } = useTranslation();
+const CopyButton = forwardRef<
+  ElementRef<typeof ActionButton>,
+  Omit<
+    ComponentPropsWithoutRef<typeof ActionButton>,
+    "action" | "doneIcon" | "icon" | "intent" | "variant"
+  > & {
+    readonly value: string;
+  }
+>(
+  (
+    { loadingChildren, doneChildren, value, className, children, ...props },
+    ref,
+  ) => {
+    const action = useCallback(() => {
+      return globalThis.navigator.clipboard.writeText(value);
+    }, [value]);
 
-  return (
-    <ActionButton
-      variant="ghost"
-      intent="neutral"
-      icon={ClipboardIcon}
-      loadingChildren={t("Copying...")}
-      doneIcon={CheckCircleIcon}
-      doneChildren={t("Copied!")}
-      action={() => {
-        return globalThis.navigator.clipboard.writeText(value);
-      }}
-      className={className}
-      {...props}
-    >
-      {t("Copy")}
-    </ActionButton>
-  );
-}
+    return (
+      <ActionButton
+        variant="ghost"
+        intent="neutral"
+        icon={ClipboardIcon}
+        loadingChildren={loadingChildren}
+        doneIcon={CheckCircleIcon}
+        doneChildren={doneChildren}
+        action={action}
+        className={className}
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </ActionButton>
+    );
+  },
+);
+
+CopyButton.displayName = "CopyButton";
 
 export { CopyButton };

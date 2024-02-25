@@ -1,11 +1,11 @@
-import { hashSync } from "hasha";
 /* eslint-disable import/namespace, import/no-deprecated, import/no-unresolved */
-import { type Root as HastRoot } from "hast";
-import { type Root as MdastRoot } from "mdast";
+import { type Element as HastElement, type Root as HastRoot } from "hast";
+import { type Heading as MdastHeading, type Root as MdastRoot } from "mdast";
 import { toString as mdastToString } from "mdast-util-to-string";
 import { type Processor } from "unified";
 import { visit } from "unist-util-visit";
 /* eslint-enable import/namespace, import/no-deprecated, import/no-unresolved */
+import { hash } from "~/helpers/hash";
 
 export interface OutlineNode {
   id: string;
@@ -13,33 +13,48 @@ export interface OutlineNode {
   label: string;
 }
 
-function getHeadingId({
+async function getHeadingId({
   depth,
   textContent,
 }: {
   depth: number;
   textContent: string;
-}): string {
+}): Promise<string> {
+  const hashed = await hash(`${textContent}@${depth}`);
+
   // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-  return hashSync(`${textContent}@${depth}`).slice(-16);
+  return hashed.slice(-16);
 }
 
 /**
  * a remark plugin that automatically assign hashed id to each heading.
  */
-function remarkHeadingId(): (tree: MdastRoot) => void {
-  return (tree) => {
+function remarkHeadingId(): (tree: MdastRoot) => Promise<void> {
+  return async (tree) => {
+    const headingNodes: MdastHeading[] = [];
+
     visit(tree, "heading", (node) => {
+      headingNodes.push(node);
+    });
+
+    const promises: Promise<unknown>[] = [];
+
+    for (const node of headingNodes) {
       const textContent = mdastToString(node);
       const { depth } = node;
-      const id = getHeadingId({ textContent, depth });
 
-      node.data ??= {};
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, unicorn/consistent-destructuring
-      (node.data as any).hProperties ??= {};
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, unicorn/consistent-destructuring
-      (node.data as any).hProperties.id = id;
-    });
+      promises.push(
+        getHeadingId({ textContent, depth }).then((id) => {
+          node.data ??= {};
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, unicorn/consistent-destructuring
+          (node.data as any).hProperties ??= {};
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, unicorn/consistent-destructuring
+          (node.data as any).hProperties.id = id;
+        }),
+      );
+    }
+
+    await Promise.all(promises);
   };
 }
 
@@ -48,8 +63,8 @@ function remarkHeadingId(): (tree: MdastRoot) => void {
  */
 function rehypeOutline(this: Processor): void {
   // eslint-disable-next-line unicorn/consistent-function-scoping
-  function compile(tree: HastRoot): OutlineNode[] {
-    const outline: OutlineNode[] = [];
+  async function compile(tree: HastRoot): Promise<OutlineNode[]> {
+    const headingNodes: HastElement[] = [];
 
     visit<HastRoot, { type: "element" }>(
       tree,
@@ -62,13 +77,25 @@ function rehypeOutline(this: Processor): void {
         { type: "element", tagName: "h6" },
       ] as never,
       (node) => {
-        const textContent = mdastToString(node);
-        const depth = Number.parseInt(node.tagName.slice(1));
-        const id = getHeadingId({ textContent, depth });
-
-        outline.push({ id, depth, label: textContent });
+        headingNodes.push(node);
       },
     );
+
+    const outline: OutlineNode[] = [];
+    const promises: Promise<unknown>[] = [];
+
+    for (const node of headingNodes) {
+      const textContent = mdastToString(node);
+      const depth = Number.parseInt(node.tagName.slice(1));
+
+      promises.push(
+        getHeadingId({ textContent, depth }).then((id) => {
+          outline.push({ id, depth, label: textContent });
+        }),
+      );
+    }
+
+    await Promise.all(promises);
 
     return outline;
   }

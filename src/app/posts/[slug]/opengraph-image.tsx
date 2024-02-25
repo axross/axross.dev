@@ -7,6 +7,9 @@ import { getConfig } from "~/helpers/config";
 import { type Post } from "~/models/post";
 import { queryPost } from "~/queries/query-post";
 
+// eslint-disable-next-line import/group-exports
+export const runtime = "nodejs";
+
 const size = {
   width: 800,
   height: 415,

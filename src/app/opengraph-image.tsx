@@ -5,6 +5,9 @@ import { promisify } from "node:util";
 import { ImageResponse } from "next/og";
 import { getConfig } from "~/helpers/config";
 
+// eslint-disable-next-line import/group-exports
+export const runtime = "nodejs";
+
 const size = {
   width: 800,
   height: 415,
