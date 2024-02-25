@@ -20,7 +20,7 @@ const CopyButton = forwardRef<
 >(
   (
     { loadingChildren, doneChildren, value, className, children, ...props },
-    ref
+    ref,
   ) => {
     const action = useCallback(() => {
       return globalThis.navigator.clipboard.writeText(value);
@@ -42,7 +42,7 @@ const CopyButton = forwardRef<
         {children}
       </ActionButton>
     );
-  }
+  },
 );
 
 CopyButton.displayName = "CopyButton";

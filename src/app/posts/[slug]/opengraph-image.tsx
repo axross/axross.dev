@@ -25,8 +25,8 @@ async function getNotoSansJpSemiBold(): Promise<ArrayBuffer> {
   const buffer = await promisify(readFile)(
     resolve(
       fileURLToPath(import.meta.url),
-      "../../../../assets/noto-sans-jp-semibold.ttf"
-    )
+      "../../../../assets/noto-sans-jp-semibold.ttf",
+    ),
   );
 
   return buffer;
@@ -36,8 +36,8 @@ async function getCardCharacters(): Promise<ArrayBuffer> {
   const buffer = await promisify(readFile)(
     resolve(
       fileURLToPath(import.meta.url),
-      "../../../../assets/card-characters.ttf"
-    )
+      "../../../../assets/card-characters.ttf",
+    ),
   );
 
   return buffer;
@@ -46,7 +46,7 @@ async function getCardCharacters(): Promise<ArrayBuffer> {
 async function getChaosDataUri(): Promise<string> {
   const svg = await promisify(readFile)(
     resolve(fileURLToPath(import.meta.url), "../../../../assets/chaos.svg"),
-    "utf8"
+    "utf8",
   );
 
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
@@ -144,7 +144,7 @@ async function Image({
           weight: 400,
         },
       ],
-    }
+    },
   );
 }
 

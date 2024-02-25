@@ -50,7 +50,7 @@ function remarkHeadingId(): (tree: MdastRoot) => Promise<void> {
           (node.data as any).hProperties ??= {};
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any, unicorn/consistent-destructuring
           (node.data as any).hProperties.id = id;
-        })
+        }),
       );
     }
 
@@ -78,7 +78,7 @@ function rehypeOutline(this: Processor): void {
       ] as never,
       (node) => {
         headingNodes.push(node);
-      }
+      },
     );
 
     const outline: OutlineNode[] = [];
@@ -91,7 +91,7 @@ function rehypeOutline(this: Processor): void {
       promises.push(
         getHeadingId({ textContent, depth }).then((id) => {
           outline.push({ id, depth, label: textContent });
-        })
+        }),
       );
     }
 

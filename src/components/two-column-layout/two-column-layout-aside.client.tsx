@@ -20,7 +20,7 @@ const TwoColumnLayoutAside = forwardRef<
 >(
   (
     { openButtonLabel, closeButtonLabel, className, children, ...props },
-    ref
+    ref,
   ) => {
     const [open, setOpen] = useState(false);
 
@@ -52,7 +52,7 @@ const TwoColumnLayoutAside = forwardRef<
         </Button>
       </>
     );
-  }
+  },
 );
 
 TwoColumnLayoutAside.displayName = "TwoColumnLayoutAside";
